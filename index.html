@@ -3016,28 +3016,34 @@ var TEAM = {
 };
 var STATS_KEY = "qui2027-stats";
 function getStats() { var s = store(STATS_KEY); return s && s.c ? s : { c: {}, g: 0, q: 0 }; }
-function recordStats(ans) {
-  if (!ans.length) return;
-  var s = getStats();
+function tallyStats(ans, s) {
   ans.forEach(function (a) {
     var m = M[a.mid];
     m.cs.forEach(function (id) { var x = s.c[id] || [0, 0]; x[1]++; if (found(a, id)) x[0]++; s.c[id] = x; });
   });
+  return s;
+}
+function recordStats(ans) {
+  if (!ans.length) return;
+  var s = tallyStats(ans, getStats());
   s.g++; s.q += ans.length; store(STATS_KEY, s);
 }
+// Résultat d’une seule partie (pas le cumul)
+function gameStats(ans) { return tallyStats(ans, { c: {}, g: 1, q: ans.length }); }
 function ranking(s, min) {
   return C.filter(function (c) { return s.c[c.id] && s.c[c.id][1] >= (min || 1); }).map(function (c) {
-    var x = s.c[c.id]; return { c: c, a: x[0], b: x[1], sc: (x[0] + 1) / (x[1] + 2) };
-  }).sort(function (x, y) { return y.sc - x.sc || y.b - x.b; });
+    var x = s.c[c.id]; return { c: c, a: x[0], b: x[1], sc: (x[0] + 1) / (x[1] + 2), r: Math.random() };
+  }).sort(function (x, y) { return y.sc - x.sc || y.b - x.b || x.r - y.r; });
 }
-function teamHtml(s) {
-  var rk = ranking(s, 3);
-  if (!rk.length) return "<p class=\"team-empty\">Joue encore un peu : il faut au moins 3 réponses sur un candidat pour savoir dans quelle équipe de campagne on t’embauche.</p>";
+function gameRank(s) { var rk = ranking(s, 2); return rk.length ? rk : ranking(s, 1); }
+function teamHtml(s, one) {
+  var rk = one ? gameRank(s) : ranking(s, 3);
+  if (!rk.length) return "<p class=\"team-empty\">" + (one ? "Pas assez de réponses dans cette partie pour te trouver une équipe de campagne." : "Joue encore un peu : il faut au moins 3 réponses sur un candidat pour savoir dans quelle équipe de campagne on t’embauche.") + "</p>";
   var b = rk[0], w = rk[rk.length - 1], p = pct(b.a, b.b);
   var h = "<div class=\"team-badge\" style=\"--fam:" + (FAMCOL[FAMILY[b.c.id]] || "var(--accent)") + "\"><span class=\"ini\">" + esc(b.c.ini) + "</span><span class=\"tag\">Team " + esc(last(b.c.name)) + "</span></div>" +
-    "<div class=\"team-txt\"><p class=\"t1\">Le candidat que tu connais le mieux : <b>" + esc(b.c.name) + "</b> (" + p + " % de bonnes réponses sur " + b.b + ").</p>" +
+    "<div class=\"team-txt\"><p class=\"t1\">" + (one ? "Sur cette partie, le candidat que tu as le mieux reconnu : <b>" : "Toutes parties confondues, le candidat que tu connais le mieux : <b>") + esc(b.c.name) + "</b> (" + p + " % de bonnes réponses sur " + b.b + ").</p>" +
     "<p class=\"t2\">Félicitations, tu fais désormais partie de la team de campagne. " + esc(TEAM[b.c.id] || "Ta mission : tenir le stand de tracts au marché.") + "</p>";
-  if (rk.length > 1 && w.c.id !== b.c.id) h += "<p class=\"t3\">Celui que tu connais le moins : " + esc(w.c.name) + " (" + pct(w.a, w.b) + " %). Un café avec son programme s’impose.</p>";
+  if (rk.length > 1 && w.c.id !== b.c.id) h += "<p class=\"t3\">" + (one ? "Celui qui t’a le plus piégé·e : " : "Celui que tu connais le moins : ") + esc(w.c.name) + " (" + pct(w.a, w.b) + " %). Un café avec son programme s’impose.</p>";
   return h + "<p class=\"t4\">Connaître un programme, ce n’est pas le soutenir. Promis, on ne t’enverra pas de carte d’adhérent.</p></div>";
 }
 function renderStats() {
@@ -3134,7 +3140,8 @@ function finish() {
     rows.sort(function (x, y) { return (y.a / y.b) - (x.a / x.b) || y.b - x.b; });
   }
   $("r-cand").innerHTML = rows.map(rowHtml).join("");
-  $("r-team").innerHTML = teamHtml(getStats());
+  game.team = gameStats(ans);
+  $("r-team").innerHTML = teamHtml(game.team, true);
   var casier = game.cfg.mode === "casier";
   $("r-theme-h").textContent = casier ? "Par type de dossier" : "Par thème";
   $("r-theme-sub").textContent = casier ? "Condamnations, procédures, relaxes, polémiques." : "Taux de bonnes réponses selon le sujet.";
@@ -3184,7 +3191,7 @@ $("r-retry").addEventListener("click", function () {
 $("r-setup").addEventListener("click", goMenu);
 function shareText() {
   var r = game.result, sq = game.answers.filter(Boolean).slice(0, 20).map(function (a) { return a.ok ? "🟩" : (a.type === "multi" && a.good ? "🟨" : "🟥"); }).join("");
-  var rk = ranking(getStats(), 3), team = rk.length ? "\nJe suis Team " + last(rk[0].c.name) + " 🎽" : "";
+  var rk = gameRank(game.team || gameStats(game.answers.filter(Boolean))), team = rk.length ? "\nJe suis Team " + last(rk[0].c.name) + " 🎽" : "";
   return "Qui a proposé ça ? 🗳️ " + r.score + "/" + r.total + " (" + r.pct + " %)\n« " + r.label + " »\n" + sq + team + "\nÀ toi de jouer : " + siteUrl();
 }
 $("r-share").addEventListener("click", function () {
