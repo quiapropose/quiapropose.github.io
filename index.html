@@ -489,6 +489,14 @@ body { background-image: radial-gradient(rgba(0,0,145,.06) 1.2px, transparent 1.
 
 .report { font-size: 12.5px; color: var(--muted); }
 #legal li { margin-bottom: 6px; }
+.contact-form { display: grid; gap: 8px; max-width: 640px; }
+.contact-form select, .contact-form textarea, .contact-form input[type=email] { font: inherit; padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 4px; background: var(--sheet); color: var(--ink); }
+.contact-form textarea { resize: vertical; }
+.ct-status { margin: 0; font-weight: 700; min-height: 1.2em; }
+.ct-status.ok { color: var(--ok); } .ct-status.ko { color: var(--ko); }
+.ct-alt { margin: 0; font-size: 13px; color: var(--muted); }
+.foot-links { margin: 0 0 10px; padding: 12px 20px 0; font-size: 14px; }
+.linkbtn { background: none; border: 0; padding: 0; font: inherit; color: var(--accent); text-decoration: underline; cursor: pointer; }
 /* ---- Mes stats / team de campagne ---- */
 .card.team { display: flex; gap: 18px; align-items: center; padding: 18px; margin: 0 0 16px; border-top: 5px solid var(--accent); }
 .team-badge { flex: 0 0 auto; width: 96px; height: 96px; border-radius: 50%; background: var(--fam); color: #fff; display: grid; place-items: center; position: relative; box-shadow: 0 0 0 4px var(--sheet), 0 0 0 7px var(--rouge); animation: pop .5s cubic-bezier(.2,1.6,.4,1) backwards; }
@@ -693,6 +701,30 @@ body { background-image: radial-gradient(rgba(0,0,145,.06) 1.2px, transparent 1.
     </div>
   </section>
 
+  <section class="view" id="v-contact" hidden>
+    <div class="cheat-head">
+      <h2>Nous écrire</h2>
+      <p>Une erreur, une mesure mal attribuée, une source à corriger, une idée ? Écris-nous ici. On lit tout et on corrige vite.</p>
+    </div>
+    <form class="card panel contact-form" id="ct-form" novalidate>
+      <label class="lab" for="ct-type">C’est à propos de…</label>
+      <select id="ct-type">
+        <option>Signaler une erreur</option>
+        <option>Proposer une mesure ou une source</option>
+        <option>Une idée pour le site</option>
+        <option>Autre chose</option>
+      </select>
+      <label class="lab" for="ct-msg">Ton message</label>
+      <textarea id="ct-msg" rows="6" maxlength="3000" required placeholder="Dis-nous tout (et une source si tu en as une)."></textarea>
+      <label class="lab" for="ct-mail">Ton e-mail <small>(facultatif, seulement si tu veux une réponse)</small></label>
+      <input type="email" id="ct-mail" autocomplete="email" placeholder="prenom@exemple.fr">
+      <input type="text" id="ct-hp" tabindex="-1" autocomplete="off" class="vh" aria-hidden="true">
+      <div class="st-actions"><button type="submit" class="btn primary" id="ct-send">Envoyer</button><button type="button" class="btn" id="ct-back">⌂ Menu</button></div>
+      <p class="ct-status" id="ct-status" role="status"></p>
+      <p class="ct-alt">Tu préfères le mail ? <a href="mailto:contact@quiapropose.fr">contact@quiapropose.fr</a></p>
+    </form>
+  </section>
+
   <section class="view" id="v-stats" hidden>
     <div class="cheat-head">
       <h2>Mes stats</h2>
@@ -742,6 +774,7 @@ body { background-image: radial-gradient(rgba(0,0,145,.06) 1.2px, transparent 1.
 </div>
 
 <footer class="method">
+    <p class="foot-links"><button type="button" class="linkbtn" id="ft-contact">✉️ Nous écrire</button> · <button type="button" class="linkbtn" id="ft-legal">Mentions légales</button></p>
   <div class="wrap">
     <details>
     <summary>Méthode et limites</summary>
@@ -768,9 +801,9 @@ body { background-image: radial-gradient(rgba(0,0,145,.06) 1.2px, transparent 1.
     <ul>
       <li><b>Éditeur :</b> site édité à titre non professionnel par un particulier, qui a choisi de préserver son anonymat comme le permet la loi pour la confiance dans l’économie numérique (art. 1-1, II). Ses coordonnées ont été communiquées à l’hébergeur.</li>
       <li><b>Hébergeur :</b> GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis. Téléphone : +1 877 448 4820.</li>
-      <li><b>Contact et corrections :</b> <span id="contact-line">une erreur, une mesure mal attribuée, une source à corriger ? Utilise le lien « Signaler une erreur » sous chaque réponse.</span></li>
+      <li><b>Contact et corrections :</b> <span id="contact-line">contact@quiapropose.fr, ou le formulaire « Nous écrire ».</span></li>
       <li><b>Indépendance :</b> ce quiz n’est lié à aucun candidat, parti, média ni institut. Il ne donne aucune consigne de vote. Les résultats des joueurs ne sont pas un sondage et ne sont jamais publiés.</li>
-      <li><b>Données personnelles :</b> aucun compte, aucun cookie, aucun traceur publicitaire. Tes scores et tes stats sont enregistrés uniquement dans ton navigateur (stockage local) et tu peux les effacer depuis « Mes stats ».</li>
+      <li><b>Données personnelles :</b> aucun compte, aucun cookie, aucun traceur publicitaire. Les messages envoyés par le formulaire « Nous écrire » transitent par le service FormSubmit (formsubmit.co) puis arrivent dans notre boîte mail ; ils servent uniquement à te répondre et à corriger le site. Tes scores et tes stats sont enregistrés uniquement dans ton navigateur (stockage local) et tu peux les effacer depuis « Mes stats ».</li>
       <li><b>Contenus :</b> les mesures sont des reformulations courtes et neutres des programmes et déclarations, avec un lien vers chaque source. Les citations sont brèves et attribuées.</li>
     </ul>
     </details>
@@ -868,6 +901,8 @@ var S = {
   brRu: { s: "Les Ruches, « Le projet » (via Votons 2027)", d: "2026", u: "https://ruches.org/le-projet" },
   glPS11: { s: "Public Sénat", d: "nov. 2026", u: "https://www.publicsenat.fr/actualites/politique/presidentielle-2027-raphael-glucksmann-met-200-milliards-sur-la-table-et-invite-le-senat-a-voter-en-faveur-dune-future-republique-ecologique" },
   phCarb: { s: "LesVoitures.fr, « Présidentielle 2027 et automobile »", d: "2026", u: "https://lesvoitures.fr/presidentielle-2027-automobile/" },
+  phProg: { s: "Programme d’Édouard Philippe (edouardphilippe.fr)", d: "12 nov. 2026", u: "https://www.edouardphilippe.fr/programme" },
+  glRfi: { s: "RFI (via Dakaractu)", d: "9 nov. 2026", u: "https://www.dakaractu.com/Presidentielle-en-France-Raphael-Glucksmann-presente-son-projet-de-revolution-ecologique_a278006.html" },
   poSite: { s: "Site de Natacha Polony (via Votons 2027)", d: "2026", u: "https://natachapolony2027.fr/natacha-polony/ma-vision" }
 };
 
@@ -1770,7 +1805,25 @@ var RAW = [
   ["branco","Logement","Surtaxer les 3 % de Français qui possèdent plusieurs logements en plus de leurs résidences.","brRu"],
   ["branco","Institutions","Créer un « défenseur des peuples » élu pour neuf ans.","brRu"],
   ["branco","Fiscalité","Publier chaque année les revenus fiscaux de tous les citoyens, comme en Finlande.","brRu"],
-  ["branco","Justice","Ramener la prescription à 3 ans pour les délits et 10 ans pour les crimes.","brRu"]
+  ["branco","Justice","Ramener la prescription à 3 ans pour les délits et 10 ans pour les crimes.","brRu"],
+  ["philippe","Sécurité","Créer des pouvoirs d’urgence pour lutter contre le narcotrafic.","phProg"],
+  ["philippe","Justice","Prononcer de courtes peines de prison ferme dès la première infraction.","phProg"],
+  ["philippe","Justice","Voter une loi pour accélérer la construction de prisons.","phProg"],
+  ["philippe","Défense","Voter une loi de montée en puissance des armées.","phProg"],
+  ["philippe","Retraites","Permettre à un tiers des Français de partir plus tôt à la retraite.","phProg"],
+  ["philippe","Retraites","Introduire une part de capitalisation collective dans les retraites de tous.","phProg"],
+  ["philippe","Éducation","Laisser les écoles libres de s’organiser.","phProg"],
+  ["philippe","Fiscalité","Supprimer l’impôt sur le revenu des classes moyennes pendant les trois premières années de chaque enfant.","phProg"],
+  ["philippe","Famille","Contrôler systématiquement les antécédents des animateurs du périscolaire, avec un droit de regard des parents.","phProg"],
+  ["philippe","Numérique","Conclure un pacte européen de souveraineté numérique.","phProg"],
+  ["philippe","Énergie","Aider l’achat de voitures électriques d’occasion.","phProg"],
+  ["philippe","Énergie","Baisser le prix de l’électricité pour les industriels.","phProg"],
+  ["philippe","Écologie","Lancer un grand plan de sécurité climatique.","phProg"],
+  ["philippe","Écologie","Climatiser et rénover les bâtiments publics.","phProg"],
+  ["philippe","Écologie","Augmenter le stockage et la réutilisation de l’eau.","phProg"],
+  ["philippe","Immigration","Instaurer un moratoire total sur l’immigration à Mayotte.","phProg"],
+  ["philippe","Défense","Doubler le nombre de navires militaires dans le Pacifique et l’océan Indien.","phProg"],
+  ["glucksmann","Énergie","Lancer un programme de nouveaux réacteurs nucléaires, en complément des renouvelables.","glRfi"]
 ];
 
 
@@ -2051,13 +2104,11 @@ function pct(a, b) { return b ? Math.round(100 * a / b) : 0; }
 function plural(n, one, many) { return n + " " + (n > 1 ? many : one); }
 function fmt(n) { return n.toLocaleString("fr-FR"); }
 /* ---------- Réglages de diffusion ---------- */
-var CONTACT_EMAIL = ""; // adresse dédiée aux corrections (à renseigner)
+var CONTACT_EMAIL = "contact@quiapropose.fr";
+var FORM_ENDPOINT = "https://formsubmit.co/ajax/" + CONTACT_EMAIL;
 function siteUrl() { return location.href.split("#")[0].split("?")[0]; }
 function reportLink(m) {
-  if (!CONTACT_EMAIL) return "";
-  var subj = "Correction – " + (m.quote ? "citation" : m.kase ? "dossier" : "mesure") + " n°" + m.id;
-  var body = "Bonjour,\n\nÀ propos de : « " + m.m + " »\n\nCe qui ne va pas (et une source si possible) :\n";
-  return "<a class=\"report\" href=\"mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent(subj) + "&body=" + encodeURIComponent(body) + "\">Signaler une erreur</a>";
+  return "<button type=\"button\" class=\"linkbtn report\" data-report=\"" + m.id + "\">Signaler une erreur</button>";
 }
 function store(k, v) { try { if (v === undefined) { var x = localStorage.getItem(k); return x ? JSON.parse(x) : null; } localStorage.setItem(k, JSON.stringify(v)); } catch (e) { return null; } }
 function last(name) { return name.split(" ").slice(1).join(" "); }
@@ -2103,7 +2154,7 @@ function countOf(id) { return SINGLE.filter(function (x) { return x.c === id; })
 /* ---------- État ---------- */
 var cfg = { mode: "classic", pool: "main", diff: "easy", len: "20", duel: ["lepen", "melenchon"], targets: [] };
 var game = null, timerId = null, autoId = null;
-var views = { setup: $("v-setup"), game: $("v-game"), res: $("v-res"), explorer: $("v-explorer"), cheat: $("v-cheat"), stats: $("v-stats") };
+var views = { setup: $("v-setup"), game: $("v-game"), res: $("v-res"), explorer: $("v-explorer"), cheat: $("v-cheat"), stats: $("v-stats"), contact: $("v-contact") };
 function show(v) {
   Object.keys(views).forEach(function (k) { views[k].hidden = (k !== v); });
   $("tab-jouer").setAttribute("aria-pressed", v === "setup");
@@ -2795,6 +2846,41 @@ function renderStats() {
 $("st-reset").addEventListener("click", function () { store(STATS_KEY, { c: {}, g: 0, q: 0 }); renderStats(); });
 $("st-play").addEventListener("click", function () { goMenu(); });
 
+/* ---------- Nous écrire ---------- */
+var ctFrom = "setup";
+function openContact(prefill) {
+  clearInterval(timerId); clearTimeout(autoId);
+  ctFrom = game && !game.over ? "game" : (views.res && !views.res.hidden ? "res" : "setup");
+  if (prefill) { $("ct-type").value = "Signaler une erreur"; $("ct-msg").value = prefill; }
+  $("ct-status").textContent = ""; $("ct-status").className = "ct-status";
+  show("contact"); window.scrollTo({ top: 0 }); setTimeout(function () { $("ct-msg").focus(); }, 50);
+}
+document.addEventListener("click", function (e) {
+  var b = e.target.closest("[data-report]"); if (!b) return;
+  var m = M[+b.dataset.report];
+  openContact("À propos de : « " + m.m + " » (n°" + m.id + ")\n\nCe qui ne va pas : ");
+});
+$("ft-contact").addEventListener("click", function () { openContact(); });
+$("ft-legal").addEventListener("click", function () { var d = $("legal"); d.open = true; d.scrollIntoView({ behavior: "smooth" }); });
+$("ct-back").addEventListener("click", function () { goMenu(); });
+$("ct-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  var msg = $("ct-msg").value.trim(), mail = $("ct-mail").value.trim(), st = $("ct-status");
+  if ($("ct-hp").value) return;
+  if (msg.length < 5) { st.textContent = "Ton message est un peu court."; st.className = "ct-status ko"; return; }
+  if (mail && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail)) { st.textContent = "Cette adresse e-mail a l’air incomplète."; st.className = "ct-status ko"; return; }
+  $("ct-send").disabled = true; st.textContent = "Envoi…"; st.className = "ct-status";
+  var payload = { _subject: "[Qui a proposé ça] " + $("ct-type").value, sujet: $("ct-type").value, message: msg, _template: "table" };
+  if (mail) { payload.email = mail; payload._replyto = mail; }
+  fetch(FORM_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(payload) })
+    .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return r.ok && String(j.success) !== "false"; }); })
+    .then(function (ok) {
+      if (ok) { st.textContent = "Message envoyé, merci ! On lit tout."; st.className = "ct-status ok"; $("ct-msg").value = ""; }
+      else { st.textContent = "L’envoi n’a pas marché. Écris-nous directement à " + CONTACT_EMAIL + "."; st.className = "ct-status ko"; }
+    })
+    .catch(function () { st.textContent = "Pas de connexion ? Écris-nous à " + CONTACT_EMAIL + "."; st.className = "ct-status ko"; })
+    .then(function () { $("ct-send").disabled = false; });
+});
 function finish() {
   clearInterval(timerId); clearTimeout(autoId);
   game.over = true;
@@ -3045,9 +3131,8 @@ setInterval(cdQuip, 12000);
 initExplorer();
 renderHome();
 runIntro();
-if (CONTACT_EMAIL) $("contact-line").innerHTML = "écris à <a href=\"mailto:" + CONTACT_EMAIL + "\">" + CONTACT_EMAIL + "</a>, ou utilise le lien « Signaler une erreur » sous chaque réponse.";
-else $("contact-line").textContent = "une adresse dédiée aux corrections arrive très bientôt.";
-if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } else if (location.hash === "#antiseches") { show("cheat"); renderCheat(); } else if (location.hash === "#stats") { show("stats"); renderStats(); } else show("setup");
+$("contact-line").innerHTML = "écris à <a href=\"mailto:" + CONTACT_EMAIL + "\">" + CONTACT_EMAIL + "</a>, ou utilise le formulaire « Nous écrire » et le lien « Signaler une erreur » sous chaque réponse.";
+if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } else if (location.hash === "#antiseches") { show("cheat"); renderCheat(); } else if (location.hash === "#stats") { show("stats"); renderStats(); } else if (location.hash === "#contact") { show("contact"); } else show("setup");
 window.addEventListener("hashchange", function () { if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } });
 })();
 </script>
