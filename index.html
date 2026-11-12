@@ -10,13 +10,13 @@
 <meta property="og:locale" content="fr_FR">
 <meta property="og:url" content="https://quiapropose.fr/">
 <meta property="og:title" content="Qui a proposé ça ? Le quiz de la présidentielle 2027">
-<meta property="og:description" content="900 mesures, 20 candidats : sauras-tu retrouver qui propose quoi ? Et toi, tu es dans quelle team de campagne ?">
+<meta property="og:description" content="960 mesures, 21 candidats : sauras-tu retrouver qui propose quoi ? Et toi, tu es dans quelle team de campagne ?">
 <meta property="og:image" content="https://quiapropose.fr/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Qui a proposé ça ? Le quiz de la présidentielle 2027">
-<meta name="twitter:description" content="900 mesures, 20 candidats : sauras-tu retrouver qui propose quoi ?">
+<meta name="twitter:description" content="960 mesures, 21 candidats : sauras-tu retrouver qui propose quoi ?">
 <meta name="twitter:image" content="https://quiapropose.fr/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='21' height='64' fill='%23000091'/%3E%3Crect x='21' width='22' height='64' fill='%23fff'/%3E%3Crect x='43' width='21' height='64' fill='%23e1000f'/%3E%3Ctext x='32' y='46' font-size='40' font-family='Arial' font-weight='900' text-anchor='middle' fill='%2313203a'%3E%3F%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -512,6 +512,104 @@ body { background-image: radial-gradient(rgba(0,0,145,.06) 1.2px, transparent 1.
 .st-actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
 @media (max-width: 560px) { .card.team { flex-direction: column; text-align: center; } }
 
+
+/* ===== Accueil v3 : hiérarchie ===== */
+.hero { display: grid; grid-template-columns: 1.15fr 1fr; gap: 36px; align-items: center; margin: 4px 0 40px; }
+.hero > * { min-width: 0; }
+.hero-kick { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 14px; padding: 6px 12px 5px; border-radius: 999px; background: var(--sheet); border: 1.5px solid var(--rouge); color: var(--rouge); font: 800 13px/1 var(--f-ui); letter-spacing: .1em; text-transform: uppercase; }
+.hero-kick .pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--rouge); animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(225,0,15,.45); } 50% { box-shadow: 0 0 0 7px rgba(225,0,15,0); } }
+.hero-h { margin: 0 0 22px; font: 500 clamp(34px, 4.6vw, 54px)/1.02 var(--f-read); letter-spacing: -.015em; text-wrap: balance; }
+.hero-h em { font: 900 1.12em/.95 var(--f-display); font-style: normal; text-transform: uppercase; color: var(--accent); letter-spacing: 0; background: linear-gradient(transparent 64%, rgba(225,0,15,.15) 64% 92%, transparent 92%); padding: 0 .06em; }
+.hero .facts { gap: 0; margin: 0 0 24px; }
+.hero .facts li { padding: 0 20px; border-left: 3px solid var(--line); }
+.hero .facts li:first-child { padding-left: 0; border-left: 0; }
+.hero .facts li:nth-child(1) b { color: var(--accent); }
+.hero .facts li:nth-child(3) b { color: var(--rouge); }
+.hero .facts b { font-size: 34px; }
+.hero-cta { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.hero-go { font-size: 27px; padding: 19px 26px 20px; gap: 28px; min-width: 310px; }
+.hero-alt { color: var(--muted); font-weight: 600; font-size: 15px; text-underline-offset: 4px; }
+.hero-alt:hover { color: var(--accent); }
+.hero-note { margin: 12px 0 0; font-size: 13px; color: var(--muted); }
+
+.teaser { position: relative; padding: 18px 20px 20px; border-top: 0; overflow: hidden; transform: rotate(.6deg); transition: transform .3s ease; }
+.teaser:hover { transform: rotate(0); }
+.teaser::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 6px; background: linear-gradient(90deg, var(--bleu) 0 33.34%, var(--line) 33.34% 66.67%, var(--rouge) 66.67%); }
+body:has(#v-setup:not([hidden])) .cd-chip { display: none; }
+.go-row .go { gap: 22px; }
+.t-top { display: flex; justify-content: space-between; align-items: center; margin-top: 4px; }
+.t-lab { font: 800 11px/1 var(--f-ui); letter-spacing: .14em; text-transform: uppercase; background: var(--ink); color: var(--paper); padding: 5px 8px 4px; border-radius: 2px; }
+.t-score { font: 800 18px/1 var(--f-display); color: var(--muted); font-variant-numeric: tabular-nums; }
+.t-q { margin: 14px 0 4px; font: 800 15px/1 var(--f-display); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.t-m { margin: 0 0 16px; font: 500 clamp(21px, 2.3vw, 25px)/1.28 var(--f-read); min-height: 3.84em; text-wrap: pretty; }
+.t-opts { display: grid; gap: 8px; }
+.t-opts button { display: flex; align-items: center; gap: 12px; text-align: left; border: 1.5px solid var(--line); background: var(--sheet); padding: 7px 12px 7px 7px; border-radius: 999px; cursor: pointer; font: 600 15px/1.2 var(--f-ui); color: var(--ink); transition: transform .12s ease, border-color .12s ease, background .15s ease; }
+.t-opts button:hover:not(:disabled) { transform: translateX(4px); border-color: var(--fam); }
+.t-opts button i { flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--fam); color: #fff; display: grid; place-items: center; font: 800 12px/1 var(--f-display); font-style: normal; letter-spacing: .02em; box-shadow: 0 0 0 1.5px var(--line); }
+.t-opts button:disabled { cursor: default; opacity: .55; }
+.t-opts button.ok { opacity: 1; border-color: var(--ok); background: var(--ok-soft); }
+.t-opts button.ko { opacity: 1; border-color: var(--ko); background: var(--ko-soft); }
+.t-opts button.ok span::after { content: "  ✓"; color: var(--ok); font-weight: 800; }
+.t-opts button.ko span::after { content: "  ✗"; color: var(--ko); font-weight: 800; }
+.t-res { margin: 12px 0 0; min-height: 1.4em; font-size: 15px; }
+.teaser.won .t-res { color: var(--ok); font-weight: 600; }
+.teaser.won .t-res small, .teaser.lost .t-res small { color: var(--muted); font-weight: 400; }
+.teaser.won { animation: pop .4s ease; }
+@keyframes pop { 40% { transform: rotate(0) scale(1.025); } }
+.t-next { margin-top: 10px; border: 1.5px solid var(--ink); background: transparent; color: var(--ink); padding: 8px 14px; font-weight: 700; font-size: 14px; border-radius: 2px; cursor: pointer; }
+.t-next:hover { background: var(--ink); color: var(--paper); }
+
+.sec-h { display: flex; align-items: center; gap: 12px; margin: 0 0 14px; scroll-margin-top: 16px; }
+.sec-h h2 { margin: 0; font: 800 28px/1 var(--f-display); text-transform: uppercase; letter-spacing: .01em; }
+.sec-h .step { flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--bleu); color: #fff; display: grid; place-items: center; font: 800 18px/1 var(--f-display); box-shadow: inset 0 -4px 0 var(--rouge); }
+#v-setup > .modes { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 0 0 28px; }
+#v-setup .modes button { padding: 14px 14px 13px; gap: 4px; border-radius: 4px; box-shadow: var(--shadow); min-height: 112px; }
+#v-setup .modes button b { font-size: 19px; overflow-wrap: normal; hyphens: none; line-height: 1.02; }
+#v-setup .modes button .ico { display: block; font-size: 28px; line-height: 1; margin: 0 0 8px; font-style: normal; transition: transform .2s ease; }
+#v-setup .modes button:hover .ico { transform: scale(1.15) rotate(-6deg); }
+#v-setup .modes button[aria-pressed="true"] { box-shadow: inset 0 -4px 0 var(--rouge), var(--shadow); }
+.modebox { padding: 22px 22px 24px; gap: 18px; }
+.modebox .sec-h { margin: 0; }
+.fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px 26px; align-items: start; }
+.fields > #fld-duel, .fields > #fld-cands, .fields > #fld-citations, .fields > #fld-conseil, .fields > #fld-casier { grid-column: 1 / -1; }
+.go-row { display: flex; align-items: center; gap: 8px 20px; flex-wrap: wrap; padding-top: 4px; }
+.go-row .go { min-width: 340px; }
+.home-low { display: grid; grid-template-columns: 1fr 1.25fr; gap: 24px; margin: 36px 0 0; align-items: start; }
+.home-low > * { min-width: 0; }
+.home-low .cd, .home-low .hemi { margin: 0; }
+#v-setup > .more { margin-top: 20px; }
+@media (max-width: 960px) { #v-setup > .modes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; gap: 26px; margin-bottom: 32px; }
+  .teaser { transform: none; }
+  .home-low { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .mast .wrap { padding-top: 16px; padding-bottom: 10px; gap: 10px; }
+  .brand h1 { font-size: 40px; }
+  .brand .kicker { font-size: 10.5px; }
+  .mast .right { width: 100%; }
+  .cd-chip { display: none; }
+  nav.tabs { width: 100%; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  nav.tabs::-webkit-scrollbar { display: none; }
+  nav.tabs button { flex: none; white-space: nowrap; padding: 7px 11px; font-size: 13px; }
+  main.wrap { padding-top: 20px; }
+  .hero-h { font-size: 36px; }
+  .hero .facts li { padding: 0 14px; }
+  .hero .facts b { font-size: 28px; }
+  .hero-cta { flex-direction: column; align-items: stretch; gap: 10px; }
+  .hero-go { min-width: 0; font-size: 24px; }
+  .hero-alt { text-align: center; }
+  .hero-note { text-align: center; }
+  .t-m { min-height: 0; font-size: 21px; }
+  #v-setup .modes button { min-height: 0; padding: 12px; }
+  #v-setup .modes button b { font-size: 16.5px; }
+  #v-setup .modes button span { font-size: 12px; }
+  #v-setup .modes button .ico { font-size: 24px; margin-bottom: 6px; }
+  .sec-h h2 { font-size: 24px; }
+  .go-row .go { min-width: 0; width: 100%; }
+}
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 </head>
@@ -536,39 +634,33 @@ body { background-image: radial-gradient(rgba(0,0,145,.06) 1.2px, transparent 1.
 
 <main class="wrap">
   <section class="view" id="v-setup">
-    <div class="setup">
-      <div>
-        <div class="cd" id="cd" aria-live="off">
-          <span class="j" id="cd-j">J-…</span>
-          <span class="lbl">Avant le premier tour · dimanche 18 avril 2027</span>
-          <div class="units" aria-hidden="true">
-            <span class="u"><b id="cd-d">–</b><span>jours</span></span>
-            <span class="u"><b id="cd-h">–</b><span>heures</span></span>
-            <span class="u"><b id="cd-m">–</b><span>min</span></span>
-            <span class="u"><b id="cd-s">–</b><span>s</span></span>
-          </div>
-          <span class="quipcd" id="cd-quip"></span>
-        </div>
-        <p class="lede">Une mesure, un candidat. À toi de retrouver qui a proposé quoi.</p>
+    <div class="hero">
+      <div class="hero-main">
+        <p class="hero-kick"><span class="pulse" aria-hidden="true"></span><span id="hero-j">J-…</span> avant le premier tour</p>
+        <h2 class="hero-h">Une mesure.<br>Un candidat.<br><em>À toi de deviner.</em></h2>
         <ul class="facts">
           <li><b id="f-mes">0</b><span>mesures sourcées</span></li>
           <li><b id="f-cand">0</b><span>candidats</span></li>
           <li><b id="f-th">0</b><span>thèmes</span></li>
         </ul>
-        <div class="card hemi">
-          <h3>L’hémicycle des candidats</h3>
-          <p>Clique sur un siège pour réviser un candidat.</p>
-          <svg id="hemi" viewBox="0 0 420 235" role="group" aria-label="Hémicycle des candidats"></svg>
+        <div class="hero-cta">
+          <button type="button" class="go hero-go" id="btn-quick"><span>Jouer maintenant</span><span aria-hidden="true">→</span></button>
+          <a class="hero-alt" href="#modes-h">ou choisis ton mode ↓</a>
         </div>
-        <details class="more">
-          <summary>Voir les <span id="more-n">tous les</span> panneaux <small id="more-s"></small></summary>
-          <p class="boards-intro">Bandeau <span class="soon-l">À venir</span> : programme 2027 incomplet, ou candidature déclarée sans programme pour l’instant. On complète dès que ça sort.</p>
-          <div class="boards" id="boards-home"></div>
-        </details>
+        <p class="hero-note">10 questions · les 7 favoris des sondages · 4 réponses au choix</p>
       </div>
-      <div class="card modebox">
-        <h2>Choisis ta partie</h2>
-        <div class="modes" role="group" aria-label="Mode de jeu" id="modes">
+      <div class="teaser card" id="teaser" aria-live="polite">
+        <div class="t-top"><span class="t-lab">Échauffement</span><span class="t-score" id="t-score"></span></div>
+        <p class="t-q">Qui a proposé ça&nbsp;?</p>
+        <p class="t-m" id="t-m">…</p>
+        <div class="t-opts" id="t-opts" role="group" aria-label="Réponses"></div>
+        <p class="t-res" id="t-res"></p>
+        <button type="button" class="t-next" id="t-next" hidden>Une autre →</button>
+      </div>
+    </div>
+
+    <div class="sec-h" id="modes-h"><span class="step">1</span><h2>Choisis ton mode</h2></div>
+    <div class="modes" role="group" aria-label="Mode de jeu" id="modes">
           <button type="button" id="m-classic" data-mode="classic" aria-pressed="true"><b>Classique</b><span>Une mesure, un candidat.</span></button>
           <button type="button" id="m-duel" data-mode="duel" aria-pressed="false"><b>Confrontation</b><span>Deux candidats, une mesure.</span></button>
           <button type="button" id="m-blitz" data-mode="blitz" aria-pressed="false"><b>Éclair 60 s</b><span>Une minute, un max de points.</span></button>
@@ -579,6 +671,9 @@ body { background-image: radial-gradient(rgba(0,0,145,.06) 1.2px, transparent 1.
           <button type="button" id="m-conseil" data-mode="conseil" aria-pressed="false"><b>Le Conseil constit’ tousse</b><span>Les mesures qui coincent en droit.</span></button>
         </div>
 
+    <div class="card modebox" id="modebox">
+      <div class="sec-h"><span class="step">2</span><h2>Règle ta partie</h2></div>
+      <div class="fields">
         <div class="field" id="fld-pool">
           <span class="lab" id="lab-pool">Candidats en jeu</span>
           <div class="seg" role="group" aria-labelledby="lab-pool" id="seg-pool">
@@ -627,10 +722,36 @@ body { background-image: radial-gradient(rgba(0,0,145,.06) 1.2px, transparent 1.
           <div class="cand-pick" id="cand-pick" role="group" aria-labelledby="lab-cands"></div>
           <p class="hint" id="target-hint"></p>
         </div>
+      </div>
+      <div class="go-row">
         <button type="button" class="go" id="btn-start"><span>Lancer la partie</span><span aria-hidden="true">→</span></button>
         <span class="best" id="best"></span>
       </div>
     </div>
+
+    <div class="home-low">
+      <div class="cd" id="cd" aria-live="off">
+        <span class="j" id="cd-j">J-…</span>
+        <span class="lbl">Avant le premier tour · dimanche 18 avril 2027</span>
+        <div class="units" aria-hidden="true">
+          <span class="u"><b id="cd-d">–</b><span>jours</span></span>
+          <span class="u"><b id="cd-h">–</b><span>heures</span></span>
+          <span class="u"><b id="cd-m">–</b><span>min</span></span>
+          <span class="u"><b id="cd-s">–</b><span>s</span></span>
+        </div>
+        <span class="quipcd" id="cd-quip"></span>
+      </div>
+      <div class="card hemi">
+        <h3>L’hémicycle des candidats</h3>
+        <p>Clique sur un siège pour réviser un candidat.</p>
+        <svg id="hemi" viewBox="0 0 420 235" role="group" aria-label="Hémicycle des candidats"></svg>
+      </div>
+    </div>
+    <details class="more">
+      <summary>Voir les <span id="more-n">tous les</span> panneaux <small id="more-s"></small></summary>
+      <p class="boards-intro">Bandeau <span class="soon-l">À venir</span> : programme 2027 incomplet, ou candidature déclarée sans programme pour l’instant. On complète dès que ça sort.</p>
+      <div class="boards" id="boards-home"></div>
+    </details>
   </section>
 
   <section class="view" id="v-game" hidden>
@@ -811,7 +932,7 @@ body { background-image: radial-gradient(rgba(0,0,145,.06) 1.2px, transparent 1.
 </footer>
 
 <script>
-/* Données : candidats, sources et mesures. État au 10 novembre 2026. */
+/* Données : candidats, sources et mesures. État au 12 novembre 2026. */
 var C = [
   { id: "arthaud", name: "Nathalie Arthaud", ini: "NA", party: "Lutte ouvrière" },
   { id: "asselineau", name: "François Asselineau", ini: "FA", party: "UPR" },
@@ -828,6 +949,7 @@ var C = [
   { id: "philippe", name: "Édouard Philippe", ini: "EP", party: "Horizons", main: true },
   { id: "philippot", name: "Florian Philippot", ini: "FP", party: "Les Patriotes" },
   { id: "polony", name: "Natacha Polony", ini: "NP", party: "Sans étiquette" },
+  { id: "riner", name: "Teddy Riner", ini: "TR", party: "Sans étiquette" },
   { id: "retailleau", name: "Bruno Retailleau", ini: "BR", party: "Les Républicains", main: true },
   { id: "roussel", name: "Fabien Roussel", ini: "FR", party: "Parti communiste" },
   { id: "ruffin", name: "François Ruffin", ini: "FRu", party: "Debout !" },
@@ -903,6 +1025,10 @@ var S = {
   phCarb: { s: "LesVoitures.fr, « Présidentielle 2027 et automobile »", d: "2026", u: "https://lesvoitures.fr/presidentielle-2027-automobile/" },
   phProg: { s: "Programme d’Édouard Philippe (edouardphilippe.fr)", d: "12 nov. 2026", u: "https://www.edouardphilippe.fr/programme" },
   glRfi: { s: "RFI (via Dakaractu)", d: "9 nov. 2026", u: "https://www.dakaractu.com/Presidentielle-en-France-Raphael-Glucksmann-presente-son-projet-de-revolution-ecologique_a278006.html" },
+  reAp: { s: "Acteurs publics (présentation à Station F)", d: "8 juil. 2026", u: "https://acteurspublics.fr/articles/presidentielle-bruno-retailleau-souhaite-redeployer-125-000-fonctionnaires-sur-le-terrain-grace-a-lia/" },
+  toTn: { s: "Terre-net (livret santé environnementale)", d: "30 mai 2026", u: "https://www.terre-net.fr/politique/article/899196/tondelier-devoile-ses-mesures-pour-la-sante-environnementale" },
+  liEu1: { s: "Europe 1 (entretien avec Laurence Ferrari)", d: "2026", u: "https://www.europe1.fr/politique/aujourdhui-en-france-on-depouille-les-actifs-au-profit-des-inactifs-denonce-david-lisnard-938960" },
+  riLcp: { s: "LCP (entretien au Parisien)", d: "10 nov. 2026", u: "https://lcp.fr/actualites/retraites-salaires-securite-que-propose-teddy-riner-pour-la-presidentielle-444935" },
   poSite: { s: "Site de Natacha Polony (via Votons 2027)", d: "2026", u: "https://natachapolony2027.fr/natacha-polony/ma-vision" }
 };
 
@@ -1646,7 +1772,6 @@ var RAW = [
   ["philippot","Société","Interdire l’abattage rituel sans étourdissement.","ptSite"],
   ["retailleau","Sécurité","Autoriser la vidéosurveillance « intelligente » dans les lieux publics.","reSite"],
   ["retailleau","Défense","Multiplier par cinq les moyens de l’IA de défense : cyber, drones, robotique, quantique.","reSite"],
-  ["retailleau","Numérique","Créer « Marianne », un assistant numérique qui remplace les formulaires administratifs.","reSite"],
   ["retailleau","Europe","Imposer des clauses de réciprocité dans tous les accords commerciaux européens.","reSite"],
   ["retailleau","Éducation","Instaurer un examen d’entrée en sixième et des groupes de niveau au collège.","reSite"],
   ["ruffin","Travail","Indexer les salaires sur l’inflation, comme jusqu’en 1982.","ruSite"],
@@ -1683,7 +1808,6 @@ var RAW = [
   ["zemmour","Défense","Refuser tout partage de la dissuasion nucléaire et du siège français à l’ONU.","zeEu"],
   ["zemmour","Travail","Passer à trois jours de carence pour les arrêts maladie des fonctionnaires.","zeEu"],
   ["kazib","Logement","Exproprier les logements vides et geler les loyers.","kaSite"],
-  ["kazib","Institutions","Remplacer président et Sénat par une assemblée unique, à la fois législative et exécutive.","kaSite"],
   ["bertrand","Travail","Exonérer d’impôt et de cotisations les heures travaillées au-delà de 35 heures.","beSite"],
   ["bertrand","Immigration","Examiner chaque demande d’asile en un mois, avec assignation à résidence du demandeur.","beSite"],
   ["bertrand","Immigration","Créer une Alliance méditerranéenne de contrôle de l’immigration avec Frontex.","beSite"],
@@ -1823,7 +1947,43 @@ var RAW = [
   ["philippe","Écologie","Augmenter le stockage et la réutilisation de l’eau.","phProg"],
   ["philippe","Immigration","Instaurer un moratoire total sur l’immigration à Mayotte.","phProg"],
   ["philippe","Défense","Doubler le nombre de navires militaires dans le Pacifique et l’océan Indien.","phProg"],
-  ["glucksmann","Énergie","Lancer un programme de nouveaux réacteurs nucléaires, en complément des renouvelables.","glRfi"]
+  ["glucksmann","Énergie","Lancer un programme de nouveaux réacteurs nucléaires, en complément des renouvelables.","glRfi"],
+  ["retailleau","Budget","Ne pas remplacer 125 000 fonctionnaires partant à la retraite d’ici 2032, pour 7,5 milliards d’euros d’économies.","reAp"],
+  ["retailleau","Numérique","Consacrer un plan de 5 milliards d’euros à l’intelligence artificielle sur le quinquennat.","reAp"],
+  ["retailleau","Numérique","Nommer un « CTO de l’État », un directeur technique aux pouvoirs réels sur l’informatique publique.","reAp"],
+  ["retailleau","Numérique","Regrouper dans un budget unique les crédits numériques de tous les ministères.","reAp"],
+  ["tondelier","Agriculture","Créer un fonds pour aider les agriculteurs à passer à l’agroécologie.","toTn"],
+  ["tondelier","Santé","Interdire avant 21 h les publicités télé pour les produits trop sucrés ou trop salés.","toTn"],
+  ["tondelier","Santé","Interdire les PFAS, les perturbateurs endocriniens et les substances cancérigènes dans les produits du quotidien.","toTn"],
+  ["tondelier","Écologie","Stratégie « 300/30/3 » : un espace vert à moins de 300 m, 30 % de feuillage par territoire, trois arbres visibles de chez soi.","toTn"],
+  ["tondelier","Fiscalité","Créer une « TVA verte ».","toTn"],
+  ["tondelier","Écologie","Créer un fonds national de dépollution financé par les industries les plus polluantes.","toTn"],
+  ["tondelier","Écologie","Généraliser les régies publiques de l’eau.","toTn"],
+  ["tondelier","Éducation","Développer « l’école dehors » pour que les enfants passent plus de temps en plein air.","toTn"],
+  ["arthaud","Santé","Lever les brevets sur les vaccins pour les pays les plus pauvres.","arLo"],
+  ["arthaud","Société","Dépénaliser le cannabis.","arLo"],
+  ["arthaud","Santé","Autoriser le suicide assisté, avec le maximum de garde-fous.","arLo"],
+  ["arthaud","Transports","Rendre les transports en commun gratuits.","arLo"],
+  ["arthaud","Défense","Dire non à la course à l’armement et donner cet argent à la santé et aux salaires.","arLo"],
+  ["arthaud","Immigration","Donner le droit de vote aux travailleurs immigrés.","arLo"],
+  ["lisnard","Fiscalité","Supprimer la C3S, une taxe sur le chiffre d’affaires des entreprises.","liProg"],
+  ["lisnard","Travail","Permettre aux accords d’entreprise de déroger à la durée légale du travail, à la hausse comme à la baisse.","liProg"],
+  ["lisnard","Immigration","Inscrire dans la Constitution la primauté du droit national en matière d’immigration.","liProg"],
+  ["lisnard","Institutions","Supprimer par ordonnances la moitié des 1 200 agences et opérateurs de l’État.","liProg"],
+  ["lisnard","Justice","Supprimer les réductions de peine automatiques.","liProg"],
+  ["lisnard","Sécurité","Permettre aux communes volontaires d’armer leur police municipale.","liProg"],
+  ["lisnard","Sécurité","Créer des cellules locales anti-stups placées sous l’autorité du préfet.","liProg"],
+  ["lisnard","Europe","En finir avec les surtranspositions françaises des règles européennes.","liProg"],
+  ["lisnard","Santé","Ouvrir une maison de santé pluridisciplinaire dans chaque canton.","liProg"],
+  ["lisnard","Santé","Garantir la liberté d’installation des médecins avec un conventionnement différencié selon les zones.","liProg"],
+  ["lisnard","Économie","Faire 80 milliards d’euros d’économies dès la première année pour augmenter les salaires nets.","liEu1"],
+  ["riner","Travail","Réduire l’écart entre le salaire brut et le salaire net.","riLcp"],
+  ["riner","Économie","Alléger les charges des entreprises pour qu’elles créent des emplois.","riLcp"],
+  ["riner","Travail","Laisser les volontaires travailler plus que 35 heures pour gagner plus, sans supprimer les 35 heures.","riLcp"],
+  ["riner","Retraites","Garder la retraite par répartition, avec une part de capitalisation.","riLcp"],
+  ["riner","Budget","Dépenser moins pour mieux réinvestir, sans subir la dette.","riLcp"],
+  ["riner","Sécurité","Restaurer l’autorité de l’État pour ne pas laisser la rue aux délinquants.","riLcp"],
+  ["riner","Éducation","Sanctionner les auteurs de violences et de dégradations dans les lycées, tout en écoutant les jeunes.","riLcp"]
 ];
 
 
@@ -1931,7 +2091,7 @@ var QUOTES = [
 ];
 
 /* Familles politiques (classement usuel de la presse), utilisées par les antisèches. */
-var FAMILY = { arthaud: "Extrême gauche", kazib: "Extrême gauche", melenchon: "Gauche radicale", roussel: "Gauche (communiste)", ruffin: "Gauche", glucksmann: "Gauche sociale-démocrate", tondelier: "Écologistes", batho: "Écologistes", attal: "Centre (camp présidentiel)", philippe: "Centre droit", retailleau: "Droite", bertrand: "Droite", lisnard: "Droite", dupont: "Droite souverainiste", asselineau: "Souverainistes (Frexit)", philippot: "Souverainistes (Frexit)", branco: "Souverainistes (Frexit)", polony: "Souverainistes", lepen: "Extrême droite", zemmour: "Extrême droite" };
+var FAMILY = { arthaud: "Extrême gauche", kazib: "Extrême gauche", melenchon: "Gauche radicale", roussel: "Gauche (communiste)", ruffin: "Gauche", glucksmann: "Gauche sociale-démocrate", tondelier: "Écologistes", batho: "Écologistes", attal: "Centre (camp présidentiel)", philippe: "Centre droit", retailleau: "Droite", bertrand: "Droite", lisnard: "Droite", dupont: "Droite souverainiste", asselineau: "Souverainistes (Frexit)", philippot: "Souverainistes (Frexit)", branco: "Souverainistes (Frexit)", polony: "Souverainistes", riner: "Sans étiquette", lepen: "Extrême droite", zemmour: "Extrême droite" };
 
 /* Mode « Le Conseil constitutionnel tousse » : mesures qui butent sur la Constitution, la jurisprudence ou les traités. [candidats, mesure, verdict, obstacle, source] */
 var IMPOSS = [
@@ -2129,11 +2289,11 @@ var SOON = {
   zemmour: "On fait avec le programme des européennes. Le reste est encore dans les cartons.",
   roussel: "Les « jours heureux » de 2022 servent de bande-annonce.",
   polony: "Une « vision » en ligne, un programme encore en cuisson. Repassez après le dessert.",
-  arthaud: "Un dépliant pour l’instant. La suite au prochain tract."
+  arthaud: "Un dépliant pour l’instant. La suite au prochain tract.",
+  riner: "Quelques pistes données au Parisien. Le programme complet est encore au vestiaire."
 };
 // Candidats déclarés sans programme recensé : affichés sur l'accueil seulement, pas encore jouables.
 var NOPROG = [
-  { name: "Teddy Riner", ini: "TR", party: "Sans étiquette", q: "Candidat depuis le 9 novembre. Le programme est encore au vestiaire." },
   { name: "Jean Lassalle", ini: "JL", party: "Résistons", q: "Programme en route, à pied, quelque part entre les Pyrénées et Paris." },
   { name: "Karim Bouamrane", ini: "KB", party: "Maire de Saint-Ouen", q: "Candidature déclarée. Programme pas encore déclaré." },
   { name: "Olivier Becht", ini: "OB", party: "« Extrême centre »", q: "Le « Projet France » est annoncé. On le cherche encore, quelque part au centre." },
@@ -2146,7 +2306,11 @@ var NOPROG = [
   { name: "Sylvain Durif", ini: "SD", party: "Sans étiquette", q: "Programme en attente de transmission cosmique." },
   { name: "Manolo Mlekuz", ini: "MMl", party: "Trajectoire", q: "La trajectoire est annoncée. La destination, pas encore." },
   { name: "Jean-François Legendre", ini: "JFL", party: "À nous maintenant", q: "Le programme ? « À nous maintenant »… mais pas tout de suite." },
-  { name: "Benoît Mathieu", ini: "BM", party: "Sans étiquette", q: "Ingénieur : le programme est encore au stade du prototype." }
+  { name: "Benoît Mathieu", ini: "BM", party: "Sans étiquette", q: "Ingénieur : le programme est encore au stade du prototype." },
+  { name: "Joël Chevé", ini: "JC", party: "La France adulte", q: "Programme attendu. Il paraît qu’il faut être adulte pour patienter." },
+  { name: "Erwan Rohou", ini: "ER", party: "Mouvement écologiste indépendant", q: "Programme en germination. Arrosage prévu au printemps." },
+  { name: "Augustin Billetdoux", ini: "AB", party: "Sans étiquette", q: "Le programme arrivera peut-être par billet doux." },
+  { name: "Christian Collovati", ini: "CC", party: "Sans étiquette", q: "Candidature annoncée. Programme pas encore en rayon." }
 ];
 function countAll(id) { return M.filter(function (x) { return !special(x) && x.cs.indexOf(id) >= 0; }).length; }
 function countOf(id) { return SINGLE.filter(function (x) { return x.c === id; }).length; }
@@ -2182,7 +2346,7 @@ $("g-menu").addEventListener("click", goMenu);
 
 /* ---------- Accueil ---------- */
 var MODE_ICON = { classic: "🗳️", duel: "🥊", blitz: "⚡", target: "🎯", multi: "🧩", accord: "🤝", citations: "🎤", conseil: "⚖️", casier: "🗂️" };
-var FAM_ORDER = ["Extrême gauche", "Gauche radicale", "Gauche (communiste)", "Gauche", "Gauche sociale-démocrate", "Écologistes", "Centre (camp présidentiel)", "Centre droit", "Droite", "Droite souverainiste", "Souverainistes", "Souverainistes (Frexit)", "Extrême droite"];
+var FAM_ORDER = ["Extrême gauche", "Gauche radicale", "Gauche (communiste)", "Gauche", "Gauche sociale-démocrate", "Écologistes", "Sans étiquette", "Centre (camp présidentiel)", "Centre droit", "Droite", "Droite souverainiste", "Souverainistes", "Souverainistes (Frexit)", "Extrême droite"];
 function renderHemi() {
   var list = C.slice().sort(function (a, b) { return FAM_ORDER.indexOf(FAMILY[a.id]) - FAM_ORDER.indexOf(FAMILY[b.id]) || a.n - b.n; });
   var cx = 210, cy = 200, n = list.length, out = [];
@@ -2225,6 +2389,7 @@ function renderHome() {
   $("duel-a").innerHTML = opts; $("duel-b").innerHTML = opts;
   $("duel-chips").innerHTML = DUELS.map(function (d, i) { return "<button type=\"button\" data-i=\"" + i + "\">" + esc(last(CBY[d[0]].name)) + " / " + esc(last(CBY[d[1]].name)) + "</button>"; }).join("");
   syncSetup();
+  teaserNext();
 }
 
 // ---- Splash d’ouverture : « Au début, ils étaient 29… » ----
@@ -2307,6 +2472,44 @@ $("cand-pick").addEventListener("click", function (e) {
   syncSetup();
 });
 $("btn-start").addEventListener("click", function () { startGame(buildQuestions(cfg), cfg); });
+$("btn-quick").addEventListener("click", function () {
+  cfg.mode = "classic"; cfg.pool = "main"; cfg.diff = "easy"; cfg.len = "10"; syncSetup();
+  startGame(buildQuestions(cfg), cfg);
+});
+$("modes").addEventListener("click", function (e) {
+  if (!e.target.closest("button") || window.innerWidth > 860) return;
+  setTimeout(function () { $("modebox").scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" }); }, 60);
+});
+
+/* ---------- Échauffement (accueil) ---------- */
+var tz = { ok: 0, n: 0, cur: null, seen: {} };
+var TZ_OK = ["Bien vu.", "Exact. Tu lis les programmes, toi.", "Dans le mille.", "Oui ! Prêt·e pour la vraie partie ?", "Bravo, même son équipe de campagne hésitait."];
+var TZ_KO = ["Raté, c’est", "Perdu : la réponse était", "Eh non, c’est", "Piège ! C’était"];
+function teaserNext() {
+  var mains = C.filter(function (c) { return c.main; });
+  var pool = SINGLE.filter(function (x) { return CBY[x.c].main && !tz.seen[x.id] && x.m.length < 120; });
+  if (!pool.length) { tz.seen = {}; pool = SINGLE.filter(function (x) { return CBY[x.c].main; }); }
+  var q = pick(pool); tz.seen[q.id] = 1; tz.cur = q;
+  var opts = shuffle([q.c].concat(shuffle(mains.filter(function (c) { return c.id !== q.c; })).slice(0, 2).map(function (c) { return c.id; })));
+  $("t-m").textContent = "« " + q.m.replace(/\.$/, "") + " »";
+  $("t-opts").innerHTML = opts.map(function (id) {
+    var c = CBY[id];
+    return "<button type=\"button\" data-c=\"" + id + "\" style=\"--fam:" + (FAMCOL[FAMILY[id]] || "#888") + "\"><i>" + esc(c.ini) + "</i><span>" + esc(c.name) + "</span></button>";
+  }).join("");
+  $("t-res").textContent = ""; $("t-next").hidden = true; $("teaser").classList.remove("won", "lost");
+}
+$("t-opts").addEventListener("click", function (e) {
+  var b = e.target.closest("button"); if (!b || !tz.cur || $("teaser").classList.contains("won") || $("teaser").classList.contains("lost")) return;
+  var good = b.dataset.c === tz.cur.c; tz.n++; if (good) tz.ok++;
+  [].forEach.call(this.children, function (x) { x.disabled = true; if (x.dataset.c === tz.cur.c) x.classList.add("ok"); });
+  if (!good) b.classList.add("ko");
+  $("teaser").classList.add(good ? "won" : "lost");
+  $("t-res").innerHTML = good ? esc(pick(TZ_OK)) : esc(pick(TZ_KO)) + " <b>" + esc(CBY[tz.cur.c].name) + "</b>.";
+  $("t-score").textContent = tz.ok + "/" + tz.n;
+  $("t-next").hidden = false;
+  if (tz.n === 3) $("t-res").insertAdjacentHTML("beforeend", "<br><small>Échauffé·e ? Passe à la vraie partie avec « Jouer maintenant ».</small>");
+});
+$("t-next").addEventListener("click", teaserNext);
 
 /* ---------- Questions ---------- */
 function balanced(pool, n) {
@@ -2751,7 +2954,7 @@ $("g-cheat").addEventListener("click", function () {
 });
 
 /* ---------- Fiches antisèches ---------- */
-var FAMCOL = { "Extrême gauche": "#b3261e", "Gauche radicale": "#d0342c", "Gauche (communiste)": "#c62828", "Gauche": "#e0554f", "Gauche sociale-démocrate": "#e57373", "Écologistes": "#17784a", "Centre (camp présidentiel)": "#e8a400", "Centre droit": "#4f6bd8", "Droite": "#000091", "Droite souverainiste": "#2b3a8f", "Souverainistes (Frexit)": "#5a6478", "Souverainistes": "#7a8295", "Extrême droite": "#13203a" };
+var FAMCOL = { "Extrême gauche": "#b3261e", "Gauche radicale": "#d0342c", "Gauche (communiste)": "#c62828", "Gauche": "#e0554f", "Gauche sociale-démocrate": "#e57373", "Écologistes": "#17784a", "Sans étiquette": "#8a5cc7", "Centre (camp présidentiel)": "#e8a400", "Centre droit": "#4f6bd8", "Droite": "#000091", "Droite souverainiste": "#2b3a8f", "Souverainistes (Frexit)": "#5a6478", "Souverainistes": "#7a8295", "Extrême droite": "#13203a" };
 function renderCheat() {
   $("cheat-grid").innerHTML = C.map(function (c) {
     var mine = M.filter(function (x) { return !special(x) && x.cs.indexOf(c.id) >= 0; });
@@ -2808,7 +3011,8 @@ var TEAM = {
   arthaud: "Ta mission : distribuer les tracts à 6 h devant l’usine.",
   kazib: "Ta mission : tenir le mégaphone en manif.",
   batho: "Ta mission : veiller sur les ruches du QG.",
-  branco: "Ta mission : préparer les plaidoiries de la campagne."
+  branco: "Ta mission : préparer les plaidoiries de la campagne.",
+  riner: "Ta mission : porter le kimono de rechange à chaque meeting."
 };
 var STATS_KEY = "qui2027-stats";
 function getStats() { var s = store(STATS_KEY); return s && s.c ? s : { c: {}, g: 0, q: 0 }; }
@@ -3106,14 +3310,14 @@ function cdSet(id, v) { var el = $(id); if (cdPrev[id] === v) return; cdPrev[id]
 function cdTick() {
   var ms = VOTE - Date.now();
   if (ms <= 0) {
-    $("cd-j").textContent = "Jour J"; $("cd-chip").textContent = "1er tour : c’est aujourd’hui (ou c’est passé)";
+    $("cd-j").textContent = "Jour J"; $("hero-j").textContent = "Jour J,"; $("cd-chip").textContent = "1er tour : c’est aujourd’hui (ou c’est passé)";
     ["cd-d", "cd-h", "cd-m", "cd-s"].forEach(function (id) { $(id).textContent = "00"; });
     $("cd-quip").textContent = "Les bureaux de vote sont ouverts. Le quiz, lui, ne ferme jamais.";
     return;
   }
   var s = Math.floor(ms / 1000), d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60), sec = s % 60;
   var jd = Math.ceil(ms / 86400000);
-  $("cd-j").textContent = "J-" + jd;
+  $("cd-j").textContent = "J-" + jd; $("hero-j").textContent = "J-" + jd;
   $("cd-chip").textContent = "1er tour J-" + jd;
   cdSet("cd-d", String(d)); cdSet("cd-h", pad(h)); cdSet("cd-m", pad(m)); cdSet("cd-s", pad(sec));
 }
