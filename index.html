@@ -657,7 +657,7 @@ body:has(#v-setup:not([hidden])) .cd-chip { display: none; }
 .g-bar span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--bleu), var(--rouge)); border-radius: 999px; transition: width .8s ease; }
 .g-next { margin: 0; font-size: 13.5px; color: var(--muted); }
 .res-plus { padding: 14px 18px; margin: 0 0 14px; display: grid; gap: 10px; }
-.res-plus:has(.rp-xp:empty):has(.rp-daily[hidden]) { display: none; }
+.res-plus:has(.rp-xp:empty):has(.rp-daily[hidden]):has(.rp-vs[hidden]):has(.rp-chal[hidden]) { display: none; }
 .rp-daily[hidden] { display: none; }
 .rp-daily { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-weight: 600; }
 .rp-daily .d-grid span { width: 28px; height: 28px; font-size: 14px; color: #fff; }
@@ -700,6 +700,149 @@ body:has(#v-setup:not([hidden])) .cd-chip { display: none; }
 .fcard.pop .f-m { animation: pop .4s ease; }
 @media (max-width: 960px) { .rdv { grid-template-columns: 1fr 1fr; } .daily { grid-column: 1 / -1; } }
 @media (max-width: 640px) { .rdv { grid-template-columns: 1fr; } .streak-chip { display: none; } }
+
+/* ===== Profil, défis entre amis, ligue ===== */
+.vs-banner { display: flex; align-items: center; gap: 14px; padding: 14px 16px; margin: 0 0 22px; border: 2px solid var(--rouge); background: #fff6f6; }
+.vs-banner[hidden] { display: none; }
+.vs-ava { font-size: 40px; line-height: 1; }
+.vs-txt { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+.vs-txt b { font: 800 22px/1.05 var(--f-display); text-transform: uppercase; color: var(--rouge); }
+.vs-txt span { font-size: 14px; color: var(--muted); }
+.vs-go { font-size: 20px; padding: 13px 18px; gap: 18px; }
+.vs-x { border: 0; background: transparent; font-size: 18px; color: var(--muted); cursor: pointer; padding: 6px; }
+.rp-vs[hidden], .rp-chal[hidden] { display: none; }
+.rp-vs { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px 16px; align-items: center; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+.rp-vs .side { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+.rp-vs .side .ava { font-size: 36px; line-height: 1; }
+.rp-vs .side b { font: 800 18px/1.1 var(--f-display); text-transform: uppercase; }
+.rp-vs .side .sc { font: 900 34px/1 var(--f-display); }
+.rp-vs .side.win .sc { color: var(--ok); }
+.rp-vs .side .d-grid span { width: 20px; height: 20px; font-size: 11px; color: #fff; border-radius: 4px; }
+.rp-vs .vsm { font: 900 22px/1 var(--f-display); color: var(--rouge); }
+.rp-vs .verdict { grid-column: 1 / -1; text-align: center; font-weight: 700; font-size: 16px; }
+.rp-chal { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.chal-me { display: flex; gap: 6px; }
+.chal-me select, .chal-me input, .prof-row input { font: 600 15px/1.2 var(--f-ui); padding: 9px 10px; border: 1.5px solid var(--line); border-radius: 3px; background: var(--sheet); color: var(--ink); }
+.chal-me input { width: 160px; }
+.chal-msg { font-size: 13px; color: var(--ok); font-weight: 600; word-break: break-all; }
+.prof-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 14px; margin-bottom: 14px; }
+.prof-grid > * { min-width: 0; }
+.prof-row { display: flex; align-items: center; gap: 10px; margin: 6px 0 10px; }
+.prof-ava { font-size: 40px; line-height: 1; }
+.prof-row input { flex: 1; min-width: 0; font-size: 17px; }
+.emos { display: flex; flex-wrap: wrap; gap: 6px; }
+.emos button { font-size: 22px; width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--sheet); cursor: pointer; }
+.emos button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 0 0 2px var(--accent); }
+.prof-grade { margin: 12px 0 0; font-weight: 700; }
+.lg { width: 100%; border-collapse: collapse; font-size: 15px; }
+.lg th { text-align: left; font: 700 11px/1 var(--f-ui); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding: 6px 8px; border-bottom: 1px solid var(--line); }
+.lg td { padding: 9px 8px; border-bottom: 1px solid var(--line); }
+.lg td.n { text-align: center; font-variant-numeric: tabular-nums; font-weight: 700; }
+.lg tr.me td { background: var(--accent-soft); }
+.lg .rk { font: 800 16px/1 var(--f-display); color: var(--muted); width: 28px; }
+.lg-empty { color: var(--muted); font-size: 14px; margin: 6px 0 0; }
+@media (max-width: 760px) { .prof-grid { grid-template-columns: 1fr; } .vs-banner { flex-wrap: wrap; } .vs-go { width: 100%; } .rp-vs .side .sc { font-size: 28px; } }
+
+/* ===== Le jeu en format « fil » (plein écran, swipe) ===== */
+body.playing { background: var(--playbg, #101a4d) !important; background-image: none !important; transition: background-color .5s ease; color: #fff; }
+body.playing::before, body.playing .mast, body.playing footer.method { display: none !important; }
+body.playing main.wrap { max-width: 660px; padding: 10px 18px 110px; }
+body.playing #v-game { min-height: calc(100vh - 20px); display: flex; flex-direction: column; }
+body.playing .hud { position: sticky; top: 0; z-index: 5; margin: 0 -18px 8px; padding: 10px 18px; background: linear-gradient(var(--playbg, #101a4d) 70%, transparent); color: #fff; gap: 10px; }
+body.playing .hud .prog { font-size: 18px; color: #fff; }
+body.playing .hud .pts b, body.playing .hud .streak { color: #fff; }
+body.playing .hud .pts span { color: rgba(255,255,255,.65); }
+body.playing .hud .bar { background: rgba(255,255,255,.15); }
+body.playing .menu-btn { background: rgba(255,255,255,.12); color: #fff; border-color: transparent; border-radius: 999px; }
+body.playing .quit { color: rgba(255,255,255,.7); }
+body.playing .trail i { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.25); }
+body.playing .trail i.ok { background: #34d399; border-color: #34d399; }
+body.playing .trail i.ko { background: #f87171; border-color: #f87171; }
+body.playing .trail i.cur { border-color: #fff; }
+body.playing .notice { background: rgba(255,255,255,.08); color: #fff; border-color: rgba(255,255,255,.2); }
+body.playing .bulletin { background: transparent; border: 0; box-shadow: none; padding: 18px 0 8px; color: #fff; margin-bottom: 14px; overflow: visible; }
+body.playing .bulletin .theme { color: #fff; border: 0; background: rgba(255,255,255,.14); border-radius: 999px; padding: 6px 11px 5px; }
+body.playing .bulletin blockquote { font-size: clamp(27px, 6.2vw, 38px); line-height: 1.22; margin-top: 22px; color: #fff; }
+body.playing .bulletin .ask { color: rgba(255,255,255,.7); font: 800 15px/1 var(--f-display); letter-spacing: .1em; text-transform: uppercase; margin-top: 18px; }
+body.playing .bulletin .src { border-top-color: rgba(255,255,255,.2); color: rgba(255,255,255,.9); }
+body.playing .bulletin .src a { color: #c7d2fe; }
+body.playing .quip { color: #fff; }
+body.playing .memo { color: rgba(255,255,255,.65); }
+body.playing .gain { color: #fbbf24; }
+body.playing .report, body.playing .linkbtn { color: rgba(255,255,255,.6) !important; }
+body.playing #g-next { white-space: nowrap; }
+body.playing .verdict.ok { color: #34d399; }
+body.playing .verdict.ko { color: #fca5a5; }
+body.playing .pre { background: rgba(255,255,255,.08); color: #fff; margin-right: 0; }
+body.playing .pre b { color: #fca5a5; }
+body.playing .info-btn { top: 16px; right: 0; background: rgba(255,255,255,.14); color: #fff; border-color: transparent; }
+body.playing .infobox { background: rgba(255,255,255,.1); color: #fff; border-left-color: #fff; }
+body.playing .infobox .ih { color: #c7d2fe; }
+body.playing .stamp { background: rgba(0,0,0,.25); right: 0; top: 12px; }
+body.playing .stamp.ok { color: #34d399; border-color: #34d399; }
+body.playing .stamp.ko { color: #f87171; border-color: #f87171; }
+body.playing .toast { left: auto; right: 0; top: -6px; color: #fbbf24; }
+body.playing .board { background: rgba(255,255,255,.07); border: 2px solid rgba(255,255,255,.22); color: #fff; border-radius: 14px; }
+body.playing .board .num { background: rgba(255,255,255,.18); color: #fff; border-radius: 12px 0 8px 0; }
+body.playing .board .ini { color: #fff; }
+body.playing .board .pt, body.playing .board .key { color: rgba(255,255,255,.6); }
+body.playing .board::after { height: 4px; }
+body.playing button.board:hover:not(:disabled) { background: rgba(255,255,255,.14); border-color: #fff; }
+body.playing button.board.is-ok { background: rgba(52,211,153,.2); border-color: #34d399; }
+body.playing button.board.is-ok .num { background: #34d399; }
+body.playing button.board.is-ko { background: rgba(248,113,113,.2); border-color: #f87171; }
+body.playing button.board.is-ko .num { background: #f87171; }
+body.playing button.board.dim { opacity: .3; }
+body.playing .vf button { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.3); color: #fff; border-radius: 14px; }
+body.playing .vf button.is-ok { background: rgba(52,211,153,.2); border-color: #34d399; }
+body.playing .vf button.is-ko { background: rgba(248,113,113,.2); border-color: #f87171; }
+body.playing .hintbox { background: rgba(255,255,255,.08); color: #fff; }
+body.playing .cheat-btn { color: #fbbf24 !important; border-color: #fbbf24 !important; border-radius: 999px; }
+body.playing .keys { color: rgba(255,255,255,.5); }
+body.playing .keys kbd { background: transparent; color: #fff; border-color: rgba(255,255,255,.3); }
+body.playing .next-row { position: sticky; bottom: 0; z-index: 4; margin: 14px -18px 0; padding: 14px 18px calc(14px + env(safe-area-inset-bottom)); background: linear-gradient(transparent, var(--playbg, #101a4d) 35%); }
+body.playing #g-next { background: #fff; color: var(--playbg, #101a4d); border: 0; border-radius: 999px; padding: 15px 22px; font: 800 19px/1 var(--f-display); text-transform: uppercase; letter-spacing: .04em; box-shadow: 0 8px 24px -8px rgba(0,0,0,.5); }
+body.playing #g-next::before { content: "↑"; display: inline-block; margin-right: 8px; animation: nudge 1.4s ease-in-out infinite; }
+@keyframes nudge { 50% { transform: translateY(-4px); } }
+body.playing .bulletin.enter { animation: riseup .45s cubic-bezier(.2,.9,.2,1) both; }
+@keyframes riseup { from { opacity: 0; transform: translateY(70px); } to { opacity: 1; transform: none; } }
+body.playing #v-game.leaving .bulletin, body.playing #v-game.leaving #g-opts { animation: leaveup .22s ease-in both; }
+@keyframes leaveup { to { opacity: 0; transform: translateY(-80px); } }
+@media (max-width: 640px) { body.playing .keys { display: none; } body.playing .hud .quit { display: none; } body.playing .hud { grid-template-columns: auto 1fr auto; } body.playing .hud .streak { display: none; } body.playing .hud .bar { grid-column: 1 / -1; order: 9; } body.playing .hud .pts { flex-direction: row; align-items: baseline; gap: 4px; } body.playing .hud .pts b { font-size: 24px; } body.playing .hud .prog { font-size: 16px; } }
+
+/* Réactions animées */
+.react { position: fixed; left: 50%; top: 92px; z-index: 30; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; background: #fff; color: var(--ink); padding: 10px 20px 10px 10px; border-radius: 999px; box-shadow: 0 14px 40px -10px rgba(0,0,0,.55); pointer-events: none; width: max-content; max-width: min(92vw, 440px); }
+.react[hidden] { display: none; }
+.react.in { animation: rin .5s cubic-bezier(.2,1.6,.4,1) both; }
+.react.out { animation: rout .3s ease-in both; }
+@keyframes rin { from { opacity: 0; transform: translate(-50%, 40px) scale(.6); } to { opacity: 1; transform: translate(-50%, 0) scale(1); } }
+@keyframes rout { to { opacity: 0; transform: translate(-50%, 20px) scale(.9); } }
+.react .r-emo { font-size: 44px; line-height: 1; animation: wob .7s ease-in-out .15s 2; display: inline-block; }
+@keyframes wob { 25% { transform: rotate(-14deg) scale(1.15); } 75% { transform: rotate(12deg) scale(1.15); } }
+.react .r-ava { position: relative; flex: none; width: 50px; height: 50px; border-radius: 50%; background: var(--fam); color: #fff; display: grid; place-items: center; font: 800 15px/1 var(--f-display); animation: sulk .9s ease-in-out .1s 2; }
+.react .r-ava em { position: absolute; right: -10px; top: -12px; font-size: 26px; font-style: normal; animation: wob .6s ease-in-out .3s 3; }
+@keyframes sulk { 0%, 100% { transform: none; } 30% { transform: translateX(-5px) rotate(-8deg); } 60% { transform: translateX(5px) rotate(8deg); } }
+.react .r-txt { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.react .r-txt b { font: 800 19px/1.05 var(--f-display); text-transform: uppercase; letter-spacing: .02em; }
+.react .r-txt span { font-size: 13.5px; color: var(--muted); line-height: 1.25; }
+.react.ok .r-txt b { color: var(--ok); }
+.react.ko .r-txt b { color: var(--ko); }
+.react.fire { background: linear-gradient(90deg, #fff7ed, #fff); }
+.react.fire .r-txt b { color: #c2410c; }
+
+.league-card { padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; }
+.lc-me { display: flex; align-items: center; gap: 10px; }
+.lc-ava { font-size: 36px; line-height: 1; }
+.lc-me b { font: 800 22px/1.05 var(--f-display); text-transform: uppercase; overflow-wrap: anywhere; }
+.lc-rec { margin: 0; font-size: 14px; color: var(--muted); }
+.lc-rec b { color: var(--ink); }
+.lc-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+.lc-btns .btn { padding: 9px 12px; font-size: 14px; }
+#v-setup .modes button.fil-mode { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+#v-setup .modes button.fil-mode b, #v-setup .modes button.fil-mode span { color: var(--paper); }
+#v-setup .modes button.fil-mode span { opacity: .75; }
+#v-setup > .modes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 760px) { #v-setup > .modes { grid-template-columns: repeat(2, minmax(0, 1fr)); } #v-setup .modes button.fil-mode { grid-column: 1 / -1; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 </head>
@@ -725,6 +868,12 @@ body:has(#v-setup:not([hidden])) .cd-chip { display: none; }
 
 <main class="wrap">
   <section class="view" id="v-setup">
+    <div class="card vs-banner" id="vs-banner" hidden>
+      <span class="vs-ava" id="vs-ava">🦊</span>
+      <div class="vs-txt"><b id="vs-who">Un·e ami·e te défie</b><span id="vs-sub"></span></div>
+      <button type="button" class="go vs-go" id="vs-go"><span>Relever le défi</span><span aria-hidden="true">→</span></button>
+      <button type="button" class="vs-x" id="vs-x" aria-label="Ignorer ce défi">✕</button>
+    </div>
     <div class="hero">
       <div class="hero-main">
         <p class="hero-kick"><span class="pulse" aria-hidden="true"></span><span id="hero-j">J-…</span> avant le premier tour</p>
@@ -761,13 +910,12 @@ body:has(#v-setup:not([hidden])) .cd-chip { display: none; }
         <button type="button" class="btn d-share" id="d-share" hidden>Partager mon défi</button>
         <p class="d-next" id="d-next"></p>
       </div>
-      <button type="button" class="card fil-card" id="fil-open">
-        <span class="fil-phone" aria-hidden="true"><span></span><span></span><span></span></span>
-        <b>Le Fil</b>
-        <span class="fil-txt">Des mesures à faire défiler sans fin, comme sur ton téléphone. Devine, swipe, recommence.</span>
-        <span class="fil-best" id="fil-best"></span>
-        <span class="fil-cta">Ouvrir le fil ↓</span>
-      </button>
+      <div class="card league-card" id="league-card">
+        <span class="g-lab">Ta ligue d’amis</span>
+        <div class="lc-me"><span class="lc-ava" id="lc-ava">🦊</span><b id="lc-name">Choisis un pseudo</b></div>
+        <p class="lc-rec" id="lc-rec">Joue une partie, puis envoie le lien « Défier un ami » : il joue les mêmes questions, et vos scores s’affrontent.</p>
+        <div class="lc-btns"><button type="button" class="btn primary" id="lc-play">🥊 Partie à défier</button><button type="button" class="btn" id="lc-see">Ma ligue</button></div>
+      </div>
       <div class="card grade" id="grade">
         <span class="g-lab">Ton grade</span>
         <div class="g-row"><span class="g-ico" id="gr-ico">📣</span><b id="gr-name">Militant·e</b></div>
@@ -780,6 +928,7 @@ body:has(#v-setup:not([hidden])) .cd-chip { display: none; }
     <div class="sec-h" id="modes-h"><span class="step">1</span><h2>Choisis ton mode</h2></div>
     <div class="modes" role="group" aria-label="Mode de jeu" id="modes">
           <button type="button" id="m-classic" data-mode="classic" aria-pressed="true"><b>Classique</b><span>Une mesure, un candidat.</span></button>
+          <button type="button" id="m-fil" data-mode="fil" class="fil-mode"><b><i class="ico" aria-hidden="true">📱</i>Fil infini</b><span>Swipe sans fin, comme sur TikTok.</span></button>
           <button type="button" id="m-duel" data-mode="duel" aria-pressed="false"><b>Confrontation</b><span>Deux candidats, une mesure.</span></button>
           <button type="button" id="m-blitz" data-mode="blitz" aria-pressed="false"><b>Éclair 60 s</b><span>Une minute, un max de points.</span></button>
           <button type="button" id="m-target" data-mode="target" aria-pressed="false"><b>Ciblé</b><span>Révise qui tu veux.</span></button>
@@ -895,6 +1044,7 @@ body:has(#v-setup:not([hidden])) .cd-chip { display: none; }
     <div id="g-opts"></div>
     <p class="hintbox" id="g-hint" hidden></p>
     <div class="next-row"><button type="button" class="cheat-btn" id="g-cheat">Antisèche <small id="g-cheat-n">×3</small></button><span class="grow"></span><button type="button" id="g-validate" hidden>Valider mon choix</button><button type="button" id="g-next" hidden>Mesure suivante →</button></div>
+    <div class="react" id="g-react" aria-hidden="true" hidden></div>
     <p class="keys" id="g-keys">Raccourcis : touches <kbd>1</kbd> à <kbd>9</kbd> pour répondre, <kbd>Entrée</kbd> pour continuer.</p>
   </section>
 
@@ -909,7 +1059,13 @@ body:has(#v-setup:not([hidden])) .cd-chip { display: none; }
     </div>
     <div class="card res-plus" id="r-plus">
       <div class="rp-daily" id="r-daily" hidden></div>
+      <div class="rp-vs" id="r-vs" hidden></div>
       <div class="rp-xp" id="r-xp"></div>
+      <div class="rp-chal" id="r-chal" hidden>
+        <div class="chal-me"><select id="r-emo" aria-label="Ton avatar"></select><input id="r-name" maxlength="20" placeholder="Ton pseudo" aria-label="Ton pseudo" autocomplete="nickname"></div>
+        <button type="button" class="btn primary" id="r-chal-go">🥊 Défier un ami sur ces questions</button>
+        <span class="chal-msg" id="r-chal-msg"></span>
+      </div>
     </div>
     <div class="res-actions">
       <button type="button" class="btn" id="r-again">Rejouer</button>
@@ -973,6 +1129,20 @@ body:has(#v-setup:not([hidden])) .cd-chip { display: none; }
       <h2>Mes stats</h2>
       <p>Quel candidat tu connais le mieux, toutes parties confondues. Les stats restent dans ton navigateur, rien n’est envoyé nulle part.</p>
       <p class="st-sum" id="st-sum"></p>
+    </div>
+    <div class="prof-grid">
+      <div class="card panel prof">
+        <h3>Ton profil</h3>
+        <p class="sub">Ton pseudo n’apparaît que dans les liens de défi que tu envoies. Rien n’est enregistré ailleurs que dans ton navigateur.</p>
+        <div class="prof-row"><span class="prof-ava" id="pf-ava">🦊</span><input id="pf-name" maxlength="20" placeholder="Choisis un pseudo" aria-label="Ton pseudo" autocomplete="nickname"></div>
+        <div class="emos" id="pf-emos" role="group" aria-label="Choisis ton avatar"></div>
+        <p class="prof-grade" id="pf-grade"></p>
+      </div>
+      <div class="card panel">
+        <h3>Ta ligue d’amis</h3>
+        <p class="sub">Chaque défi envoyé puis relevé par lien compte ici. Termine une partie et clique sur « Défier un ami ».</p>
+        <div id="lg-table"></div>
+      </div>
     </div>
     <div class="card team" id="st-team"></div>
     <div class="card panel">
@@ -2455,6 +2625,7 @@ var game = null, timerId = null, autoId = null;
 var views = { setup: $("v-setup"), game: $("v-game"), res: $("v-res"), explorer: $("v-explorer"), cheat: $("v-cheat"), stats: $("v-stats"), contact: $("v-contact") };
 function show(v) {
   Object.keys(views).forEach(function (k) { views[k].hidden = (k !== v); });
+  document.body.classList.toggle("playing", v === "game");
   $("tab-jouer").setAttribute("aria-pressed", v === "setup");
   $("tab-explorer").setAttribute("aria-pressed", v === "explorer");
   $("tab-cheat").setAttribute("aria-pressed", v === "cheat");
@@ -2469,7 +2640,7 @@ document.querySelectorAll("nav.tabs button").forEach(function (b) {
   });
 });
 function goMenu() {
-  clearInterval(timerId); clearTimeout(autoId);
+  clearInterval(timerId); clearTimeout(autoId); hideReact();
   game = null;
   if (location.hash) history.replaceState(null, "", location.pathname + location.search);
   show("setup"); syncSetup(); renderDaily();
@@ -2593,7 +2764,7 @@ function syncSetup() {
   $("best").textContent = best ? "Ton record dans ce mode : " + fmt(best.pts) + " points (" + best.score + "/" + best.total + ")." : "Pas encore de record dans ce mode. La place est libre.";
 }
 function modeKey(c) { return c.mode === "classic" || c.mode === "blitz" ? c.mode + "-" + c.pool + "-" + c.diff : c.mode; }
-$("modes").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; cfg.mode = b.dataset.mode; syncSetup(); });
+$("modes").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; if (b.dataset.mode === "fil") { openFil(); return; } cfg.mode = b.dataset.mode; syncSetup(); });
 $("seg-pool").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; cfg.pool = b.dataset.pool; syncSetup(); });
 $("seg-diff").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; cfg.diff = b.dataset.diff; syncSetup(); });
 $("seg-len").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; cfg.len = b.dataset.len; syncSetup(); });
@@ -2612,7 +2783,7 @@ $("btn-quick").addEventListener("click", function () {
   startGame(buildQuestions(cfg), cfg);
 });
 $("modes").addEventListener("click", function (e) {
-  if (!e.target.closest("button") || window.innerWidth > 860) return;
+  var mb = e.target.closest("button"); if (!mb || mb.dataset.mode === "fil" || window.innerWidth > 860) return;
   setTimeout(function () { $("modebox").scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" }); }, 60);
 });
 
@@ -2673,7 +2844,8 @@ function renderDaily() {
   $("d-state").textContent = done ? "Fait : " + d.score + "/" + d.total + ". " + (d.score === d.total ? "Sans faute, respect." : d.score >= 3 ? "Pas mal du tout." : "Demain, revanche.") :
     st.n ? "Ta série tient à un fil : ne la casse pas aujourd’hui." : "Un seul essai par jour. Compare ton score avec tes amis.";
   $("d-next").textContent = done ? "Prochain défi dans " + untilMidnight() + "." : "";
-  var fb = store(FILBEST_KEY); $("fil-best").textContent = fb ? "Ton record : ×" + fb + " d’affilée" : "";
+  var fb = store(FILBEST_KEY); $("m-fil").querySelector("span").textContent = fb ? "Swipe sans fin. Ton record : ×" + fb + " d’affilée." : "Swipe sans fin, comme sur TikTok.";
+  renderLeagueCard();
   renderGrade();
   var seen = store(SEEN_KEY);
   if (seen === null) store(SEEN_KEY, RAW.length);
@@ -2806,7 +2978,113 @@ function closeFil() {
   }
   renderDaily();
 }
-$("fil-open").addEventListener("click", openFil);
+$("lc-play").addEventListener("click", function () { $("btn-quick").click(); });
+$("lc-see").addEventListener("click", function () { $("tab-stats").click(); });
+function renderLeagueCard() {
+  var pr = profile(), lg = store(LEAGUE_KEY) || {}, rows = Object.keys(lg).map(function (k) { return lg[k]; });
+  $("lc-ava").textContent = pr.emo; $("lc-name").textContent = pr.name || "Choisis un pseudo";
+  if (rows.length) {
+    var W = 0, L = 0; rows.forEach(function (r) { W += r.w; L += r.l; });
+    var rival = rows.slice().sort(function (a, b) { return (b.w + b.l + b.d) - (a.w + a.l + a.d); })[0];
+    $("lc-rec").innerHTML = "<b>" + W + " victoire" + (W > 1 ? "s" : "") + "</b> · " + L + " défaite" + (L > 1 ? "s" : "") + " contre " + plural(rows.length, "ami·e", "ami·es") + ". Ton rival n°1 : " + esc(rival.e + " " + rival.n) + " (" + rival.w + "-" + rival.l + ").";
+  }
+}
+
+/* ---------- Profil et défis entre amis (par lien, sans serveur) ---------- */
+var PROFILE_KEY = "qui2027-profile", LEAGUE_KEY = "qui2027-league";
+var EMOS = ["🦊", "🐻", "🦉", "🐸", "🐯", "🐧", "🦄", "🐙", "🐝", "🦁", "🐼", "🐓"];
+function profile() { var p = store(PROFILE_KEY) || {}; return { name: (p.name || "").slice(0, 20), emo: EMOS.indexOf(p.emo) >= 0 ? p.emo : "🦊" }; }
+function saveProfile(p) { store(PROFILE_KEY, { name: (p.name || "").trim().slice(0, 20), emo: p.emo }); }
+function b64e(o) { return btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); }
+function b64d(t) { t = t.replace(/-/g, "+").replace(/_/g, "/"); while (t.length % 4) t += "="; return JSON.parse(decodeURIComponent(escape(atob(t)))); }
+function ck(txt) { var h = 0; for (var i = 0; i < txt.length; i++) h = (h * 31 + txt.charCodeAt(i)) % 9973; return h; }
+function canChallenge() { return game && game.cfg.mode !== "blitz" && game.qs.length <= 20 && game.qs.every(function (q) { return q.type === "pick"; }) && game.answers.filter(Boolean).length === game.qs.length; }
+function challengeUrl() {
+  var pr = profile(), r = game.result;
+  var o = { v: 1, n: pr.name || "Un·e ami·e", e: pr.emo, s: r.score, t: r.total, p: r.pts, m: game.cfg.mode,
+    g: game.qs.map(function (q, i) { return game.answers[i] && game.answers[i].ok ? 1 : 0; }).join(""),
+    q: game.qs.map(function (q) { return [q.mid, ck(M[q.mid].m)].concat(q.opts); }) };
+  if (game.cfg.vs) o.r = { n: game.cfg.vs.n, e: game.cfg.vs.e, s: game.cfg.vs.s, t: game.cfg.vs.t };
+  return siteUrl() + "#defi=" + b64e(o);
+}
+function parseChallenge(h) {
+  try {
+    var o = b64d(h); if (!o || o.v !== 1 || !o.q || !o.q.length || o.q.length > 20) return null;
+    var qs = o.q.map(function (x) {
+      var m = M[x[0]], opts = x.slice(2).filter(function (id) { return CBY[id]; });
+      if (!m || ck(m.m) !== x[1] || opts.indexOf(m.c) < 0) throw new Error("old");
+      return { mid: x[0], type: "pick", opts: opts };
+    });
+    o.n = String(o.n || "Un·e ami·e").slice(0, 20); o.e = EMOS.indexOf(o.e) >= 0 ? o.e : "🦊";
+    return { o: o, qs: qs };
+  } catch (e) { return { old: true }; }
+}
+var pendingVs = null;
+function showVsBanner() {
+  var b = $("vs-banner"); if (!pendingVs) { b.hidden = true; return; }
+  if (pendingVs.old) { b.hidden = false; $("vs-ava").textContent = "🕰️"; $("vs-who").textContent = "Ce défi a expiré"; $("vs-sub").textContent = "Le quiz a été mis à jour depuis. Demande un nouveau lien, ou lance une partie."; $("vs-go").hidden = true; return; }
+  var o = pendingVs.o; b.hidden = false; $("vs-go").hidden = false;
+  $("vs-ava").textContent = o.e; $("vs-who").textContent = o.n + " te défie !";
+  $("vs-sub").textContent = (o.r ? o.n + " a relevé ton défi et te renvoie la balle. " : "") + "Score à battre : " + o.s + "/" + o.t + " sur les mêmes " + o.q.length + " questions.";
+}
+$("vs-go").addEventListener("click", function () {
+  if (!pendingVs || pendingVs.old) return;
+  var o = pendingVs.o, md = ["citations", "casier"].indexOf(o.m) >= 0 ? o.m : "classic";
+  startGame(pendingVs.qs, { mode: md, pool: "all", diff: "easy", len: "10", duel: [], targets: [], vs: { n: o.n, e: o.e, s: o.s, t: o.t, p: o.p, g: o.g } });
+  pendingVs = null; showVsBanner();
+});
+$("vs-x").addEventListener("click", function () { pendingVs = null; showVsBanner(); });
+function checkHashChallenge() {
+  var m = location.hash.match(/^#defi=([A-Za-z0-9_-]+)$/); if (!m) return false;
+  pendingVs = parseChallenge(m[1]);
+  history.replaceState(null, "", location.pathname + location.search);
+  show("setup"); showVsBanner(); window.scrollTo({ top: 0 });
+  return true;
+}
+function vsAfter(sc, total) {
+  var vs = game.cfg.vs; $("r-vs").hidden = !vs;
+  if (!vs) return;
+  var pr = profile(), me = { n: pr.name || "Toi", e: pr.emo, s: sc, p: game.pts, g: game.qs.map(function (q, i) { return game.answers[i] && game.answers[i].ok ? 1 : 0; }).join("") };
+  var res = sc !== vs.s ? (sc > vs.s ? 1 : -1) : (game.pts !== vs.p ? (game.pts > vs.p ? 1 : -1) : 0);
+  function side(x, win) { return "<div class=\"side" + (win ? " win" : "") + "\"><span class=\"ava\">" + esc(x.e) + "</span><b>" + esc(x.n) + "</b><span class=\"sc\">" + x.s + "/" + total + "</span><span class=\"d-grid\">" + gridHtml(String(x.g || "").split("").map(function (c) { return c === "1"; })) + "</span></div>"; }
+  var verdict = res > 0 ? "🏆 Tu bats " + esc(vs.n) + " ! Renvoie-lui la balle." : res < 0 ? "😬 " + esc(vs.n) + " gagne cette manche. Revanche ?" : "🤝 Égalité parfaite. Il faut une belle.";
+  if (sc === vs.s && res !== 0) verdict += " (Départagés aux points : " + fmt(game.pts) + " contre " + fmt(vs.p || 0) + ".)";
+  $("r-vs").innerHTML = side(me, res > 0) + "<span class=\"vsm\">VS</span>" + side(vs, res < 0) + "<p class=\"verdict\">" + verdict + "</p>";
+  var lg = store(LEAGUE_KEY) || {}, k = vs.n.toLowerCase(), row = lg[k] || { n: vs.n, e: vs.e, w: 0, l: 0, d: 0 };
+  row.n = vs.n; row.e = vs.e; if (res > 0) row.w++; else if (res < 0) row.l++; else row.d++; row.at = Date.now();
+  lg[k] = row; store(LEAGUE_KEY, lg);
+  if (res > 0) setTimeout(function () { confetti(70); }, 400);
+}
+function chalSetup() {
+  var ok = canChallenge(); $("r-chal").hidden = !ok; if (!ok) return;
+  var pr = profile();
+  $("r-emo").innerHTML = EMOS.map(function (e) { return "<option" + (e === pr.emo ? " selected" : "") + ">" + e + "</option>"; }).join("");
+  $("r-name").value = pr.name; $("r-chal-msg").textContent = "";
+  $("r-chal-go").textContent = game.cfg.vs ? "🥊 Renvoyer la balle à " + game.cfg.vs.n : "🥊 Défier un ami sur ces questions";
+}
+$("r-chal-go").addEventListener("click", function () {
+  saveProfile({ name: $("r-name").value, emo: $("r-emo").value });
+  var pr = profile(), r = game.result, url = challengeUrl();
+  var txt = pr.emo + " " + (pr.name || "Quelqu’un") + " te défie sur « Qui a proposé ça ? » : " + r.score + "/" + r.total + (game.cfg.vs ? " (et toi tu avais " + game.cfg.vs.s + "/" + game.cfg.vs.t + ")" : "") + ". Mêmes questions, à toi de faire mieux 👉 " + url;
+  if (navigator.share) { navigator.share({ title: "Qui a proposé ça ? Défi", text: txt }).catch(function () {}); $("r-chal-msg").textContent = ""; return; }
+  try { navigator.clipboard.writeText(txt).then(function () { $("r-chal-msg").textContent = "Lien copié : colle-le à tes amis (WhatsApp, SMS…)."; }, function () { $("r-chal-msg").textContent = url; }); } catch (e) { $("r-chal-msg").textContent = url; }
+});
+function renderProfile() {
+  var pr = profile();
+  $("pf-ava").textContent = pr.emo; $("pf-name").value = pr.name;
+  $("pf-emos").innerHTML = EMOS.map(function (e) { return "<button type=\"button\" data-e=\"" + e + "\" aria-pressed=\"" + (e === pr.emo) + "\">" + e + "</button>"; }).join("");
+  var gi = gradeInfo(store(XP_KEY) || 0); $("pf-grade").textContent = "Grade : " + gi.ico + " " + gi.name;
+  var lg = store(LEAGUE_KEY) || {}, rows = Object.keys(lg).map(function (k) { return lg[k]; });
+  rows.sort(function (a, b) { return (b.w + b.l + b.d) - (a.w + a.l + a.d) || b.at - a.at; });
+  var W = rows.reduce(function (a, r) { return a + r.w; }, 0), L = rows.reduce(function (a, r) { return a + r.l; }, 0), Dd = rows.reduce(function (a, r) { return a + r.d; }, 0);
+  $("lg-table").innerHTML = rows.length ? "<table class=\"lg\"><thead><tr><th></th><th>Ami·e</th><th>Défis</th><th>Tes victoires</th><th>Ses victoires</th><th>Nuls</th></tr></thead><tbody>" +
+    "<tr class=\"me\"><td class=\"rk\">" + esc(pr.emo) + "</td><td><b>" + esc(pr.name || "Toi") + "</b> (total)</td><td class=\"n\">" + (W + L + Dd) + "</td><td class=\"n\">" + W + "</td><td class=\"n\">" + L + "</td><td class=\"n\">" + Dd + "</td></tr>" +
+    rows.map(function (r) { return "<tr><td class=\"rk\">" + esc(r.e) + "</td><td>" + esc(r.n) + "</td><td class=\"n\">" + (r.w + r.l + r.d) + "</td><td class=\"n\">" + r.w + "</td><td class=\"n\">" + r.l + "</td><td class=\"n\">" + r.d + "</td></tr>"; }).join("") + "</tbody></table>"
+    : "<p class=\"lg-empty\">Pas encore de défi. Joue une partie, puis envoie le lien « Défier un ami » : ton ami joue les mêmes questions et vos scores s’affichent ici.</p>";
+}
+$("pf-emos").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; var pr = profile(); pr.emo = b.dataset.e; saveProfile(pr); renderProfile(); });
+$("pf-name").addEventListener("change", function () { var pr = profile(); pr.name = this.value; saveProfile(pr); renderProfile(); });
+
 
 
 /* ---------- Questions ---------- */
@@ -3053,6 +3331,7 @@ function infoHtml(m) {
 
 function renderQ() {
   var q = game.qs[game.i], m = M[q.mid], n = game.qs.length, blitz = game.cfg.mode === "blitz";
+  document.body.style.setProperty("--playbg", FIL_BG[game.i % FIL_BG.length]); $("v-game").classList.remove("leaving");
   if (!blitz) { $("g-barwrap").classList.remove("timer"); $("g-prog").textContent = (game.cfg.mode === "casier" ? "Dossier " : game.cfg.mode === "citations" ? "Citation " : game.cfg.mode === "conseil" ? "Saisine " : "Mesure ") + (game.i + 1) + " / " + n; $("g-bar").style.width = pct(game.i, n) + "%"; }
   else $("g-prog").textContent = game.timeLeft + " s";
   hudUpdate();
@@ -3183,6 +3462,7 @@ function reveal(a, animate) {
     if (a.gain) floatGain("+" + a.gain);
     if (!a.ok) { var cd2 = $("g-card"); cd2.classList.remove("enter", "shake"); void cd2.offsetWidth; cd2.classList.add("shake"); }
     if (a.ok && STREAK_TOAST[game.streak]) confetti(40);
+    react(a, m);
   }
   hudUpdate();
   if (game.cfg.mode !== "blitz") {
@@ -3194,8 +3474,59 @@ function reveal(a, animate) {
 }
 function bonusTxt(d) { if (!d) return ""; var b = []; if (d.streak) b.push("série +" + d.streak); if (d.speed) b.push("rapidité +" + d.speed); return b.length ? " (" + b.join(", ") + ")" : ""; }
 $("g-next").addEventListener("click", next);
+
+/* ---------- Réactions animées après chaque réponse ---------- */
+var R_OK = [["👏", "Propre.", "Tu lis les programmes, toi."], ["😎", "Facile.", "Trop facile, même."], ["🎯", "Dans le mille.", "Le QG peut t’embaucher."], ["🧠", "Cerveau.", "Tu révises en cachette ?"], ["✅", "Validé.", "Le Conseil constitutionnel approuve."], ["🤌", "Parfait.", "Rien à redire."]];
+var R_FIRE = { 3: ["🔥", "En feu !", "Trois d’affilée."], 5: ["🤯", "Inarrêtable.", "Cinq de suite, respect."], 8: ["🚀", "Décollage.", "Huit d’affilée !"], 10: ["🏆", "Légende.", "Dix sans faute."], 15: ["👑", "Majesté.", "Tu devrais te présenter."] };
+var R_KO_EMO = ["😤", "🙄", "😒", "🤨", "😮‍💨", "😩"];
+var R_KO_TXT = ["Le QG de {X} soupire.", "Quelque part, {X} fronce les sourcils.", "Aïe, l’équipe de {X} a tout vu.", "{X} va devoir distribuer plus de tracts.", "Le community manager de {X} est en PLS.", "Raté : c’était {X}. Ça pique."];
+var reactT = null;
+function hideReact() { var r = $("g-react"); clearTimeout(reactT); if (!r.hidden) { r.classList.remove("in"); r.hidden = true; } }
+function react(a, m) {
+  if (!game || game.cfg.mode === "blitz" && a.ok && !R_FIRE[game.streak]) return;
+  var r = $("g-react"), h, cls;
+  if (a.ok) {
+    var f = R_FIRE[game.streak], o = f || pick(R_OK); cls = f ? "fire" : "ok";
+    h = "<span class=\"r-emo\">" + o[0] + "</span><span class=\"r-txt\"><b>" + esc(o[1]) + "</b><span>" + esc(o[2]) + "</span></span>";
+  } else {
+    var c = CBY[m.c], nm = m.cs.length > 1 ? names(m.cs) : c.name; cls = "ko";
+    h = "<span class=\"r-ava\" style=\"--fam:" + (FAMCOL[FAMILY[c.id]] || "#888") + "\">" + esc(c.ini) + "<em>" + pick(R_KO_EMO) + "</em></span><span class=\"r-txt\"><b>" + esc(pick(["Raté !", "Aïe.", "Perdu !", "Oups."])) + "</b><span>" + esc(pick(R_KO_TXT).replace("{X}", nm)) + "</span></span>";
+  }
+  clearTimeout(reactT);
+  r.className = "react " + cls; r.innerHTML = h; r.hidden = false; void r.offsetWidth; r.classList.add("in");
+  reactT = setTimeout(function () { r.classList.add("out"); reactT = setTimeout(function () { r.hidden = true; r.classList.remove("in", "out"); }, 300); }, game.cfg.mode === "blitz" ? 900 : 2200);
+}
+/* Swipe vers le haut pour passer à la suivante */
+(function () {
+  var y0 = null, t0 = 0;
+  $("v-game").addEventListener("touchstart", function (e) { y0 = e.touches[0].clientY; t0 = Date.now(); }, { passive: true });
+  $("v-game").addEventListener("touchend", function (e) {
+    if (y0 === null || !game || !game.answers[game.i] || game.cfg.mode === "blitz") { y0 = null; return; }
+    var dy = e.changedTouches[0].clientY - y0; y0 = null;
+    var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
+    if (dy < -70 && Date.now() - t0 < 600 && atBottom) next();
+  }, { passive: true });
+  var wl = 0;
+  window.addEventListener("wheel", function (e) {
+    if (!game || !document.body.classList.contains("playing") || !game.answers[game.i] || game.cfg.mode === "blitz") return;
+    var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
+    if (e.deltaY > 30 && atBottom && Date.now() - wl > 900) { wl = Date.now(); next(); }
+  }, { passive: true });
+})();
+
 function next() {
   if (!game || game.over || !game.answers[game.i]) return;
+  if (game.leaving) return;
+  if (game.cfg.mode !== "blitz" && !REDUCED) {
+    game.leaving = true; $("v-game").classList.add("leaving"); hideReact();
+    var gg = game;
+    setTimeout(function () { if (game === gg) { game.leaving = false; advance(); } }, 200);
+    return;
+  }
+  advance();
+}
+function advance() {
+  hideReact();
   game.i++;
   if (game.i >= game.qs.length) {
     if (game.cfg.mode === "blitz") game.qs = game.qs.concat(buildQuestions(game.cfg));
@@ -3350,6 +3681,7 @@ function renderStats() {
   $("st-team").innerHTML = teamHtml(s);
   $("st-rows").innerHTML = rk.length ? rk.map(function (o) { return rowHtml({ l: o.c.name, a: o.a, b: o.b }); }).join("") : "";
   $("st-reset").hidden = !s.g;
+  renderProfile();
 }
 $("st-reset").addEventListener("click", function () { store(STATS_KEY, { c: {}, g: 0, q: 0 }); renderStats(); });
 $("st-play").addEventListener("click", function () { goMenu(); });
@@ -3390,7 +3722,7 @@ $("ct-form").addEventListener("submit", function (e) {
     .then(function () { $("ct-send").disabled = false; });
 });
 function finish() {
-  clearInterval(timerId); clearTimeout(autoId);
+  clearInterval(timerId); clearTimeout(autoId); hideReact();
   game.over = true;
   var ans = game.answers.filter(Boolean);
   recordStats(ans);
@@ -3398,6 +3730,7 @@ function finish() {
   afterGame(ans, sc, total);
   var key = modeKey(game.cfg);
   game.result = { pts: game.pts, score: sc, total: total, pct: p, label: t.label, streak: game.bestStreak };
+  vsAfter(sc, total); chalSetup();
   countUp($("r-pts"), game.pts, 1100);
   $("r-sub").textContent = "points · " + sc + "/" + total + " (" + p + " %) · meilleure série ×" + game.bestStreak;
   var text = t.text;
@@ -3644,7 +3977,8 @@ renderHome();
 runIntro();
 $("contact-line").innerHTML = "écris à <a href=\"mailto:" + CONTACT_EMAIL + "\">" + CONTACT_EMAIL + "</a>, ou utilise le formulaire « Nous écrire » et le lien « Signaler une erreur » sous chaque réponse.";
 if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } else if (location.hash === "#antiseches") { show("cheat"); renderCheat(); } else if (location.hash === "#stats") { show("stats"); renderStats(); } else if (location.hash === "#contact") { show("contact"); } else show("setup");
-window.addEventListener("hashchange", function () { if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } });
+window.addEventListener("hashchange", function () { if (checkHashChallenge()) return; if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } });
+checkHashChallenge();
 })();
 </script>
 </body>
