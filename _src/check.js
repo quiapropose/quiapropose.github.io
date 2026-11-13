@@ -22,7 +22,7 @@ G.POLLS.forEach(function (p) {
   ["inst", "pour", "terrain", "n", "marge", "methode", "u"].forEach(function (f) { if (!p[f]) bad("sondage " + p.inst + " : champ " + f + " manquant (loi de 1977)"); });
   p.hyps.forEach(function (h) { var t = h.r.reduce(function (a, x) { return a + x[1]; }, 0); if (Math.abs(t - 100) > 1.01) bad("sondage " + p.inst + " / " + h.nom + " : total " + t + " %"); });
 });
-if (G.NEWS.length > 14) bad("NEWS : " + G.NEWS.length + " éléments, garder 14 au maximum");
+if (G.NEWS.length > 6) bad("NEWS : " + G.NEWS.length + " éléments, garder 6 au maximum");
 G.NEWS.forEach(function (n, i) {
   ["d", "k", "t", "s", "u"].forEach(function (f) { if (!n[f]) bad("NEWS[" + i + "] champ " + f + " manquant"); });
   if (["declare", "programme", "mesure", "agenda", "insolite", "debat"].indexOf(n.k) < 0) bad("NEWS[" + i + "] type inconnu : " + n.k);

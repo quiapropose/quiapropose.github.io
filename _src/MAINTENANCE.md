@@ -26,13 +26,13 @@ Les sources du site sont dans ce dossier `_src/`. Le site publié (`index.html`,
    - meetings et débats, dates clés.
 
    Sources à privilégier : les dépêches AFP reprises par les médias (France 24, TV5Monde, Le Point, La Libre, Boursorama…), les sites officiels des candidats, la Commission des sondages, LCP, franceinfo, Le Monde, RFI.
-2. **Fil info (`NEWS`).**
-   - Ajouter en tête les nouveautés : 3 au maximum par jour, et 14 éléments au maximum au total (les plus anciens sortent).
+2. **Fil info (`NEWS`).** Il doit rester très simple : **6 éléments au maximum**, les plus récents en tête.
+   - Une seule ligne par sujet. Regrouper ce qui va ensemble : une candidature et la réaction qu'elle suscite, un programme et le meeting qui le lance.
+   - Éviter plusieurs lignes à la même date. Si deux sujets distincts tombent le même jour, la date n'est affichée qu'une fois.
+   - Un seul élément « À venir » (`d: "À venir"`, `k: "agenda"`) qui liste les 2 ou 3 prochaines dates clés ; retirer les dates passées.
    - Format : `{ d: "13 nov.", k: type, t: texte, s: média, u: url }`, avec pour `k` l'une des valeurs `declare`, `programme`, `mesure`, `agenda`, `insolite` ou `debat`.
-   - Texte factuel, court (160 caractères au maximum), neutre, sans adjectif de jugement.
-   - Le type `insolite` est réservé à un fait réel et léger (un bon mot assumé, un lieu de meeting inattendu), jamais à une moquerie.
+   - Texte factuel, court (140 caractères environ, 160 au maximum), neutre, sans adjectif de jugement. Une touche légère (un bon mot assumé par un candidat, un lieu de meeting inattendu) est bienvenue, jamais une moquerie.
    - Indiquer « AFP via <média> » quand l'article est une dépêche AFP.
-   - Les éléments « À venir » (`agenda`) restent tant que la date n'est pas passée.
    - Mettre à jour `NEWS_MAJ`.
 3. **Mesures (`RAW`).**
    - Pour chaque mesure nouvelle et vérifiable : ajouter une source dans `S` (avec une URL https qui pointe vers le texte original ou un article qui le cite), puis une ligne dans `RAW`.

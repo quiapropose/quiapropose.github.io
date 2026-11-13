@@ -1217,13 +1217,10 @@ var POLLS_MAJ = "13 novembre 2026";
 
 /* Fil info (bandeau du haut) : les plus récents d'abord. k = declare | programme | mesure | agenda | insolite | debat */
 var NEWS = [
-  { d: "12 nov.", k: "programme", t: "Édouard Philippe publie son programme complet : à retrouver dans le quiz.", s: "edouardphilippe.fr", u: "https://www.edouardphilippe.fr/programme" },
-  { d: "9 nov.", k: "declare", t: "Le judoka Teddy Riner se déclare candidat, dans une vidéo et un entretien au Parisien.", s: "LCP", u: "https://lcp.fr/actualites/le-judoka-teddy-riner-annonce-sa-candidature-a-l-election-presidentielle-de-2027-444920" },
-  { d: "9 nov.", k: "insolite", t: "Édouard Philippe souhaite la bienvenue à Teddy Riner, un « candidat de poids ». Le jeu de mots est offert.", s: "AFP via La Libre", u: "https://www.lalibre.be/dernieres-depeches/2026/11/09/des-tatamis-a-lelysee-teddy-riner-annonce-sa-candidature-a-la-presidentielle-TN24TXUYZBDHLNYIUW4YHZJEI4/" },
-  { d: "9 nov.", k: "programme", t: "Raphaël Glucksmann présente son programme des 100 premiers jours pour sortir des énergies fossiles.", s: "RFI", u: "https://www.dakaractu.com/Presidentielle-en-France-Raphael-Glucksmann-presente-son-projet-de-revolution-ecologique_a278006.amp.html" },
-  { d: "7 nov.", k: "debat", t: "Meeting de Jean-Luc Mélenchon au Bourget, devant plus de 20 000 personnes.", s: "franceinfo", u: "https://www.franceinfo.fr/elections/presidentielle/reportage-nous-allons-gagner-au-bourget-jean-luc-melenchon-devoile-son-programme-pour-2027-et-poursuit-sa-demonstration-de-force_8272679.html" },
-  { d: "6 nov.", k: "programme", t: "LFI publie « L’Avenir en commun » 2027 : 1 069 mesures, dont 238 nouvelles, vendu 4,90 € en librairie.", s: "AFP via France 24", u: "https://www.france24.com/fr/france/20261106-france-insoumise-jean-luc-melenchon-presente-programme-presidentielle-2027-fidele-volonte-rupture-lfi" },
-  { d: "13 déc.", k: "agenda", t: "À venir : les militants Écologistes votent pour décider de leur candidature.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-declares-et-potentiels-444932" },
-  { d: "12 mars", k: "agenda", t: "À venir : date limite pour réunir les 500 parrainages d’élus.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-declares-et-potentiels-444932" }
+  { d: "12 nov.", k: "programme", t: "Édouard Philippe publie son programme complet : ses mesures sont dans le quiz.", s: "edouardphilippe.fr", u: "https://www.edouardphilippe.fr/programme" },
+  { d: "9 nov.", k: "declare", t: "Teddy Riner se déclare candidat. Édouard Philippe salue un « candidat de poids ».", s: "AFP via La Libre", u: "https://www.lalibre.be/dernieres-depeches/2026/11/09/des-tatamis-a-lelysee-teddy-riner-annonce-sa-candidature-a-la-presidentielle-TN24TXUYZBDHLNYIUW4YHZJEI4/" },
+  { d: "9 nov.", k: "programme", t: "Raphaël Glucksmann présente ses 100 premiers jours pour sortir des énergies fossiles.", s: "RFI", u: "https://www.dakaractu.com/Presidentielle-en-France-Raphael-Glucksmann-presente-son-projet-de-revolution-ecologique_a278006.amp.html" },
+  { d: "6-7 nov.", k: "programme", t: "LFI publie « L’Avenir en commun » (1 069 mesures) et réunit plus de 20 000 personnes au Bourget.", s: "AFP via France 24", u: "https://www.france24.com/fr/france/20261106-france-insoumise-jean-luc-melenchon-presente-programme-presidentielle-2027-fidele-volonte-rupture-lfi" },
+  { d: "À venir", k: "agenda", t: "13 déc. : vote des Écologistes sur leur candidature · 12 mars : fin des parrainages.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-declares-et-potentiels-444932" }
 ];
 var NEWS_MAJ = "13 novembre 2026";

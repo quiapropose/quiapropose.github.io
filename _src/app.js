@@ -444,7 +444,7 @@ $("mini-poll").addEventListener("click", function (e) { e.preventDefault(); $("t
 var NEWS_ICO = { declare: "🙋", programme: "📘", mesure: "💡", agenda: "📅", insolite: "😄", debat: "🎤" };
 (function renderTicker() {
   if (typeof NEWS === "undefined" || !NEWS.length) { $("ticker").hidden = true; return; }
-  var one = NEWS.map(function (n) { return "<a class=\"tk-item\" href=\"" + esc(n.u) + "\" target=\"_blank\" rel=\"noopener\"><span aria-hidden=\"true\">" + (NEWS_ICO[n.k] || "📰") + "</span><b>" + esc(n.d) + "</b>" + esc(n.t) + " <small>(" + esc(n.s) + ")</small></a>"; }).join("");
+  var one = NEWS.map(function (n, i) { return "<a class=\"tk-item" + (i && NEWS[i - 1].d === n.d ? " tk-same" : "") + "\" href=\"" + esc(n.u) + "\" target=\"_blank\" rel=\"noopener\"><span aria-hidden=\"true\">" + (NEWS_ICO[n.k] || "📰") + "</span><b>" + esc(n.d) + "</b>" + esc(n.t) + " <small>(" + esc(n.s) + ")</small></a>"; }).join("");
   $("tk-track").innerHTML = one + one.replace(/<a /g, "<a aria-hidden=\"true\" tabindex=\"-1\" ");
 })();
 
@@ -498,8 +498,7 @@ function dailyShareText(d, st) {
 function renderDaily() {
   var n = dayNum(), d = store(DAILY_KEY), st = streakNow(), done = d && d.n === n;
   $("d-num").textContent = "n°" + n;
-  $("d-streak").textContent = "🔥 " + st.n;
-  $("streak-chip").hidden = !st.n; $("streak-chip").textContent = "🔥 " + st.n + (st.n > 1 ? " jours" : " jour");
+  $("d-streak").textContent = "🔥 " + st.n; $("d-streak").classList.toggle("zero", !st.n);
   $("d-go").hidden = !!done; $("d-share").hidden = !done;
   $("d-grid").innerHTML = done ? gridHtml(d.grid) : "<span>?</span><span>?</span><span>?</span><span>?</span><span>?</span>";
   $("d-state").textContent = done ? "Fait : " + d.score + "/" + d.total + ". " + (d.score === d.total ? "Sans faute, respect." : d.score >= 3 ? "Pas mal du tout." : "Demain, revanche.") :
@@ -657,11 +656,12 @@ $("lc-pill").addEventListener("click", function () { $("tab-stats").click(); set
 function renderLeagueCard() {
   var pr = profile(), me = sbOn() && onlineMe(), cur = store(OL_CUR_KEY);
   $("lc-ava").textContent = pr.emo;
-  $("lc-txt").textContent = pr.name ? pr.name + " · ligue entre amis" : "Ligue entre amis";
+  var sn = streakNow().n, fire = sn ? " · 🔥 " + sn : "";
+  $("lc-txt").textContent = (pr.name ? pr.name + " · ligue entre amis" : "Ligue entre amis") + fire;
   if (me && cur) rpc("qp_board", { p_code: cur, p_viewer: me.id }).then(function (bd) {
     bd = (bd || []).sort(function (a, b) { return b.week - a.week || b.ptsum - a.ptsum; });
     var k = bd.findIndex(function (r) { return r.isme; });
-    if (k >= 0) $("lc-txt").textContent = (pr.name || "Toi") + " · " + (k + 1) + (k ? "e" : "er") + " de ta ligue sur " + bd.length;
+    if (k >= 0) $("lc-txt").textContent = (pr.name || "Toi") + " · " + (k + 1) + (k ? "e" : "er") + " de ta ligue sur " + bd.length + fire;
   }).catch(function () {});
 }
 /* ---------- Profil et défis entre amis (par lien, sans serveur) ---------- */
@@ -807,7 +807,8 @@ function drawOnline() {
     rows = rows || [];
     rows.sort(function (a, b) { return olSort === "week" ? (b.week - a.week || b.ptsum - a.ptsum) : (b.total - a.total || b.ptsum - a.ptsum); });
     var md = ["🥇", "🥈", "🥉"];
-    $("ol-board").innerHTML = "<div class=\"ol-bar\"><span>Code : <code>" + esc(l.lcode) + "</code></span><button type=\"button\" class=\"btn\" id=\"ol-invite\">📨 Inviter des amis</button>" +
+    var snb = streakNow().n;
+    $("ol-board").innerHTML = "<div class=\"ol-bar\"><span>Code : <code>" + esc(l.lcode) + "</code>" + (snb ? " · ta série : 🔥 " + plural(snb, "jour", "jours") : "") + "</span><button type=\"button\" class=\"btn\" id=\"ol-invite\">📨 Inviter des amis</button>" +
       "<span class=\"ol-sort\"><button type=\"button\" data-s=\"week\" aria-pressed=\"" + (olSort === "week") + "\">7 jours</button><button type=\"button\" data-s=\"total\" aria-pressed=\"" + (olSort === "total") + "\">Depuis le début</button></span>" +
       "<button type=\"button\" class=\"linkbtn\" id=\"ol-leave\">Quitter la ligue</button></div>" +
       "<table class=\"lg\"><thead><tr><th></th><th>Joueur</th><th>Aujourd’hui</th><th>7 jours</th><th>Total</th><th>Défis</th></tr></thead><tbody>" +
