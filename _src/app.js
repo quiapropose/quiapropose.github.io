@@ -444,8 +444,13 @@ $("mini-poll").addEventListener("click", function (e) { e.preventDefault(); $("t
 var NEWS_ICO = { declare: "🙋", programme: "📘", mesure: "💡", agenda: "📅", insolite: "😄", debat: "🎤" };
 (function renderTicker() {
   if (typeof NEWS === "undefined" || !NEWS.length) { $("ticker").hidden = true; return; }
-  var one = NEWS.map(function (n, i) { return "<a class=\"tk-item" + (i && NEWS[i - 1].d === n.d ? " tk-same" : "") + "\" href=\"" + esc(n.u) + "\" target=\"_blank\" rel=\"noopener\"><span aria-hidden=\"true\">" + (NEWS_ICO[n.k] || "📰") + "</span><b>" + esc(n.d) + "</b>" + esc(n.t) + " <small>(" + esc(n.s) + ")</small></a>"; }).join("");
-  $("tk-track").innerHTML = one + one.replace(/<a /g, "<a aria-hidden=\"true\" tabindex=\"-1\" ");
+  function item(n) { return "<a href=\"" + esc(n.u) + "\" target=\"_blank\" rel=\"noopener\"><span class=\"tk-d\">" + esc(n.d) + "</span>" + esc(n.t) + " <span class=\"tk-s\">(" + esc(n.s) + ")</span></a>"; }
+  $("tk-one").innerHTML = item(NEWS[0]);
+  $("tk-list").innerHTML = NEWS.slice(1).map(function (n) { return "<li>" + item(n) + "</li>"; }).join("");
+  var more = $("tk-more");
+  if (NEWS.length < 2) { more.hidden = true; return; }
+  more.textContent = "+ " + (NEWS.length - 1);
+  more.addEventListener("click", function () { var open = $("tk-list").hidden; $("tk-list").hidden = !open; more.setAttribute("aria-expanded", open); more.textContent = open ? "Réduire" : "+ " + (NEWS.length - 1); });
 })();
 
 /* ---------- Échauffement (accueil) ---------- */

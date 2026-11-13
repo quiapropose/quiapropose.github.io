@@ -519,8 +519,8 @@ body { background-image: radial-gradient(rgba(0,0,145,.06) 1.2px, transparent 1.
 /* ===== Accueil v3 : hiérarchie ===== */
 .hero { display: grid; grid-template-columns: 1.15fr 1fr; gap: 36px; align-items: center; margin: 4px 0 40px; }
 .hero > * { min-width: 0; }
-.hero-kick { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 14px; padding: 6px 12px 5px; border-radius: 999px; background: var(--sheet); border: 1.5px solid var(--rouge); color: var(--rouge); font: 800 13px/1 var(--f-ui); letter-spacing: .1em; text-transform: uppercase; }
-.hero-kick .pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--rouge); animation: pulse 1.6s ease-in-out infinite; }
+.hero-kick { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 14px; padding: 6px 12px 5px; border-radius: 999px; background: var(--sheet); border: 1.5px solid var(--line); color: var(--bleu); font: 800 13px/1 var(--f-ui); letter-spacing: .1em; text-transform: uppercase; }
+.hero-kick .pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--bleu); }
 @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(225,0,15,.45); } 50% { box-shadow: 0 0 0 7px rgba(225,0,15,0); } }
 .hero-h { margin: 0 0 22px; font: 500 clamp(34px, 4.6vw, 54px)/1.02 var(--f-read); letter-spacing: -.015em; text-wrap: balance; }
 .hero-h em { font: 900 1.12em/.95 var(--f-display); font-style: normal; text-transform: uppercase; color: var(--accent); letter-spacing: 0; background: linear-gradient(transparent 64%, rgba(225,0,15,.15) 64% 92%, transparent 92%); padding: 0 .06em; }
@@ -967,49 +967,41 @@ svg .arc-c2 { font: 600 9.5px/1 var(--f-ui); fill: var(--muted); }
 .poll .top2 span { font-size: 12px; color: var(--muted); }
 
 
-/* ===== Haut de page : défi du jour + échauffement réduit ===== */
-.hero { align-items: start; }
+/* ===== Haut de page : échauffement + défi du jour compact ===== */
+.hero { align-items: center; }
 .hero-side { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
-.hero-side .daily { display: flex !important; flex-direction: column; gap: 8px; padding: 16px 18px 14px; }
-.hero-side .daily h3 { font-size: 21px; }
-.hero-side .daily .d-go, .hero-side .daily .d-share { min-width: 0; margin: 4px 0 0 !important; font-size: 20px; padding: 13px 16px; }
-.hero-side .lc-pill { align-self: flex-start; }
-.hero-side .daily > * { align-self: stretch; text-align: left; justify-self: stretch; }
-.hero-side .daily .d-top { justify-content: space-between; }
-.hero-side .daily .d-grid { justify-content: flex-start; }
-.hero-side .daily .lc-pill { align-self: flex-start; }
+.hero-side .daily { display: grid !important; grid-template-columns: 1fr auto; grid-template-areas: "top go" "h go" "grid pill" "next pill"; gap: 4px 14px; align-items: center; padding: 12px 14px; border-bottom-width: 4px; }
+.hero-side .daily .d-top { grid-area: top; justify-content: flex-start; gap: 8px; }
+.hero-side .daily h3 { grid-area: h; font-size: 16px; text-transform: none; font-family: var(--f-ui); font-weight: 700; }
+.hero-side .daily .d-state { display: none; }
+.hero-side .daily .d-grid { grid-area: grid; gap: 4px; }
+.hero-side .daily .d-grid span { width: 22px; height: 22px; font-size: 11px; border-radius: 4px; }
+.hero-side .daily .d-go, .hero-side .daily .d-share { grid-area: go; min-width: 0; margin: 0 !important; font-size: 16px; padding: 10px 14px; gap: 10px; align-self: center; }
+.hero-side .daily .d-next { grid-area: next; font-size: 12px; }
+.hero-side .daily .lc-pill { grid-area: pill; justify-self: end; align-self: end; font-size: 12px; padding: 5px 10px; }
+.hero-side .d-streak { font-size: 13px; padding: 3px 7px 2px; }
 .d-streak.zero { display: none; }
-.teaser.mini { transform: none; padding: 12px 14px 12px; }
-.teaser.mini .t-top { margin-top: 2px; }
-.teaser.mini .t-lab { font-size: 10px; }
-.teaser.mini .t-score { font-size: 15px; }
-.teaser.mini .t-m { font-size: 16px; line-height: 1.3; min-height: 2.6em; margin: 8px 0 10px; }
-.teaser.mini .t-opts { grid-template-columns: 1fr 1fr; gap: 6px; }
-.teaser.mini .t-opts button { font-size: 13px; padding: 4px 8px 4px 4px; gap: 8px; }
-.teaser.mini .t-opts button i { width: 26px; height: 26px; font-size: 10px; }
-.teaser.mini .t-res { font-size: 13px; margin-top: 8px; min-height: 0; }
-.teaser.mini .t-res:empty { display: none; }
-.teaser.mini .t-next { font-size: 13px; }
 @media (max-width: 760px) {
   .hero-side { display: contents; }
   .hero-side .daily { order: -1; }
   .hero-side .teaser { order: 1; }
+  .hero-side .daily { grid-template-columns: 1fr auto; grid-template-areas: "top pill" "h h" "grid go" "next next"; gap: 6px 10px; }
+  .hero-side .daily .lc-pill { align-self: center; }
+  .hero-side .daily .d-go, .hero-side .daily .d-share { white-space: nowrap; font-size: 15px; padding: 9px 12px; }
 }
-.tk-item.tk-same b { display: none; }
-/* ===== Fil info ===== */
-.ticker { display: flex; align-items: stretch; background: var(--ink); color: #fff; font-size: 14px; overflow: hidden; }
-.tk-lab { flex: none; background: var(--rouge); font: 800 14px/1 var(--f-display); letter-spacing: .08em; text-transform: uppercase; padding: 10px 14px 9px; display: flex; align-items: center; gap: 6px; }
-.tk-lab::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #fff; animation: pulse 1.6s ease-in-out infinite; }
-.tk-view { flex: 1; overflow: hidden; position: relative; mask-image: linear-gradient(90deg, transparent, #000 30px, #000 calc(100% - 30px), transparent); }
-.tk-track { display: inline-flex; gap: 34px; white-space: nowrap; padding: 9px 0; animation: tk 70s linear infinite; }
-.ticker:hover .tk-track { animation-play-state: paused; }
-@keyframes tk { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.tk-item { color: #fff; text-decoration: none; display: inline-flex; gap: 7px; align-items: baseline; }
-.tk-item:hover { text-decoration: underline; }
-.tk-item b { color: #fbbf24; font-weight: 800; }
-.tk-item small { color: rgba(255,255,255,.55); font-size: 12px; }
+/* ===== Fil info (calme) ===== */
+.ticker { border-bottom: 1px solid var(--line); background: var(--sheet); font-size: 13.5px; color: var(--ink); }
+.tk-in { display: flex; align-items: baseline; gap: 10px; padding-top: 7px; padding-bottom: 7px; min-width: 0; }
+.tk-lab { flex: none; font: 800 11px/1 var(--f-ui); letter-spacing: .12em; text-transform: uppercase; color: var(--bleu); }
+.tk-one { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tk-one a, .tk-list a { color: inherit; text-decoration: none; }
+.tk-one a:hover, .tk-list a:hover { text-decoration: underline; }
+.tk-d { color: var(--muted); font-weight: 700; margin-right: 6px; }
+.tk-s { color: var(--muted); font-size: 12px; }
+.tk-more { flex: none; border: 0; background: none; color: var(--muted); font: 600 12.5px/1 var(--f-ui); cursor: pointer; padding: 0; text-decoration: underline; text-underline-offset: 3px; }
+.tk-list { list-style: none; margin: 0; padding: 2px 0 10px; display: grid; gap: 6px; }
+.tk-list[hidden] { display: none; }
 body.playing .ticker { display: none; }
-@media (prefers-reduced-motion: reduce) { .tk-track { animation: none; } .tk-view { overflow-x: auto; } }
 .mini-poll svg { width: 100%; max-width: 270px; align-self: center; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
@@ -1033,7 +1025,7 @@ body.playing .ticker { display: none; }
     </div>
   </div>
 </header>
-<div class="ticker" id="ticker" aria-label="Fil info de la campagne"><span class="tk-lab">Fil info</span><div class="tk-view"><div class="tk-track" id="tk-track"></div></div></div>
+<div class="ticker" id="ticker" aria-label="Fil info de la campagne"><div class="wrap tk-in"><span class="tk-lab">Fil info</span><span class="tk-one" id="tk-one"></span><button type="button" class="tk-more" id="tk-more" aria-expanded="false"></button></div><div class="wrap"><ul class="tk-list" id="tk-list" hidden></ul></div></div>
 
 <main class="wrap">
   <section class="view" id="v-setup">
@@ -1054,7 +1046,7 @@ body.playing .ticker { display: none; }
     <div class="hero">
       <div class="hero-main">
         <p class="hero-kick"><span class="pulse" aria-hidden="true"></span><span id="hero-j">J-…</span> avant le premier tour</p>
-        <button type="button" class="news-chip" id="news-chip" hidden></button>
+        <button type="button" class="news-chip" id="news-chip" hidden style="display:none"></button>
         <h2 class="hero-h">Une mesure.<br>Un candidat.<br><em>À toi de deviner.</em></h2>
         <ul class="facts">
           <li><b id="f-mes">0</b><span>mesures sourcées</span></li>
@@ -1069,22 +1061,23 @@ body.playing .ticker { display: none; }
         <p class="hero-polls"><a href="#sondages" id="hero-polls">📊 Où en sont les sondages ?</a> <span id="hero-polls-sub"></span></p>
       </div>
       <div class="hero-side">
+        <div class="teaser card" id="teaser" aria-live="polite">
+          <div class="t-top"><span class="t-lab">Échauffement</span><span class="t-score" id="t-score"></span></div>
+          <p class="t-q">Qui a proposé ça&nbsp;?</p>
+          <p class="t-m" id="t-m">…</p>
+          <div class="t-opts" id="t-opts" role="group" aria-label="Réponses"></div>
+          <p class="t-res" id="t-res"></p>
+          <button type="button" class="t-next" id="t-next" hidden>Une autre →</button>
+        </div>
         <div class="card daily" id="daily">
           <div class="d-top"><span class="d-lab">Défi du jour <b id="d-num">n°1</b></span><span class="d-streak" id="d-streak" title="Jours d’affilée avec le défi réussi">🔥 0</span></div>
-          <h3>5 mesures. Les mêmes pour tout le monde.</h3>
+          <h3>5 mesures, les mêmes pour tous</h3>
           <p class="d-state" id="d-state">Un seul essai par jour. Compare ton score avec tes amis.</p>
           <div class="d-grid" id="d-grid" aria-hidden="true"></div>
           <button type="button" class="go d-go" id="d-go"><span>Relever le défi</span><span aria-hidden="true">→</span></button>
           <button type="button" class="btn d-share" id="d-share" hidden>Partager mon défi</button>
           <p class="d-next" id="d-next"></p>
           <button type="button" class="lc-pill" id="lc-pill"><span id="lc-ava">🏛️</span> <span id="lc-txt">Ligue entre amis</span> →</button>
-        </div>
-        <div class="teaser card mini" id="teaser" aria-live="polite">
-          <div class="t-top"><span class="t-lab">Échauffement</span><span class="t-score" id="t-score"></span></div>
-          <p class="t-m" id="t-m">…</p>
-          <div class="t-opts" id="t-opts" role="group" aria-label="Réponses"></div>
-          <p class="t-res" id="t-res"></p>
-          <button type="button" class="t-next" id="t-next" hidden>Une autre →</button>
         </div>
       </div>
     </div>
@@ -3101,8 +3094,13 @@ $("mini-poll").addEventListener("click", function (e) { e.preventDefault(); $("t
 var NEWS_ICO = { declare: "🙋", programme: "📘", mesure: "💡", agenda: "📅", insolite: "😄", debat: "🎤" };
 (function renderTicker() {
   if (typeof NEWS === "undefined" || !NEWS.length) { $("ticker").hidden = true; return; }
-  var one = NEWS.map(function (n, i) { return "<a class=\"tk-item" + (i && NEWS[i - 1].d === n.d ? " tk-same" : "") + "\" href=\"" + esc(n.u) + "\" target=\"_blank\" rel=\"noopener\"><span aria-hidden=\"true\">" + (NEWS_ICO[n.k] || "📰") + "</span><b>" + esc(n.d) + "</b>" + esc(n.t) + " <small>(" + esc(n.s) + ")</small></a>"; }).join("");
-  $("tk-track").innerHTML = one + one.replace(/<a /g, "<a aria-hidden=\"true\" tabindex=\"-1\" ");
+  function item(n) { return "<a href=\"" + esc(n.u) + "\" target=\"_blank\" rel=\"noopener\"><span class=\"tk-d\">" + esc(n.d) + "</span>" + esc(n.t) + " <span class=\"tk-s\">(" + esc(n.s) + ")</span></a>"; }
+  $("tk-one").innerHTML = item(NEWS[0]);
+  $("tk-list").innerHTML = NEWS.slice(1).map(function (n) { return "<li>" + item(n) + "</li>"; }).join("");
+  var more = $("tk-more");
+  if (NEWS.length < 2) { more.hidden = true; return; }
+  more.textContent = "+ " + (NEWS.length - 1);
+  more.addEventListener("click", function () { var open = $("tk-list").hidden; $("tk-list").hidden = !open; more.setAttribute("aria-expanded", open); more.textContent = open ? "Réduire" : "+ " + (NEWS.length - 1); });
 })();
 
 /* ---------- Échauffement (accueil) ---------- */
