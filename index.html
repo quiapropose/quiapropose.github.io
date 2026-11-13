@@ -843,6 +843,45 @@ body.playing #v-game.leaving .bulletin, body.playing #v-game.leaving #g-opts { a
 #v-setup .modes button.fil-mode span { opacity: .75; }
 #v-setup > .modes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 @media (max-width: 760px) { #v-setup > .modes { grid-template-columns: repeat(2, minmax(0, 1fr)); } #v-setup .modes button.fil-mode { grid-column: 1 / -1; } }
+
+/* ===== Ligues en ligne ===== */
+.lgb-form { display: flex; gap: 6px; margin-top: 6px; }
+.lgb-form select, .lgb-form input, .ol-form input { font: 600 15px/1.2 var(--f-ui); padding: 9px 10px; border: 1.5px solid var(--line); border-radius: 3px; background: var(--sheet); color: var(--ink); }
+.lgb-form input { flex: 1; min-width: 0; }
+.lgb-msg, .ol-msg { font-size: 13px; color: var(--ko); font-weight: 600; min-height: 0; }
+.lgb-msg:empty, .ol-msg:empty { display: none; }
+.ol-msg.ok { color: var(--ok); }
+.ol[hidden] { display: none; }
+.ol { margin-bottom: 14px; }
+.ol-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.ol-head h3 { margin: 0; }
+.ol-me { font-weight: 700; }
+.ol-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 12px 0 10px; }
+.ol-tabs button { border: 1.5px solid var(--line); background: var(--sheet); border-radius: 999px; padding: 7px 12px; font-weight: 700; font-size: 14px; cursor: pointer; color: var(--ink); }
+.ol-tabs button[aria-selected="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.ol-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 4px 0 10px; font-size: 14px; color: var(--muted); }
+.ol-bar code { font: 800 16px/1 var(--f-display); letter-spacing: .12em; color: var(--ink); background: var(--accent-soft); padding: 5px 8px 4px; border-radius: 3px; }
+.ol-sort { display: inline-flex; border: 1.5px solid var(--line); border-radius: 999px; overflow: hidden; }
+.ol-sort button { border: 0; background: transparent; padding: 5px 10px; font-weight: 700; font-size: 13px; cursor: pointer; color: var(--muted); }
+.ol-sort button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.lg td.today { font-weight: 800; }
+.lg td.today.none { color: var(--muted); font-weight: 400; }
+.lg .medal { font-size: 18px; }
+.ol-forms { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.ol-form { display: flex; gap: 6px; }
+.ol-form input { flex: 1; min-width: 0; }
+.ol-del { margin-top: 12px; font-size: 12.5px; color: var(--muted); }
+.lc-board { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; font-size: 14px; }
+.lc-board li { display: flex; gap: 8px; align-items: center; }
+.lc-board li b { margin-left: auto; font-variant-numeric: tabular-nums; }
+.lc-board li.me { font-weight: 800; }
+@media (max-width: 640px) { .ol-forms { grid-template-columns: 1fr; } .ol .lg th:nth-child(6), .ol .lg td:nth-child(6) { display: none; } .ol .lg { font-size: 14px; } .ol .lg td, .ol .lg th { padding: 8px 5px; } }
+#ol-board { overflow-x: auto; }
+.ol-form { flex-wrap: wrap; }
+.ol-form input { flex: 1 1 150px; }
+.ol-form .btn { white-space: nowrap; }
+.vs-banner { position: relative; padding-right: 40px; }
+.vs-x { position: absolute; top: 6px; right: 6px; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 </head>
@@ -868,6 +907,14 @@ body.playing #v-game.leaving .bulletin, body.playing #v-game.leaving #g-opts { a
 
 <main class="wrap">
   <section class="view" id="v-setup">
+    <div class="card vs-banner lg-banner" id="lg-banner" hidden>
+      <span class="vs-ava">🏟️</span>
+      <div class="vs-txt"><b id="lgb-title">Tu es invité·e dans une ligue</b><span id="lgb-sub">Choisis un pseudo pour rejoindre le classement.</span>
+        <span class="lgb-form"><select id="lgb-emo" aria-label="Ton avatar"></select><input id="lgb-name" maxlength="20" placeholder="Ton pseudo" aria-label="Ton pseudo" autocomplete="nickname"></span>
+        <span class="lgb-msg" id="lgb-msg"></span></div>
+      <button type="button" class="go vs-go" id="lgb-go"><span>Rejoindre</span><span aria-hidden="true">→</span></button>
+      <button type="button" class="vs-x" id="lgb-x" aria-label="Ignorer l’invitation">✕</button>
+    </div>
     <div class="card vs-banner" id="vs-banner" hidden>
       <span class="vs-ava" id="vs-ava">🦊</span>
       <div class="vs-txt"><b id="vs-who">Un·e ami·e te défie</b><span id="vs-sub"></span></div>
@@ -1144,6 +1191,18 @@ body.playing #v-game.leaving .bulletin, body.playing #v-game.leaving #g-opts { a
         <div id="lg-table"></div>
       </div>
     </div>
+    <div class="card panel ol" id="ol-card" hidden>
+      <div class="ol-head"><h3>🏟️ Ligues en ligne</h3><span class="ol-me" id="ol-me"></span></div>
+      <p class="sub">Classement commun du <b>Défi du jour</b> : mêmes 5 questions pour tout le monde, un essai par jour. Ton score est envoyé à tes ligues à la fin de chaque défi.</p>
+      <div class="ol-tabs" id="ol-tabs" role="tablist" aria-label="Tes ligues"></div>
+      <div id="ol-board"></div>
+      <div class="ol-forms">
+        <div class="ol-form"><input id="ol-new" maxlength="30" placeholder="Nom de la nouvelle ligue" aria-label="Nom de la nouvelle ligue"><button type="button" class="btn primary" id="ol-create">Créer une ligue</button></div>
+        <div class="ol-form"><input id="ol-code" maxlength="8" placeholder="Code (ex. 5VQWD8)" aria-label="Code de la ligue" autocapitalize="characters"><button type="button" class="btn" id="ol-join">Rejoindre</button></div>
+      </div>
+      <p class="ol-msg" id="ol-msg" aria-live="polite"></p>
+      <button type="button" class="linkbtn ol-del" id="ol-del" hidden>Supprimer mon profil en ligne</button>
+    </div>
     <div class="card team" id="st-team"></div>
     <div class="card panel">
       <h3>Ton classement des candidats</h3>
@@ -1216,7 +1275,8 @@ body.playing #v-game.leaving .bulletin, body.playing #v-game.leaving #g-opts { a
       <li><b>Hébergeur :</b> GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis. Téléphone : +1 877 448 4820.</li>
       <li><b>Contact et corrections :</b> <span id="contact-line">contact@quiapropose.fr, ou le formulaire « Nous écrire ».</span></li>
       <li><b>Indépendance :</b> ce quiz n’est lié à aucun candidat, parti, média ni institut. Il ne donne aucune consigne de vote. Les résultats des joueurs ne sont pas un sondage et ne sont jamais publiés.</li>
-      <li><b>Données personnelles :</b> aucun compte, aucun cookie, aucun traceur publicitaire. Les messages envoyés par le formulaire « Nous écrire » transitent par le service FormSubmit (formsubmit.co) puis arrivent dans notre boîte mail ; ils servent uniquement à te répondre et à corriger le site. Tes scores et tes stats sont enregistrés uniquement dans ton navigateur (stockage local) et tu peux les effacer depuis « Mes stats ».</li>
+      <li><b>Données personnelles :</b> aucun compte, aucun cookie, aucun traceur publicitaire. Les messages envoyés par le formulaire « Nous écrire » transitent par le service FormSubmit (formsubmit.co) puis arrivent dans notre boîte mail ; ils servent uniquement à te répondre et à corriger le site. Tes scores et tes stats sont enregistrés dans ton navigateur (stockage local) et tu peux les effacer depuis « Mes stats ».</li>
+      <li><b>Ligues en ligne (facultatif) :</b> si tu rejoins une ligue, seuls ton pseudo, ton avatar et tes scores au Défi du jour sont enregistrés chez Supabase (serveurs dans l’Union européenne), pour afficher le classement aux membres de tes ligues. Aucun e-mail ni nom réel n’est demandé. Tu peux tout supprimer à tout moment avec « Supprimer mon profil en ligne » dans « Mes stats ».</li>
       <li><b>Contenus :</b> les mesures sont des reformulations courtes et neutres des programmes et déclarations, avec un lien vers chaque source. Les citations sont brèves et attribuées.</li>
     </ul>
     </details>
@@ -2901,17 +2961,31 @@ function afterGame(ans, sc, total) {
   $("r-daily").hidden = !dn; $("r-again").hidden = !!dn;
   if (dn) {
     var grid = ans.map(function (a) { return !!a.ok; });
-    var d = { n: dn, score: sc, total: total, grid: grid };
+    var d = { n: dn, score: sc, total: total, grid: grid, pts: game.pts };
     var prev = store(DAILY_KEY);
     if (!(prev && prev.n === dn)) {
       store(DAILY_KEY, d);
       var st = store(STREAK_KEY) || { last: 0, n: 0, best: 0 };
       st.n = st.last === dn - 1 ? st.n + 1 : (st.last === dn ? st.n : 1); st.last = dn; st.best = Math.max(st.best || 0, st.n);
       store(STREAK_KEY, st);
+      submitDailyOnline(d).then(function () { dailyRank(dn); });
     } else d = prev;
     var st2 = streakNow();
     $("r-daily").innerHTML = "<span>Défi du jour n°" + dn + " : <b>" + d.score + "/" + d.total + "</b></span><span class=\"d-grid\">" + gridHtml(d.grid) + "</span><span>🔥 Série : " + plural(st2.n, "jour", "jours") + (st2.best > st2.n ? " (record " + st2.best + ")" : "") + "</span><span class=\"meta\">Prochain défi dans " + untilMidnight() + ".</span>";
   }
+}
+
+
+function dailyRank(dn) {
+  var me = onlineMe(), cur = store(OL_CUR_KEY); if (!sbOn() || !me || !cur) return;
+  rpc("qp_board", { p_code: cur, p_viewer: me.id }).then(function (rows) {
+    rows = (rows || []).filter(function (r) { return r.today >= 0; }).sort(function (a, b) { return b.today - a.today || b.ptsum - a.ptsum; });
+    var k = rows.findIndex(function (r) { return r.isme; }); if (k < 0) return;
+    rpc("qp_league_name", { p_code: cur }).then(function (n) {
+      var el = $("r-daily"); if (!el || el.hidden) return;
+      el.insertAdjacentHTML("beforeend", "<span>🏟️ Ligue « " + esc(n || cur) + " » : <b>" + (k + 1) + (k ? "e" : "er") + "</b> sur " + rows.length + " aujourd’hui" + (k === 0 ? " 👑" : "") + "</span>");
+    });
+  }).catch(function () {});
 }
 
 /* Le Fil : un flux vertical façon réseaux sociaux */
@@ -2978,10 +3052,28 @@ function closeFil() {
   }
   renderDaily();
 }
-$("lc-play").addEventListener("click", function () { $("btn-quick").click(); });
+$("lc-play").addEventListener("click", function () {
+  if (sbOn() && onlineMe()) { $("d-go").hidden ? $("daily").scrollIntoView({ behavior: "smooth", block: "center" }) : $("d-go").click(); return; }
+  if (sbOn()) { $("tab-stats").click(); setTimeout(function () { $("ol-card").scrollIntoView({ behavior: "smooth", block: "start" }); (profile().name ? $("ol-new") : $("pf-name")).focus(); }, 250); return; }
+  $("btn-quick").click();
+});
 $("lc-see").addEventListener("click", function () { $("tab-stats").click(); });
 function renderLeagueCard() {
   var pr = profile(), lg = store(LEAGUE_KEY) || {}, rows = Object.keys(lg).map(function (k) { return lg[k]; });
+  if (sbOn()) {
+    $("lc-play").textContent = onlineMe() ? "🥊 Défi du jour" : "🏟️ Créer ma ligue"; $("lc-see").textContent = "Classement";
+    var me = onlineMe(), cur = store(OL_CUR_KEY);
+    if (me && cur) {
+      $("lc-ava").textContent = pr.emo; $("lc-name").textContent = pr.name || "Toi";
+      rpc("qp_board", { p_code: cur, p_viewer: me.id }).then(function (bd) {
+        bd = (bd || []).sort(function (a, b) { return b.week - a.week || b.ptsum - a.ptsum; });
+        var md = ["🥇", "🥈", "🥉"], mine = bd.findIndex(function (r) { return r.isme; });
+        $("lc-rec").innerHTML = "<ul class=\"lc-board\">" + bd.slice(0, 3).map(function (r, i) { return "<li" + (r.isme ? " class=\"me\"" : "") + ">" + md[i] + " " + esc(r.pemo + " " + r.pname) + "<b>" + r.week + " ✓</b></li>"; }).join("") + "</ul>" + (mine > 2 ? "<small>Toi : " + (mine + 1) + "e sur " + bd.length + "</small>" : "");
+      }).catch(function () {});
+      return;
+    }
+    if (!me) $("lc-rec").textContent = "Crée une ligue, envoie le code à tes amis, et affrontez-vous chaque jour sur le Défi du jour.";
+  }
   $("lc-ava").textContent = pr.emo; $("lc-name").textContent = pr.name || "Choisis un pseudo";
   if (rows.length) {
     var W = 0, L = 0; rows.forEach(function (r) { W += r.w; L += r.l; });
@@ -3082,8 +3174,131 @@ function renderProfile() {
     rows.map(function (r) { return "<tr><td class=\"rk\">" + esc(r.e) + "</td><td>" + esc(r.n) + "</td><td class=\"n\">" + (r.w + r.l + r.d) + "</td><td class=\"n\">" + r.w + "</td><td class=\"n\">" + r.l + "</td><td class=\"n\">" + r.d + "</td></tr>"; }).join("") + "</tbody></table>"
     : "<p class=\"lg-empty\">Pas encore de défi. Joue une partie, puis envoie le lien « Défier un ami » : ton ami joue les mêmes questions et vos scores s’affichent ici.</p>";
 }
-$("pf-emos").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; var pr = profile(); pr.emo = b.dataset.e; saveProfile(pr); renderProfile(); });
-$("pf-name").addEventListener("change", function () { var pr = profile(); pr.name = this.value; saveProfile(pr); renderProfile(); });
+
+/* ---------- Ligues en ligne (Supabase) ---------- */
+var SB_URL = "https://fieffcynzedifrpjeivg.supabase.co", SB_KEY = "sb_publishable_Sk5SiN0inH8vRC3lsnUQWA_lCsvfyx7"; // renseignés au déploiement
+var ONLINE_KEY = "qui2027-online", OL_CUR_KEY = "qui2027-olcur";
+function sbOn() { return !!(SB_URL && SB_KEY); }
+function rpc(fn, args) {
+  var h = { "Content-Type": "application/json", "apikey": SB_KEY };
+  if (!/^sb_/.test(SB_KEY)) h.Authorization = "Bearer " + SB_KEY;
+  return fetch(SB_URL.replace(/\/$/, "") + "/rest/v1/rpc/" + fn, { method: "POST", headers: h, body: JSON.stringify(args || {}) })
+    .then(function (r) { return r.text().then(function (t) { var j = null; try { j = t ? JSON.parse(t) : null; } catch (e) {} if (!r.ok) throw new Error((j && (j.message || j.hint)) || "Connexion impossible"); return j; }); });
+}
+function onlineMe() { return store(ONLINE_KEY); }
+function ensurePlayer() {
+  var me = onlineMe(); if (me) return Promise.resolve(me);
+  var pr = profile(); if (!pr.name) return Promise.reject(new Error("Choisis d’abord un pseudo."));
+  return rpc("qp_create_player", { p_name: pr.name, p_emo: pr.emo }).then(function (r) { var x = r[0]; me = { id: x.pid, secret: x.psecret }; store(ONLINE_KEY, me); return me; });
+}
+function auth(me, extra) { var o = { p_id: me.id, p_secret: me.secret }; for (var k in extra) o[k] = extra[k]; return o; }
+function onlineError(e) {
+  if (e && /profil inconnu/.test(e.message)) { store(ONLINE_KEY, null); return "Ton profil en ligne a été supprimé. Rejoins à nouveau une ligue."; }
+  return (e && e.message) || "Connexion impossible.";
+}
+function submitDailyOnline(d) {
+  var me = onlineMe(); if (!sbOn() || !me || !d) return Promise.resolve();
+  return rpc("qp_submit", auth(me, { p_day: d.n, p_score: d.score, p_pts: d.pts || 0 })).catch(function () {});
+}
+var olLeagues = [], olSort = "week";
+function olMsg(t, ok) { var el = $("ol-msg"); el.textContent = t || ""; el.className = "ol-msg" + (ok ? " ok" : ""); }
+function inviteText(l) { return "🏟️ Rejoins ma ligue « " + l.lname + " » sur Qui a proposé ça ? : un défi de 5 mesures par jour, et un classement entre nous. Code " + l.lcode + " 👉 " + siteUrl() + "#ligue=" + l.lcode; }
+function renderOnline() {
+  var card = $("ol-card"); card.hidden = !sbOn(); if (!sbOn()) return;
+  var me = onlineMe(), pr = profile();
+  $("ol-me").textContent = me ? pr.emo + " " + (pr.name || "") : "";
+  $("ol-del").hidden = !me;
+  if (!me) { olLeagues = []; drawOnline(); return; }
+  rpc("qp_my_leagues", auth(me)).then(function (r) { olLeagues = r || []; drawOnline(); }).catch(function (e) { olMsg(onlineError(e)); drawOnline(); });
+}
+function drawOnline() {
+  var cur = store(OL_CUR_KEY);
+  if (!olLeagues.some(function (l) { return l.lcode === cur; })) cur = olLeagues.length ? olLeagues[0].lcode : null;
+  $("ol-tabs").innerHTML = olLeagues.map(function (l) { return "<button type=\"button\" role=\"tab\" data-code=\"" + esc(l.lcode) + "\" aria-selected=\"" + (l.lcode === cur) + "\">" + esc(l.lname) + " <small>(" + l.nb + ")</small></button>"; }).join("");
+  if (!cur) { $("ol-board").innerHTML = "<p class=\"lg-empty\">Tu n’es dans aucune ligue en ligne. Crée la tienne et invite tes amis avec le code, ou rejoins une ligue existante.</p>"; return; }
+  store(OL_CUR_KEY, cur);
+  var l = olLeagues.filter(function (x) { return x.lcode === cur; })[0];
+  $("ol-board").innerHTML = "<p class=\"lg-empty\">Chargement du classement…</p>";
+  rpc("qp_board", { p_code: cur, p_viewer: onlineMe().id }).then(function (rows) {
+    rows = rows || [];
+    rows.sort(function (a, b) { return olSort === "week" ? (b.week - a.week || b.ptsum - a.ptsum) : (b.total - a.total || b.ptsum - a.ptsum); });
+    var md = ["🥇", "🥈", "🥉"];
+    $("ol-board").innerHTML = "<div class=\"ol-bar\"><span>Code : <code>" + esc(l.lcode) + "</code></span><button type=\"button\" class=\"btn\" id=\"ol-invite\">📨 Inviter des amis</button>" +
+      "<span class=\"ol-sort\"><button type=\"button\" data-s=\"week\" aria-pressed=\"" + (olSort === "week") + "\">7 jours</button><button type=\"button\" data-s=\"total\" aria-pressed=\"" + (olSort === "total") + "\">Depuis le début</button></span>" +
+      "<button type=\"button\" class=\"linkbtn\" id=\"ol-leave\">Quitter la ligue</button></div>" +
+      "<table class=\"lg\"><thead><tr><th></th><th>Joueur</th><th>Aujourd’hui</th><th>7 jours</th><th>Total</th><th>Défis</th></tr></thead><tbody>" +
+      rows.map(function (r, i) { return "<tr" + (r.isme ? " class=\"me\"" : "") + "><td class=\"rk\">" + (md[i] ? "<span class=\"medal\">" + md[i] + "</span>" : i + 1) + "</td><td>" + esc(r.pemo + " " + r.pname) + (r.isme ? " (toi)" : "") + "</td><td class=\"n today" + (r.today < 0 ? " none" : "") + "\">" + (r.today < 0 ? "—" : r.today + "/5") + "</td><td class=\"n\">" + r.week + "</td><td class=\"n\">" + r.total + "</td><td class=\"n\">" + r.played + "</td></tr>"; }).join("") +
+      "</tbody></table>";
+  }).catch(function (e) { $("ol-board").innerHTML = ""; olMsg(onlineError(e)); });
+}
+$("ol-tabs").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; store(OL_CUR_KEY, b.dataset.code); drawOnline(); });
+$("ol-board").addEventListener("click", function (e) {
+  var cur = store(OL_CUR_KEY), l = olLeagues.filter(function (x) { return x.lcode === cur; })[0];
+  if (e.target.closest("#ol-invite") && l) { shareOrCopy(inviteText(l), function (m) { olMsg("Invitation copiée : colle-la sur WhatsApp, Insta ou par SMS.", true); }); return; }
+  var sb = e.target.closest(".ol-sort button"); if (sb) { olSort = sb.dataset.s; drawOnline(); return; }
+  if (e.target.closest("#ol-leave") && l) {
+    if (!confirmInline(e.target, "Confirmer : quitter « " + l.lname + " » ?")) return;
+    rpc("qp_leave_league", auth(onlineMe(), { p_code: l.lcode })).then(function () { olMsg("Tu as quitté la ligue.", true); renderOnline(); renderLeagueCard(); }).catch(function (er) { olMsg(onlineError(er)); });
+  }
+});
+function confirmInline(btn, txt) { if (btn.dataset.armed) return true; btn.dataset.armed = "1"; var old = btn.textContent; btn.textContent = txt; setTimeout(function () { delete btn.dataset.armed; btn.textContent = old; }, 4000); return false; }
+function afterJoin(name) {
+  var d = store(DAILY_KEY); if (d && d.n === dayNum()) submitDailyOnline(d);
+  renderOnline(); renderLeagueCard();
+}
+$("ol-create").addEventListener("click", function () {
+  var nm = $("ol-new").value.trim(); if (!nm) { olMsg("Donne un nom à ta ligue."); return; }
+  if (!profile().name) { olMsg("Choisis d’abord un pseudo dans « Ton profil »."); $("pf-name").focus(); return; }
+  ensurePlayer().then(function (me) { return rpc("qp_create_league", auth(me, { p_name: nm })); })
+    .then(function (code) { store(OL_CUR_KEY, code); $("ol-new").value = ""; olMsg("Ligue créée ! Code : " + code + ". Clique sur « Inviter des amis ».", true); afterJoin(); })
+    .catch(function (e) { olMsg(onlineError(e)); });
+});
+function joinCode(code, msgFn) {
+  return ensurePlayer().then(function (me) { return rpc("qp_join_league", auth(me, { p_code: code })); })
+    .then(function (name) { store(OL_CUR_KEY, code.toUpperCase().trim()); afterJoin(name); return name; });
+}
+$("ol-join").addEventListener("click", function () {
+  var code = $("ol-code").value.trim(); if (!code) { olMsg("Entre le code de la ligue."); return; }
+  if (!profile().name) { olMsg("Choisis d’abord un pseudo dans « Ton profil »."); $("pf-name").focus(); return; }
+  joinCode(code).then(function (n) { $("ol-code").value = ""; olMsg("Bienvenue dans « " + n + " » !", true); }).catch(function (e) { olMsg(onlineError(e)); });
+});
+$("ol-del").addEventListener("click", function (e) {
+  if (!confirmInline(this, "Confirmer : tout supprimer (pseudo, scores, ligues) ?")) return;
+  var me = onlineMe(); if (!me) return;
+  rpc("qp_delete_player", auth(me)).then(function () { store(ONLINE_KEY, null); olMsg("Profil en ligne supprimé.", true); renderOnline(); renderLeagueCard(); }).catch(function (er) { olMsg(onlineError(er)); });
+});
+/* Invitation par lien : #ligue=CODE */
+var pendingLeague = null;
+function checkHashLeague() {
+  var m = location.hash.match(/^#ligue=([A-Za-z0-9]{4,8})$/); if (!m) return false;
+  history.replaceState(null, "", location.pathname + location.search);
+  if (!sbOn()) return true;
+  pendingLeague = m[1].toUpperCase(); show("setup"); window.scrollTo({ top: 0 });
+  var pr = profile(); $("lgb-name").value = pr.name;
+  $("lgb-emo").innerHTML = EMOS.map(function (e) { return "<option" + (e === pr.emo ? " selected" : "") + ">" + e + "</option>"; }).join("");
+  $("lgb-msg").textContent = ""; $("lg-banner").hidden = false;
+  rpc("qp_league_name", { p_code: pendingLeague }).then(function (n) {
+    if (!n) { $("lgb-title").textContent = "Ligue introuvable"; $("lgb-sub").textContent = "Le code " + pendingLeague + " n’existe pas (ou plus)."; $("lgb-go").hidden = true; return; }
+    $("lgb-title").textContent = "Invitation : ligue « " + n + " »"; $("lgb-go").hidden = false;
+    $("lgb-sub").textContent = "Choisis ton pseudo et rejoins le classement du Défi du jour.";
+  }).catch(function () {});
+  return true;
+}
+$("lgb-go").addEventListener("click", function () {
+  var nm = $("lgb-name").value.trim(); if (!nm) { $("lgb-msg").textContent = "Choisis un pseudo."; return; }
+  saveProfile({ name: nm, emo: $("lgb-emo").value });
+  var me = onlineMe(), up = me ? rpc("qp_update_player", auth(me, { p_name: nm, p_emo: $("lgb-emo").value })).catch(function () {}) : Promise.resolve();
+  up.then(function () { return joinCode(pendingLeague); }).then(function (n) {
+    $("lgb-title").textContent = "Bienvenue dans « " + n + " » !"; $("lgb-sub").textContent = "Fais le Défi du jour juste en dessous : ton score ira directement au classement.";
+    $("lgb-go").hidden = true; $("lgb-msg").textContent = ""; pendingLeague = null;
+    setTimeout(function () { $("lg-banner").hidden = true; $("daily").scrollIntoView({ behavior: "smooth", block: "center" }); }, 2200);
+  }).catch(function (e) { $("lgb-msg").textContent = onlineError(e); });
+});
+$("lgb-x").addEventListener("click", function () { pendingLeague = null; $("lg-banner").hidden = true; });
+
+function syncOnlineProfile() { var me = onlineMe(), pr = profile(); if (sbOn() && me && pr.name) rpc("qp_update_player", auth(me, { p_name: pr.name, p_emo: pr.emo })).then(renderOnline).catch(function () {}); }
+$("pf-emos").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; var pr = profile(); pr.emo = b.dataset.e; saveProfile(pr); renderProfile(); syncOnlineProfile(); });
+$("pf-name").addEventListener("change", function () { var pr = profile(); pr.name = this.value; saveProfile(pr); renderProfile(); syncOnlineProfile(); });
 
 
 
@@ -3681,7 +3896,7 @@ function renderStats() {
   $("st-team").innerHTML = teamHtml(s);
   $("st-rows").innerHTML = rk.length ? rk.map(function (o) { return rowHtml({ l: o.c.name, a: o.a, b: o.b }); }).join("") : "";
   $("st-reset").hidden = !s.g;
-  renderProfile();
+  renderProfile(); renderOnline();
 }
 $("st-reset").addEventListener("click", function () { store(STATS_KEY, { c: {}, g: 0, q: 0 }); renderStats(); });
 $("st-play").addEventListener("click", function () { goMenu(); });
@@ -3977,8 +4192,8 @@ renderHome();
 runIntro();
 $("contact-line").innerHTML = "écris à <a href=\"mailto:" + CONTACT_EMAIL + "\">" + CONTACT_EMAIL + "</a>, ou utilise le formulaire « Nous écrire » et le lien « Signaler une erreur » sous chaque réponse.";
 if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } else if (location.hash === "#antiseches") { show("cheat"); renderCheat(); } else if (location.hash === "#stats") { show("stats"); renderStats(); } else if (location.hash === "#contact") { show("contact"); } else show("setup");
-window.addEventListener("hashchange", function () { if (checkHashChallenge()) return; if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } });
-checkHashChallenge();
+window.addEventListener("hashchange", function () { if (checkHashChallenge() || checkHashLeague()) return; if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } });
+checkHashChallenge(); checkHashLeague();
 })();
 </script>
 </body>
