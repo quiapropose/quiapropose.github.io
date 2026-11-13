@@ -909,6 +909,78 @@ body.playing #v-game.leaving .bulletin, body.playing #v-game.leaving #g-opts { a
 .poll .meta { font-size: 12px; color: var(--muted); line-height: 1.45; border-top: 1px dashed var(--line); padding-top: 8px; }
 .poll .meta a { color: var(--muted); }
 .polls-legal { font-size: 12.5px; color: var(--muted); }
+
+/* ===== Accueil : défi + petit bouton ligue ===== */
+.rdv { grid-template-columns: 1fr !important; }
+.daily { display: grid !important; grid-template-columns: 1fr auto; grid-template-areas: "top top" "h go" "st go" "grid go" "next pill"; gap: 6px 22px; align-items: center; }
+.daily .d-top { grid-area: top; } .daily h3 { grid-area: h; } .daily .d-state { grid-area: st; } .daily .d-grid { grid-area: grid; }
+.daily .d-go, .daily .d-share { grid-area: go; margin: 0 !important; align-self: center; min-width: 260px; }
+.daily .d-next { grid-area: next; }
+.lc-pill { grid-area: pill; justify-self: end; border: 1.5px solid rgba(255,255,255,.4); background: rgba(255,255,255,.1); color: #fff; font: 700 13px/1 var(--f-ui); padding: 7px 12px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
+.lc-pill:hover { background: rgba(255,255,255,.2); }
+@media (max-width: 760px) { .daily { grid-template-columns: 1fr; grid-template-areas: "top" "h" "st" "grid" "go" "next" "pill"; } .daily .d-go, .daily .d-share { min-width: 0; } .lc-pill { justify-self: start; } }
+/* ===== Profil compact ===== */
+.prof .prof-ava { font-size: 30px; }
+.prof .prof-row input { font-size: 15px; padding: 8px 10px; }
+.emos { gap: 4px; }
+.emos button { width: auto; height: auto; border-radius: 6px; padding: 4px 7px; font-size: 12px; display: inline-flex; align-items: center; gap: 4px; color: var(--ink); }
+.emos button span { font-size: 16px; }
+/* ===== Mini sondage (accueil) ===== */
+.hl-left { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.mini-poll { display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; text-decoration: none; color: var(--ink); transition: transform .15s ease; }
+.mini-poll:hover { transform: translateY(-2px); }
+.mp-lab { font: 800 13px/1 var(--f-ui); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.mp-src { font-size: 12px; color: var(--muted); text-align: center; }
+.mp-cta { font: 800 15px/1 var(--f-display); letter-spacing: .05em; text-transform: uppercase; color: var(--accent); text-align: center; margin-top: 4px; }
+svg .arc-seg { transition: opacity .2s; }
+svg .arc-lbl { font: 800 9px/1 var(--f-display); fill: #fff; pointer-events: none; }
+svg .arc-c1 { font: 900 22px/1 var(--f-display); fill: var(--ink); }
+svg .arc-c2 { font: 600 9.5px/1 var(--f-ui); fill: var(--muted); }
+/* ===== Page sondages plus graphique ===== */
+#v-polls .cheat-head h2 { font-size: clamp(34px, 6vw, 56px); }
+.pov { padding: 18px 20px; margin: 16px 0; }
+.pov-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.pov-head h3 { margin: 0; font: 800 24px/1 var(--f-display); text-transform: uppercase; }
+.pov-head span { font-size: 13px; color: var(--muted); }
+.pov-legend { display: flex; gap: 16px; flex-wrap: wrap; margin: 12px 0 6px; font-size: 13px; font-weight: 600; }
+.pov-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.pov-plot { display: grid; gap: 2px; }
+.pv-row { display: grid; grid-template-columns: 110px 1fr; gap: 10px; align-items: center; min-height: 26px; }
+.pv-row .nm { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 6px; }
+.pv-row .nm i { width: 8px; height: 8px; border-radius: 50%; background: var(--fam); flex: none; }
+.pv-track { position: relative; height: 24px; background: repeating-linear-gradient(90deg, transparent 0 calc(25% - 1px), var(--line) calc(25% - 1px) 25%); border-radius: 3px; }
+.pv-track::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: var(--paper); }
+.pv-span { position: absolute; top: 50%; height: 6px; margin-top: -3px; background: var(--fam); opacity: .25; border-radius: 3px; }
+.pv-dot { position: absolute; top: 50%; width: 13px; height: 13px; margin: -6.5px 0 0 -6.5px; border: 2px solid var(--sheet); box-shadow: 0 1px 3px rgba(0,0,0,.3); transition: left .8s cubic-bezier(.2,.9,.2,1); }
+.pv-dot.s0 { border-radius: 50%; background: var(--bleu); }
+.pv-dot.s1 { border-radius: 2px; background: var(--rouge); }
+.pv-dot.s2 { border-radius: 2px; background: var(--ink); transform: rotate(45deg); }
+.pov-legend .pv-dot { position: static; margin: 0; display: inline-block; }
+.pv-axis { display: grid; grid-template-columns: 110px 1fr; gap: 10px; font-size: 11px; color: var(--muted); }
+.pv-axis div { display: flex; justify-content: space-between; }
+.pov-note { margin: 10px 0 0; font-size: 12.5px; color: var(--muted); }
+.poll { border-top: 6px solid var(--pc, var(--bleu)); }
+.poll svg { width: 100%; max-width: 300px; align-self: center; height: auto; }
+.poll .top2 { display: flex; justify-content: center; gap: 18px; text-align: center; }
+.poll .top2 div { display: flex; flex-direction: column; }
+.poll .top2 b { font: 900 30px/1 var(--f-display); }
+.poll .top2 span { font-size: 12px; color: var(--muted); }
+
+/* ===== Fil info ===== */
+.ticker { display: flex; align-items: stretch; background: var(--ink); color: #fff; font-size: 14px; overflow: hidden; }
+.tk-lab { flex: none; background: var(--rouge); font: 800 14px/1 var(--f-display); letter-spacing: .08em; text-transform: uppercase; padding: 10px 14px 9px; display: flex; align-items: center; gap: 6px; }
+.tk-lab::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #fff; animation: pulse 1.6s ease-in-out infinite; }
+.tk-view { flex: 1; overflow: hidden; position: relative; mask-image: linear-gradient(90deg, transparent, #000 30px, #000 calc(100% - 30px), transparent); }
+.tk-track { display: inline-flex; gap: 34px; white-space: nowrap; padding: 9px 0; animation: tk 70s linear infinite; }
+.ticker:hover .tk-track { animation-play-state: paused; }
+@keyframes tk { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.tk-item { color: #fff; text-decoration: none; display: inline-flex; gap: 7px; align-items: baseline; }
+.tk-item:hover { text-decoration: underline; }
+.tk-item b { color: #fbbf24; font-weight: 800; }
+.tk-item small { color: rgba(255,255,255,.55); font-size: 12px; }
+body.playing .ticker { display: none; }
+@media (prefers-reduced-motion: reduce) { .tk-track { animation: none; } .tk-view { overflow-x: auto; } }
+.mini-poll svg { width: 100%; max-width: 270px; align-self: center; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 </head>
@@ -932,6 +1004,7 @@ body.playing #v-game.leaving .bulletin, body.playing #v-game.leaving #g-opts { a
     </div>
   </div>
 </header>
+<div class="ticker" id="ticker" aria-label="Fil info de la campagne"><span class="tk-lab">Fil info</span><div class="tk-view"><div class="tk-track" id="tk-track"></div></div></div>
 
 <main class="wrap">
   <section class="view" id="v-setup">
@@ -985,12 +1058,7 @@ body.playing #v-game.leaving .bulletin, body.playing #v-game.leaving #g-opts { a
         <button type="button" class="go d-go" id="d-go"><span>Relever le défi</span><span aria-hidden="true">→</span></button>
         <button type="button" class="btn d-share" id="d-share" hidden>Partager mon défi</button>
         <p class="d-next" id="d-next"></p>
-      </div>
-      <div class="card league-card" id="league-card">
-        <span class="g-lab">Ta ligue d’amis</span>
-        <div class="lc-me"><span class="lc-ava" id="lc-ava">🦊</span><b id="lc-name">Choisis un pseudo</b></div>
-        <p class="lc-rec" id="lc-rec">Joue une partie, puis envoie le lien « Défier un ami » : il joue les mêmes questions, et vos scores s’affrontent.</p>
-        <div class="lc-btns"><button type="button" class="btn primary" id="lc-play">🥊 Partie à défier</button><button type="button" class="btn" id="lc-see">Ma ligue</button></div>
+        <button type="button" class="lc-pill" id="lc-pill"><span id="lc-ava">🏛️</span> <span id="lc-txt">Ligue entre amis</span> →</button>
       </div>
     </div>
 
@@ -1065,6 +1133,7 @@ body.playing #v-game.leaving .bulletin, body.playing #v-game.leaving #g-opts { a
     </div>
 
     <div class="home-low">
+      <div class="hl-left">
       <div class="cd" id="cd" aria-live="off">
         <span class="j" id="cd-j">J-…</span>
         <span class="lbl">Avant le premier tour · dimanche 18 avril 2027</span>
@@ -1075,6 +1144,13 @@ body.playing #v-game.leaving .bulletin, body.playing #v-game.leaving #g-opts { a
           <span class="u"><b id="cd-s">–</b><span>s</span></span>
         </div>
         <span class="quipcd" id="cd-quip"></span>
+      </div>
+      <a class="card mini-poll" id="mini-poll" href="#sondages">
+        <span class="mp-lab">📊 Le dernier sondage</span>
+        <svg id="mp-arc" viewBox="0 0 220 122" role="img" aria-label="Dernier sondage"></svg>
+        <span class="mp-src" id="mp-src"></span>
+        <span class="mp-cta">Voir tous les sondages →</span>
+      </a>
       </div>
       <div class="card hemi">
         <h3>L’hémicycle des candidats</h3>
@@ -1194,9 +1270,15 @@ body.playing #v-game.leaving .bulletin, body.playing #v-game.leaving #g-opts { a
 
   <section class="view" id="v-polls" hidden>
     <div class="cheat-head">
-      <h2>Les derniers sondages</h2>
+      <h2>Les sondages en un coup d’œil</h2>
       <p>Intentions de vote au premier tour, en % des suffrages exprimés, d’après les dernières enquêtes de plusieurs instituts. Choisis une hypothèse : les sondeurs testent plusieurs listes de candidats, car toutes les candidatures ne sont pas encore connues.</p>
       <p class="polls-warn">⚠️ Un sondage est une photographie de l’opinion à un moment donné, pas une prédiction. Chaque résultat comporte une marge d’erreur. Mis à jour le <span id="polls-maj"></span>.</p>
+    </div>
+    <div class="card pov" id="pov">
+      <div class="pov-head"><h3>Les 3 instituts, côte à côte</h3><span id="pov-sub">Hypothèse avec Édouard Philippe, sans Gabriel Attal</span></div>
+      <div class="pov-legend" id="pov-legend"></div>
+      <div class="pov-plot" id="pov-plot"></div>
+      <p class="pov-note">Chaque forme est le score d’un candidat dans un sondage. Plus les formes sont proches, plus les instituts sont d’accord. Les listes de candidats testées diffèrent un peu d’un institut à l’autre.</p>
     </div>
     <div class="polls" id="polls"></div>
     <p class="polls-legal">Conformément à la loi du 19 juillet 1977 relative aux sondages, la notice de chaque enquête peut être consultée sur le site de la <a href="https://www.commission-des-sondages.fr/notices/" target="_blank" rel="noopener">Commission des sondages</a>. Ce site ne réalise aucun sondage : les scores du quiz ne sont pas des intentions de vote.</p>
@@ -2534,6 +2616,19 @@ var POLLS = [
 ];
 var POLLS_MAJ = "13 novembre 2026";
 
+/* Fil info (bandeau du haut) : les plus récents d'abord. k = declare | programme | mesure | agenda | insolite | debat */
+var NEWS = [
+  { d: "12 nov.", k: "programme", t: "Édouard Philippe publie son programme complet : à retrouver dans le quiz.", s: "edouardphilippe.fr", u: "https://www.edouardphilippe.fr/programme" },
+  { d: "9 nov.", k: "declare", t: "Le judoka Teddy Riner se déclare candidat, dans une vidéo et un entretien au Parisien.", s: "LCP", u: "https://lcp.fr/actualites/le-judoka-teddy-riner-annonce-sa-candidature-a-l-election-presidentielle-de-2027-444920" },
+  { d: "9 nov.", k: "insolite", t: "Édouard Philippe souhaite la bienvenue à Teddy Riner, un « candidat de poids ». Le jeu de mots est offert.", s: "AFP via La Libre", u: "https://www.lalibre.be/dernieres-depeches/2026/11/09/des-tatamis-a-lelysee-teddy-riner-annonce-sa-candidature-a-la-presidentielle-TN24TXUYZBDHLNYIUW4YHZJEI4/" },
+  { d: "9 nov.", k: "programme", t: "Raphaël Glucksmann présente son programme des 100 premiers jours pour sortir des énergies fossiles.", s: "RFI", u: "https://www.dakaractu.com/Presidentielle-en-France-Raphael-Glucksmann-presente-son-projet-de-revolution-ecologique_a278006.amp.html" },
+  { d: "7 nov.", k: "debat", t: "Meeting de Jean-Luc Mélenchon au Bourget, devant plus de 20 000 personnes.", s: "franceinfo", u: "https://www.franceinfo.fr/elections/presidentielle/reportage-nous-allons-gagner-au-bourget-jean-luc-melenchon-devoile-son-programme-pour-2027-et-poursuit-sa-demonstration-de-force_8272679.html" },
+  { d: "6 nov.", k: "programme", t: "LFI publie « L’Avenir en commun » 2027 : 1 069 mesures, dont 238 nouvelles, vendu 4,90 € en librairie.", s: "AFP via France 24", u: "https://www.france24.com/fr/france/20261106-france-insoumise-jean-luc-melenchon-presente-programme-presidentielle-2027-fidele-volonte-rupture-lfi" },
+  { d: "13 déc.", k: "agenda", t: "À venir : les militants Écologistes votent pour décider de leur candidature.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-declares-et-potentiels-444932" },
+  { d: "12 mars", k: "agenda", t: "À venir : date limite pour réunir les 500 parrainages d’élus.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-declares-et-potentiels-444932" }
+];
+var NEWS_MAJ = "13 novembre 2026";
+
 </script>
 <script>
 (function () {
@@ -2818,7 +2913,7 @@ function renderHome() {
   $("duel-chips").innerHTML = DUELS.map(function (d, i) { return "<button type=\"button\" data-i=\"" + i + "\">" + esc(last(CBY[d[0]].name)) + " / " + esc(last(CBY[d[1]].name)) + "</button>"; }).join("");
   syncSetup();
   teaserNext();
-  renderDaily();
+  renderDaily(); renderMiniPoll();
 }
 
 // ---- Splash d’ouverture : « Au début, ils étaient 29… » ----
@@ -2924,19 +3019,67 @@ function growBars(root) { requestAnimationFrame(function () { [].forEach.call(ro
 function renderPolls() {
   $("polls-maj").textContent = POLLS_MAJ;
   $("polls").innerHTML = POLLS.map(function (p, k) {
-    return "<article class=\"card poll\"><h3>" + esc(p.inst) + "</h3><span class=\"pour\">pour " + esc(p.pour) + " · " + esc(p.terrain) + "</span>" +
+    return "<article class=\"card poll\" style=\"--pc:" + ["var(--bleu)", "var(--rouge)", "var(--ink)"][k % 3] + "\"><h3>" + esc(p.inst) + "</h3><span class=\"pour\">pour " + esc(p.pour) + " · " + esc(p.terrain) + "</span>" +
       "<label class=\"vh\" for=\"ph-" + k + "\">Hypothèse testée</label><select id=\"ph-" + k + "\" data-k=\"" + k + "\">" + p.hyps.map(function (h, j) { return "<option value=\"" + j + "\">" + esc(h.nom) + "</option>"; }).join("") + "</select>" +
+      "<svg viewBox=\"0 0 220 122\" id=\"pa-" + k + "\" role=\"img\" aria-label=\"Répartition des intentions de vote\">" + arcSvg(p.hyps[0]) + "</svg>" +
       "<div class=\"pbars\" id=\"pb-" + k + "\">" + pollBars(p.hyps[0]) + "</div>" +
       "<p class=\"meta\">Sondage " + esc(p.inst) + " pour " + esc(p.pour) + ", réalisé " + esc(p.terrain) + " auprès de " + esc(p.n) + ". " + esc(p.methode) + ". Marge d’erreur " + esc(p.marge) + " selon le score. <a href=\"" + esc(p.u) + "\" target=\"_blank\" rel=\"noopener\">Notice (Commission des sondages) ↗</a></p></article>";
   }).join("");
-  growBars($("polls"));
+  growBars($("polls")); renderPov();
 }
 $("polls").addEventListener("change", function (e) {
   var sel = e.target.closest("select"); if (!sel) return;
-  var k = +sel.dataset.k, box = $("pb-" + k); box.innerHTML = pollBars(POLLS[k].hyps[+sel.value]); growBars(box);
+  var k = +sel.dataset.k, box = $("pb-" + k), h = POLLS[k].hyps[+sel.value]; box.innerHTML = pollBars(h); $("pa-" + k).innerHTML = arcSvg(h); growBars(box);
 });
 $("hero-polls").addEventListener("click", function (e) { e.preventDefault(); $("tab-polls").click(); });
 $("hero-polls-sub").textContent = "· " + POLLS.length + " instituts, mis à jour le " + POLLS_MAJ.replace(/ 2026$/, "");
+
+
+var EXTRA_FAM = { "Christine Lagarde": "Centre (camp présidentiel)", "Dominique de Villepin": "Centre droit", "François Hollande": "Gauche sociale-démocrate" };
+function famOf(k) { return CBY[k] ? FAMILY[k] : (EXTRA_FAM[k] || "Sans étiquette"); }
+function arcSvg(h, big) {
+  var segs = h.r.slice().sort(function (a, b) { return FAM_ORDER.indexOf(famOf(a[0])) - FAM_ORDER.indexOf(famOf(b[0])); });
+  var tot = segs.reduce(function (a, x) { return a + x[1]; }, 0), cx = 110, cy = 110, R = 100, r = 56, ang = Math.PI, out = [];
+  segs.forEach(function (x) {
+    var a0 = ang, a1 = ang - x[1] / tot * Math.PI; ang = a1;
+    var p = function (a, rr) { return (cx + rr * Math.cos(a)).toFixed(2) + " " + (cy - rr * Math.sin(a)).toFixed(2); };
+    var large = (a0 - a1) > Math.PI ? 1 : 0;
+    out.push("<path class=\"arc-seg\" fill=\"" + pollCol(x[0]) + "\" stroke=\"var(--sheet)\" stroke-width=\"1.2\" d=\"M " + p(a0, R) + " A " + R + " " + R + " 0 " + large + " 1 " + p(a1, R) + " L " + p(a1, r) + " A " + r + " " + r + " 0 " + large + " 0 " + p(a0, r) + " Z\"><title>" + esc(pollName(x[0]) + " : " + String(x[1]).replace(".", ",") + " %") + "</title></path>");
+    if (x[1] >= 7) { var am = (a0 + a1) / 2, t = p(am, (R + r) / 2).split(" "); out.push("<text class=\"arc-lbl\" x=\"" + t[0] + "\" y=\"" + (+t[1] + 3) + "\" text-anchor=\"middle\">" + esc(CBY[x[0]] ? CBY[x[0]].ini : x[0].split(" ").map(function (w) { return w[0]; }).join("")) + "</text>"); }
+  });
+  var top = h.r.slice().sort(function (a, b) { return b[1] - a[1]; })[0];
+  out.push("<text class=\"arc-c1\" x=\"110\" y=\"98\" text-anchor=\"middle\">" + String(top[1]).replace(".", ",") + " %</text><text class=\"arc-c2\" x=\"110\" y=\"112\" text-anchor=\"middle\">" + esc(pollName(top[0])) + " en tête</text>");
+  return out.join("");
+}
+var INST_SH = ["s0", "s1", "s2"];
+function renderPov() {
+  var hy = POLLS.map(function (p) { return p.hyps[0]; }), names = {};
+  hy.forEach(function (h) { h.r.forEach(function (x) { names[x[0]] = Math.max(names[x[0]] || 0, x[1]); }); });
+  var rows = Object.keys(names).sort(function (a, b) { return names[b] - names[a]; }), MAX = 40;
+  $("pov-legend").innerHTML = POLLS.map(function (p, i) { return "<span><i class=\"pv-dot " + INST_SH[i] + "\"></i>" + esc(p.inst) + " <small>(" + esc(p.terrain.replace(/ 2026$/, "")) + ")</small></span>"; }).join("");
+  $("pov-plot").innerHTML = rows.map(function (k) {
+    var vals = hy.map(function (h) { var x = h.r.filter(function (y) { return y[0] === k; })[0]; return x ? x[1] : null; });
+    var got = vals.filter(function (v) { return v !== null; }), mn = Math.min.apply(null, got), mx = Math.max.apply(null, got);
+    return "<div class=\"pv-row\" style=\"--fam:" + pollCol(k) + "\"><span class=\"nm\"><i></i>" + esc(pollName(k)) + "</span><div class=\"pv-track\"><span class=\"pv-span\" style=\"left:" + (mn / MAX * 100) + "%;width:" + ((mx - mn) / MAX * 100) + "%\"></span>" +
+      vals.map(function (v, i) { return v === null ? "" : "<i class=\"pv-dot " + INST_SH[i] + "\" data-l=\"" + (v / MAX * 100) + "\" style=\"left:0\" title=\"" + esc(POLLS[i].inst + " : " + String(v).replace(".", ",") + " %") + "\"></i>"; }).join("") + "</div></div>";
+  }).join("") + "<div class=\"pv-axis\"><span></span><div><span>0 %</span><span>10 %</span><span>20 %</span><span>30 %</span><span>40 %</span></div></div>";
+  requestAnimationFrame(function () { setTimeout(function () { [].forEach.call($("pov-plot").querySelectorAll(".pv-dot"), function (d) { d.style.left = d.dataset.l + "%"; }); }, 60); });
+}
+function renderMiniPoll() {
+  var p = POLLS[0], h = p.hyps[0];
+  $("mp-arc").innerHTML = arcSvg(h);
+  $("mp-src").textContent = "Sondage " + p.inst + " pour " + p.pour + " · " + p.terrain.replace(/ 2026$/, "") + " · " + h.nom.toLowerCase();
+}
+$("mini-poll").addEventListener("click", function (e) { e.preventDefault(); $("tab-polls").click(); });
+
+
+/* ---------- Fil info ---------- */
+var NEWS_ICO = { declare: "🙋", programme: "📘", mesure: "💡", agenda: "📅", insolite: "😄", debat: "🎤" };
+(function renderTicker() {
+  if (typeof NEWS === "undefined" || !NEWS.length) { $("ticker").hidden = true; return; }
+  var one = NEWS.map(function (n) { return "<a class=\"tk-item\" href=\"" + esc(n.u) + "\" target=\"_blank\" rel=\"noopener\"><span aria-hidden=\"true\">" + (NEWS_ICO[n.k] || "📰") + "</span><b>" + esc(n.d) + "</b>" + esc(n.t) + " <small>(" + esc(n.s) + ")</small></a>"; }).join("");
+  $("tk-track").innerHTML = one + one.replace(/<a /g, "<a aria-hidden=\"true\" tabindex=\"-1\" ");
+})();
 
 /* ---------- Échauffement (accueil) ---------- */
 var tz = { ok: 0, n: 0, cur: null, seen: {} };
@@ -3143,40 +3286,23 @@ function closeFil() {
   }
   renderDaily();
 }
-$("lc-play").addEventListener("click", function () {
-  if (sbOn() && onlineMe()) { $("d-go").hidden ? $("daily").scrollIntoView({ behavior: "smooth", block: "center" }) : $("d-go").click(); return; }
-  if (sbOn()) { $("tab-stats").click(); setTimeout(function () { $("ol-card").scrollIntoView({ behavior: "smooth", block: "start" }); (profile().name ? $("ol-new") : $("pf-name")).focus(); }, 250); return; }
-  $("btn-quick").click();
-});
-$("lc-see").addEventListener("click", function () { $("tab-stats").click(); });
+$("lc-pill").addEventListener("click", function () { $("tab-stats").click(); setTimeout(function () { var el = sbOn() ? $("ol-card") : $("lg-table"); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); }, 250); });
 function renderLeagueCard() {
-  var pr = profile(), lg = store(LEAGUE_KEY) || {}, rows = Object.keys(lg).map(function (k) { return lg[k]; });
-  if (sbOn()) {
-    $("lc-play").textContent = onlineMe() ? "🥊 Défi du jour" : "🏟️ Créer ma ligue"; $("lc-see").textContent = "Classement";
-    var me = onlineMe(), cur = store(OL_CUR_KEY);
-    if (me && cur) {
-      $("lc-ava").textContent = pr.emo; $("lc-name").textContent = pr.name || "Toi";
-      rpc("qp_board", { p_code: cur, p_viewer: me.id }).then(function (bd) {
-        bd = (bd || []).sort(function (a, b) { return b.week - a.week || b.ptsum - a.ptsum; });
-        var md = ["🥇", "🥈", "🥉"], mine = bd.findIndex(function (r) { return r.isme; });
-        $("lc-rec").innerHTML = "<ul class=\"lc-board\">" + bd.slice(0, 3).map(function (r, i) { return "<li" + (r.isme ? " class=\"me\"" : "") + ">" + md[i] + " " + esc(r.pemo + " " + r.pname) + "<b>" + r.week + " ✓</b></li>"; }).join("") + "</ul>" + (mine > 2 ? "<small>Toi : " + (mine + 1) + "e sur " + bd.length + "</small>" : "");
-      }).catch(function () {});
-      return;
-    }
-    if (!me) $("lc-rec").textContent = "Crée une ligue, envoie le code à tes amis, et affrontez-vous chaque jour sur le Défi du jour.";
-  }
-  $("lc-ava").textContent = pr.emo; $("lc-name").textContent = pr.name || "Choisis un pseudo";
-  if (rows.length) {
-    var W = 0, L = 0; rows.forEach(function (r) { W += r.w; L += r.l; });
-    var rival = rows.slice().sort(function (a, b) { return (b.w + b.l + b.d) - (a.w + a.l + a.d); })[0];
-    $("lc-rec").innerHTML = "<b>" + W + " victoire" + (W > 1 ? "s" : "") + "</b> · " + L + " défaite" + (L > 1 ? "s" : "") + " contre " + plural(rows.length, "ami·e", "ami·es") + ". Ton rival n°1 : " + esc(rival.e + " " + rival.n) + " (" + rival.w + "-" + rival.l + ").";
-  }
+  var pr = profile(), me = sbOn() && onlineMe(), cur = store(OL_CUR_KEY);
+  $("lc-ava").textContent = pr.emo;
+  $("lc-txt").textContent = pr.name ? pr.name + " · ligue entre amis" : "Ligue entre amis";
+  if (me && cur) rpc("qp_board", { p_code: cur, p_viewer: me.id }).then(function (bd) {
+    bd = (bd || []).sort(function (a, b) { return b.week - a.week || b.ptsum - a.ptsum; });
+    var k = bd.findIndex(function (r) { return r.isme; });
+    if (k >= 0) $("lc-txt").textContent = (pr.name || "Toi") + " · " + (k + 1) + (k ? "e" : "er") + " de ta ligue sur " + bd.length;
+  }).catch(function () {});
 }
-
 /* ---------- Profil et défis entre amis (par lien, sans serveur) ---------- */
 var PROFILE_KEY = "qui2027-profile", LEAGUE_KEY = "qui2027-league";
-var EMOS = ["🦊", "🐻", "🦉", "🐸", "🐯", "🐧", "🦄", "🐙", "🐝", "🦁", "🐼", "🐓"];
-function profile() { var p = store(PROFILE_KEY) || {}; return { name: (p.name || "").slice(0, 20), emo: EMOS.indexOf(p.emo) >= 0 ? p.emo : "🦊" }; }
+var PORTF = [["🏛️", "Institutions"], ["⚖️", "Justice"], ["🎓", "Éducation"], ["🌿", "Écologie"], ["🩺", "Santé"], ["🎭", "Culture"], ["🛡️", "Défense"], ["🌍", "Affaires étrangères"], ["💶", "Économie"], ["🚆", "Transports"], ["🌾", "Agriculture"], ["🔬", "Recherche"]];
+var EMOS = PORTF.map(function (x) { return x[0]; });
+function portName(e) { var x = PORTF.filter(function (y) { return y[0] === e; })[0]; return x ? x[1] : ""; }
+function profile() { var p = store(PROFILE_KEY) || {}; return { name: (p.name || "").slice(0, 20), emo: EMOS.indexOf(p.emo) >= 0 ? p.emo : "🏛️" }; }
 function saveProfile(p) { store(PROFILE_KEY, { name: (p.name || "").trim().slice(0, 20), emo: p.emo }); }
 function b64e(o) { return btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); }
 function b64d(t) { t = t.replace(/-/g, "+").replace(/_/g, "/"); while (t.length % 4) t += "="; return JSON.parse(decodeURIComponent(escape(atob(t)))); }
@@ -3198,7 +3324,7 @@ function parseChallenge(h) {
       if (!m || ck(m.m) !== x[1] || opts.indexOf(m.c) < 0) throw new Error("old");
       return { mid: x[0], type: "pick", opts: opts };
     });
-    o.n = String(o.n || "Un·e ami·e").slice(0, 20); o.e = EMOS.indexOf(o.e) >= 0 ? o.e : "🦊";
+    o.n = String(o.n || "Un·e ami·e").slice(0, 20); o.e = EMOS.indexOf(o.e) >= 0 ? o.e : "🏛️";
     return { o: o, qs: qs };
   } catch (e) { return { old: true }; }
 }
@@ -3241,7 +3367,7 @@ function vsAfter(sc, total) {
 function chalSetup() {
   var ok = canChallenge(); $("r-chal").hidden = !ok; if (!ok) return;
   var pr = profile();
-  $("r-emo").innerHTML = EMOS.map(function (e) { return "<option" + (e === pr.emo ? " selected" : "") + ">" + e + "</option>"; }).join("");
+  $("r-emo").innerHTML = PORTF.map(function (x) { return "<option value=\"" + x[0] + "\"" + (x[0] === pr.emo ? " selected" : "") + ">" + x[0] + " " + x[1] + "</option>"; }).join("");
   $("r-name").value = pr.name; $("r-chal-msg").textContent = "";
   $("r-chal-go").textContent = game.cfg.vs ? "🥊 Renvoyer la balle à " + game.cfg.vs.n : "🥊 Défier un ami sur ces questions";
 }
@@ -3255,7 +3381,7 @@ $("r-chal-go").addEventListener("click", function () {
 function renderProfile() {
   var pr = profile();
   $("pf-ava").textContent = pr.emo; $("pf-name").value = pr.name;
-  $("pf-emos").innerHTML = EMOS.map(function (e) { return "<button type=\"button\" data-e=\"" + e + "\" aria-pressed=\"" + (e === pr.emo) + "\">" + e + "</button>"; }).join("");
+  $("pf-emos").innerHTML = PORTF.map(function (x) { return "<button type=\"button\" data-e=\"" + x[0] + "\" title=\"Ministère : " + x[1] + "\" aria-pressed=\"" + (x[0] === pr.emo) + "\"><span>" + x[0] + "</span>" + x[1] + "</button>"; }).join("");
   var gi = gradeInfo(store(XP_KEY) || 0); $("pf-grade").textContent = "Grade : " + gi.ico + " " + gi.name;
   var lg = store(LEAGUE_KEY) || {}, rows = Object.keys(lg).map(function (k) { return lg[k]; });
   rows.sort(function (a, b) { return (b.w + b.l + b.d) - (a.w + a.l + a.d) || b.at - a.at; });
@@ -3358,6 +3484,7 @@ $("ol-del").addEventListener("click", function (e) {
   var me = onlineMe(); if (!me) return;
   rpc("qp_delete_player", auth(me)).then(function () { store(ONLINE_KEY, null); olMsg("Profil en ligne supprimé.", true); renderOnline(); renderLeagueCard(); }).catch(function (er) { olMsg(onlineError(er)); });
 });
+(function () { var raw = store(PROFILE_KEY); if (raw && raw.emo && EMOS.indexOf(raw.emo) < 0) { saveProfile(profile()); setTimeout(function () { if (typeof syncOnlineProfile === "function") syncOnlineProfile(); }, 1500); } })();
 /* Invitation par lien : #ligue=CODE */
 var pendingLeague = null;
 function checkHashLeague() {
@@ -3366,7 +3493,7 @@ function checkHashLeague() {
   if (!sbOn()) return true;
   pendingLeague = m[1].toUpperCase(); show("setup"); window.scrollTo({ top: 0 });
   var pr = profile(); $("lgb-name").value = pr.name;
-  $("lgb-emo").innerHTML = EMOS.map(function (e) { return "<option" + (e === pr.emo ? " selected" : "") + ">" + e + "</option>"; }).join("");
+  $("lgb-emo").innerHTML = PORTF.map(function (x) { return "<option value=\"" + x[0] + "\"" + (x[0] === pr.emo ? " selected" : "") + ">" + x[0] + " " + x[1] + "</option>"; }).join("");
   $("lgb-msg").textContent = ""; $("lg-banner").hidden = false;
   rpc("qp_league_name", { p_code: pendingLeague }).then(function (n) {
     if (!n) { $("lgb-title").textContent = "Ligue introuvable"; $("lgb-sub").textContent = "Le code " + pendingLeague + " n’existe pas (ou plus)."; $("lgb-go").hidden = true; return; }
