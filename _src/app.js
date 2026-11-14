@@ -1141,6 +1141,14 @@ function constitInfo(t) {
   if (typeof CONSTIT !== "undefined" && CONSTIT[t]) { var c = CONSTIT[t], s = CSRC[c[2]]; return { v: c[0], o: c[1], u: s && s.u, s: s && s.s }; }
   var r = IMP_BY[t]; return r ? { v: r[2], o: r[3], u: r[4] && r[4].u, s: r[4] && r[4].s } : null;
 }
+var EST_CL = ["moins de 100 millions d’euros", "100 millions à 1 milliard d’euros", "1 à 5 milliards d’euros", "5 à 20 milliards d’euros", "plus de 20 milliards d’euros"];
+function estHtml(e) {
+  var lab = EST_CL[e[1]], head;
+  if (e[0] === "nc") head = "Impact sur les finances publiques difficile à chiffrer.";
+  else if (e[0] === "mixte") head = "Estimation du site, à confirmer : effets dans les deux sens, de l’ordre de " + lab + " par an.";
+  else head = "Estimation du site, à confirmer : " + (e[0] === "gain" ? "économie ou recette en plus" : "coût") + " de l’ordre de " + lab + " par an pour les finances publiques.";
+  return "<b>" + esc(head) + "</b> " + esc(e[2]) + (e[0] === "nc" ? "" : " Ordre de grandeur indicatif, sans valeur officielle.");
+}
 function infoHtml(m) {
   var seen = {}, terms = [];
   GLOSS.forEach(function (g) { if (!seen[g[1]] && g.re.test(m.m)) { seen[g[1]] = 1; terms.push("<li><b>" + esc(g[1]) + "</b> : " + esc(g[2]) + "</li>"); } });
@@ -1149,6 +1157,7 @@ function infoHtml(m) {
   if (ct) h += "<p class=\"ih\">Et la Constitution ?</p><p><b>" + esc(ct.v) + ".</b> " + esc(ct.o) + "</p>";
   var co = (typeof COUT !== "undefined") && COUT[m.m];
   if (co) h += "<p class=\"ih\">Combien ça coûte ?</p><p><b>Estimation : " + esc(co[0]) + ".</b> " + esc(co[1]) + ". Chiffre incertain, à prendre comme un ordre de grandeur ; la source s’affiche après ta réponse.</p>";
+  else { var es = (typeof EST !== "undefined") && EST[m.m]; if (es) h += "<p class=\"ih\">Combien ça coûte ?</p><p>" + estHtml(es) + "</p>"; }
   if (terms.length) h += "<p class=\"ih\">Les mots à connaître</p><ul>" + terms.slice(0, h ? 2 : 4).join("") + "</ul>";
   var rp = (typeof EXPL !== "undefined" && EXPL[m.m]) ? "" : REPERE[m.t];
   if (rp) h += "<p class=\"ih\">Repère · " + esc(m.t) + "</p><p>" + esc(rp) + "</p>";
