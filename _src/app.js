@@ -1138,15 +1138,17 @@ var REPERE = {
 };
 var IMP_BY = {}; IMPOSS.forEach(function (r) { IMP_BY[r[1]] = r; });
 function constitInfo(t) {
-  if (typeof CONSTIT !== "undefined" && CONSTIT[t]) { var c = CONSTIT[t], s = CSRC[c[2]]; return { v: c[0], o: c[1], u: s && s.u }; }
-  var r = IMP_BY[t]; return r ? { v: r[2], o: r[3], u: r[4] && r[4].u } : null;
+  if (typeof CONSTIT !== "undefined" && CONSTIT[t]) { var c = CONSTIT[t], s = CSRC[c[2]]; return { v: c[0], o: c[1], u: s && s.u, s: s && s.s }; }
+  var r = IMP_BY[t]; return r ? { v: r[2], o: r[3], u: r[4] && r[4].u, s: r[4] && r[4].s } : null;
 }
 function infoHtml(m) {
   var seen = {}, terms = [];
   GLOSS.forEach(function (g) { if (!seen[g[1]] && g.re.test(m.m)) { seen[g[1]] = 1; terms.push("<li><b>" + esc(g[1]) + "</b> : " + esc(g[2]) + "</li>"); } });
   var h = (typeof EXPL !== "undefined" && EXPL[m.m]) ? "<p class=\"ih\">En clair</p><p>" + esc(EXPL[m.m]) + "</p>" : "";
   var ct = constitInfo(m.m);
-  if (ct) h += "<p class=\"ih\">Et la Constitution ?</p><p><b>" + esc(ct.v) + ".</b> " + esc(ct.o) + (ct.u ? " <a href=\"" + esc(ct.u) + "\" target=\"_blank\" rel=\"noopener\">Source ↗</a>" : "") + "</p>";
+  if (ct) h += "<p class=\"ih\">Et la Constitution ?</p><p><b>" + esc(ct.v) + ".</b> " + esc(ct.o) + "</p>";
+  var co = (typeof COUT !== "undefined") && COUT[m.m];
+  if (co) h += "<p class=\"ih\">Combien ça coûte ?</p><p><b>Estimation : " + esc(co[0]) + ".</b> " + esc(co[1]) + ". Chiffre incertain, à prendre comme un ordre de grandeur ; la source s’affiche après ta réponse.</p>";
   if (terms.length) h += "<p class=\"ih\">Les mots à connaître</p><ul>" + terms.slice(0, h ? 2 : 4).join("") + "</ul>";
   var rp = (typeof EXPL !== "undefined" && EXPL[m.m]) ? "" : REPERE[m.t];
   if (rp) h += "<p class=\"ih\">Repère · " + esc(m.t) + "</p><p>" + esc(rp) + "</p>";
@@ -1272,6 +1274,11 @@ function reveal(a, animate) {
   if (game.cfg.mode !== "blitz") {
     var quip = m.imp ? pick(QUIP_IMP) : m.kase ? (a.ok ? pick(QUIP_CASE_OK) : pick(QUIP_CASE_KO)) : m.quote ? (a.ok ? pick(QUIP_QUOTE_OK) : pick(QUIP_QUOTE_KO)) : m.fou ? pick(QUIP_FOU) : (a.ok ? pick(QUIP_OK) : (a.type === "multi" && a.good ? pick(QUIP_PARTIAL) : pick(QUIP_KO)));
     parts.push("<span class=\"quip\">" + esc(quip) + "</span>");
+  }
+  if (!special(m)) {
+    var ct2 = constitInfo(m.m), co2 = (typeof COUT !== "undefined") && COUT[m.m];
+    if (ct2 && ct2.u) parts.push("<span>Constitution : <a href=\"" + esc(ct2.u) + "\" target=\"_blank\" rel=\"noopener\">" + esc(ct2.s) + " ↗</a></span>");
+    if (co2) parts.push("<span>Chiffrage : <a href=\"" + esc(co2[4]) + "\" target=\"_blank\" rel=\"noopener\">" + esc(co2[2]) + " ↗</a> · " + esc(co2[3]) + "</span>");
   }
   if (m.imp) { var so = m.srcs[m.c]; parts.push("<span>Source de l’obstacle : <a href=\"" + esc(so.u) + "\" target=\"_blank\" rel=\"noopener\">" + esc(so.s) + " ↗</a> · " + esc(so.d) + "</span>"); }
   else parts.push("<span>" + srcHtml(m) + "</span>");
