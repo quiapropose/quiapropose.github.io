@@ -1022,7 +1022,6 @@ var RAW = [
   ["philippe","Immigration","Instaurer un moratoire total sur l’immigration à Mayotte.","phProg"],
   ["philippe","Défense","Doubler le nombre de navires militaires dans le Pacifique et l’océan Indien.","phProg"],
   ["glucksmann","Énergie","Lancer un programme de nouveaux réacteurs nucléaires, en complément des renouvelables.","glRfi"],
-  ["retailleau","Budget","Ne pas remplacer 125 000 fonctionnaires partant à la retraite d’ici 2032, pour 7,5 milliards d’euros d’économies.","reAp"],
   ["retailleau","Numérique","Consacrer un plan de 5 milliards d’euros à l’intelligence artificielle sur le quinquennat.","reAp"],
   ["retailleau","Numérique","Nommer un « CTO de l’État », un directeur technique aux pouvoirs réels sur l’informatique publique.","reAp"],
   ["retailleau","Numérique","Regrouper dans un budget unique les crédits numériques de tous les ministères.","reAp"],
