@@ -4,6 +4,8 @@ function bad(m) { console.log("✗ " + m); ok = false; }
 var src = fs.readFileSync(path.join(d, "data.js"), "utf8");
 try { new Function(fs.readFileSync(path.join(d, "app.js"), "utf8")); } catch (e) { bad("app.js : erreur de syntaxe : " + e.message); }
 var G = {};
+var EX = {};
+try { new Function("G", fs.readFileSync(path.join(d, "expl.js"), "utf8") + "\n;G.EXPL=EXPL;")(EX); } catch (e) { bad("expl.js : " + e.message); EX.EXPL = {}; }
 try { new Function("G", src + "\n;G.C=C;G.S=S;G.RAW=RAW;G.SHARED=SHARED;G.POLLS=POLLS;G.NEWS=NEWS;G.FAMILY=FAMILY;")(G); } catch (e) { bad("data.js : " + e.message); console.log("ÉCHEC"); process.exit(1); }
 var ids = {}; G.C.forEach(function (c) { ids[c.id] = 1; if (!G.FAMILY[c.id]) bad("FAMILY manquante pour " + c.id); });
 var seen = {};
@@ -29,5 +31,8 @@ G.NEWS.forEach(function (n, i) {
   if (n.u && !/^https:\/\//.test(n.u)) bad("NEWS[" + i + "] URL non https");
   if (n.t && n.t.length > 160) bad("NEWS[" + i + "] texte trop long");
 });
+var texts = {}; G.RAW.forEach(function (r) { texts[r[2]] = 1; }); G.SHARED.forEach(function (r) { texts[r[2]] = 1; });
+Object.keys(texts).forEach(function (t) { if (!EX.EXPL[t]) bad("explication « En clair » manquante dans expl.js : " + t.slice(0, 70)); });
+Object.keys(EX.EXPL).forEach(function (t) { if (!texts[t]) bad("expl.js : clé sans mesure correspondante : " + t.slice(0, 70)); var v = EX.EXPL[t]; if (v.length > 320) bad("expl.js : explication trop longue (" + v.length + " car.) : " + t.slice(0, 60)); });
 console.log(ok ? "OK : " + G.C.length + " candidats, " + (G.RAW.length + G.SHARED.length) + " mesures, " + G.POLLS.length + " sondages, " + G.NEWS.length + " infos" : "ÉCHEC");
 process.exit(ok ? 0 : 1);

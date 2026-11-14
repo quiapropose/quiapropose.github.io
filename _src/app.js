@@ -1022,7 +1022,7 @@ function hudUpdate() {
   else $("g-pts").textContent = fmt(game.pts);
   var s = $("g-streak"); s.textContent = "Série ×" + game.streak; s.classList.toggle("hot", game.streak >= 3);
 }
-// ---- Le petit « i » : lexique et repères par thème ----
+// ---- Le petit « i » : explication de la mesure (EXPL, expl.js), lexique et repères par thème ----
 var GLOSS = [
   ["Smic", "Smic", "Le salaire minimum légal en France, revalorisé au moins une fois par an (le 1er janvier)."],
   ["RIC", "RIC", "Référendum d’initiative citoyenne : en réunissant assez de signatures, des citoyens déclenchent eux-mêmes un vote, par exemple pour proposer ou abroger une loi."],
@@ -1139,7 +1139,8 @@ var REPERE = {
 function infoHtml(m) {
   var seen = {}, terms = [];
   GLOSS.forEach(function (g) { if (!seen[g[1]] && g.re.test(m.m)) { seen[g[1]] = 1; terms.push("<li><b>" + esc(g[1]) + "</b> : " + esc(g[2]) + "</li>"); } });
-  var h = terms.length ? "<p class=\"ih\">Les mots à connaître</p><ul>" + terms.slice(0, 4).join("") + "</ul>" : "";
+  var h = (typeof EXPL !== "undefined" && EXPL[m.m]) ? "<p class=\"ih\">En clair</p><p>" + esc(EXPL[m.m]) + "</p>" : "";
+  if (terms.length) h += "<p class=\"ih\">Les mots à connaître</p><ul>" + terms.slice(0, 3).join("") + "</ul>";
   var rp = REPERE[m.t];
   if (rp) h += "<p class=\"ih\">Repère · " + esc(m.t) + "</p><p>" + esc(rp) + "</p>";
   return h;

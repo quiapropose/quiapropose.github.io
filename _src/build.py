@@ -2,7 +2,7 @@ import os
 site=os.environ.get('SITE','https://quiapropose.fr/')
 d=os.path.dirname(os.path.abspath(__file__))
 head=open(os.path.join(d,'head.html'),encoding='utf8').read().replace('%%SITE%%',site)
-data=open(os.path.join(d,'data.js'),encoding='utf8').read()
+data=open(os.path.join(d,'data.js'),encoding='utf8').read()+'\n'+open(os.path.join(d,'expl.js'),encoding='utf8').read()
 app=open(os.path.join(d,'app.js'),encoding='utf8').read()
 sb_url=os.environ.get('SB_URL','https://fieffcynzedifrpjeivg.supabase.co'); sb_key=os.environ.get('SB_KEY','sb_publishable_Sk5SiN0inH8vRC3lsnUQWA_lCsvfyx7')
 app=app.replace('var SB_URL = "", SB_KEY = "";', 'var SB_URL = "%s", SB_KEY = "%s";' % (sb_url, sb_key))
