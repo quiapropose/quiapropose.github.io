@@ -1522,7 +1522,9 @@ var S = {
   reE1: { s: "Europe 1 (Grande interview Europe 1-CNews)", d: "1er juil. 2026", u: "https://www.europe1.fr/node/963669" },
   ndCarb: { s: "LesVoitures.fr, « Présidentielle 2027 et automobile »", d: "2026", u: "https://lesvoitures.fr/presidentielle-2027-automobile/" },
   reCarb: { s: "LesVoitures.fr, « Présidentielle 2027 et automobile »", d: "2026", u: "https://lesvoitures.fr/presidentielle-2027-automobile/" },
-  poSite: { s: "Site de Natacha Polony (via Votons 2027)", d: "2026", u: "https://natachapolony2027.fr/natacha-polony/ma-vision" }
+  poSite: { s: "Site de Natacha Polony (via Votons 2027)", d: "2026", u: "https://natachapolony2027.fr/natacha-polony/ma-vision" },
+  psSP: { s: "Public Sénat (grand oral de franceinfo sur les services publics)", d: "12 nov. 2026", u: "https://www.publicsenat.fr/actualites/politique/presidentielle-2027-sante-justice-education-cultureque-retenir-du-grand-oral-des-candidats-sur-les-services-publics" },
+  qzZe: { s: "Quartz (entretien à franceinfo)", d: "12 nov. 2026", u: "https://fr.qz.com/eric-zemmour-800000-postes-fonction-publique-111226" }
 };
 
 // [candidat, thème, mesure reformulée, clé source]
@@ -2486,7 +2488,24 @@ var RAW = [
   ["melenchon","Culture","Donner aux journalistes un droit de veto sur la nomination du directeur de leur média.","melMl"],
   ["retailleau","Budget","Lancer un plan d’urgence de 120 milliards d’euros d’économies sur cinq ans.","reE1"],
   ["dupont","Énergie","Supprimer la TVA appliquée aux taxes sur les carburants, ainsi que les certificats d’économies d’énergie.","ndCarb"],
-  ["retailleau","Transports","Abroger les zones à faibles émissions (ZFE).","reCarb"]
+  ["retailleau","Transports","Abroger les zones à faibles émissions (ZFE).","reCarb"],
+  ["roussel","Institutions","Recruter près de 500 000 fonctionnaires en cinq ans.","psSP"],
+  ["roussel","Sécurité","Recruter 60 000 policiers, gendarmes et douaniers supplémentaires.","psSP"],
+  ["roussel","Sécurité","Interdire les lanceurs de balles de défense (LBD).","psSP"],
+  ["retailleau","Budget","Ne pas remplacer 400 000 fonctionnaires, dont 300 000 postes économisés grâce à l’intelligence artificielle et à la réorganisation.","psSP"],
+  ["retailleau","Éducation","Créer une centaine d’écoles publiques autonomes dont le directeur choisit son équipe et son projet.","psSP"],
+  ["retailleau","Santé","Alléger les tâches administratives à l’hôpital grâce à l’intelligence artificielle, l’équivalent de 6 000 postes de médecins.","psSP"],
+  ["tondelier","Institutions","Créer entre 250 000 et 350 000 postes dans la fonction publique.","psSP"],
+  ["tondelier","Santé","N’autoriser l’installation d’un médecin en zone bien dotée qu’au départ d’un autre praticien.","psSP"],
+  ["glucksmann","Éducation","Augmenter de 10 % le salaire des enseignants, et jusqu’à 25 % en milieu de carrière.","psSP"],
+  ["melenchon","Budget","Consacrer 22 milliards d’euros aux services publics dès les premiers mois du mandat.","psSP"],
+  ["melenchon","Éducation","Rétablir le bac professionnel en quatre ans.","psSP"],
+  ["attal","Éducation","Augmenter les enseignants de 200 à 500 euros par mois à partir de 2028, selon l’ancienneté.","psSP"],
+  ["zemmour","Budget","Supprimer 800 000 postes de fonctionnaires en cinq ans, sans toucher aux enseignants, policiers, militaires et soignants.","psSP"],
+  ["zemmour","Justice","Recruter 40 000 surveillants pénitentiaires.","psSP"],
+  ["zemmour","Santé","Exonérer d’impôt les revenus d’activité des médecins retraités.","psSP"],
+  ["zemmour","Éducation","Mettre fin au collège unique et orienter vers la voie professionnelle dès la quatrième.","psSP"],
+  ["philippe","Justice","Interdire aux magistrats de se syndiquer.","psSP"]
 ];
 
 
@@ -2504,7 +2523,7 @@ var SHARED = [
   [["lepen","philippot","lisnard"],"Santé","Supprimer les agences régionales de santé (ARS).",{lepen:"lp22",philippot:"ptSite",lisnard:"liProg"},0],
   [["philippe","retailleau"],"Énergie","Commander huit réacteurs EPR2 en plus des six déjà prévus.",{philippe:"phSite",retailleau:"reSite"},0],
   [["philippe","lisnard"],"Éducation","Augmenter de 20 % la rémunération des enseignants en cinq ans.",{philippe:"phSite",lisnard:"liProg"},0],
-  [["philippe","lepen","lisnard","retailleau"],"Justice","Rétablir des peines planchers.",{philippe:"phSite",lepen:"lp22",lisnard:"liProg",retailleau:"reMv"},0],
+  [["philippe","lepen","lisnard","retailleau","zemmour"],"Justice","Rétablir des peines planchers.",{philippe:"phSite",lepen:"lp22",lisnard:"liProg",retailleau:"reMv",zemmour:"qzZe"},0],
   [["philippe","lepen","lisnard"],"Immigration","Dénoncer ou réviser l’accord franco-algérien de 1968.",{philippe:"phSite",lepen:"lp22",lisnard:"liProg"},0],
   [["lepen","retailleau","lisnard","zemmour"],"Immigration","Mettre fin au droit du sol automatique.",{lepen:"lp22",retailleau:"reMv",lisnard:"liProg",zemmour:"zeMv"},0],
   [["attal","glucksmann"],"Numérique","Interdire les réseaux sociaux aux moins de 15 ans.",{attal:"atMv",glucksmann:"glActe"},0],
@@ -2529,7 +2548,7 @@ var SHARED = [
   [["melenchon","glucksmann","tondelier"],"Institutions","Donner le droit de vote aux étrangers non européens aux élections locales.",{melenchon:"melS4",glucksmann:"glActe",tondelier:"toMv"},0],
   [["melenchon","tondelier"],"Travail","Abroger la loi El Khomri et les ordonnances Macron sur le travail.",{melenchon:"melS1",tondelier:"toMv"},0],
   [["melenchon","tondelier"],"Logement","Abroger la loi Kasbarian sur les squats et les impayés de loyer.",{melenchon:"melR3",tondelier:"toMv"},0],
-  [["philippe","attal"],"Justice","Supprimer le juge d’application des peines.",{philippe:"phSite",attal:"atMv"},0],
+  [["philippe","attal","retailleau"],"Justice","Supprimer le juge d’application des peines.",{philippe:"phSite",attal:"atMv",retailleau:"psSP"},0],
   [["roussel","kazib","melenchon"],"Retraites","Rétablir la retraite à 60 ans.",{roussel:"roJh",kazib:"kaSite",melenchon:"melLcp"},0],
   [["zemmour","lisnard","retailleau"],"Justice","Juger les mineurs délinquants comme des majeurs dès 16 ans.",{zemmour:"zeMv",lisnard:"liProg",retailleau:"reMv"},0],
   [["lepen","zemmour"],"Sécurité","Instaurer une présomption de légitime défense pour les forces de l’ordre.",{lepen:"lp22",zemmour:"zeMv"},0],
