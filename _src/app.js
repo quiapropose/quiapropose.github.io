@@ -1136,12 +1136,19 @@ var REPERE = {
   "Budget": "Dépenses et dette publiques. Les règles européennes demandent un déficit sous 3 % du PIB.",
   "Europe": "Traités, budget, règles communes de l’UE. Changer un traité demande l’accord des 27 pays."
 };
+var IMP_BY = {}; IMPOSS.forEach(function (r) { IMP_BY[r[1]] = r; });
+function constitInfo(t) {
+  if (typeof CONSTIT !== "undefined" && CONSTIT[t]) { var c = CONSTIT[t], s = CSRC[c[2]]; return { v: c[0], o: c[1], u: s && s.u }; }
+  var r = IMP_BY[t]; return r ? { v: r[2], o: r[3], u: r[4] && r[4].u } : null;
+}
 function infoHtml(m) {
   var seen = {}, terms = [];
   GLOSS.forEach(function (g) { if (!seen[g[1]] && g.re.test(m.m)) { seen[g[1]] = 1; terms.push("<li><b>" + esc(g[1]) + "</b> : " + esc(g[2]) + "</li>"); } });
   var h = (typeof EXPL !== "undefined" && EXPL[m.m]) ? "<p class=\"ih\">En clair</p><p>" + esc(EXPL[m.m]) + "</p>" : "";
-  if (terms.length) h += "<p class=\"ih\">Les mots à connaître</p><ul>" + terms.slice(0, 3).join("") + "</ul>";
-  var rp = REPERE[m.t];
+  var ct = constitInfo(m.m);
+  if (ct) h += "<p class=\"ih\">Et la Constitution ?</p><p><b>" + esc(ct.v) + ".</b> " + esc(ct.o) + (ct.u ? " <a href=\"" + esc(ct.u) + "\" target=\"_blank\" rel=\"noopener\">Source ↗</a>" : "") + "</p>";
+  if (terms.length) h += "<p class=\"ih\">Les mots à connaître</p><ul>" + terms.slice(0, h ? 2 : 4).join("") + "</ul>";
+  var rp = (typeof EXPL !== "undefined" && EXPL[m.m]) ? "" : REPERE[m.t];
   if (rp) h += "<p class=\"ih\">Repère · " + esc(m.t) + "</p><p>" + esc(rp) + "</p>";
   return h;
 }

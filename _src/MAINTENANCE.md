@@ -39,7 +39,8 @@ Les sources du site sont dans ce dossier `_src/`. Le site publié (`index.html`,
    - Pour chaque mesure nouvelle et vérifiable : ajouter une source dans `S` (avec une URL https qui pointe vers le texte original ou un article qui le cite), puis une ligne dans `RAW`.
    - Reformuler en une phrase neutre à l'infinitif, sans reprendre de slogan.
    - Pas de doublon : `check.js` les détecte.
-   - Ajouter dans `expl.js` l'explication « En clair » de chaque nouvelle mesure (1 ou 2 phrases, 320 caractères au maximum) : ce que la mesure change concrètement et la situation actuelle en France, en expliquant les termes techniques. Elle s'affiche avant la réponse : ne jamais nommer ni suggérer le candidat ou son camp, aucun jugement, aucun chiffre incertain. `check.js` refuse une mesure sans explication. Si le texte d'une mesure change, changer aussi sa clé dans `expl.js`.
+   - Ajouter dans `expl.js` l'explication « En clair » de chaque nouvelle mesure (1 ou 2 phrases, 320 caractères au maximum) : ce que la mesure change concrètement et la situation actuelle en France, en expliquant les termes techniques. Elle s'affiche avant la réponse : ne jamais nommer ni suggérer le candidat ou son camp, aucun jugement, aucun chiffre incertain. `check.js` refuse une mesure sans explication.
+   - Si la mesure demande de réviser la Constitution ou s'y heurte en l'état, ajouter une ligne dans `CONSTIT` (fichier `expl.js`) : verdict, explication courte et source dans `CSRC` (texte de la Constitution, décision du Conseil constitutionnel ou analyse de juristes). Ne rien affirmer sans base claire. Si le texte d'une mesure change, changer aussi sa clé dans `expl.js`.
    - Pour un nouveau candidat déclaré : l'ajouter dans `C` (avec `main: true` seulement s'il est à 5 % ou plus dans les sondages) et dans `FAMILY`, avec au moins 8 mesures sourcées.
    - Mettre à jour la date dans le commentaire d'en-tête de `data.js`.
 4. **Sondages (`POLLS`).**
