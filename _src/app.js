@@ -1149,6 +1149,16 @@ function estHtml(e) {
   else head = "Estimation du site, à confirmer : " + (e[0] === "gain" ? "économie ou recette en plus" : "coût") + " de l’ordre de " + lab + " par an pour les finances publiques.";
   return "<b>" + esc(head) + "</b> " + esc(e[2]) + (e[0] === "nc" ? "" : " Ordre de grandeur indicatif, sans valeur officielle.");
 }
+function costLine(m) {
+  var co = (typeof COUT !== "undefined") && COUT[m.m];
+  if (co) return "💶 Coût estimé : " + esc(co[0]) + "<small>Chiffrage existant, incertain · source après ta réponse · détails : bouton i</small>";
+  var e = (typeof EST !== "undefined") && EST[m.m];
+  if (!e) return "";
+  if (e[0] === "nc") return "💶 Coût : difficile à chiffrer<small>Pourquoi : bouton i</small>";
+  var lab = EST_CL[e[1]] + " par an";
+  var head = e[0] === "gain" ? "💶 Économie estimée : " + lab : e[0] === "mixte" ? "💶 Effet sur les finances publiques : dans les deux sens, de l’ordre de " + lab : "💶 Coût estimé : " + lab;
+  return esc(head) + "<small>Estimation du site, à confirmer · détails : bouton i</small>";
+}
 function infoHtml(m) {
   var seen = {}, terms = [];
   GLOSS.forEach(function (g) { if (!seen[g[1]] && g.re.test(m.m)) { seen[g[1]] = 1; terms.push("<li><b>" + esc(g[1]) + "</b> : " + esc(g[2]) + "</li>"); } });
@@ -1185,6 +1195,8 @@ function renderQ() {
   game.sel = [];
   $("g-hint").hidden = true; $("g-hint").innerHTML = "";
   $("g-pre").hidden = !m.quote; $("g-pre").innerHTML = m.quote ? "<b>Le contexte</b> " + esc(m.pre) : "";
+  var cl = special(m) ? "" : costLine(m);
+  $("g-cost").hidden = !cl; $("g-cost").innerHTML = cl;
   var ih = (!kase && !m.quote) ? infoHtml(m) : "";
   $("g-info").hidden = !ih; $("g-info").setAttribute("aria-expanded", "false"); $("g-infobox").hidden = true; $("g-infobox").innerHTML = ih;
   updCheat();

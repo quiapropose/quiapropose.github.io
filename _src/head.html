@@ -450,6 +450,10 @@ body { background-image: radial-gradient(rgba(0,0,145,.06) 1.2px, transparent 1.
 .pre { margin: 10px 44px 0 0; padding: 10px 12px; background: #fff6e0; border-left: 4px solid var(--rouge); font-size: 14.5px; line-height: 1.45; border-radius: 2px; }
 .pre b { display: block; font: 800 11.5px/1.2 var(--f-ui); text-transform: uppercase; letter-spacing: .1em; color: var(--rouge); margin-bottom: 3px; }
 :root[data-theme="dark"] .pre { background: rgba(225,0,15,.12); }
+/* ---- Coût affiché sous la mesure ---- */
+.costline { display: inline-block; margin: 12px 0 0; padding: 7px 12px; border-radius: 12px; background: var(--accent-soft); font: 600 14px/1.4 var(--f-ui); }
+.costline[hidden] { display: none; }
+.costline small { display: block; font-weight: 500; font-size: 12px; color: var(--muted); margin-top: 2px; }
 /* ---- Bouton i ---- */
 .bulletin { position: relative; }
 .info-btn { position: absolute; top: 14px; right: 14px; width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--accent); background: var(--sheet); color: var(--accent); font: italic 800 17px/1 Georgia, serif; cursor: pointer; display: grid; place-items: center; padding: 0; transition: transform .15s ease, background .15s ease; }
@@ -786,6 +790,8 @@ body.playing .info-btn { top: 16px; right: 0; background: rgba(255,255,255,.14);
 body.playing .infobox { background: rgba(255,255,255,.1); color: #fff; border-left-color: #fff; }
 body.playing .infobox .ih { color: #c7d2fe; }
 body.playing .infobox a { color: #c7d2fe; }
+body.playing .costline { background: rgba(255,255,255,.12); color: #fff; }
+body.playing .costline small { color: #c7d2fe; }
 body.playing .stamp { background: rgba(0,0,0,.25); right: 0; top: 12px; }
 body.playing .stamp.ok { color: #34d399; border-color: #34d399; }
 body.playing .stamp.ko { color: #f87171; border-color: #f87171; }
@@ -1201,6 +1207,7 @@ body.playing .ticker { display: none; }
       <span class="theme" id="g-theme">Thème</span><span class="kind" id="g-kind" hidden></span><button type="button" class="info-btn" id="g-info" aria-expanded="false" aria-controls="g-infobox" title="Comprendre la mesure" hidden><span aria-hidden="true">i</span><span class="vh">Comprendre la mesure</span></button>
       <p class="pre" id="g-pre" hidden></p>
       <blockquote id="g-text"></blockquote>
+      <p class="costline" id="g-cost" hidden></p>
       <div class="infobox" id="g-infobox" hidden></div>
       <p class="ask" id="g-ask">Qui propose cette mesure ?</p>
       <div class="src" id="g-src" hidden></div>
