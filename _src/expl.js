@@ -1090,7 +1090,7 @@ var COUT = {
   "Un âge minimal de départ à 63 ans, avec une décote de 7 % par an, et le taux plein automatique ramené de 67 à 65 ans.": ["économie d’environ 12 milliards d’euros (sur 42 milliards attendus de l’ensemble de sa réforme des retraites)", "Chiffrage annoncé par le candidat lui-même, non vérifié de façon indépendante", "Bruno Retailleau s’engage sur un plan d’économies de près de 200 milliards d’euros – Public Sénat", "12 octobre 2026", "https://www.publicsenat.fr/actualites/economie/presidentielle-2027-bruno-retailleau-sengage-sur-un-plan-deconomies-de-pres-de-200-milliards-deuros-sil-est-elu"]
 };
 
-/* « Combien ça coûte ? » (suite) : ORDRE DE GRANDEUR ESTIMÉ PAR LE SITE, à confirmer, pour les mesures sans chiffrage sourcé (COUT a priorité).
+/* « Combien ça coûte ? » (suite) : ORDRE DE GRANDEUR ESTIMÉ PAR LE SITE, en attente du chiffrage de l’Institut Montaigne (à vérifier début 2027), pour les mesures sans chiffrage sourcé (COUT a priorité).
    Effet annuel en régime de croisière sur les finances publiques. [sens, classe, base]
    sens : cout | gain | mixte | nc (non chiffrable) ; classe : 0 < 100 M€, 1 = 0,1-1 Md€, 2 = 1-5 Md€, 3 = 5-20 Md€, 4 > 20 Md€ par an (null si nc). */
 var EST = {

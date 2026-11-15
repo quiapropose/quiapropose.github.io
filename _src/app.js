@@ -1145,9 +1145,9 @@ var EST_CL = ["moins de 100 millions d’euros", "100 millions à 1 milliard d�
 function estHtml(e) {
   var lab = EST_CL[e[1]], head;
   if (e[0] === "nc") head = "Impact sur les finances publiques difficile à chiffrer.";
-  else if (e[0] === "mixte") head = "Estimation du site, à confirmer : effets dans les deux sens, de l’ordre de " + lab + " par an.";
-  else head = "Estimation du site, à confirmer : " + (e[0] === "gain" ? "économie ou recette en plus" : "coût") + " de l’ordre de " + lab + " par an pour les finances publiques.";
-  return "<b>" + esc(head) + "</b> " + esc(e[2]) + (e[0] === "nc" ? "" : " Ordre de grandeur indicatif, sans valeur officielle.");
+  else if (e[0] === "mixte") head = "Estimation du site : effets dans les deux sens, de l’ordre de " + lab + " par an.";
+  else head = "Estimation du site : " + (e[0] === "gain" ? "économie ou recette en plus" : "coût") + " de l’ordre de " + lab + " par an pour les finances publiques.";
+  return "<b>" + esc(head) + "</b> " + esc(e[2]) + (e[0] === "nc" ? "" : " Ordre de grandeur indicatif, sans valeur officielle, en attente du chiffrage de l’Institut Montaigne : à vérifier début 2027.");
 }
 function costLine(m) {
   var co = (typeof COUT !== "undefined") && COUT[m.m];
@@ -1157,7 +1157,7 @@ function costLine(m) {
   if (e[0] === "nc") return "💶 Coût : difficile à chiffrer<small>Pourquoi : bouton i</small>";
   var lab = EST_CL[e[1]] + " par an";
   var head = e[0] === "gain" ? "💶 Économie estimée : " + lab : e[0] === "mixte" ? "💶 Effet sur les finances publiques : dans les deux sens, de l’ordre de " + lab : "💶 Coût estimé : " + lab;
-  return esc(head) + "<small>Estimation du site, à confirmer · détails : bouton i</small>";
+  return esc(head) + "<small>Estimation du site, en attente du chiffrage de l’Institut Montaigne (début 2027) · détails : bouton i</small>";
 }
 function infoHtml(m) {
   var seen = {}, terms = [];
