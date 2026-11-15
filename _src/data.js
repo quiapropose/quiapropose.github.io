@@ -103,6 +103,7 @@ var S = {
   reCarb: { s: "LesVoitures.fr, « Présidentielle 2027 et automobile »", d: "2026", u: "https://lesvoitures.fr/presidentielle-2027-automobile/" },
   poSite: { s: "Site de Natacha Polony (via Votons 2027)", d: "2026", u: "https://natachapolony2027.fr/natacha-polony/ma-vision" },
   psSP: { s: "Public Sénat (grand oral de franceinfo sur les services publics)", d: "12 nov. 2026", u: "https://www.publicsenat.fr/actualites/politique/presidentielle-2027-sante-justice-education-cultureque-retenir-du-grand-oral-des-candidats-sur-les-services-publics" },
+  glLiv: { s: "Livret « Une révolution pour sortir des énergies fossiles – Les premiers 100 jours » (glucks2027.fr)", d: "9 nov. 2026", u: "https://glucks2027.fr/wp-content/uploads/2026/11/livret_progr_revolution_ecologique_2027.pdf" },
   qzZe: { s: "Quartz (entretien à franceinfo)", d: "12 nov. 2026", u: "https://fr.qz.com/eric-zemmour-800000-postes-fonction-publique-111226" }
 };
 
@@ -421,7 +422,7 @@ var RAW = [
   ["glucksmann","Jeunesse","Un passeport « Colo pour tous » : un séjour collectif en colonie pour chaque enfant.","glWiki"],
   ["glucksmann","Immigration","Confier la politique migratoire à une convention citoyenne dont les conclusions seraient soumises au Parlement.","glWiki"],
   ["glucksmann","Famille","Créer un statut des familles monoparentales (logement, crèche, transports, pensions).","glWiki"],
-  ["glucksmann","Énergie","Financer par les superprofits des chèques énergie de 500 € et 200 €, et encadrer les marges pour baisser l’essence de 20 centimes.","glWiki"],
+  ["glucksmann","Énergie","Encadrer les marges de raffinage et de distribution pour baisser de 20 centimes le prix de l’essence.","glWiki"],
   ["glucksmann","Travail","Instaurer un « chèque syndical » et faire entrer des salariés dans les conseils d’administration dès 100 salariés.","glActe"],
   ["glucksmann","Immigration","Abroger la loi immigration de 2024.","glActe"],
   ["glucksmann","Immigration","Créer une force européenne de sauvetage en mer et reconnaître un « devoir de sauver ».","glActe"],
@@ -1022,6 +1023,22 @@ var RAW = [
   ["philippe","Immigration","Instaurer un moratoire total sur l’immigration à Mayotte.","phProg"],
   ["philippe","Défense","Doubler le nombre de navires militaires dans le Pacifique et l’océan Indien.","phProg"],
   ["glucksmann","Énergie","Lancer un programme de nouveaux réacteurs nucléaires, en complément des renouvelables.","glRfi"],
+  ["glucksmann","Institutions","Inscrire dans la Constitution un état d’urgence écologique et ajouter à l’article 1er que la République est écologique.","glLiv"],
+  ["glucksmann","Budget","Voter une loi de programmation écologique, sur le modèle de la loi de programmation militaire, qui s’impose chaque année au budget.","glLiv"],
+  ["glucksmann","Transports","Supprimer dès les 100 premiers jours l’exonération de taxe sur le carburant des vols intérieurs, et augmenter la taxe sur les billets d’avion.","glLiv"],
+  ["glucksmann","Économie","Doubler le plafond du livret A et le fusionner avec le LDDS en un livret rémunéré à 2,5 %, pour prêter aux collectivités à taux bas.","glLiv"],
+  ["glucksmann","Europe","Lancer avec les partenaires européens un grand emprunt commun pour la transition écologique.","glLiv"],
+  ["glucksmann","Logement","Proposer un million de pompes à chaleur à 1 € par jour, en priorité pour les logements chauffés au fioul ou au gaz.","glLiv"],
+  ["glucksmann","Transports","Créer 5 000 lignes de covoiturage d’ici 2035, avec un premier appel à projets dans les 100 premiers jours.","glLiv"],
+  ["glucksmann","Jeunesse","Créer un « Pass Mobilité Durable Jeunes » à 1 € par jour pour les moins de 25 ans, pour les transports en commun et le train.","glLiv"],
+  ["glucksmann","Énergie","Au moins doubler d’ici 2035 les capacités de production d’énergie renouvelable.","glLiv"],
+  ["glucksmann","Énergie","Geler les hausses de taxes sur l’électricité et garantir que son prix n’augmente pas plus vite que l’inflation.","glLiv"],
+  ["glucksmann","Énergie","Multiplier les heures creuses en journée pour les particuliers et les TPE au tarif réglementé.","glLiv"],
+  ["glucksmann","Numérique","Obliger les centres de données à récupérer leur chaleur pour la réinjecter dans les réseaux de chaleur locaux.","glLiv"],
+  ["glucksmann","Éducation","Rénover 4 000 écoles primaires par an, ainsi que plus de 2 800 collèges et lycées, en commençant par ceux fermés pendant les canicules.","glLiv"],
+  ["glucksmann","Sécurité","Investir 1 milliard d’euros dans la sécurité civile dès juin 2027 et créer un fonds qui avance l’indemnisation des sinistrés.","glLiv"],
+  ["glucksmann","Économie","Passer les véhicules de l’État à l’électrique, en achetant en priorité des modèles fabriqués en France ou en Europe.","glLiv"],
+  ["glucksmann","Écologie","Lancer avec les collectivités un plan national « droit à la fraîcheur » : ombrage, refuges climatiques, toitures fraîches.","glLiv"],
   ["retailleau","Numérique","Consacrer un plan de 5 milliards d’euros à l’intelligence artificielle sur le quinquennat.","reAp"],
   ["retailleau","Numérique","Nommer un « CTO de l’État », un directeur technique aux pouvoirs réels sur l’informatique publique.","reAp"],
   ["retailleau","Numérique","Regrouper dans un budget unique les crédits numériques de tous les ministères.","reAp"],
@@ -1246,7 +1263,7 @@ var NEWS = [
   { d: "14 nov.", k: "debat", t: "Gérard Larcher veut réunir Retailleau, Lisnard, Attal et Philippe pour une « méthode de départage ». Renaissance accepte, Philippe exclut toujours une primaire.", s: "AFP via Yahoo Actualités", u: "https://fr.news.yahoo.com/pr%C3%A9sidentielle-larcher-veut-r%C3%A9unir-candidats-173103030.html" },
   { d: "12 nov.", k: "programme", t: "Édouard Philippe publie son programme complet : ses mesures sont dans le quiz.", s: "edouardphilippe.fr", u: "https://www.edouardphilippe.fr/programme" },
   { d: "9 nov.", k: "declare", t: "Teddy Riner se déclare candidat. Édouard Philippe salue un « candidat de poids ».", s: "AFP via La Libre", u: "https://www.lalibre.be/dernieres-depeches/2026/11/09/des-tatamis-a-lelysee-teddy-riner-annonce-sa-candidature-a-la-presidentielle-TN24TXUYZBDHLNYIUW4YHZJEI4/" },
-  { d: "9 nov.", k: "programme", t: "Raphaël Glucksmann présente ses 100 premiers jours pour sortir des énergies fossiles.", s: "RFI", u: "https://www.dakaractu.com/Presidentielle-en-France-Raphael-Glucksmann-presente-son-projet-de-revolution-ecologique_a278006.amp.html" },
+  { d: "9 nov.", k: "programme", t: "Raphaël Glucksmann présente ses 100 premiers jours pour sortir des énergies fossiles : ses mesures sont dans le quiz.", s: "glucks2027.fr", u: "https://glucks2027.fr/wp-content/uploads/2026/11/livret_progr_revolution_ecologique_2027.pdf" },
   { d: "6-7 nov.", k: "programme", t: "LFI publie « L’Avenir en commun » (1 069 mesures) et réunit plus de 20 000 personnes au Bourget.", s: "AFP via France 24", u: "https://www.france24.com/fr/france/20261106-france-insoumise-jean-luc-melenchon-presente-programme-presidentielle-2027-fidele-volonte-rupture-lfi" },
   { d: "À venir", k: "agenda", t: "13 déc. : vote des Écologistes sur leur candidature · 12 mars : fin des parrainages · 18 avril : premier tour.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-declares-et-potentiels-444932" }
 ];
