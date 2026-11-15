@@ -1,4 +1,4 @@
-/* Données : candidats, sources et mesures. État au 14 novembre 2026. */
+/* Données : candidats, sources et mesures. État au 15 novembre 2026. */
 var C = [
   { id: "arthaud", name: "Nathalie Arthaud", ini: "NA", party: "Lutte ouvrière" },
   { id: "asselineau", name: "François Asselineau", ini: "FA", party: "UPR" },
@@ -1212,6 +1212,14 @@ var IMPOSS = [
 /* Derniers sondages d'intentions de vote au 1er tour (en % des suffrages exprimés).
    Chiffres recoupés : notice de la Commission des sondages et/ou rapport de l'institut, et relevés observatoire2027.fr. */
 var POLLS = [
+  { inst: "Elabe", pour: "BFMTV et La Tribune Dimanche", terrain: "12 et 13 novembre 2026", n: "1 500 personnes, dont 1 391 inscrites sur les listes électorales", marge: "± 3,5 points au maximum", methode: "Questionnaire en ligne, méthode des quotas",
+    u: "https://elabe.fr/presidentielle-2027-novembre/", hyps: [
+    { nom: "Avec Édouard Philippe et Dominique de Villepin", r: [["lepen",33],["melenchon",17],["philippe",15],["glucksmann",13.5],["retailleau",6],["zemmour",4.5],["tondelier",3],["dupont",3],["Dominique de Villepin",2.5],["roussel",2],["arthaud",0.5]] },
+    { nom: "Avec Gabriel Attal et Dominique de Villepin", r: [["lepen",33],["melenchon",17.5],["glucksmann",14],["attal",10],["retailleau",9],["zemmour",4.5],["tondelier",3],["Dominique de Villepin",3],["roussel",2.5],["dupont",2.5],["arthaud",1]] },
+    { nom: "Avec Gabriel Attal et Édouard Philippe", r: [["lepen",33],["melenchon",17.5],["glucksmann",13],["philippe",12],["retailleau",6],["attal",5.5],["zemmour",4],["tondelier",3.5],["dupont",3],["roussel",2],["arthaud",0.5]] },
+    { nom: "Avec Gabriel Attal, David Lisnard et François Ruffin", r: [["lepen",32],["melenchon",17.5],["glucksmann",14],["lisnard",10.5],["attal",8.5],["retailleau",6],["zemmour",4],["ruffin",3],["dupont",2.5],["roussel",1.5],["arthaud",0.5]] },
+    { nom: "Avec Édouard Philippe et David Lisnard", r: [["lepen",32.5],["melenchon",18.5],["glucksmann",13.5],["philippe",13],["lisnard",9],["retailleau",4],["zemmour",3.5],["dupont",3],["roussel",2.5],["arthaud",0.5]] },
+    { nom: "Hypothèse large (avec Teddy Riner)", r: [["lepen",31],["melenchon",17],["glucksmann",10.5],["philippe",9.5],["lisnard",8],["riner",4.5],["attal",4],["retailleau",4],["tondelier",3],["zemmour",3],["dupont",2],["polony",1.5],["roussel",1.5],["arthaud",0.5]] } ] },
   { inst: "Cluster17", pour: "Politico", terrain: "9 et 10 novembre 2026", n: "1 242 personnes, dont 1 164 inscrites sur les listes électorales", marge: "± 2,7 points au maximum", methode: "Questionnaire en ligne, méthode des quotas",
     u: "https://www.commission-des-sondages.fr/notices/", hyps: [
     { nom: "Avec Édouard Philippe", r: [["lepen",30.5],["melenchon",20],["philippe",13.5],["glucksmann",11],["lisnard",10],["retailleau",5],["dupont",3],["zemmour",3],["roussel",2],["tondelier",1.5],["arthaud",0.5]] },
@@ -1231,15 +1239,15 @@ var POLLS = [
     { nom: "Avec Attal, Retailleau et Lisnard", r: [["lepen",36],["melenchon",17.5],["glucksmann",13],["attal",9],["lisnard",7.5],["retailleau",5],["zemmour",4.5],["tondelier",3],["roussel",2],["dupont",2],["arthaud",0.5]] },
     { nom: "Avec Attal, Philippe, Retailleau et Lisnard", r: [["lepen",35],["melenchon",18],["glucksmann",10],["philippe",9.5],["lisnard",7],["attal",5],["zemmour",4.5],["retailleau",4],["tondelier",3],["roussel",2],["dupont",1.5],["arthaud",0.5]] } ] }
 ];
-var POLLS_MAJ = "13 novembre 2026";
+var POLLS_MAJ = "15 novembre 2026";
 
 /* Fil info (bandeau du haut) : les plus récents d'abord. k = declare | programme | mesure | agenda | insolite | debat */
 var NEWS = [
-  { d: "11 nov.", k: "debat", t: "Bruno Retailleau propose à Édouard Philippe, Gabriel Attal et David Lisnard une primaire les 31 janvier et 7 février. Le camp Philippe refuse.", s: "Belga via DH", u: "https://www.dhnet.be/dernieres-depeches/2026/11/11/elections-presidentielles-en-france-bruno-retailleau-propose-une-primaire-de-la-droite-les-31-janvier-et-7-fevrier-7DHMJUBA6BBZ5GIYVM4VJ4IH6U/" },
+  { d: "14 nov.", k: "debat", t: "Gérard Larcher veut réunir Retailleau, Lisnard, Attal et Philippe pour une « méthode de départage ». Renaissance accepte, Philippe exclut toujours une primaire.", s: "AFP via Yahoo Actualités", u: "https://fr.news.yahoo.com/pr%C3%A9sidentielle-larcher-veut-r%C3%A9unir-candidats-173103030.html" },
   { d: "12 nov.", k: "programme", t: "Édouard Philippe publie son programme complet : ses mesures sont dans le quiz.", s: "edouardphilippe.fr", u: "https://www.edouardphilippe.fr/programme" },
   { d: "9 nov.", k: "declare", t: "Teddy Riner se déclare candidat. Édouard Philippe salue un « candidat de poids ».", s: "AFP via La Libre", u: "https://www.lalibre.be/dernieres-depeches/2026/11/09/des-tatamis-a-lelysee-teddy-riner-annonce-sa-candidature-a-la-presidentielle-TN24TXUYZBDHLNYIUW4YHZJEI4/" },
   { d: "9 nov.", k: "programme", t: "Raphaël Glucksmann présente ses 100 premiers jours pour sortir des énergies fossiles.", s: "RFI", u: "https://www.dakaractu.com/Presidentielle-en-France-Raphael-Glucksmann-presente-son-projet-de-revolution-ecologique_a278006.amp.html" },
   { d: "6-7 nov.", k: "programme", t: "LFI publie « L’Avenir en commun » (1 069 mesures) et réunit plus de 20 000 personnes au Bourget.", s: "AFP via France 24", u: "https://www.france24.com/fr/france/20261106-france-insoumise-jean-luc-melenchon-presente-programme-presidentielle-2027-fidele-volonte-rupture-lfi" },
   { d: "À venir", k: "agenda", t: "13 déc. : vote des Écologistes sur leur candidature · 12 mars : fin des parrainages · 18 avril : premier tour.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-declares-et-potentiels-444932" }
 ];
-var NEWS_MAJ = "14 novembre 2026";
+var NEWS_MAJ = "15 novembre 2026";
