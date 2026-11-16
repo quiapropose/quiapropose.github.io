@@ -440,6 +440,53 @@ function renderMiniPoll() {
 $("mini-poll").addEventListener("click", function (e) { e.preventDefault(); $("tab-polls").click(); });
 
 
+
+/* ---------- Déguisements du titre (à la manière des doodles) ---------- */
+var HAT_SVG = "<svg viewBox=\"0 0 100 80\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M14 62 C22 30 44 6 72 8 C84 9 92 22 94 34 C86 26 76 24 70 30 C66 42 70 54 74 62 Z\" fill=\"#d62828\"/><path d=\"M70 30 C76 24 86 26 94 34\" fill=\"none\" stroke=\"#a61b1b\" stroke-width=\"3\"/><rect x=\"6\" y=\"58\" width=\"76\" height=\"16\" rx=\"8\" fill=\"#fff\" stroke=\"#e3e6ec\" stroke-width=\"2\"/><circle cx=\"93\" cy=\"38\" r=\"8\" fill=\"#fff\" stroke=\"#e3e6ec\" stroke-width=\"2\"/></svg>";
+/* from/to au format MM-JJ. Les dates restent neutres : fêtes, journées internationales, dates du scrutin. */
+var THEMES = [
+  { id: "noel", from: "12-01", to: "12-26", hat: true, fete: "🎄 Joyeuses fêtes", tip: "Joyeux Noël !" },
+  { id: "nouvel-an", from: "12-31", to: "01-01", emo: "🥂", fete: "🎆 Bonne année 2027", tip: "Bonne année !" },
+  { id: "galette", from: "01-06", to: "01-06", emo: "👑", fete: "Épiphanie : qui aura la fève ?" },
+  { id: "chandeleur", from: "02-02", to: "02-02", emo: "🥞", fete: "Chandeleur" },
+  { id: "valentin", from: "02-14", to: "02-14", emo: "💌", fete: "Saint-Valentin" },
+  { id: "femmes", from: "03-08", to: "03-08", emo: "✊", fete: "Journée internationale des droits des femmes" },
+  { id: "poisson", from: "04-01", to: "04-01", emo: "🐟", fete: "Poisson d’avril !" },
+  { id: "tour1", from: "04-18", to: "04-18", emo: "🗳️", fete: "Aujourd’hui : premier tour" },
+  { id: "tour2", from: "05-02", to: "05-02", emo: "🗳️", fete: "Aujourd’hui : second tour" },
+  { id: "musique", from: "06-21", to: "06-21", emo: "🎵", fete: "Fête de la musique" },
+  { id: "14juillet", from: "07-14", to: "07-14", emo: "🎆", fete: "Fête nationale" }
+];
+(function applyTheme() {
+  var force = (location.search.match(/[?&]theme=([\w-]+)/) || [])[1];
+  var d = new Date(), md = pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+  var th = THEMES.filter(function (t) { return force ? t.id === force : (t.from <= t.to ? md >= t.from && md <= t.to : md >= t.from || md <= t.to); })[0];
+  if (!th) return;
+  document.body.classList.add("th-" + th.id);
+  if (th.hat || th.emo) document.body.classList.add("has-doodle");
+  var el = $("doodle");
+  if (th.hat) { el.className = "doodle hat"; el.innerHTML = HAT_SVG; }
+  else if (th.emo) { el.className = "doodle emo"; el.textContent = th.emo; }
+  if (th.fete) $("kick-fete").textContent = "· " + th.fete;
+  if (th.tip) $("home-title").title = th.tip + " (retour au menu)";
+})();
+
+/* ---------- Appli (PWA) : installation et fonctionnement hors ligne ---------- */
+var isStandalone = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+var deferredInstall = null;
+if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("/sw.js").catch(function () {});
+if (isStandalone) $("ft-app-w").hidden = true;
+window.addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); deferredInstall = e; });
+window.addEventListener("appinstalled", function () { $("ft-app-w").hidden = true; try { $("app-dlg").close(); } catch (x) {} });
+$("ft-app").addEventListener("click", function () {
+  var ua = navigator.userAgent, ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1), and = /Android/.test(ua);
+  $("app-dlg-ios").hidden = and; $("app-dlg-and").hidden = ios;
+  $("app-dlg-go").hidden = !deferredInstall;
+  var d = $("app-dlg"); if (d.showModal) d.showModal(); else d.setAttribute("open", "");
+});
+$("app-dlg-go").addEventListener("click", function () { if (!deferredInstall) return; deferredInstall.prompt(); deferredInstall.userChoice.then(function () { deferredInstall = null; $("app-dlg-go").hidden = true; }); });
+$("app-dlg-x").addEventListener("click", function () { $("app-dlg").close(); });
+
 /* ---------- Fil info ---------- */
 var NEWS_ICO = { declare: "🙋", programme: "📘", mesure: "💡", agenda: "📅", insolite: "😄", debat: "🎤" };
 (function renderTicker() {

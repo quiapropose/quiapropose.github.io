@@ -7,5 +7,6 @@ ROOT=$(cd "$HERE/.." && pwd)
 node "$HERE/check.js"
 SITE=https://quiapropose.fr/ python3 "$HERE/build.py"
 mv "$HERE/index.html" "$ROOT/index.html"
+cp -R "$HERE/static/." "$ROOT/"
 python3 "$HERE/gen_seo.py" "$ROOT"
 echo "Site compilé dans $ROOT"

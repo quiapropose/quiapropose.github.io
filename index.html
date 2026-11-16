@@ -19,6 +19,13 @@
 <meta name="twitter:title" content="Qui a proposé ça ? Le quiz de la présidentielle 2027">
 <meta name="twitter:description" content="970 mesures, 21 candidats : sauras-tu retrouver qui propose quoi ?">
 <meta name="twitter:image" content="https://quiapropose.fr/og.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#13203a">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Qui a proposé ?">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='21' height='64' fill='%23000091'/%3E%3Crect x='21' width='22' height='64' fill='%23fff'/%3E%3Crect x='43' width='21' height='64' fill='%23e1000f'/%3E%3Ctext x='32' y='46' font-size='40' font-family='Arial' font-weight='900' text-anchor='middle' fill='%2313203a'%3E%3F%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -996,6 +1003,33 @@ svg .arc-c2 { font: 600 9.5px/1 var(--f-ui); fill: var(--muted); }
   .hero-side .daily .lc-pill { align-self: center; }
   .hero-side .daily .d-go, .hero-side .daily .d-share { white-space: nowrap; font-size: 15px; padding: 9px 12px; }
 }
+
+/* ===== Déguisements du titre (dates spéciales) ===== */
+.brand h1 { position: relative; }
+.doodle { position: absolute; pointer-events: none; line-height: 1; }
+.doodle:empty { display: none; }
+.kick-fete:empty { display: none; }
+.kick-fete { color: var(--rouge); margin-left: 10px; }
+.doodle.hat { left: -.16em; top: -.4em; width: .7em; transform: rotate(-20deg); }
+body.has-doodle .brand .kicker { padding-left: 52px; }
+@media (max-width: 640px) { body.has-doodle .brand .kicker { padding-left: 30px; } .kick-fete { display: none; } }
+.doodle.hat svg { display: block; width: 100%; height: auto; }
+.doodle.emo { left: -.1em; top: -.42em; font-size: .5em; transform: rotate(-14deg); }
+body.th-noel .brand h1 .q { color: #0b7a3e; }
+body.th-noel .brand::after { content: "❄  ✦   ❄    ✦  ❄"; position: absolute; right: 0; top: 4px; color: #9fb4d8; font-size: 18px; letter-spacing: .3em; opacity: .8; pointer-events: none; }
+body.th-noel .mast .wrap { position: relative; }
+.brand { position: relative; }
+body.th-femmes .brand h1 em { color: #6b21a8; }
+@media (max-width: 640px) { body.th-noel .brand::after { display: none; } }
+/* ===== Fenêtre d'installation ===== */
+.app-dlg { border: 0; border-radius: 10px; padding: 22px 24px; max-width: 420px; width: calc(100% - 32px); background: var(--sheet); color: var(--ink); box-shadow: 0 20px 60px rgba(0,0,0,.3); }
+.app-dlg::backdrop { background: rgba(10,15,30,.5); }
+.app-dlg h2 { margin: 0 0 8px; font: 800 26px/1 var(--f-display); text-transform: uppercase; }
+.app-dlg p { margin: 0 0 12px; font-size: 15px; }
+.app-dlg ol { margin: 6px 0 14px; padding-left: 20px; font-size: 15px; line-height: 1.5; }
+.app-dlg .go { width: 100%; margin-bottom: 10px; }
+.app-dlg .btn { width: 100%; }
+.app-dlg [hidden] { display: none; }
 /* ===== Fil info (calme) ===== */
 .ticker { border-bottom: 1px solid var(--line); background: var(--sheet); font-size: 13.5px; color: var(--ink); }
 .tk-in { display: flex; align-items: baseline; gap: 10px; padding-top: 7px; padding-bottom: 7px; min-width: 0; }
@@ -1017,8 +1051,8 @@ body.playing .ticker { display: none; }
 <header class="mast">
   <div class="wrap">
     <div class="brand">
-      <span class="kicker">Présidentielle des 18 avril et 2 mai 2027</span>
-      <h1 id="home-title" title="Retour au menu">Qui a <em>proposé</em> ça<span class="q">&nbsp;?</span></h1>
+      <span class="kicker">Présidentielle des 18 avril et 2 mai 2027<span class="kick-fete" id="kick-fete"></span></span>
+      <h1 id="home-title" title="Retour au menu"><span class="doodle" id="doodle" aria-hidden="true"></span>Qui a <em>proposé</em> ça<span class="q">&nbsp;?</span></h1>
     </div>
     <div class="right">
       <span class="cd-chip" id="cd-chip" title="Avant le premier tour, le 18 avril 2027">1er tour J-…</span>
@@ -1388,7 +1422,7 @@ body.playing .ticker { display: none; }
 </div>
 
 <footer class="method">
-    <p class="foot-links"><button type="button" class="linkbtn" id="ft-contact">✉️ Nous écrire</button> · <button type="button" class="linkbtn" id="ft-legal">Mentions légales</button> · <a href="https://quiapropose.fr/programmes/">📚 Tous les programmes 2027</a></p>
+    <p class="foot-links"><button type="button" class="linkbtn" id="ft-contact">✉️ Nous écrire</button> · <button type="button" class="linkbtn" id="ft-legal">Mentions légales</button> · <a href="https://quiapropose.fr/programmes/">📚 Tous les programmes 2027</a><span id="ft-app-w"> · <button type="button" class="linkbtn" id="ft-app">📲 Installer l’appli</button></span></p>
     <nav class="seo-links" id="seo-links" aria-label="Programmes par candidat"><a href="https://quiapropose.fr/programmes/nathalie-arthaud">Programme Nathalie Arthaud</a> · <a href="https://quiapropose.fr/programmes/francois-asselineau">Programme François Asselineau</a> · <a href="https://quiapropose.fr/programmes/gabriel-attal">Programme Gabriel Attal</a> · <a href="https://quiapropose.fr/programmes/delphine-batho">Programme Delphine Batho</a> · <a href="https://quiapropose.fr/programmes/xavier-bertrand">Programme Xavier Bertrand</a> · <a href="https://quiapropose.fr/programmes/juan-branco">Programme Juan Branco</a> · <a href="https://quiapropose.fr/programmes/nicolas-dupont-aignan">Programme Nicolas Dupont-Aignan</a> · <a href="https://quiapropose.fr/programmes/raphael-glucksmann">Programme Raphaël Glucksmann</a> · <a href="https://quiapropose.fr/programmes/anasse-kazib">Programme Anasse Kazib</a> · <a href="https://quiapropose.fr/programmes/marine-le-pen">Programme Marine Le Pen</a> · <a href="https://quiapropose.fr/programmes/david-lisnard">Programme David Lisnard</a> · <a href="https://quiapropose.fr/programmes/jean-luc-melenchon">Programme Jean-Luc Mélenchon</a> · <a href="https://quiapropose.fr/programmes/edouard-philippe">Programme Édouard Philippe</a> · <a href="https://quiapropose.fr/programmes/florian-philippot">Programme Florian Philippot</a> · <a href="https://quiapropose.fr/programmes/natacha-polony">Programme Natacha Polony</a> · <a href="https://quiapropose.fr/programmes/bruno-retailleau">Programme Bruno Retailleau</a> · <a href="https://quiapropose.fr/programmes/teddy-riner">Programme Teddy Riner</a> · <a href="https://quiapropose.fr/programmes/fabien-roussel">Programme Fabien Roussel</a> · <a href="https://quiapropose.fr/programmes/francois-ruffin">Programme François Ruffin</a> · <a href="https://quiapropose.fr/programmes/marine-tondelier">Programme Marine Tondelier</a> · <a href="https://quiapropose.fr/programmes/eric-zemmour">Programme Éric Zemmour</a></nav>
   <div class="wrap">
     <details>
@@ -4777,6 +4811,14 @@ var EST = {
 };
 
 </script>
+<dialog class="app-dlg" id="app-dlg" aria-labelledby="app-dlg-h">
+  <h2 id="app-dlg-h">📲 L’appli sur ton téléphone</h2>
+  <p>Gratuit, sans compte, sans pub. L’appli s’ouvre en plein écran depuis ton écran d’accueil, comme une vraie appli.</p>
+  <div id="app-dlg-ios"><b>Sur iPhone (Safari)</b><ol><li>Touche le bouton <b>Partager</b> (le carré avec une flèche vers le haut).</li><li>Choisis <b>Sur l’écran d’accueil</b>.</li><li>Touche <b>Ajouter</b>.</li></ol></div>
+  <div id="app-dlg-and"><b>Sur Android (Chrome)</b><ol><li>Touche le menu <b>⋮</b> en haut à droite.</li><li>Choisis <b>Installer l’application</b> (ou « Ajouter à l’écran d’accueil »).</li></ol></div>
+  <button type="button" class="go" id="app-dlg-go" hidden><span>Installer maintenant</span><span aria-hidden="true">→</span></button>
+  <button type="button" class="btn" id="app-dlg-x">Fermer</button>
+</dialog>
 <script>
 (function () {
 "use strict";
@@ -5219,6 +5261,53 @@ function renderMiniPoll() {
 }
 $("mini-poll").addEventListener("click", function (e) { e.preventDefault(); $("tab-polls").click(); });
 
+
+
+/* ---------- Déguisements du titre (à la manière des doodles) ---------- */
+var HAT_SVG = "<svg viewBox=\"0 0 100 80\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M14 62 C22 30 44 6 72 8 C84 9 92 22 94 34 C86 26 76 24 70 30 C66 42 70 54 74 62 Z\" fill=\"#d62828\"/><path d=\"M70 30 C76 24 86 26 94 34\" fill=\"none\" stroke=\"#a61b1b\" stroke-width=\"3\"/><rect x=\"6\" y=\"58\" width=\"76\" height=\"16\" rx=\"8\" fill=\"#fff\" stroke=\"#e3e6ec\" stroke-width=\"2\"/><circle cx=\"93\" cy=\"38\" r=\"8\" fill=\"#fff\" stroke=\"#e3e6ec\" stroke-width=\"2\"/></svg>";
+/* from/to au format MM-JJ. Les dates restent neutres : fêtes, journées internationales, dates du scrutin. */
+var THEMES = [
+  { id: "noel", from: "12-01", to: "12-26", hat: true, fete: "🎄 Joyeuses fêtes", tip: "Joyeux Noël !" },
+  { id: "nouvel-an", from: "12-31", to: "01-01", emo: "🥂", fete: "🎆 Bonne année 2027", tip: "Bonne année !" },
+  { id: "galette", from: "01-06", to: "01-06", emo: "👑", fete: "Épiphanie : qui aura la fève ?" },
+  { id: "chandeleur", from: "02-02", to: "02-02", emo: "🥞", fete: "Chandeleur" },
+  { id: "valentin", from: "02-14", to: "02-14", emo: "💌", fete: "Saint-Valentin" },
+  { id: "femmes", from: "03-08", to: "03-08", emo: "✊", fete: "Journée internationale des droits des femmes" },
+  { id: "poisson", from: "04-01", to: "04-01", emo: "🐟", fete: "Poisson d’avril !" },
+  { id: "tour1", from: "04-18", to: "04-18", emo: "🗳️", fete: "Aujourd’hui : premier tour" },
+  { id: "tour2", from: "05-02", to: "05-02", emo: "🗳️", fete: "Aujourd’hui : second tour" },
+  { id: "musique", from: "06-21", to: "06-21", emo: "🎵", fete: "Fête de la musique" },
+  { id: "14juillet", from: "07-14", to: "07-14", emo: "🎆", fete: "Fête nationale" }
+];
+(function applyTheme() {
+  var force = (location.search.match(/[?&]theme=([\w-]+)/) || [])[1];
+  var d = new Date(), md = pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+  var th = THEMES.filter(function (t) { return force ? t.id === force : (t.from <= t.to ? md >= t.from && md <= t.to : md >= t.from || md <= t.to); })[0];
+  if (!th) return;
+  document.body.classList.add("th-" + th.id);
+  if (th.hat || th.emo) document.body.classList.add("has-doodle");
+  var el = $("doodle");
+  if (th.hat) { el.className = "doodle hat"; el.innerHTML = HAT_SVG; }
+  else if (th.emo) { el.className = "doodle emo"; el.textContent = th.emo; }
+  if (th.fete) $("kick-fete").textContent = "· " + th.fete;
+  if (th.tip) $("home-title").title = th.tip + " (retour au menu)";
+})();
+
+/* ---------- Appli (PWA) : installation et fonctionnement hors ligne ---------- */
+var isStandalone = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+var deferredInstall = null;
+if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("/sw.js").catch(function () {});
+if (isStandalone) $("ft-app-w").hidden = true;
+window.addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); deferredInstall = e; });
+window.addEventListener("appinstalled", function () { $("ft-app-w").hidden = true; try { $("app-dlg").close(); } catch (x) {} });
+$("ft-app").addEventListener("click", function () {
+  var ua = navigator.userAgent, ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1), and = /Android/.test(ua);
+  $("app-dlg-ios").hidden = and; $("app-dlg-and").hidden = ios;
+  $("app-dlg-go").hidden = !deferredInstall;
+  var d = $("app-dlg"); if (d.showModal) d.showModal(); else d.setAttribute("open", "");
+});
+$("app-dlg-go").addEventListener("click", function () { if (!deferredInstall) return; deferredInstall.prompt(); deferredInstall.userChoice.then(function () { deferredInstall = null; $("app-dlg-go").hidden = true; }); });
+$("app-dlg-x").addEventListener("click", function () { $("app-dlg").close(); });
 
 /* ---------- Fil info ---------- */
 var NEWS_ICO = { declare: "🙋", programme: "📘", mesure: "💡", agenda: "📅", insolite: "😄", debat: "🎤" };
