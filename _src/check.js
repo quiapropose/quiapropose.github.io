@@ -6,7 +6,7 @@ try { new Function(fs.readFileSync(path.join(d, "app.js"), "utf8")); } catch (e)
 var G = {};
 var EX = {};
 try { new Function("G", fs.readFileSync(path.join(d, "expl.js"), "utf8") + "\n;G.EXPL=EXPL;G.CONSTIT=CONSTIT;G.CSRC=CSRC;G.COUT=COUT;G.EST=EST;")(EX); } catch (e) { bad("expl.js : " + e.message); EX.EXPL = {}; }
-try { new Function("G", src + "\n;G.C=C;G.S=S;G.RAW=RAW;G.SHARED=SHARED;G.POLLS=POLLS;G.NEWS=NEWS;G.FAMILY=FAMILY;G.FETES=typeof FETES===\"undefined\"?[]:FETES;")(G); } catch (e) { bad("data.js : " + e.message); console.log("ÉCHEC"); process.exit(1); }
+try { new Function("G", src + "\n;G.C=C;G.S=S;G.RAW=RAW;G.SHARED=SHARED;G.POLLS=POLLS;G.NEWS=NEWS;G.FAMILY=FAMILY;G.FETES=typeof FETES===\"undefined\"?[]:FETES;G.REVE=typeof REVE_PANEL===\"undefined\"?[]:REVE_PANEL;")(G); } catch (e) { bad("data.js : " + e.message); console.log("ÉCHEC"); process.exit(1); }
 var ids = {}; G.C.forEach(function (c) { ids[c.id] = 1; if (!G.FAMILY[c.id]) bad("FAMILY manquante pour " + c.id); });
 var seen = {};
 G.RAW.forEach(function (r, i) {
@@ -47,5 +47,12 @@ G.FETES.forEach(function (f, i) {
   if (!f.draw && !f.emo) bad("FETES[" + i + "] il faut draw ou emo");
   if (f.fete && f.fete.length > 60) bad("FETES[" + i + "] texte fete trop long");
 });
+var rvTxt = {}; G.RAW.forEach(function (r) { rvTxt[r[2]] = [r[0]]; }); G.SHARED.forEach(function (r) { rvTxt[r[2]] = r[0]; });
+var rvCount = {}; G.C.filter(function (c) { return c.main; }).forEach(function (c) { rvCount[c.id] = 0; });
+G.REVE.forEach(function (p, i) {
+  if (!rvTxt[p.m]) { bad("REVE_PANEL[" + i + "] texte introuvable dans RAW/SHARED : " + p.m.slice(0, 60)); return; }
+  rvTxt[p.m].forEach(function (c) { if (c in rvCount) rvCount[c]++; });
+});
+if (G.REVE.length) Object.keys(rvCount).forEach(function (c) { if (rvCount[c] < 4 || rvCount[c] > 7) bad("REVE_PANEL déséquilibré : " + c + " soutient " + rvCount[c] + " mesures (viser 5 ou 6)"); });
 console.log(ok ? "OK : " + G.C.length + " candidats, " + (G.RAW.length + G.SHARED.length) + " mesures, " + G.POLLS.length + " sondages, " + G.NEWS.length + " infos" : "ÉCHEC");
 process.exit(ok ? 0 : 1);

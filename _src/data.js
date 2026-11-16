@@ -1290,3 +1290,33 @@ var FETES = [
   { id: "musique", from: "06-21", to: "06-21", emo: "🎵", fete: "Fête de la musique" },
   { id: "14juillet", from: "07-14", to: "07-14", emo: "🎆", fete: "Fête nationale" }
 ];
+
+/* Mode « Mon programme de rêve » : 25 grandes mesures qui font débat, chacune recopiée mot pour mot depuis RAW ou SHARED.
+   Équilibre : chacun des 7 favoris doit soutenir 5 ou 6 mesures du panel (check.js le vérifie). t = rubrique affichée. */
+var REVE_PANEL = [
+  { t: "Retraites", m: "Abroger la réforme de 2023 et revenir à un âge légal de départ de 62 ans." },
+  { t: "Retraites", m: "Supprimer l’âge légal de départ : la retraite dépendrait de la durée de cotisation, avec décote et surcote." },
+  { t: "Retraites", m: "Introduire une part de capitalisation collective dans les retraites de tous." },
+  { t: "Salaires et pouvoir d’achat", m: "Porter le Smic à 1 600 euros net dans les deux ans." },
+  { t: "Salaires et pouvoir d’achat", m: "Porter le Smic à 1 700 € net." },
+  { t: "Salaires et pouvoir d’achat", m: "Baisser la TVA de 20 % à 5,5 % sur les carburants, le fioul, le gaz et l’électricité." },
+  { t: "Impôts et dépenses", m: "Instaurer la taxe Zucman : 2 % par an sur les patrimoines de plus de 100 millions d’euros." },
+  { t: "Impôts et dépenses", m: "Taxer les « méga-héritages » (le 1 % des plus grosses successions) pour reverser environ 15 milliards d’euros sur la fiche de paie." },
+  { t: "Impôts et dépenses", m: "Ne pas remplacer 400 000 fonctionnaires, dont 300 000 postes économisés grâce à l’intelligence artificielle et à la réorganisation." },
+  { t: "Impôts et dépenses", m: "Inscrire dans la Constitution, par référendum, une règle d’or de maîtrise des déficits et ramener le déficit à 2 % du PIB en fin de quinquennat." },
+  { t: "Travail et logement", m: "Ramener la durée maximale d’indemnisation du chômage de 18 à 12 mois pour les moins de 50 ans." },
+  { t: "Travail et logement", m: "Supprimer l’encadrement des loyers et lever les interdictions de louer liées au diagnostic énergétique (DPE)." },
+  { t: "Immigration", m: "Diviser par deux l’immigration légale, pour revenir nettement sous les 200 000 titres de séjour par an." },
+  { t: "Immigration", m: "Soumettre la réduction de l’immigration à un référendum." },
+  { t: "Immigration", m: "Mettre fin au droit du sol automatique." },
+  { t: "Immigration", m: "Donner le droit de vote aux étrangers non européens aux élections locales." },
+  { t: "Sécurité", m: "Rétablir des peines planchers." },
+  { t: "Sécurité", m: "Recréer une police de proximité." },
+  { t: "Énergie", m: "Commander huit réacteurs EPR2 en plus des six déjà prévus." },
+  { t: "Énergie", m: "Arrêter les nouveaux projets éoliens et démanteler progressivement les parcs existants." },
+  { t: "Démocratie et Europe", m: "Élire l’Assemblée nationale à la proportionnelle." },
+  { t: "Démocratie et Europe", m: "Supprimer l’article 49.3 de la Constitution." },
+  { t: "Démocratie et Europe", m: "Créer des « États-Unis d’Europe » par un premier référendum européen, organisé le même jour dans les pays volontaires." },
+  { t: "Société", m: "Interdire les réseaux sociaux aux moins de 15 ans." },
+  { t: "Société", m: "Interdire le port du voile dans l’espace public aux mineures de moins de 15 ans." }
+];

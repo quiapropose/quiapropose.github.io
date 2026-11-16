@@ -1046,13 +1046,26 @@ body.th-thanksgiving .kick-fete { color: #c2410c; }
 .rv-m[aria-pressed="true"] .ck { background: var(--bleu); border-color: var(--bleu); }
 .rv-m[aria-pressed="true"] .ck::after { content: "✓"; }
 .rv-m:disabled { opacity: .45; cursor: default; }
+.rv-th { margin: 18px 0 8px; font: 800 13px/1 var(--f-ui); letter-spacing: .1em; text-transform: uppercase; color: var(--bleu); }
+.rv-foot { position: sticky; bottom: 0; z-index: 5; display: flex; gap: 12px; align-items: center; padding: 12px 0 14px; background: linear-gradient(transparent, var(--paper) 30%); margin-top: 8px; }
+.rv-foot .go { flex: 1; }
+.rv-foot .go:disabled { opacity: .5; cursor: default; }
+.rv-count { white-space: nowrap; }
+.rv-count b { font: 900 24px/1 var(--f-display); color: var(--bleu); }
+.rv-viz { display: grid; grid-template-columns: minmax(0, 300px) 1fr; gap: 24px; align-items: center; margin: 14px 0 8px; }
+.rv-arc { width: 100%; height: auto; }
+.rv-viz .rv-bars { margin: 0; }
+@media (max-width: 640px) { .rv-viz { grid-template-columns: 1fr; } .rv-arc { max-width: 300px; justify-self: center; } }
+.rv-row { display: grid; grid-template-columns: 1fr auto; gap: 6px; align-items: start; }
+.rv-row .rv-i { position: static; margin-top: 10px; }
+.rv-row .rv-box { grid-column: 1 / -1; margin: 0 0 4px; }
 .rv-nav { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .rv-nav .go { flex: 1; min-width: 220px; }
 .rv-count { font: 700 14px/1 var(--f-ui); color: var(--muted); }
 .rv-res-h { margin: 0 0 6px; font: 900 clamp(30px, 5vw, 46px)/.95 var(--f-display); text-transform: uppercase; }
 .rv-res-h em { font-style: normal; color: var(--bleu); }
 .rv-bars { display: grid; gap: 8px; margin: 16px 0 20px; }
-.rv-bar { display: grid; grid-template-columns: 150px 1fr 92px; gap: 10px; align-items: center; font-size: 14px; }
+.rv-bar { display: grid; grid-template-columns: 150px 1fr 54px; gap: 10px; align-items: center; font-size: 14px; }
 .rv-bar .nm { font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .rv-bar .tr { height: 16px; background: var(--paper); border-radius: 999px; overflow: hidden; }
 .rv-bar .tr i { display: block; height: 100%; width: 0; background: var(--fam, #9aa3b5); border-radius: 999px; transition: width .8s cubic-bezier(.2,.9,.2,1); }
@@ -1063,7 +1076,7 @@ body.th-thanksgiving .kick-fete { color: #c2410c; }
 .rv-mine li .who { display: block; font: 700 12.5px/1.3 var(--f-ui); color: var(--muted); margin-top: 4px; }
 .rv-mine li .who a { color: var(--muted); }
 .rv-note { font-size: 13px; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 10px; }
-@media (max-width: 560px) { .rv-bar { grid-template-columns: 104px 1fr 74px; font-size: 13px; } }
+@media (max-width: 560px) { .rv-bar { grid-template-columns: 120px 1fr 46px; font-size: 13px; } }
 /* ===== Fenêtre d'installation ===== */
 .app-dlg { border: 0; border-radius: 10px; padding: 22px 24px; max-width: 420px; width: calc(100% - 32px); background: var(--sheet); color: var(--ink); box-shadow: 0 20px 60px rgba(0,0,0,.3); }
 .app-dlg::backdrop { background: rgba(10,15,30,.5); }
@@ -1175,7 +1188,7 @@ body.playing .ticker { display: none; }
           <button type="button" id="m-accord" data-mode="accord" aria-pressed="false"><b>Ils sont d’accord&nbsp;!</b><span>Quand des rivaux pensent pareil.</span></button>
           <button type="button" id="m-citations" data-mode="citations" aria-pressed="false"><b>Qui a dit ça&nbsp;?</b><span>10 phrases chocs, avec contexte.</span></button>
           <button type="button" id="m-casier" data-mode="casier" aria-pressed="false"><b>Casier &amp; polémiques</b><span>10 dossiers judiciaires, sourcés.</span></button>
-          <button type="button" id="m-reve" data-mode="reve" aria-pressed="false" class="m-reve"><b>✨ Mon programme de rêve</b><span>Choisis tes mesures, découvre ton candidat le plus proche.</span></button>
+          <button type="button" id="m-reve" data-mode="reve" aria-pressed="false" class="m-reve"><b>✨ Mon programme de rêve</b><span>5 mesures sur 25 : découvre ton candidat le plus proche.</span></button>
           <button type="button" id="m-conseil" data-mode="conseil" aria-pressed="false"><b>Le Conseil constit’ tousse</b><span>Les mesures qui coincent en droit.</span></button>
         </div>
 
