@@ -1273,11 +1273,11 @@ var NEWS = [
 var NEWS_MAJ = "16 novembre 2026";
 
 /* Déguisements du titre selon la date (comme les doodles). from/to au format MM-JJ.
-   draw = dessin posé sur le « Q » (bonnet, pelerin) ou emo = un emoji à la place ;
+   draw = dessin posé sur le « Q » (bonnet, pelerin) ou emo = un emoji à la place ; side = grand dessin après le « ? » (dinde) ;
    fete = petit texte à côté de la date de l'élection ; q = couleur du « ? » ; tip = info-bulle du titre.
    Le premier élément dont la période contient la date du jour s'applique. Aperçu : ?theme=<id>. */
 var FETES = [
-  { id: "thanksgiving", from: "11-16", to: "11-27", draw: "pelerin", q: "#c2410c", fete: "🦃 Thanksgiving, jeudi 26 novembre", tip: "Happy Thanksgiving !" },
+  { id: "thanksgiving", from: "11-16", to: "11-27", draw: "pelerin", side: "dinde", q: "#c2410c", fete: "🦃 Thanksgiving, jeudi 26 novembre", tip: "Happy Thanksgiving !" },
   { id: "noel", from: "12-01", to: "12-26", draw: "bonnet", q: "#0b7a3e", fete: "🎄 Joyeuses fêtes", tip: "Joyeux Noël !" },
   { id: "nouvel-an", from: "12-31", to: "01-01", emo: "🥂", fete: "🎆 Bonne année 2027", tip: "Bonne année !" },
   { id: "galette", from: "01-06", to: "01-06", emo: "👑", fete: "Épiphanie : qui aura la fève ?" },

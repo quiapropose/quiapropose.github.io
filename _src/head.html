@@ -1020,6 +1020,12 @@ body.th-noel .mast .wrap { position: relative; }
 .brand { position: relative; }
 body.th-femmes .brand h1 em { color: #6b21a8; }
 @media (max-width: 640px) { body.th-noel .brand::after { display: none; } }
+.doodle2:empty { display: none; }
+.doodle2 { display: inline-block; width: 1.3em; margin: -.3em 0 -.1em .1em; vertical-align: -.12em; transform-origin: 50% 90%; }
+.doodle2 svg { display: block; width: 100%; height: auto; }
+.brand h1:hover .doodle2 { animation: wobble .6s ease; }
+@keyframes wobble { 30% { transform: rotate(-8deg); } 60% { transform: rotate(6deg); } }
+body.th-thanksgiving .kick-fete { color: #c2410c; }
 /* ===== Fenêtre d'installation ===== */
 .app-dlg { border: 0; border-radius: 10px; padding: 22px 24px; max-width: 420px; width: calc(100% - 32px); background: var(--sheet); color: var(--ink); box-shadow: 0 20px 60px rgba(0,0,0,.3); }
 .app-dlg::backdrop { background: rgba(10,15,30,.5); }
@@ -1051,7 +1057,7 @@ body.playing .ticker { display: none; }
   <div class="wrap">
     <div class="brand">
       <span class="kicker">Présidentielle des 18 avril et 2 mai 2027<span class="kick-fete" id="kick-fete"></span></span>
-      <h1 id="home-title" title="Retour au menu"><span class="doodle" id="doodle" aria-hidden="true"></span>Qui a <em>proposé</em> ça<span class="q">&nbsp;?</span></h1>
+      <h1 id="home-title" title="Retour au menu"><span class="doodle" id="doodle" aria-hidden="true"></span>Qui a <em>proposé</em> ça<span class="q">&nbsp;?</span><span class="doodle2" id="doodle2" aria-hidden="true"></span></h1>
     </div>
     <div class="right">
       <span class="cd-chip" id="cd-chip" title="Avant le premier tour, le 18 avril 2027">1er tour J-…</span>

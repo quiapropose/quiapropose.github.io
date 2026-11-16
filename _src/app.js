@@ -445,6 +445,7 @@ $("mini-poll").addEventListener("click", function (e) { e.preventDefault(); $("t
 /* Dessins disponibles pour les déguisements (champ draw de FETES, dans data.js) */
 var DRAWINGS = {
   bonnet: "<svg viewBox=\"0 0 100 80\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M14 62 C22 30 44 6 72 8 C84 9 92 22 94 34 C86 26 76 24 70 30 C66 42 70 54 74 62 Z\" fill=\"#d62828\"/><path d=\"M70 30 C76 24 86 26 94 34\" fill=\"none\" stroke=\"#a61b1b\" stroke-width=\"3\"/><rect x=\"6\" y=\"58\" width=\"76\" height=\"16\" rx=\"8\" fill=\"#fff\" stroke=\"#e3e6ec\" stroke-width=\"2\"/><circle cx=\"93\" cy=\"38\" r=\"8\" fill=\"#fff\" stroke=\"#e3e6ec\" stroke-width=\"2\"/></svg>",
+  dinde: "<svg viewBox=\"0 0 120 122\" xmlns=\"http://www.w3.org/2000/svg\"><g transform=\"translate(60 62)\"><g><path d=\"M0 0 L-55 -10 A56 56 0 0 1 -48 -32 Z\" fill=\"#b91c1c\"/><path d=\"M0 0 L-48 -32 A56 56 0 0 1 -30 -48 Z\" fill=\"#ea580c\"/><path d=\"M0 0 L-30 -48 A56 56 0 0 1 -8 -56 Z\" fill=\"#f59e0b\"/><path d=\"M0 0 L-8 -56 A56 56 0 0 1 14 -54 Z\" fill=\"#b91c1c\"/><path d=\"M0 0 L14 -54 A56 56 0 0 1 34 -44 Z\" fill=\"#ea580c\"/><path d=\"M0 0 L34 -44 A56 56 0 0 1 49 -27 Z\" fill=\"#f59e0b\"/><path d=\"M0 0 L49 -27 A56 56 0 0 1 55 -8 Z\" fill=\"#b91c1c\"/></g><g fill=\"#7c2d12\" opacity=\".9\"><path d=\"M0 0 L-40 -8 A41 41 0 0 1 -22 -34 Z\"/><path d=\"M0 0 L-22 -34 A41 41 0 0 1 10 -40 Z\"/><path d=\"M0 0 L10 -40 A41 41 0 0 1 36 -20 Z\"/><path d=\"M0 0 L36 -20 A41 41 0 0 1 40 -6 Z\"/></g><ellipse cx=\"0\" cy=\"12\" rx=\"27\" ry=\"26\" fill=\"#8b4513\"/><ellipse cx=\"0\" cy=\"18\" rx=\"17\" ry=\"15\" fill=\"#a0522d\"/><path d=\"M-8 36 v10 m0 0 l-5 4 m5 -4 l0 5 m0 -5 l5 4 M8 36 v10 m0 0 l-5 4 m5 -4 l0 5 m0 -5 l5 4\" stroke=\"#d97706\" stroke-width=\"3\" stroke-linecap=\"round\" fill=\"none\"/><circle cx=\"0\" cy=\"-14\" r=\"13\" fill=\"#8b4513\"/><circle cx=\"-5\" cy=\"-17\" r=\"3.2\" fill=\"#fff\"/><circle cx=\"5\" cy=\"-17\" r=\"3.2\" fill=\"#fff\"/><circle cx=\"-4.5\" cy=\"-16.5\" r=\"1.7\" fill=\"#111\"/><circle cx=\"5.5\" cy=\"-16.5\" r=\"1.7\" fill=\"#111\"/><path d=\"M-4 -11 L4 -11 L0 -5 Z\" fill=\"#f59e0b\"/><path d=\"M2 -8 q5 4 1 11 q-4 -3 -1 -11\" fill=\"#dc2626\"/></g></svg>",
   pelerin: "<svg viewBox=\"0 0 100 80\" xmlns=\"http://www.w3.org/2000/svg\"><ellipse cx=\"50\" cy=\"68\" rx=\"46\" ry=\"9\" fill=\"#1f1a17\"/><path d=\"M24 66 L30 10 Q50 4 70 10 L76 66 Z\" fill=\"#2b2420\"/><rect x=\"27\" y=\"44\" width=\"46\" height=\"11\" fill=\"#5b3a1e\"/><rect x=\"42\" y=\"41\" width=\"16\" height=\"17\" rx=\"2\" fill=\"none\" stroke=\"#e0a526\" stroke-width=\"3.5\"/></svg>"
 };
 (function applyTheme() {
@@ -458,6 +459,7 @@ var DRAWINGS = {
   if (th.draw && DRAWINGS[th.draw]) { el.className = "doodle hat"; el.innerHTML = DRAWINGS[th.draw]; }
   else if (th.emo) { el.className = "doodle emo"; el.textContent = th.emo; }
   if (th.fete) $("kick-fete").textContent = "· " + th.fete;
+  if (th.side && DRAWINGS[th.side]) { $("doodle2").innerHTML = DRAWINGS[th.side]; $("doodle2").title = th.tip || ""; }
   if (th.q) document.querySelector(".brand h1 .q").style.color = th.q;
   if (th.tip) $("home-title").title = th.tip + " (retour au menu)";
 })();

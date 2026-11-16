@@ -43,6 +43,7 @@ G.FETES.forEach(function (f, i) {
   if (!f.id || fid[f.id]) bad("FETES[" + i + "] id manquant ou en double"); fid[f.id] = 1;
   if (!/^\d\d-\d\d$/.test(f.from || "") || !/^\d\d-\d\d$/.test(f.to || "")) bad("FETES[" + i + "] dates au format MM-JJ");
   if (f.draw && DRAWS.indexOf(f.draw) < 0) bad("FETES[" + i + "] dessin inconnu : " + f.draw + " (disponibles : " + DRAWS.join(", ") + ")");
+  if (f.side && ["dinde"].indexOf(f.side) < 0) bad("FETES[" + i + "] dessin side inconnu : " + f.side);
   if (!f.draw && !f.emo) bad("FETES[" + i + "] il faut draw ou emo");
   if (f.fete && f.fete.length > 60) bad("FETES[" + i + "] texte fete trop long");
 });

@@ -1020,6 +1020,12 @@ body.th-noel .mast .wrap { position: relative; }
 .brand { position: relative; }
 body.th-femmes .brand h1 em { color: #6b21a8; }
 @media (max-width: 640px) { body.th-noel .brand::after { display: none; } }
+.doodle2:empty { display: none; }
+.doodle2 { display: inline-block; width: 1.3em; margin: -.3em 0 -.1em .1em; vertical-align: -.12em; transform-origin: 50% 90%; }
+.doodle2 svg { display: block; width: 100%; height: auto; }
+.brand h1:hover .doodle2 { animation: wobble .6s ease; }
+@keyframes wobble { 30% { transform: rotate(-8deg); } 60% { transform: rotate(6deg); } }
+body.th-thanksgiving .kick-fete { color: #c2410c; }
 /* ===== Fenêtre d'installation ===== */
 .app-dlg { border: 0; border-radius: 10px; padding: 22px 24px; max-width: 420px; width: calc(100% - 32px); background: var(--sheet); color: var(--ink); box-shadow: 0 20px 60px rgba(0,0,0,.3); }
 .app-dlg::backdrop { background: rgba(10,15,30,.5); }
@@ -1051,7 +1057,7 @@ body.playing .ticker { display: none; }
   <div class="wrap">
     <div class="brand">
       <span class="kicker">Présidentielle des 18 avril et 2 mai 2027<span class="kick-fete" id="kick-fete"></span></span>
-      <h1 id="home-title" title="Retour au menu"><span class="doodle" id="doodle" aria-hidden="true"></span>Qui a <em>proposé</em> ça<span class="q">&nbsp;?</span></h1>
+      <h1 id="home-title" title="Retour au menu"><span class="doodle" id="doodle" aria-hidden="true"></span>Qui a <em>proposé</em> ça<span class="q">&nbsp;?</span><span class="doodle2" id="doodle2" aria-hidden="true"></span></h1>
     </div>
     <div class="right">
       <span class="cd-chip" id="cd-chip" title="Avant le premier tour, le 18 avril 2027">1er tour J-…</span>
@@ -2735,11 +2741,11 @@ var NEWS = [
 var NEWS_MAJ = "16 novembre 2026";
 
 /* Déguisements du titre selon la date (comme les doodles). from/to au format MM-JJ.
-   draw = dessin posé sur le « Q » (bonnet, pelerin) ou emo = un emoji à la place ;
+   draw = dessin posé sur le « Q » (bonnet, pelerin) ou emo = un emoji à la place ; side = grand dessin après le « ? » (dinde) ;
    fete = petit texte à côté de la date de l'élection ; q = couleur du « ? » ; tip = info-bulle du titre.
    Le premier élément dont la période contient la date du jour s'applique. Aperçu : ?theme=<id>. */
 var FETES = [
-  { id: "thanksgiving", from: "11-16", to: "11-27", draw: "pelerin", q: "#c2410c", fete: "🦃 Thanksgiving, jeudi 26 novembre", tip: "Happy Thanksgiving !" },
+  { id: "thanksgiving", from: "11-16", to: "11-27", draw: "pelerin", side: "dinde", q: "#c2410c", fete: "🦃 Thanksgiving, jeudi 26 novembre", tip: "Happy Thanksgiving !" },
   { id: "noel", from: "12-01", to: "12-26", draw: "bonnet", q: "#0b7a3e", fete: "🎄 Joyeuses fêtes", tip: "Joyeux Noël !" },
   { id: "nouvel-an", from: "12-31", to: "01-01", emo: "🥂", fete: "🎆 Bonne année 2027", tip: "Bonne année !" },
   { id: "galette", from: "01-06", to: "01-06", emo: "👑", fete: "Épiphanie : qui aura la fève ?" },
@@ -5285,6 +5291,7 @@ $("mini-poll").addEventListener("click", function (e) { e.preventDefault(); $("t
 /* Dessins disponibles pour les déguisements (champ draw de FETES, dans data.js) */
 var DRAWINGS = {
   bonnet: "<svg viewBox=\"0 0 100 80\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M14 62 C22 30 44 6 72 8 C84 9 92 22 94 34 C86 26 76 24 70 30 C66 42 70 54 74 62 Z\" fill=\"#d62828\"/><path d=\"M70 30 C76 24 86 26 94 34\" fill=\"none\" stroke=\"#a61b1b\" stroke-width=\"3\"/><rect x=\"6\" y=\"58\" width=\"76\" height=\"16\" rx=\"8\" fill=\"#fff\" stroke=\"#e3e6ec\" stroke-width=\"2\"/><circle cx=\"93\" cy=\"38\" r=\"8\" fill=\"#fff\" stroke=\"#e3e6ec\" stroke-width=\"2\"/></svg>",
+  dinde: "<svg viewBox=\"0 0 120 122\" xmlns=\"http://www.w3.org/2000/svg\"><g transform=\"translate(60 62)\"><g><path d=\"M0 0 L-55 -10 A56 56 0 0 1 -48 -32 Z\" fill=\"#b91c1c\"/><path d=\"M0 0 L-48 -32 A56 56 0 0 1 -30 -48 Z\" fill=\"#ea580c\"/><path d=\"M0 0 L-30 -48 A56 56 0 0 1 -8 -56 Z\" fill=\"#f59e0b\"/><path d=\"M0 0 L-8 -56 A56 56 0 0 1 14 -54 Z\" fill=\"#b91c1c\"/><path d=\"M0 0 L14 -54 A56 56 0 0 1 34 -44 Z\" fill=\"#ea580c\"/><path d=\"M0 0 L34 -44 A56 56 0 0 1 49 -27 Z\" fill=\"#f59e0b\"/><path d=\"M0 0 L49 -27 A56 56 0 0 1 55 -8 Z\" fill=\"#b91c1c\"/></g><g fill=\"#7c2d12\" opacity=\".9\"><path d=\"M0 0 L-40 -8 A41 41 0 0 1 -22 -34 Z\"/><path d=\"M0 0 L-22 -34 A41 41 0 0 1 10 -40 Z\"/><path d=\"M0 0 L10 -40 A41 41 0 0 1 36 -20 Z\"/><path d=\"M0 0 L36 -20 A41 41 0 0 1 40 -6 Z\"/></g><ellipse cx=\"0\" cy=\"12\" rx=\"27\" ry=\"26\" fill=\"#8b4513\"/><ellipse cx=\"0\" cy=\"18\" rx=\"17\" ry=\"15\" fill=\"#a0522d\"/><path d=\"M-8 36 v10 m0 0 l-5 4 m5 -4 l0 5 m0 -5 l5 4 M8 36 v10 m0 0 l-5 4 m5 -4 l0 5 m0 -5 l5 4\" stroke=\"#d97706\" stroke-width=\"3\" stroke-linecap=\"round\" fill=\"none\"/><circle cx=\"0\" cy=\"-14\" r=\"13\" fill=\"#8b4513\"/><circle cx=\"-5\" cy=\"-17\" r=\"3.2\" fill=\"#fff\"/><circle cx=\"5\" cy=\"-17\" r=\"3.2\" fill=\"#fff\"/><circle cx=\"-4.5\" cy=\"-16.5\" r=\"1.7\" fill=\"#111\"/><circle cx=\"5.5\" cy=\"-16.5\" r=\"1.7\" fill=\"#111\"/><path d=\"M-4 -11 L4 -11 L0 -5 Z\" fill=\"#f59e0b\"/><path d=\"M2 -8 q5 4 1 11 q-4 -3 -1 -11\" fill=\"#dc2626\"/></g></svg>",
   pelerin: "<svg viewBox=\"0 0 100 80\" xmlns=\"http://www.w3.org/2000/svg\"><ellipse cx=\"50\" cy=\"68\" rx=\"46\" ry=\"9\" fill=\"#1f1a17\"/><path d=\"M24 66 L30 10 Q50 4 70 10 L76 66 Z\" fill=\"#2b2420\"/><rect x=\"27\" y=\"44\" width=\"46\" height=\"11\" fill=\"#5b3a1e\"/><rect x=\"42\" y=\"41\" width=\"16\" height=\"17\" rx=\"2\" fill=\"none\" stroke=\"#e0a526\" stroke-width=\"3.5\"/></svg>"
 };
 (function applyTheme() {
@@ -5298,6 +5305,7 @@ var DRAWINGS = {
   if (th.draw && DRAWINGS[th.draw]) { el.className = "doodle hat"; el.innerHTML = DRAWINGS[th.draw]; }
   else if (th.emo) { el.className = "doodle emo"; el.textContent = th.emo; }
   if (th.fete) $("kick-fete").textContent = "· " + th.fete;
+  if (th.side && DRAWINGS[th.side]) { $("doodle2").innerHTML = DRAWINGS[th.side]; $("doodle2").title = th.tip || ""; }
   if (th.q) document.querySelector(".brand h1 .q").style.color = th.q;
   if (th.tip) $("home-title").title = th.tip + " (retour au menu)";
 })();

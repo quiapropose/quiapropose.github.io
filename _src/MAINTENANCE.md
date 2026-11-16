@@ -60,7 +60,7 @@ Les sources du site sont dans ce dossier `_src/`. Le site publié (`index.html`,
 
 6. **Déguisement du titre (`FETES`).** Chaque jour, regarder les 15 prochains jours :
    - si une date marquante arrive et qu'elle n'est pas encore dans `FETES`, l'ajouter. Exemples : une fête populaire, une journée internationale, un grand anniversaire historique consensuel (invention, exploit sportif ou scientifique, naissance d'une figure culturelle, centenaire), une date du calendrier électoral ;
-   - format : `{ id, from: "MM-JJ", to: "MM-JJ", draw: "bonnet" | "pelerin" ou emo: "🎆", fete: "texte court (60 caractères au maximum)", q: "#couleur du ?" (facultatif), tip: "info-bulle" (facultatif) }`. Le premier élément dont la période contient la date du jour s'applique : pour une date ponctuelle à l'intérieur d'une longue période (par exemple pendant Noël), placer la date ponctuelle **avant** la période longue ;
+   - format : `{ id, from: "MM-JJ", to: "MM-JJ", draw: "bonnet" | "pelerin" ou emo: "🎆", side: "dinde" (facultatif, grand dessin après le « ? »), fete: "texte court (60 caractères au maximum)", q: "#couleur du ?" (facultatif), tip: "info-bulle" (facultatif) }`. Le premier élément dont la période contient la date du jour s'applique : pour une date ponctuelle à l'intérieur d'une longue période (par exemple pendant Noël), placer la date ponctuelle **avant** la période longue ;
    - rester neutre : pas de date partisane, pas d'anniversaire lié à un parti ou à un candidat, rien qui divise politiquement ;
    - une fois l'année passée, une date ponctuelle propre à cette année (par exemple un centenaire) peut être retirée ;
    - vérifier le rendu avec `?theme=<id>`. `check.js` contrôle le format.
