@@ -205,7 +205,7 @@ function countOf(id) { return SINGLE.filter(function (x) { return x.c === id; })
 /* ---------- État ---------- */
 var cfg = { mode: "classic", pool: "main", diff: "easy", len: "20", duel: ["lepen", "melenchon"], targets: [] };
 var game = null, timerId = null, autoId = null;
-var views = { setup: $("v-setup"), game: $("v-game"), res: $("v-res"), explorer: $("v-explorer"), cheat: $("v-cheat"), stats: $("v-stats"), contact: $("v-contact"), polls: $("v-polls") };
+var views = { reve: $("v-reve"), setup: $("v-setup"), game: $("v-game"), res: $("v-res"), explorer: $("v-explorer"), cheat: $("v-cheat"), stats: $("v-stats"), contact: $("v-contact"), polls: $("v-polls") };
 function show(v) {
   Object.keys(views).forEach(function (k) { views[k].hidden = (k !== v); });
   document.body.classList.toggle("playing", v === "game");
@@ -349,7 +349,7 @@ function syncSetup() {
   $("best").textContent = best ? "Ton record dans ce mode : " + fmt(best.pts) + " points (" + best.score + "/" + best.total + ")." : "Pas encore de record dans ce mode. La place est libre.";
 }
 function modeKey(c) { return c.mode === "classic" || c.mode === "blitz" ? c.mode + "-" + c.pool + "-" + c.diff : c.mode; }
-$("modes").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; if (b.dataset.mode === "fil") { openFil(); return; } cfg.mode = b.dataset.mode; syncSetup(); });
+$("modes").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; if (b.dataset.mode === "fil") { openFil(); return; } if (b.dataset.mode === "reve") { openReve(); return; } cfg.mode = b.dataset.mode; syncSetup(); });
 $("seg-pool").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; cfg.pool = b.dataset.pool; syncSetup(); });
 $("seg-diff").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; cfg.diff = b.dataset.diff; syncSetup(); });
 $("seg-len").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; cfg.len = b.dataset.len; syncSetup(); });
@@ -368,7 +368,7 @@ $("btn-quick").addEventListener("click", function () {
   startGame(buildQuestions(cfg), cfg);
 });
 $("modes").addEventListener("click", function (e) {
-  var mb = e.target.closest("button"); if (!mb || mb.dataset.mode === "fil" || window.innerWidth > 860) return;
+  var mb = e.target.closest("button"); if (!mb || mb.dataset.mode === "fil" || mb.dataset.mode === "reve" || window.innerWidth > 860) return;
   setTimeout(function () { $("modebox").scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" }); }, 60);
 });
 
@@ -440,6 +440,99 @@ function renderMiniPoll() {
 $("mini-poll").addEventListener("click", function (e) { e.preventDefault(); $("tab-polls").click(); });
 
 
+
+
+/* ---------- Mode « Mon programme de rêve » ----------
+   Pour chaque grand thème : une mesure par candidat favori, tirée au hasard et présentée sans nom.
+   On choisit jusqu'à 3 mesures. Compatibilité = part des thèmes où l'on a retenu la mesure du candidat
+   (chaque candidat a exactement une mesure par thème où il en a une, donc les chances sont égales).
+   Rien n'est envoyé en ligne : ce n'est pas un sondage. */
+var REVE_BLOCS = [
+  { h: "Travail et pouvoir d’achat", t: ["Travail", "Économie", "Fiscalité"] },
+  { h: "Retraites et solidarité", t: ["Retraites", "Social"] },
+  { h: "Santé et famille", t: ["Santé", "Famille"] },
+  { h: "École et jeunesse", t: ["Éducation", "Jeunesse"] },
+  { h: "Écologie et énergie", t: ["Écologie", "Énergie", "Transports", "Agriculture"] },
+  { h: "Sécurité et justice", t: ["Sécurité", "Justice"] },
+  { h: "Frontières, Europe et défense", t: ["Immigration", "Europe", "International", "Défense"] },
+  { h: "Démocratie et institutions", t: ["Institutions", "Société", "Numérique"] }
+];
+var REVE_MAX = 3, reve = null;
+var REVE_BAN = new RegExp("\\b(" + C.map(function (c) { return c.name.split(" ").pop(); }).concat(["LFI", "RN", "insoumis", "Rassemblement national", "Renaissance", "Horizons", "Républicains", "écologistes"]).join("|") + ")\\b", "i");
+function reveCands() { return C.filter(function (c) { return c.main; }).map(function (c) { return c.id; }); }
+function openReve() {
+  clearInterval(timerId); clearTimeout(autoId); game = null; hideReact();
+  var cands = reveCands();
+  var blocs = REVE_BLOCS.map(function (b) {
+    var items = [];
+    cands.forEach(function (c) {
+      var pool = M.filter(function (m) { return m.cs.length === 1 && m.c === c && b.t.indexOf(m.t) >= 0 && m.m.length <= 190 && !REVE_BAN.test(m.m); });
+      if (pool.length) items.push(pool[Math.floor(Math.random() * pool.length)]);
+    });
+    return { h: b.h, items: shuffle(items), picked: [] };
+  }).filter(function (b) { return b.items.length >= 4; });
+  reve = { blocs: blocs, i: 0, cands: cands };
+  location.hash = "programme-de-reve"; show("reve"); window.scrollTo({ top: 0 }); drawReve();
+}
+function drawReve() {
+  var n = reve.blocs.length;
+  $("rv-bar").style.width = (reve.i / n * 100) + "%";
+  if (reve.i >= n) { drawReveRes(); return; }
+  var b = reve.blocs[reve.i], full = b.picked.length >= REVE_MAX;
+  $("rv-body").innerHTML = "<p class=\"rv-step\">Thème " + (reve.i + 1) + " sur " + n + "</p><h2 class=\"rv-h\">" + esc(b.h) + "</h2>" +
+    "<p class=\"rv-sub\">Choisis jusqu’à " + REVE_MAX + " mesures pour ton programme. Les noms sont cachés jusqu’à la fin.</p>" +
+    "<div class=\"rv-list\" role=\"group\" aria-label=\"" + esc(b.h) + "\">" + b.items.map(function (m, k) {
+      var on = b.picked.indexOf(k) >= 0;
+      return "<button type=\"button\" class=\"rv-m\" data-k=\"" + k + "\" aria-pressed=\"" + on + "\"" + (full && !on ? " disabled" : "") + "><span class=\"ck\" aria-hidden=\"true\"></span><span>" + esc(m.m) + "</span></button>";
+    }).join("") + "</div>" +
+    "<div class=\"rv-nav\">" + (reve.i ? "<button type=\"button\" class=\"btn\" id=\"rv-prev\">← Retour</button>" : "") +
+    "<button type=\"button\" class=\"go\" id=\"rv-next\"><span>" + (b.picked.length ? (reve.i === n - 1 ? "Voir mon candidat" : "Thème suivant") : "Aucune ne me plaît, passer") + "</span><span aria-hidden=\"true\">→</span></button>" +
+    "<span class=\"rv-count\">" + b.picked.length + " / " + REVE_MAX + "</span></div>";
+}
+$("rv-body").addEventListener("click", function (e) {
+  if (!reve) return;
+  var m = e.target.closest(".rv-m"), b = reve.blocs[reve.i];
+  if (m && b) { var k = +m.dataset.k, at = b.picked.indexOf(k); if (at >= 0) b.picked.splice(at, 1); else if (b.picked.length < REVE_MAX) b.picked.push(k); drawReve(); return; }
+  if (e.target.closest("#rv-next")) { reve.i++; drawReve(); window.scrollTo({ top: 0, behavior: "smooth" }); return; }
+  if (e.target.closest("#rv-prev")) { reve.i--; drawReve(); window.scrollTo({ top: 0, behavior: "smooth" }); return; }
+  if (e.target.closest("#rv-again")) { openReve(); return; }
+  if (e.target.closest("#rv-menu")) { goMenu(); return; }
+  if (e.target.closest("#rv-share")) {
+    var top = reve.top, txt = "Qui a proposé ça ? ✨ Mon programme de rêve ressemble à " + top.pct + " % à celui de " + CBY[top.c].name + ". Et toi ? " + siteUrl() + "#programme-de-reve";
+    if (navigator.share) navigator.share({ text: txt }).catch(function () {}); else if (navigator.clipboard) navigator.clipboard.writeText(txt).then(function () { $("rv-share").textContent = "Copié ✓"; });
+  }
+});
+function drawReveRes() {
+  var app = {}, got = {}, mine = [];
+  reve.cands.forEach(function (c) { app[c] = 0; got[c] = 0; });
+  reve.blocs.forEach(function (b) {
+    b.items.forEach(function (m, k) { app[m.c]++; if (b.picked.indexOf(k) >= 0) { got[m.c]++; mine.push({ m: m, h: b.h }); } });
+  });
+  if (!mine.length) {
+    $("rv-body").innerHTML = "<h2 class=\"rv-res-h\">Programme vide</h2><p class=\"rv-sub\">Tu n’as retenu aucune mesure. Recommence : les mesures proposées changent à chaque fois.</p><div class=\"rv-nav\"><button type=\"button\" class=\"go\" id=\"rv-again\"><span>Recommencer</span><span aria-hidden=\"true\">→</span></button></div>";
+    return;
+  }
+  var rows = reve.cands.filter(function (c) { return app[c]; }).map(function (c) { return { c: c, g: got[c], a: app[c], pct: Math.round(got[c] / app[c] * 100) }; })
+    .sort(function (x, y) { return y.pct - x.pct || y.g - x.g || CBY[x.c].name.localeCompare(CBY[y.c].name, "fr"); });
+  var top = rows[0], ties = rows.filter(function (r) { return r.pct === top.pct && r.g === top.g; });
+  reve.top = top;
+  var head = ties.length > 1
+    ? "Égalité entre <em>" + ties.map(function (r) { return esc(CBY[r.c].name); }).join("</em> et <em>") + "</em>"
+    : "Ton programme ressemble le plus à celui de <em>" + esc(CBY[top.c].name) + "</em>";
+  $("rv-body").innerHTML = "<h2 class=\"rv-res-h\">" + head + "</h2>" +
+    "<p class=\"rv-sub\">Tu as retenu " + plural(mine.length, "mesure", "mesures") + ". Pour chaque candidat : la part des thèmes où tu as choisi sa mesure.</p>" +
+    "<div class=\"rv-bars\">" + rows.map(function (r) {
+      return "<div class=\"rv-bar\" style=\"--fam:" + (FAMCOL[FAMILY[r.c]] || "#888") + "\"><span class=\"nm\">" + esc(CBY[r.c].name) + "</span><span class=\"tr\"><i data-w=\"" + r.pct + "\"></i></span><b>" + r.pct + " % <small>(" + r.g + "/" + r.a + ")</small></b></div>";
+    }).join("") + "</div>" +
+    "<h3>Ton programme de rêve, avec les auteurs</h3><ul class=\"rv-mine\">" + mine.map(function (x) {
+      var src = x.m.srcs[x.m.c];
+      return "<li style=\"--fam:" + (FAMCOL[FAMILY[x.m.c]] || "#888") + "\">" + esc(x.m.m) + "<span class=\"who\">" + esc(CBY[x.m.c].name) + " · " + esc(x.h) + (src && src.u ? " · <a href=\"" + esc(src.u) + "\" target=\"_blank\" rel=\"noopener\">source</a>" : "") + "</span></li>";
+    }).join("") + "</ul>" +
+    "<div class=\"rv-nav\"><button type=\"button\" class=\"go\" id=\"rv-again\"><span>Refaire avec d’autres mesures</span><span aria-hidden=\"true\">→</span></button><button type=\"button\" class=\"btn\" id=\"rv-share\">Partager</button><button type=\"button\" class=\"btn\" id=\"rv-menu\">Menu</button></div>" +
+    "<p class=\"rv-note\">Ce n’est pas une consigne de vote. Le jeu compare une mesure tirée au hasard par candidat et par thème, parmi les " + reve.cands.length + " candidats en tête des sondages ; un programme complet compte des centaines de mesures. Refais le test : les mesures changent à chaque fois. Tes choix restent sur ton téléphone ou ton ordinateur, rien n’est envoyé.</p>";
+  requestAnimationFrame(function () { setTimeout(function () { document.querySelectorAll(".rv-bar .tr i").forEach(function (i) { i.style.width = i.dataset.w + "%"; }); }, 60); });
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
 /* ---------- Déguisements du titre (à la manière des doodles) ---------- */
 /* Dessins disponibles pour les déguisements (champ draw de FETES, dans data.js) */
@@ -1868,7 +1961,7 @@ initExplorer();
 renderHome();
 runIntro();
 $("contact-line").innerHTML = "écris à <a href=\"mailto:" + CONTACT_EMAIL + "\">" + CONTACT_EMAIL + "</a>, ou utilise le formulaire « Nous écrire » et le lien « Signaler une erreur » sous chaque réponse.";
-if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } else if (location.hash === "#antiseches") { show("cheat"); renderCheat(); } else if (location.hash === "#sondages") { show("polls"); renderPolls(); } else if (location.hash === "#stats") { show("stats"); renderStats(); } else if (location.hash === "#contact") { show("contact"); } else show("setup");
+if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } else if (location.hash === "#antiseches") { show("cheat"); renderCheat(); } else if (location.hash === "#sondages") { show("polls"); renderPolls(); } else if (location.hash === "#stats") { show("stats"); renderStats(); } else if (location.hash === "#contact") { show("contact"); } else if (location.hash === "#programme-de-reve") { openReve(); } else show("setup");
 window.addEventListener("hashchange", function () { if (checkHashChallenge() || checkHashLeague()) return; if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } });
 checkHashChallenge(); checkHashLeague();
 })();
