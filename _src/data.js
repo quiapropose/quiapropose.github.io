@@ -1291,8 +1291,8 @@ var FETES = [
   { id: "14juillet", from: "07-14", to: "07-14", emo: "🎆", fete: "Fête nationale" }
 ];
 
-/* Mode « Mon programme de rêve » : 25 grandes mesures qui font débat, chacune recopiée mot pour mot depuis RAW ou SHARED.
-   Équilibre : chacun des 7 favoris doit soutenir 5 ou 6 mesures du panel (check.js le vérifie). t = rubrique affichée. */
+/* Mode « Mon programme de rêve » : grandes mesures qui font débat, toujours proposées dans leur catégorie (le reste est tiré au hasard).
+   Chaque texte est recopié mot pour mot depuis RAW ou SHARED. Équilibre : chacun des 7 favoris soutient 5 ou 6 mesures du panel (check.js le vérifie). */
 var REVE_PANEL = [
   { t: "Retraites", m: "Abroger la réforme de 2023 et revenir à un âge légal de départ de 62 ans." },
   { t: "Retraites", m: "Supprimer l’âge légal de départ : la retraite dépendrait de la durée de cotisation, avec décote et surcote." },
