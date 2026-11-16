@@ -12,6 +12,7 @@ Les sources du site sont dans ce dossier `_src/`. Le site publié (`index.html`,
   - `SHARED` : les mesures communes à plusieurs candidats.
   - `POLLS` / `POLLS_MAJ` : les sondages.
   - `NEWS` / `NEWS_MAJ` : le fil info du haut de page.
+  - `FETES` : les déguisements du titre selon la date (comme les doodles de Google).
 - `expl.js` : l'explication « En clair » de chaque mesure (`EXPL`, clé = texte exact de la mesure), affichée par le bouton « i » pendant la partie.
 - `app.js` et `head.html` : l'interface. On n'y touche que pour corriger un bug.
 - `check.js` : les vérifications automatiques.
@@ -51,11 +52,18 @@ Les sources du site sont dans ce dossier `_src/`. Le site publié (`index.html`,
    - Garder au maximum 4 instituts, les plus récents (un sondage par institut).
    - Mettre à jour `POLLS_MAJ`.
    - Un candidat absent de `C` peut figurer dans un sondage sous son nom complet. Si besoin, ajouter sa famille dans `EXTRA_FAM` (fichier `app.js`).
-5. **Publier.** Depuis la racine du dépôt :
+5. **Publier** (après l'étape 6 ci-dessous). Depuis la racine du dépôt :
    - lancer `sh _src/publish.sh` ;
    - si tout est OK : `git add -A && git -c user.name="quiapropose" -c user.email="quiapropose@users.noreply.github.com" commit -m "Mise à jour du <date>"` puis `git push origin main`.
 
    S'il n'y a rien de nouveau, ne rien publier.
+
+6. **Déguisement du titre (`FETES`).** Chaque jour, regarder les 15 prochains jours :
+   - si une date marquante arrive et qu'elle n'est pas encore dans `FETES`, l'ajouter. Exemples : une fête populaire, une journée internationale, un grand anniversaire historique consensuel (invention, exploit sportif ou scientifique, naissance d'une figure culturelle, centenaire), une date du calendrier électoral ;
+   - format : `{ id, from: "MM-JJ", to: "MM-JJ", draw: "bonnet" | "pelerin" ou emo: "🎆", fete: "texte court (60 caractères au maximum)", q: "#couleur du ?" (facultatif), tip: "info-bulle" (facultatif) }`. Le premier élément dont la période contient la date du jour s'applique : pour une date ponctuelle à l'intérieur d'une longue période (par exemple pendant Noël), placer la date ponctuelle **avant** la période longue ;
+   - rester neutre : pas de date partisane, pas d'anniversaire lié à un parti ou à un candidat, rien qui divise politiquement ;
+   - une fois l'année passée, une date ponctuelle propre à cette année (par exemple un centenaire) peut être retirée ;
+   - vérifier le rendu avec `?theme=<id>`. `check.js` contrôle le format.
 
 ## Règles à ne jamais enfreindre
 

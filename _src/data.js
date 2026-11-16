@@ -1271,3 +1271,22 @@ var NEWS = [
   { d: "À venir", k: "agenda", t: "13 déc. : vote des Écologistes sur leur candidature · 12 mars : fin des parrainages · 18 avril : premier tour.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-declares-et-potentiels-444932" }
 ];
 var NEWS_MAJ = "16 novembre 2026";
+
+/* Déguisements du titre selon la date (comme les doodles). from/to au format MM-JJ.
+   draw = dessin posé sur le « Q » (bonnet, pelerin) ou emo = un emoji à la place ;
+   fete = petit texte à côté de la date de l'élection ; q = couleur du « ? » ; tip = info-bulle du titre.
+   Le premier élément dont la période contient la date du jour s'applique. Aperçu : ?theme=<id>. */
+var FETES = [
+  { id: "thanksgiving", from: "11-16", to: "11-27", draw: "pelerin", q: "#c2410c", fete: "🦃 Thanksgiving, jeudi 26 novembre", tip: "Happy Thanksgiving !" },
+  { id: "noel", from: "12-01", to: "12-26", draw: "bonnet", q: "#0b7a3e", fete: "🎄 Joyeuses fêtes", tip: "Joyeux Noël !" },
+  { id: "nouvel-an", from: "12-31", to: "01-01", emo: "🥂", fete: "🎆 Bonne année 2027", tip: "Bonne année !" },
+  { id: "galette", from: "01-06", to: "01-06", emo: "👑", fete: "Épiphanie : qui aura la fève ?" },
+  { id: "chandeleur", from: "02-02", to: "02-02", emo: "🥞", fete: "Chandeleur" },
+  { id: "valentin", from: "02-14", to: "02-14", emo: "💌", fete: "Saint-Valentin" },
+  { id: "femmes", from: "03-08", to: "03-08", emo: "✊", fete: "Journée internationale des droits des femmes" },
+  { id: "poisson", from: "04-01", to: "04-01", emo: "🐟", fete: "Poisson d’avril !" },
+  { id: "tour1", from: "04-18", to: "04-18", emo: "🗳️", fete: "Aujourd’hui : premier tour" },
+  { id: "tour2", from: "05-02", to: "05-02", emo: "🗳️", fete: "Aujourd’hui : second tour" },
+  { id: "musique", from: "06-21", to: "06-21", emo: "🎵", fete: "Fête de la musique" },
+  { id: "14juillet", from: "07-14", to: "07-14", emo: "🎆", fete: "Fête nationale" }
+];
