@@ -13,6 +13,7 @@ Les sources du site sont dans ce dossier `_src/`. Le site publié (`index.html`,
   - `POLLS` / `POLLS_MAJ` : les sondages.
   - `NEWS` / `NEWS_MAJ` : le fil info du haut de page.
   - `FETES` : les déguisements du titre selon la date (comme les doodles de Google).
+  - `REVE_PANEL` : les 25 grandes mesures du mode « Mon programme de rêve ». Chaque texte doit être recopié mot pour mot depuis `RAW` ou `SHARED`, et chacun des 7 favoris doit soutenir 5 ou 6 mesures du panel (`check.js` le vérifie). Si une mesure du panel est retirée ou reformulée, mettre le panel à jour en gardant cet équilibre.
 - `expl.js` : l'explication « En clair » de chaque mesure (`EXPL`, clé = texte exact de la mesure), affichée par le bouton « i » pendant la partie.
 - `app.js` et `head.html` : l'interface. On n'y touche que pour corriger un bug.
 - `check.js` : les vérifications automatiques.
