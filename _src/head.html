@@ -1219,6 +1219,33 @@ body.th-thanksgiving .kick-fete { color: #c2410c; }
   .door i { font-size: 36px; }
   #pg-jeu .play-top { grid-template-columns: 1fr; }
 }
+
+#modes .modes { grid-template-columns: repeat(auto-fill, minmax(205px, 1fr)) !important; }
+@media (max-width: 760px) { #modes .modes { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+.quick[hidden] { display: none !important; }
+#modes .modes button[aria-pressed="true"] { box-shadow: none; }
+#fld-themes { grid-column: 1 / -1; order: -1; }
+#fld-themes .theme-pick { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+.theme-pick button { justify-content: space-between; padding: 8px 10px; font-size: 14px; font-weight: 600; }
+.theme-pick button small { font-size: 11.5px; color: var(--muted); font-weight: 500; }
+.theme-pick button[aria-pressed="true"] small { color: var(--accent); }
+/* Défi du jour sur la porte d'entrée */
+#pg-porte .daily { max-width: 900px; margin: 18px auto 0; display: grid !important; grid-template-columns: 1fr auto; grid-template-areas: "top go" "h go" "grid pill" "next pill"; gap: 4px 18px; align-items: center; padding: 14px 20px; border-radius: 14px; text-align: left; }
+#pg-porte .daily > * { text-align: left; }
+#pg-porte .daily .d-top { grid-area: top; justify-content: flex-start; gap: 8px; }
+#pg-porte .daily h3 { grid-area: h; font: 800 20px/1.05 var(--f-display); text-transform: uppercase; }
+#pg-porte .daily .d-state { display: none; }
+#pg-porte .daily .d-grid { grid-area: grid; gap: 4px; }
+#pg-porte .daily .d-grid span { width: 24px; height: 24px; font-size: 11px; border-radius: 5px; }
+#pg-porte .daily .d-go, #pg-porte .daily .d-share { grid-area: go; min-width: 0; margin: 0 !important; font-size: 18px; padding: 12px 18px; gap: 12px; white-space: nowrap; }
+#pg-porte .daily .d-next { grid-area: next; font-size: 12px; }
+#pg-porte .daily .lc-pill { grid-area: pill; justify-self: end; align-self: end; font-size: 12px; padding: 5px 10px; }
+#pg-jeu .warm { max-width: none; margin: 0 0 22px; }
+#pg-jeu .warm .teaser { max-width: 760px; margin: 0 auto; }
+@media (max-width: 760px) {
+  #pg-porte .daily { grid-template-columns: 1fr auto; grid-template-areas: "top pill" "h h" "grid go" "next next"; gap: 6px 10px; padding: 12px 14px; }
+  #pg-porte .daily .d-go, #pg-porte .daily .d-share { font-size: 15px; padding: 9px 12px; }
+}
 /* ===== Fil info (calme) ===== */
 .ticker { border-bottom: 1px solid var(--line); background: var(--sheet); font-size: 13.5px; color: var(--ink); }
 .tk-in { display: flex; align-items: baseline; gap: 10px; padding-top: 7px; padding-bottom: 7px; min-width: 0; }
@@ -1249,8 +1276,8 @@ body.playing .ticker { display: none; }
       <div class="menu-pop" id="menu-pop" hidden>
         <nav class="tabs" aria-label="Sections">
           <button type="button" id="tab-home" data-view="porte" aria-pressed="true">🏠 Accueil</button>
-          <button type="button" id="tab-jouer" data-view="jouer" aria-pressed="false">🎯 Côté jeu</button>
-          <button type="button" id="tab-reviser" data-view="reviser" aria-pressed="false">📖 Côté cours</button>
+          <button type="button" id="tab-jouer" data-view="jouer" aria-pressed="false">🎯 Faites vos jeux</button>
+          <button type="button" id="tab-reviser" data-view="reviser" aria-pressed="false">📖 Faites vos devoirs</button>
           <button type="button" id="tab-polls" data-view="polls" aria-pressed="false">📊 Sondages</button>
           <button type="button" id="tab-cheat" data-view="cheat" aria-pressed="false">📝 Antisèches</button>
           <button type="button" id="tab-explorer" data-view="explorer" aria-pressed="false">🔎 Toutes les mesures</button>
@@ -1282,22 +1309,12 @@ body.playing .ticker { display: none; }
     <div class="page" id="pg-porte">
       <p class="hero-kick"><span class="pulse" aria-hidden="true"></span><span id="hero-j">J-…</span> avant le premier tour</p>
       <button type="button" class="news-chip" id="news-chip" hidden style="display:none"></button>
-      <h2 class="door-q">Tu entres côté jeu ou côté cours&nbsp;?</h2>
+      <h2 class="door-q">Plutôt jeux ou devoirs&nbsp;?</h2>
       <div class="doors">
-        <button type="button" class="door door-jeu" data-page="jeu"><i aria-hidden="true">🎯</i><b>Côté jeu</b><span>Devine qui a proposé quoi : quiz, défi du jour, ligues entre amis.</span><em>Entrer →</em></button>
-        <button type="button" class="door door-cours" data-page="cours"><i aria-hidden="true">📖</i><b>Côté cours</b><span>Les programmes, les sondages et les antisèches pour tout comprendre.</span><em>Entrer →</em></button>
+        <button type="button" class="door door-jeu" data-page="jeu"><i aria-hidden="true">🎯</i><b>Faites vos jeux</b><span>Devine qui a proposé quoi : quiz, programme de rêve, ligues entre amis.</span><em>Jouer →</em></button>
+        <button type="button" class="door door-cours" data-page="cours"><i aria-hidden="true">📖</i><b>Faites vos devoirs</b><span>Le devoir citoyen, version facile : programmes, sondages et antisèches.</span><em>Réviser →</em></button>
       </div>
-    </div>
-
-    <div class="page" id="pg-jeu" hidden>
-      <div class="pg-head"><button type="button" class="pg-back" data-page="porte">← Accueil</button><h2>Côté jeu</h2><p>Choisis ton mode de jeu.</p></div>
-      <div class="play-top">
-        <div class="card quick">
-            <h3>Une mesure. Un candidat. <em>À toi de deviner.</em></h3>
-            <button type="button" class="go hero-go" id="btn-quick"><span>Jouer maintenant</span><span aria-hidden="true">→</span></button>
-            <p class="hero-note">10 questions · les 7 favoris des sondages · 4 réponses au choix</p>
-          </div>
-        <div class="card daily" id="daily">
+      <div class="card daily" id="daily">
           <div class="d-top"><span class="d-lab">Défi du jour <b id="d-num">n°1</b></span><span class="d-streak" id="d-streak" title="Jours d’affilée avec le défi réussi">🔥 0</span></div>
           <h3>5 mesures, les mêmes pour tous</h3>
           <p class="d-state" id="d-state">Un seul essai par jour. Compare ton score avec tes amis.</p>
@@ -1307,12 +1324,31 @@ body.playing .ticker { display: none; }
           <p class="d-next" id="d-next"></p>
           <button type="button" class="lc-pill" id="lc-pill"><span id="lc-ava">🏛️</span> <span id="lc-txt">Ligue entre amis</span> →</button>
         </div>
+    </div>
+
+    <div class="page" id="pg-jeu" hidden>
+      <div class="pg-head"><button type="button" class="pg-back" data-page="porte">← Accueil</button><h2>Faites vos jeux</h2><p>Échauffe-toi, puis choisis ton mode.</p></div>
+      <div class="warm">
+        <div class="teaser card" id="teaser" aria-live="polite">
+          <div class="t-top"><span class="t-lab">Échauffement</span><span class="t-score" id="t-score"></span></div>
+          <p class="t-q">Qui a proposé ça&nbsp;?</p>
+          <p class="t-m" id="t-m">…</p>
+          <div class="t-opts" id="t-opts" role="group" aria-label="Réponses"></div>
+          <p class="t-res" id="t-res"></p>
+          <button type="button" class="t-next" id="t-next" hidden>Une autre →</button>
+        </div>
       </div>
+      <div class="card quick" hidden>
+            <h3>Une mesure. Un candidat. <em>À toi de deviner.</em></h3>
+            <button type="button" class="go hero-go" id="btn-quick"><span>Jouer maintenant</span><span aria-hidden="true">→</span></button>
+            <p class="hero-note">10 questions · les 7 favoris des sondages · 4 réponses au choix</p>
+          </div>
       <div id="modes" role="group" aria-label="Mode de jeu">
         <button type="button" id="m-reve" data-mode="reve" aria-pressed="false" class="m-reve"><b><i class="ico" aria-hidden="true">✨</i>Mon programme de rêve</b><span>Choisis tes mesures par thème et découvre ton candidat le plus proche.</span></button>
         <p class="mg-h">Le quiz</p>
         <div class="modes">
           <button type="button" id="m-classic" data-mode="classic" aria-pressed="false"><b><i class="ico" aria-hidden="true">🎯</i>Classique</b><span>Une mesure, un candidat.</span></button>
+          <button type="button" id="m-theme" data-mode="theme" aria-pressed="false"><b><i class="ico" aria-hidden="true">📚</i>Par thème</b><span>Entraîne-toi sur les sujets de ton choix.</span></button>
           <button type="button" id="m-duel" data-mode="duel" aria-pressed="false"><b><i class="ico" aria-hidden="true">🥊</i>Confrontation</b><span>Deux candidats, une mesure.</span></button>
           <button type="button" id="m-blitz" data-mode="blitz" aria-pressed="false"><b><i class="ico" aria-hidden="true">⚡</i>Éclair 60 s</b><span>Une minute, un max de points.</span></button>
           <button type="button" id="m-target" data-mode="target" aria-pressed="false"><b><i class="ico" aria-hidden="true">🔎</i>Ciblé</b><span>Révise qui tu veux.</span></button>
@@ -1325,16 +1361,7 @@ body.playing .ticker { display: none; }
           <button type="button" id="m-conseil" data-mode="conseil" aria-pressed="false"><b><i class="ico" aria-hidden="true">🏛️</i>Le Conseil constit’ tousse</b><span>Les mesures qui coincent en droit.</span></button>
         </div>
       </div>
-      <div class="warm"><p class="mg-h">Pour t’échauffer</p>
-        <div class="teaser card" id="teaser" aria-live="polite">
-          <div class="t-top"><span class="t-lab">Échauffement</span><span class="t-score" id="t-score"></span></div>
-          <p class="t-q">Qui a proposé ça&nbsp;?</p>
-          <p class="t-m" id="t-m">…</p>
-          <div class="t-opts" id="t-opts" role="group" aria-label="Réponses"></div>
-          <p class="t-res" id="t-res"></p>
-          <button type="button" class="t-next" id="t-next" hidden>Une autre →</button>
-        </div>
-      </div>
+      
     </div>
 
     <div class="page" id="pg-reglages" hidden>
@@ -1385,6 +1412,11 @@ body.playing .ticker { display: none; }
         <div class="field" id="fld-casier" hidden>
           <p class="notice">Présomption d’innocence : une enquête ou un procès en cours n’est pas une condamnation. Chaque fiche indique le statut exact de la procédure et sa source. Les candidats sans affaire ni polémique retenue servent de leurres.</p>
         </div>
+        <div class="field" id="fld-themes" hidden>
+          <span class="lab" id="lab-themes">Thèmes à réviser</span>
+          <div class="cand-pick theme-pick" id="theme-pick" role="group" aria-labelledby="lab-themes"></div>
+          <p class="hint" id="theme-hint"></p>
+        </div>
         <div class="field" id="fld-cands" hidden>
           <span class="lab" id="lab-cands">Candidats ciblés</span>
           <div class="cand-pick" id="cand-pick" role="group" aria-labelledby="lab-cands"></div>
@@ -1399,7 +1431,7 @@ body.playing .ticker { display: none; }
     </div>
 
     <div class="page" id="pg-cours" hidden>
-      <div class="pg-head"><button type="button" class="pg-back" data-page="porte">← Accueil</button><h2>Côté cours</h2><p>Les programmes, les sondages et les antisèches pour tout comprendre, sans pression.</p></div>
+      <div class="pg-head"><button type="button" class="pg-back" data-page="porte">← Accueil</button><h2>Faites vos devoirs</h2><p>Programmes, sondages, antisèches : de quoi tout comprendre, sans pression.</p></div>
       <ul class="facts">
         <li><b id="f-mes">0</b><span>mesures sourcées</span></li>
         <li><b id="f-cand">0</b><span>candidats</span></li>

@@ -203,7 +203,7 @@ function countAll(id) { return M.filter(function (x) { return !special(x) && x.c
 function countOf(id) { return SINGLE.filter(function (x) { return x.c === id; }).length; }
 
 /* ---------- État ---------- */
-var cfg = { mode: "classic", pool: "main", diff: "easy", len: "20", duel: ["lepen", "melenchon"], targets: [] };
+var cfg = { mode: "classic", pool: "main", diff: "easy", len: "20", duel: ["lepen", "melenchon"], targets: [], themes: [] };
 var game = null, timerId = null, autoId = null;
 var views = { reve: $("v-reve"), setup: $("v-setup"), game: $("v-game"), res: $("v-res"), explorer: $("v-explorer"), cheat: $("v-cheat"), stats: $("v-stats"), contact: $("v-contact"), polls: $("v-polls") };
 function show(v) {
@@ -265,7 +265,7 @@ $("home-title").addEventListener("click", function () { goMenu(); setPage("porte
 $("g-menu").addEventListener("click", goMenu);
 
 /* ---------- Accueil ---------- */
-var MODE_ICON = { classic: "🗳️", duel: "🥊", blitz: "⚡", target: "🎯", multi: "🧩", accord: "🤝", citations: "🎤", conseil: "⚖️", casier: "🗂️" };
+var MODE_ICON = { theme: "📚", classic: "🗳️", duel: "🥊", blitz: "⚡", target: "🎯", multi: "🧩", accord: "🤝", citations: "🎤", conseil: "⚖️", casier: "🗂️" };
 var FAM_ORDER = ["Extrême gauche", "Gauche radicale", "Gauche (communiste)", "Gauche", "Gauche sociale-démocrate", "Écologistes", "Sans étiquette", "Centre (camp présidentiel)", "Centre droit", "Droite", "Droite souverainiste", "Souverainistes", "Souverainistes (Frexit)", "Extrême droite"];
 function renderHemi() {
   var list = C.slice().sort(function (a, b) { return FAM_ORDER.indexOf(FAMILY[a.id]) - FAM_ORDER.indexOf(FAMILY[b.id]) || a.n - b.n; });
@@ -302,6 +302,10 @@ function renderHome() {
     }).join("");
   stagger($("boards-home"));
   $("more-n").textContent = C.length + NOPROG.length; $("more-s").textContent = "dont " + (part.length + NOPROG.length) + " « à venir »";
+  $("theme-pick").innerHTML = THEMES.map(function (t, i) {
+    var n = SINGLE.filter(function (x) { return x.t === t; }).length;
+    return "<button type=\"button\" id=\"th-" + i + "\" data-i=\"" + i + "\" aria-pressed=\"false\"><span>" + esc(t) + "</span><small>" + n + "</small></button>";
+  }).join("");
   $("cand-pick").innerHTML = C.map(function (c) {
     return "<button type=\"button\" id=\"pick-" + c.id + "\" data-c=\"" + c.id + "\" aria-pressed=\"false\"><span class=\"n\">" + c.n + "</span><span>" + esc(c.name) + "</span></button>";
   }).join("");
@@ -346,16 +350,17 @@ function runIntro() {
   timers.push(setTimeout(function () { toks[keep].classList.add("win"); toks[keep].textContent = "?"; ov.classList.add("end"); $("i-step").innerHTML = "&nbsp;"; }, tEnd));
   timers.push(setTimeout(close, tEnd + 2600));
 }
-var MODES = ["classic", "duel", "blitz", "target", "accord", "citations", "casier", "conseil"];
+var MODES = ["classic", "theme", "duel", "blitz", "target", "accord", "citations", "casier", "conseil"];
 function syncSetup() {
   MODES.forEach(function (m) { $("m-" + m).setAttribute("aria-pressed", cfg.mode === m); });
   ["main", "all"].forEach(function (p) { $("p-" + p).setAttribute("aria-pressed", cfg.pool === p); });
   ["easy", "hard"].forEach(function (d) { $("d-" + d).setAttribute("aria-pressed", cfg.diff === d); });
   ["10", "20", "50", "all"].forEach(function (l) { $("l-" + l).setAttribute("aria-pressed", cfg.len === l); });
-  var classicLike = cfg.mode === "classic" || cfg.mode === "blitz";
+  var classicLike = cfg.mode === "classic" || cfg.mode === "blitz" || cfg.mode === "theme";
+  $("fld-themes").hidden = cfg.mode !== "theme";
   $("fld-pool").hidden = !classicLike;
   $("fld-diff").hidden = !classicLike;
-  $("fld-len").hidden = !(cfg.mode === "classic" || cfg.mode === "multi");
+  $("fld-len").hidden = !(cfg.mode === "classic" || cfg.mode === "multi" || cfg.mode === "theme");
   $("fld-duel").hidden = cfg.mode !== "duel";
   $("fld-cands").hidden = cfg.mode !== "target";
   $("fld-casier").hidden = cfg.mode !== "casier";
@@ -372,13 +377,19 @@ function syncSetup() {
       "Retrouve le bon candidat parmi les " + n + " choisis (" + SINGLE.filter(function (x) { return cfg.targets.indexOf(x.c) >= 0; }).length + " mesures).";
     ok = n > 0;
   }
+  THEMES.forEach(function (t, i) { var b = $("th-" + i); if (b) b.setAttribute("aria-pressed", cfg.themes.indexOf(t) >= 0); });
+  if (cfg.mode === "theme") {
+    var ids = cfg.pool === "main" ? MAIN : ALL, nm = SINGLE.filter(function (x) { return ids.indexOf(x.c) >= 0 && cfg.themes.indexOf(x.t) >= 0; }).length;
+    $("theme-hint").textContent = cfg.themes.length ? plural(nm, "mesure", "mesures") + " à réviser sur " + plural(cfg.themes.length, "thème", "thèmes") + "." : "Choisis un ou plusieurs thèmes.";
+    ok = nm > 0;
+  }
   if (cfg.mode === "duel") ok = cfg.duel[0] !== cfg.duel[1];
   $("btn-start").disabled = !ok;
-  $("btn-start").firstElementChild.textContent = cfg.mode === "duel" && !ok ? "Choisis deux candidats différents" : pick(GO_LABELS);
+  $("btn-start").firstElementChild.textContent = cfg.mode === "duel" && !ok ? "Choisis deux candidats différents" : cfg.mode === "theme" && !ok ? "Choisis au moins un thème" : pick(GO_LABELS);
   var best = store("qui2027-best-" + modeKey(cfg));
   $("best").textContent = best ? "Ton record dans ce mode : " + fmt(best.pts) + " points (" + best.score + "/" + best.total + ")." : "Pas encore de record dans ce mode. La place est libre.";
 }
-function modeKey(c) { return c.mode === "classic" || c.mode === "blitz" ? c.mode + "-" + c.pool + "-" + c.diff : c.mode; }
+function modeKey(c) { return c.mode === "classic" || c.mode === "blitz" || c.mode === "theme" ? c.mode + "-" + c.pool + "-" + c.diff : c.mode; }
 $("modes").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; if (b.dataset.mode === "fil") { openFil(); return; } if (b.dataset.mode === "reve") { openReve(); return; } cfg.mode = b.dataset.mode; syncSetup();
   $("rg-title").innerHTML = b.querySelector("b").innerHTML; $("rg-sub").textContent = b.querySelector("span").textContent; setPage("reglages"); });
 $("seg-pool").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; cfg.pool = b.dataset.pool; syncSetup(); });
@@ -387,6 +398,12 @@ $("seg-len").addEventListener("click", function (e) { var b = e.target.closest("
 $("duel-a").addEventListener("change", function () { cfg.duel[0] = this.value; syncSetup(); });
 $("duel-b").addEventListener("change", function () { cfg.duel[1] = this.value; syncSetup(); });
 $("duel-chips").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; cfg.duel = DUELS[+b.dataset.i].slice(); syncSetup(); });
+$("theme-pick").addEventListener("click", function (e) {
+  var b = e.target.closest("button"); if (!b) return;
+  var t = THEMES[+b.dataset.i], k = cfg.themes.indexOf(t);
+  if (k >= 0) cfg.themes.splice(k, 1); else cfg.themes.push(t);
+  syncSetup();
+});
 $("cand-pick").addEventListener("click", function (e) {
   var b = e.target.closest("button"); if (!b) return;
   var k = cfg.targets.indexOf(b.dataset.c);
@@ -1162,14 +1179,14 @@ function buildQuestions(conf, onlyIds) {
   var pool;
   if (conf.mode === "duel") pool = SINGLE.filter(function (x) { return conf.duel.indexOf(x.c) >= 0; });
   else if (conf.mode === "target") pool = SINGLE.filter(function (x) { return conf.targets.indexOf(x.c) >= 0; });
-  else { var ids = conf.pool === "main" ? MAIN : ALL; pool = SINGLE.filter(function (x) { return ids.indexOf(x.c) >= 0; }); }
+  else { var ids = conf.pool === "main" ? MAIN : ALL; pool = SINGLE.filter(function (x) { return ids.indexOf(x.c) >= 0 && (conf.mode !== "theme" || (conf.themes || []).indexOf(x.t) >= 0); }); }
   pool = shuffle(pool.filter(only));
   if (conf.mode === "duel" && !onlyIds) {
     var a = pool.filter(function (x) { return x.c === conf.duel[0]; }), b = pool.filter(function (x) { return x.c === conf.duel[1]; });
     var k = Math.min(10, Math.max(a.length, b.length));
     pool = shuffle(a.slice(0, k).concat(b.slice(0, k)));
   }
-  if ((conf.mode === "classic" || conf.mode === "blitz") && !onlyIds && conf.len !== "all") pool = balanced(pool, conf.mode === "blitz" ? 60 : parseInt(conf.len, 10));
+  if ((conf.mode === "classic" || conf.mode === "blitz" || conf.mode === "theme") && !onlyIds && conf.len !== "all") pool = balanced(pool, conf.mode === "blitz" ? 60 : parseInt(conf.len, 10));
   return pool.map(function (x) { return { mid: x.id, type: "pick", opts: optionsFor(x, conf) }; });
 }
 
@@ -1430,7 +1447,7 @@ $("g-opts").addEventListener("click", function (e) {
   }
   if (q.type === "vf") { var yes = b.dataset.v === "yes"; a = { mid: q.mid, pick: yes ? q.who : "other", ok: yes === (m.cs.indexOf(q.who) >= 0), type: "vf", who: q.who }; }
   else a = { mid: q.mid, pick: b.dataset.c, ok: b.dataset.c === m.c, type: "pick" };
-  var base = (game.cfg.diff === "hard" && (game.cfg.mode === "classic" || game.cfg.mode === "blitz")) ? 150 : 100;
+  var base = (game.cfg.diff === "hard" && (game.cfg.mode === "classic" || game.cfg.mode === "blitz" || game.cfg.mode === "theme")) ? 150 : 100;
   score(a, base, secs);
   game.answers[game.i] = a;
   reveal(a, true);
@@ -1873,7 +1890,7 @@ $("r-share").addEventListener("click", function () {
   try { navigator.clipboard.writeText(txt).then(function () { done("Copié, à coller où tu veux."); }, function () { done(txt); }); } catch (e) { done(txt); }
 });
 $("r-copy").addEventListener("click", function () {
-  var r = game.result, lab = { classic: "mode classique", duel: "confrontation", blitz: "mode éclair", target: "mode ciblé", multi: "multi-réponses", accord: "« Ils sont d’accord ! »", casier: "« Casier & polémiques »", citations: "« Qui a dit ça ? »", conseil: "« Le Conseil constitutionnel tousse »" }[game.cfg.mode];
+  var r = game.result, lab = { theme: "mode par thème", classic: "mode classique", duel: "confrontation", blitz: "mode éclair", target: "mode ciblé", multi: "multi-réponses", accord: "« Ils sont d’accord ! »", casier: "« Casier & polémiques »", citations: "« Qui a dit ça ? »", conseil: "« Le Conseil constitutionnel tousse »" }[game.cfg.mode];
   var extra = game.cfg.mode === "duel" ? " (" + last(CBY[game.cfg.duel[0]].name) + " / " + last(CBY[game.cfg.duel[1]].name) + ")" : "";
   var txt = "Qui a proposé ça ? Présidentielle 2027, " + lab + extra + " : " + fmt(r.pts) + " points, " + r.score + "/" + r.total + " (" + r.pct + " %), « " + r.label + " ». À toi : " + siteUrl();
   var done = function (msg) { $("r-copied").textContent = msg; $("r-copied").hidden = false; };
