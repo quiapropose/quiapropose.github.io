@@ -1129,6 +1129,36 @@ body.th-thanksgiving .kick-fete { color: #c2410c; }
 .mini-poll .mp-src { display: none; }
 @media (max-width: 980px) { .modes { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; } }
 @media (max-width: 640px) { .modes { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } .hero-h { font-size: 30px; } }
+
+/* ===== Menu « Comprendre » et défi du jour à part ===== */
+nav.tabs { align-items: center; }
+.dd { position: relative; }
+.dd-btn { border: 1.5px solid var(--ink); background: transparent; padding: 8px 14px; font-weight: 600; font-size: 14px; cursor: pointer; border-radius: 2px; color: var(--ink); }
+.dd-btn[aria-expanded="true"], .dd.on .dd-btn { background: var(--ink); color: var(--paper); }
+.dd-pop { position: absolute; top: calc(100% + 6px); left: 0; z-index: 60; min-width: 250px; background: var(--sheet); border: 1.5px solid var(--line); border-radius: 10px; box-shadow: 0 14px 34px rgba(10,20,40,.18); padding: 6px; display: grid; gap: 2px; }
+.dd-pop[hidden] { display: none; }
+nav.tabs .dd-pop button { display: block; width: 100%; text-align: left; border: 0; border-radius: 7px; padding: 10px 12px; font: 600 14.5px/1.2 var(--f-ui); background: none; color: var(--ink); white-space: nowrap; }
+nav.tabs .dd-pop button:hover { background: var(--paper); }
+nav.tabs .dd-pop button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); }
+#v-hemi .hemi { max-width: 760px; margin: 10px auto 0; }
+.home-low { display: none; }
+.hero-side .daily, #v-setup > .daily { }
+#v-setup > .daily { display: grid !important; grid-template-columns: auto 1fr auto auto; grid-template-areas: "top grid pill go" "h next pill go"; align-items: center; gap: 4px 16px; text-align: left; background: var(--sheet); color: var(--ink); border: 1.5px solid var(--line); border-left: 5px solid var(--bleu); border-bottom-width: 1.5px; border-radius: 6px; padding: 10px 14px; margin: 0 0 26px; box-shadow: none; }
+#v-setup > .daily > * { width: auto; text-align: left; justify-self: start; }
+#v-setup > .daily .d-top { grid-area: top; } #v-setup > .daily h3 { grid-area: h; } #v-setup > .daily .d-grid { grid-area: grid; } #v-setup > .daily .d-next { grid-area: next; } #v-setup > .daily .lc-pill { grid-area: pill; justify-self: end; } #v-setup > .daily .d-go, #v-setup > .daily .d-share { grid-area: go; justify-self: end; }
+#v-setup > .daily .d-top { order: 1; gap: 8px; }
+#v-setup > .daily .d-lab { color: var(--bleu); opacity: 1; }
+#v-setup > .daily .d-streak { background: var(--paper); color: var(--ink); font-size: 13px; padding: 3px 7px 2px; }
+#v-setup > .daily h3 { order: 2; margin: 0; font: 600 14px/1.2 var(--f-ui); text-transform: none; color: var(--muted); }
+#v-setup > .daily .d-state { display: none; }
+#v-setup > .daily .d-grid { order: 3; gap: 3px; }
+#v-setup > .daily .d-grid span { width: 20px; height: 20px; font-size: 10px; border-radius: 4px; background: var(--paper); color: var(--muted); }
+#v-setup > .daily .d-grid span.ok { background: #1f9d5c; color: #fff; }
+#v-setup > .daily .d-grid span.ko { background: var(--rouge); color: #fff; }
+#v-setup > .daily .d-next { order: 4; margin: 0; font-size: 12px; color: var(--muted); opacity: 1; }
+#v-setup > .daily .lc-pill { order: 5; margin-left: auto; border-color: var(--line); background: none; color: var(--muted); font-size: 12px; padding: 5px 10px; }
+#v-setup > .daily .d-go, #v-setup > .daily .d-share { order: 6; margin: 0 !important; min-width: 0; background: var(--bleu); color: #fff !important; box-shadow: none; font-size: 14px; padding: 8px 14px; border: 0; white-space: nowrap; }
+@media (max-width: 640px) { #v-setup > .daily { grid-template-columns: 1fr auto; grid-template-areas: "top pill" "h h" "grid go" "next next"; } #v-setup > .daily .lc-pill { margin-left: 0; } }
 /* ===== Fil info (calme) ===== */
 .ticker { border-bottom: 1px solid var(--line); background: var(--sheet); font-size: 13.5px; color: var(--ink); }
 .tk-in { display: flex; align-items: baseline; gap: 10px; padding-top: 7px; padding-bottom: 7px; min-width: 0; }
@@ -1157,9 +1187,15 @@ body.playing .ticker { display: none; }
       <span class="cd-chip" id="cd-chip" title="Avant le premier tour, le 18 avril 2027">1er tour J-…</span>
       <nav class="tabs" aria-label="Sections">
         <button type="button" id="tab-jouer" data-view="jouer" aria-pressed="true">⌂ Menu</button>
-        <button type="button" id="tab-cheat" data-view="cheat" aria-pressed="false">Antisèches</button>
-        <button type="button" id="tab-explorer" data-view="explorer" aria-pressed="false">Toutes les mesures</button>
-        <button type="button" id="tab-polls" data-view="polls" aria-pressed="false">Sondages</button>
+        <div class="dd" id="dd">
+          <button type="button" class="dd-btn" id="dd-btn" aria-expanded="false" aria-controls="dd-pop">Comprendre <span aria-hidden="true">▾</span></button>
+          <div class="dd-pop" id="dd-pop" hidden>
+            <button type="button" id="tab-polls" data-view="polls" aria-pressed="false">📊 Les sondages</button>
+            <button type="button" id="tab-hemi" data-view="hemi" aria-pressed="false">🏛️ L’hémicycle des candidats</button>
+            <button type="button" id="tab-explorer" data-view="explorer" aria-pressed="false">🔎 Toutes les mesures</button>
+            <button type="button" id="tab-cheat" data-view="cheat" aria-pressed="false">📝 Les antisèches</button>
+          </div>
+        </div>
         <button type="button" id="tab-stats" data-view="stats" aria-pressed="false">Mes stats</button>
       </nav>
     </div>
@@ -1209,7 +1245,11 @@ body.playing .ticker { display: none; }
           <p class="t-res" id="t-res"></p>
           <button type="button" class="t-next" id="t-next" hidden>Une autre →</button>
         </div>
-        <div class="card daily" id="daily">
+        
+      </div>
+    </div>
+
+    <div class="card daily" id="daily">
           <div class="d-top"><span class="d-lab">Défi du jour <b id="d-num">n°1</b></span><span class="d-streak" id="d-streak" title="Jours d’affilée avec le défi réussi">🔥 0</span></div>
           <h3>5 mesures, les mêmes pour tous</h3>
           <p class="d-state" id="d-state">Un seul essai par jour. Compare ton score avec tes amis.</p>
@@ -1219,8 +1259,6 @@ body.playing .ticker { display: none; }
           <p class="d-next" id="d-next"></p>
           <button type="button" class="lc-pill" id="lc-pill"><span id="lc-ava">🏛️</span> <span id="lc-txt">Ligue entre amis</span> →</button>
         </div>
-      </div>
-    </div>
 
     <div class="sec-h" id="modes-h"><h2>Les modes de jeu</h2></div>
     <div class="modes" role="group" aria-label="Mode de jeu" id="modes">
@@ -1319,11 +1357,7 @@ body.playing .ticker { display: none; }
         <span class="mp-cta">Voir tous les sondages →</span>
       </a>
       </div>
-      <div class="card hemi">
-        <h3>L’hémicycle des candidats</h3>
-        <p>Clique sur un siège pour réviser un candidat.</p>
-        <svg id="hemi" viewBox="0 0 420 235" role="group" aria-label="Hémicycle des candidats"></svg>
-      </div>
+      
     </div>
     <details class="more">
       <summary>Voir les <span id="more-n">tous les</span> panneaux <small id="more-s"></small></summary>
@@ -1418,6 +1452,13 @@ body.playing .ticker { display: none; }
       <div class="rv-prog" aria-hidden="true"><i id="rv-bar"></i></div>
     </div>
     <div id="rv-body"></div>
+  </section>
+  <section class="view" id="v-hemi" hidden>
+    <div class="card hemi">
+        <h3>L’hémicycle des candidats</h3>
+        <p>Clique sur un siège pour réviser un candidat.</p>
+        <svg id="hemi" viewBox="0 0 420 235" role="group" aria-label="Hémicycle des candidats"></svg>
+      </div>
   </section>
   <section class="view" id="v-contact" hidden>
     <div class="cheat-head">
@@ -5192,7 +5233,7 @@ function countOf(id) { return SINGLE.filter(function (x) { return x.c === id; })
 /* ---------- État ---------- */
 var cfg = { mode: "classic", pool: "main", diff: "easy", len: "20", duel: ["lepen", "melenchon"], targets: [], themes: [] };
 var game = null, timerId = null, autoId = null;
-var views = { reve: $("v-reve"), setup: $("v-setup"), game: $("v-game"), res: $("v-res"), explorer: $("v-explorer"), cheat: $("v-cheat"), stats: $("v-stats"), contact: $("v-contact"), polls: $("v-polls") };
+var views = { reve: $("v-reve"), setup: $("v-setup"), game: $("v-game"), res: $("v-res"), explorer: $("v-explorer"), cheat: $("v-cheat"), stats: $("v-stats"), contact: $("v-contact"), polls: $("v-polls"), hemi: $("v-hemi") };
 function show(v) {
   Object.keys(views).forEach(function (k) { views[k].hidden = (k !== v); });
   document.body.classList.toggle("playing", v === "game");
@@ -5201,14 +5242,22 @@ function show(v) {
   $("tab-cheat").setAttribute("aria-pressed", v === "cheat");
   $("tab-stats").setAttribute("aria-pressed", v === "stats");
   $("tab-polls").setAttribute("aria-pressed", v === "polls");
+  $("tab-hemi").setAttribute("aria-pressed", v === "hemi");
+  $("dd").classList.toggle("on", ["polls", "hemi", "explorer", "cheat"].indexOf(v) >= 0);
 }
-document.querySelectorAll("nav.tabs button").forEach(function (b) {
+function closeDd() { $("dd-pop").hidden = true; $("dd-btn").setAttribute("aria-expanded", "false"); }
+$("dd-btn").addEventListener("click", function (e) { e.stopPropagation(); var open = $("dd-pop").hidden; $("dd-pop").hidden = !open; this.setAttribute("aria-expanded", open); });
+document.addEventListener("click", function (e) { if (!$("dd-pop").hidden && !e.target.closest("#dd")) closeDd(); });
+document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !$("dd-pop").hidden) { closeDd(); $("dd-btn").focus(); } });
+document.querySelectorAll("nav.tabs button[data-view]").forEach(function (b) {
   b.addEventListener("click", function () {
     if (b.dataset.view === "explorer") { location.hash = "explorer"; show("explorer"); renderExplorer(); }
     else if (b.dataset.view === "polls") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "sondages"; show("polls"); renderPolls(); window.scrollTo({ top: 0 }); }
     else if (b.dataset.view === "stats") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "stats"; show("stats"); renderStats(); window.scrollTo({ top: 0 }); }
+    else if (b.dataset.view === "hemi") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "hemicycle"; show("hemi"); window.scrollTo({ top: 0 }); }
     else if (b.dataset.view === "cheat") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "antiseches"; show("cheat"); renderCheat(); window.scrollTo({ top: 0 }); }
     else goMenu();
+    closeDd();
   });
 });
 function goMenu() {
@@ -6995,7 +7044,7 @@ initExplorer();
 renderHome();
 runIntro();
 $("contact-line").innerHTML = "écris à <a href=\"mailto:" + CONTACT_EMAIL + "\">" + CONTACT_EMAIL + "</a>, ou utilise le formulaire « Nous écrire » et le lien « Signaler une erreur » sous chaque réponse.";
-if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } else if (location.hash === "#antiseches") { show("cheat"); renderCheat(); } else if (location.hash === "#sondages") { show("polls"); renderPolls(); } else if (location.hash === "#stats") { show("stats"); renderStats(); } else if (location.hash === "#contact") { show("contact"); } else if (location.hash === "#programme-de-reve") { openReve(); } else show("setup");
+if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } else if (location.hash === "#antiseches") { show("cheat"); renderCheat(); } else if (location.hash === "#sondages") { show("polls"); renderPolls(); } else if (location.hash === "#stats") { show("stats"); renderStats(); } else if (location.hash === "#contact") { show("contact"); } else if (location.hash === "#programme-de-reve") { openReve(); } else if (location.hash === "#hemicycle") { show("hemi"); } else show("setup");
 window.addEventListener("hashchange", function () { if (checkHashChallenge() || checkHashLeague()) return; if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } });
 checkHashChallenge(); checkHashLeague();
 })();
