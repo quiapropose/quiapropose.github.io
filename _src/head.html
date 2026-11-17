@@ -1103,9 +1103,32 @@ body.th-thanksgiving .kick-fete { color: #c2410c; }
 .hero-cta { margin-top: 6px; }
 .modebox[hidden] { display: none; }
 .home-low .cd { display: none; }
-.seo-more { margin: 6px 0 0; }
-.seo-more summary { cursor: pointer; font-size: 13px; color: var(--muted); }
+.seo-more { margin: 6px 0 0 20px; }
+.seo-more summary { cursor: pointer; font: 500 13px/1.3 var(--f-ui) !important; text-transform: none !important; letter-spacing: 0 !important; color: var(--muted); padding: 0 !important; }
+.seo-more summary::after { display: none !important; }
 .seo-more[open] summary { margin-bottom: 6px; }
+
+/* ===== Accueil encore plus léger ===== */
+.hero { margin-bottom: 28px; }
+.hero-h { font-size: clamp(30px, 3.6vw, 42px); margin-bottom: 18px; }
+.hero-h em { display: inline; }
+.t-m { min-height: 0; font-size: clamp(19px, 2vw, 22px); margin-bottom: 12px; }
+.t-q { margin-top: 10px; }
+.teaser { padding: 14px 18px 16px; }
+.sec-h .step { display: none; }
+#modes-h h2 { font-size: 22px; }
+.modes { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; gap: 8px !important; }
+.modes button { padding: 10px 12px !important; gap: 3px; min-height: 0 !important; height: auto !important; justify-content: flex-start; }
+.modes button b { font-size: 15px !important; line-height: 1.05; display: flex; align-items: center; gap: 6px; }
+.modes .ico { font-size: 18px !important; margin: 0 !important; }
+.modes button span { font-size: 12px !important; line-height: 1.25; }
+.modes button[aria-pressed="true"] { box-shadow: none; }
+.modes button.m-reve { grid-column: auto; }
+.home-low { margin-top: 26px; }
+.home-low + details.more, details.more { display: none; }
+.mini-poll .mp-src { display: none; }
+@media (max-width: 980px) { .modes { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; } }
+@media (max-width: 640px) { .modes { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } .hero-h { font-size: 30px; } }
 /* ===== Fil info (calme) ===== */
 .ticker { border-bottom: 1px solid var(--line); background: var(--sheet); font-size: 13.5px; color: var(--ink); }
 .tk-in { display: flex; align-items: baseline; gap: 10px; padding-top: 7px; padding-bottom: 7px; min-width: 0; }
@@ -1199,7 +1222,7 @@ body.playing .ticker { display: none; }
       </div>
     </div>
 
-    <div class="sec-h" id="modes-h"><span class="step">1</span><h2>Choisis ton mode</h2></div>
+    <div class="sec-h" id="modes-h"><h2>Les modes de jeu</h2></div>
     <div class="modes" role="group" aria-label="Mode de jeu" id="modes">
           <button type="button" id="m-classic" data-mode="classic" aria-pressed="true"><b>Classique</b><span>Une mesure, un candidat.</span></button>
           <button type="button" id="m-theme" data-mode="theme" aria-pressed="false"><b>Par thème</b><span>Entraîne-toi sur les sujets de ton choix.</span></button>
