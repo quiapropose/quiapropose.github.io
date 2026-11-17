@@ -209,7 +209,8 @@ var views = { reve: $("v-reve"), setup: $("v-setup"), game: $("v-game"), res: $(
 function show(v) {
   Object.keys(views).forEach(function (k) { views[k].hidden = (k !== v); });
   document.body.classList.toggle("playing", v === "game");
-  $("tab-jouer").setAttribute("aria-pressed", v === "setup");
+  $("tab-jouer").setAttribute("aria-pressed", v === "setup" && homeTab === "jouer");
+  $("tab-reviser").setAttribute("aria-pressed", v === "setup" && homeTab === "reviser");
   $("tab-explorer").setAttribute("aria-pressed", v === "explorer");
   $("tab-cheat").setAttribute("aria-pressed", v === "cheat");
   $("tab-stats").setAttribute("aria-pressed", v === "stats");
@@ -221,9 +222,30 @@ document.querySelectorAll("nav.tabs button").forEach(function (b) {
     else if (b.dataset.view === "polls") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "sondages"; show("polls"); renderPolls(); window.scrollTo({ top: 0 }); }
     else if (b.dataset.view === "stats") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "stats"; show("stats"); renderStats(); window.scrollTo({ top: 0 }); }
     else if (b.dataset.view === "cheat") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "antiseches"; show("cheat"); renderCheat(); window.scrollTo({ top: 0 }); }
-    else goMenu();
+    else { goMenu(); setHome(b.dataset.view === "reviser" ? "reviser" : "jouer"); }
+    closeMenu();
   });
 });
+/* ---------- Accueil : Je joue / Je révise, et menu déroulant ---------- */
+var HOME_KEY = "qui2027-home", homeTab = "jouer";
+try { if (localStorage.getItem(HOME_KEY) === "reviser") homeTab = "reviser"; } catch (x) {}
+function setHome(k) {
+  homeTab = k === "reviser" ? "reviser" : "jouer";
+  try { localStorage.setItem(HOME_KEY, homeTab); } catch (x) {}
+  $("hp-jouer").hidden = homeTab !== "jouer"; $("hp-reviser").hidden = homeTab !== "reviser";
+  $("hs-jouer").setAttribute("aria-selected", homeTab === "jouer"); $("hs-reviser").setAttribute("aria-selected", homeTab === "reviser");
+  $("tab-jouer").setAttribute("aria-pressed", !views.setup.hidden && homeTab === "jouer");
+  $("tab-reviser").setAttribute("aria-pressed", !views.setup.hidden && homeTab === "reviser");
+}
+document.querySelectorAll(".home-switch button").forEach(function (b) { b.addEventListener("click", function () { setHome(b.dataset.home); }); });
+function closeMenu() { $("menu-pop").hidden = true; $("menu-btn").setAttribute("aria-expanded", "false"); }
+$("menu-btn").addEventListener("click", function (e) { e.stopPropagation(); var open = $("menu-pop").hidden; $("menu-pop").hidden = !open; this.setAttribute("aria-expanded", open); });
+document.addEventListener("click", function (e) { if (!$("menu-pop").hidden && !e.target.closest("#menu-pop")) closeMenu(); });
+document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !$("menu-pop").hidden) { closeMenu(); $("menu-btn").focus(); } });
+$("mn-contact").addEventListener("click", function () { closeMenu(); $("ft-contact").click(); });
+$("mn-app").addEventListener("click", function () { closeMenu(); $("ft-app").click(); });
+document.querySelectorAll(".learn[data-go]").forEach(function (b) { b.addEventListener("click", function () { $("tab-" + b.dataset.go).click(); }); });
+setHome(location.hash === "#reviser" ? "reviser" : homeTab);
 function goMenu() {
   clearInterval(timerId); clearTimeout(autoId); hideReact();
   game = null;
@@ -368,7 +390,8 @@ $("btn-quick").addEventListener("click", function () {
   startGame(buildQuestions(cfg), cfg);
 });
 $("modes").addEventListener("click", function (e) {
-  var mb = e.target.closest("button"); if (!mb || mb.dataset.mode === "fil" || mb.dataset.mode === "reve" || window.innerWidth > 860) return;
+  var mb = e.target.closest("button"); if (!mb || mb.dataset.mode === "fil" || mb.dataset.mode === "reve") return;
+  $("modebox").hidden = false;
   setTimeout(function () { $("modebox").scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" }); }, 60);
 });
 
@@ -398,7 +421,6 @@ $("polls").addEventListener("change", function (e) {
   var sel = e.target.closest("select"); if (!sel) return;
   var k = +sel.dataset.k, box = $("pb-" + k), h = POLLS[k].hyps[+sel.value]; box.innerHTML = pollBars(h); $("pa-" + k).innerHTML = arcSvg(h); growBars(box);
 });
-$("hero-polls").addEventListener("click", function (e) { e.preventDefault(); $("tab-polls").click(); });
 $("hero-polls-sub").textContent = "· " + POLLS.length + " instituts, mis à jour le " + POLLS_MAJ.replace(/ 2026$/, "");
 
 

@@ -1090,6 +1090,88 @@ body.th-thanksgiving .kick-fete { color: #c2410c; }
 .app-dlg .go { width: 100%; margin-bottom: 10px; }
 .app-dlg .btn { width: 100%; }
 .app-dlg [hidden] { display: none; }
+
+/* ===== Accueil allégé : Je joue / Je révise ===== */
+.menu-btn { display: inline-flex; align-items: center; gap: 9px; border: 1.5px solid var(--ink); background: var(--sheet); color: var(--ink); font: 700 15px/1 var(--f-ui); padding: 10px 14px; border-radius: 999px; cursor: pointer; }
+.menu-btn:hover, .menu-btn[aria-expanded="true"] { background: var(--ink); color: var(--paper); }
+.mb-ico { display: grid; gap: 3px; width: 16px; }
+.mb-ico i { display: block; height: 2px; background: currentColor; border-radius: 2px; }
+.mast .right { position: relative; }
+.menu-pop { position: absolute; top: calc(100% + 8px); right: 0; z-index: 50; min-width: 280px; background: var(--sheet); border: 1.5px solid var(--line); border-radius: 12px; box-shadow: 0 16px 40px rgba(10,20,40,.18); padding: 8px; }
+.menu-pop[hidden] { display: none; }
+.menu-pop nav.tabs { display: grid; gap: 2px; width: auto; overflow: visible; }
+.menu-pop nav.tabs button, .menu-more a, .menu-more button { display: block; width: 100%; text-align: left; border: 0; background: none; padding: 10px 12px; border-radius: 8px; font: 600 15px/1.2 var(--f-ui); color: var(--ink); text-decoration: none; cursor: pointer; white-space: normal; }
+.menu-pop nav.tabs button:hover, .menu-more a:hover, .menu-more button:hover { background: var(--paper); }
+.menu-pop nav.tabs button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); }
+.menu-more { border-top: 1px solid var(--line); margin-top: 6px; padding-top: 6px; display: grid; gap: 2px; }
+.menu-more a, .menu-more button { font-weight: 500; font-size: 14px; color: var(--muted); }
+.home-top { text-align: center; margin: 6px 0 22px; }
+.home-top .hero-kick { margin-bottom: 10px; }
+.home-q { margin: 0 0 14px; font: 900 clamp(30px, 5vw, 46px)/1 var(--f-display); text-transform: uppercase; }
+.home-switch { display: inline-grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 6px; background: var(--sheet); border: 1.5px solid var(--line); border-radius: 18px; width: min(560px, 100%); }
+.home-switch button { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 10px; align-items: center; text-align: left; border: 0; background: none; padding: 10px 14px; border-radius: 13px; cursor: pointer; color: var(--ink); transition: background .15s ease, color .15s ease; }
+.home-switch button i { grid-row: 1 / 3; font-style: normal; font-size: 26px; }
+.home-switch button b { font: 900 22px/1 var(--f-display); text-transform: uppercase; }
+.home-switch button small { font-size: 12.5px; color: var(--muted); }
+.home-switch button[aria-selected="true"] { background: var(--bleu); color: #fff; box-shadow: inset 0 -4px 0 var(--rouge); }
+.home-switch button[aria-selected="true"] small { color: rgba(255,255,255,.8); }
+.home-panel[hidden] { display: none; }
+.play-top { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; margin-bottom: 30px; }
+.play-left { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.quick { padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; }
+.quick h3 { margin: 0; font: 800 22px/1.05 var(--f-display); text-transform: uppercase; }
+.quick h3 em { font-style: normal; color: var(--bleu); }
+.quick .hero-go { min-width: 0; width: 100%; font-size: 24px; padding: 16px 20px; }
+.quick .hero-note { margin: 0; }
+.play-left .daily { display: grid !important; grid-template-columns: 1fr auto; grid-template-areas: "top go" "h go" "grid pill" "next pill"; gap: 4px 14px; align-items: center; padding: 12px 14px; border-bottom-width: 4px; }
+.play-left .daily > * { text-align: left; }
+.play-left .daily .d-top { grid-area: top; justify-content: flex-start; gap: 8px; }
+.play-left .daily h3 { grid-area: h; font-size: 16px; text-transform: none; font-family: var(--f-ui); font-weight: 700; }
+.play-left .daily .d-state { display: none; }
+.play-left .daily .d-grid { grid-area: grid; gap: 4px; }
+.play-left .daily .d-grid span { width: 22px; height: 22px; font-size: 11px; border-radius: 4px; }
+.play-left .daily .d-go, .play-left .daily .d-share { grid-area: go; min-width: 0; margin: 0 !important; font-size: 16px; padding: 10px 14px; gap: 10px; white-space: nowrap; }
+.play-left .daily .d-next { grid-area: next; font-size: 12px; }
+.play-left .daily .lc-pill { grid-area: pill; justify-self: end; align-self: end; font-size: 12px; padding: 5px 10px; }
+.play-top .teaser { transform: none; }
+#modes-h { margin-top: 0; }
+#modes { margin-bottom: 18px; }
+#modes .modes { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+#modes .modes button { padding: 12px; }
+#modes .modes button b { font-size: 17px; display: flex; align-items: center; gap: 2px; }
+#modes .modes button span { font-size: 12.5px; }
+.mg-h { margin: 16px 0 8px; font: 800 12px/1 var(--f-ui); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+#modes > .m-reve { display: grid; grid-template-columns: 1fr; width: 100%; text-align: left; border: 0; border-radius: 12px; padding: 16px 20px; cursor: pointer; background: linear-gradient(120deg, var(--bleu), #3046d8); color: #fff; box-shadow: inset 0 -5px 0 var(--rouge); transition: transform .12s ease; }
+#modes > .m-reve:hover { transform: translateY(-2px); }
+#modes > .m-reve b { font: 900 24px/1 var(--f-display); text-transform: uppercase; display: flex; align-items: center; gap: 4px; color: #fff; }
+#modes > .m-reve span { font-size: 14px; opacity: .9; margin-top: 4px; color: #fff; }
+#modes > .m-reve .ico { font-style: normal; margin-right: 6px; }
+.modebox[hidden] { display: none; }
+.learn-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 14px; margin: 0 0 26px; align-items: stretch; }
+.learn-links { display: grid; gap: 10px; }
+.learn { display: grid; grid-template-columns: auto 1fr; column-gap: 12px; align-items: center; text-align: left; padding: 14px 16px; color: var(--ink); text-decoration: none; cursor: pointer; font: inherit; border: 1.5px solid var(--line); background: var(--sheet); transition: transform .12s ease, border-color .12s ease; }
+.learn:hover { transform: translateY(-2px); border-color: var(--bleu); }
+.learn i { grid-row: 1 / 3; font-style: normal; font-size: 28px; }
+.learn b { font: 800 20px/1.05 var(--f-display); text-transform: uppercase; }
+.learn span { font-size: 13.5px; color: var(--muted); }
+#hp-reviser .facts { justify-content: center; margin-bottom: 18px; }
+#hp-reviser .mini-poll { height: 100%; }
+@media (max-width: 860px) {
+  .play-top, .learn-grid { grid-template-columns: 1fr; }
+  #modes .modes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .play-left .daily { grid-template-columns: 1fr auto; grid-template-areas: "top pill" "h h" "grid go" "next next"; }
+  .home-switch button { padding: 9px 10px; column-gap: 8px; }
+  .home-switch button b { font-size: 19px; }
+  .home-switch button small { font-size: 11px; }
+  .home-switch button i { font-size: 22px; }
+  .menu-pop { right: auto; left: 0; }
+  #modes .modes button b { font-size: 15px; overflow-wrap: anywhere; }
+  #modes .modes button { padding: 10px; min-width: 0; }
+  .play-left .daily .d-go, .play-left .daily .d-share { font-size: 14px; padding: 9px 10px; }
+  .play-left .daily { min-width: 0; }
+}
 /* ===== Fil info (calme) ===== */
 .ticker { border-bottom: 1px solid var(--line); background: var(--sheet); font-size: 13.5px; color: var(--ink); }
 .tk-in { display: flex; align-items: baseline; gap: 10px; padding-top: 7px; padding-bottom: 7px; min-width: 0; }
@@ -1115,14 +1197,19 @@ body.playing .ticker { display: none; }
       <h1 id="home-title" title="Retour au menu"><span class="doodle" id="doodle" aria-hidden="true"></span>Qui a <em>proposé</em> ça<span class="q">&nbsp;?</span><span class="doodle2" id="doodle2" aria-hidden="true"></span></h1>
     </div>
     <div class="right">
-      <span class="cd-chip" id="cd-chip" title="Avant le premier tour, le 18 avril 2027">1er tour J-…</span>
-      <nav class="tabs" aria-label="Sections">
-        <button type="button" id="tab-jouer" data-view="jouer" aria-pressed="true">⌂ Menu</button>
-        <button type="button" id="tab-cheat" data-view="cheat" aria-pressed="false">Antisèches</button>
-        <button type="button" id="tab-explorer" data-view="explorer" aria-pressed="false">Toutes les mesures</button>
-        <button type="button" id="tab-polls" data-view="polls" aria-pressed="false">Sondages</button>
-        <button type="button" id="tab-stats" data-view="stats" aria-pressed="false">Mes stats</button>
-      </nav>
+      <span class="cd-chip" id="cd-chip" hidden>1er tour J-…</span>
+      <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="menu-pop"><span class="mb-ico" aria-hidden="true"><i></i><i></i><i></i></span>Menu</button>
+      <div class="menu-pop" id="menu-pop" hidden>
+        <nav class="tabs" aria-label="Sections">
+          <button type="button" id="tab-jouer" data-view="jouer" aria-pressed="true">🎯 Jouer</button>
+          <button type="button" id="tab-reviser" data-view="reviser" aria-pressed="false">📖 Réviser</button>
+          <button type="button" id="tab-polls" data-view="polls" aria-pressed="false">📊 Sondages</button>
+          <button type="button" id="tab-cheat" data-view="cheat" aria-pressed="false">📝 Antisèches</button>
+          <button type="button" id="tab-explorer" data-view="explorer" aria-pressed="false">🔎 Toutes les mesures</button>
+          <button type="button" id="tab-stats" data-view="stats" aria-pressed="false">🏆 Mes stats et ma ligue</button>
+        </nav>
+        <div class="menu-more"><a href="https://quiapropose.fr/programmes/">📚 Les programmes, candidat par candidat</a><button type="button" id="mn-contact">✉️ Nous écrire</button><button type="button" id="mn-app">📲 Installer l’appli</button></div>
+      </div>
     </div>
   </div>
 </header>
@@ -1144,33 +1231,25 @@ body.playing .ticker { display: none; }
       <button type="button" class="go vs-go" id="vs-go"><span>Relever le défi</span><span aria-hidden="true">→</span></button>
       <button type="button" class="vs-x" id="vs-x" aria-label="Ignorer ce défi">✕</button>
     </div>
-    <div class="hero">
-      <div class="hero-main">
-        <p class="hero-kick"><span class="pulse" aria-hidden="true"></span><span id="hero-j">J-…</span> avant le premier tour</p>
-        <button type="button" class="news-chip" id="news-chip" hidden style="display:none"></button>
-        <h2 class="hero-h">Une mesure.<br>Un candidat.<br><em>À toi de deviner.</em></h2>
-        <ul class="facts">
-          <li><b id="f-mes">0</b><span>mesures sourcées</span></li>
-          <li><b id="f-cand">0</b><span>candidats</span></li>
-          <li><b id="f-th">0</b><span>thèmes</span></li>
-        </ul>
-        <div class="hero-cta">
-          <button type="button" class="go hero-go" id="btn-quick"><span>Jouer maintenant</span><span aria-hidden="true">→</span></button>
-          <a class="hero-alt" href="#modes-h">ou choisis ton mode ↓</a><a class="hero-alt" href="https://quiapropose.fr/programmes/">📚 lire les programmes</a>
-        </div>
-        <p class="hero-note">10 questions · les 7 favoris des sondages · 4 réponses au choix</p>
-        <p class="hero-polls"><a href="#sondages" id="hero-polls">📊 Où en sont les sondages ?</a> <span id="hero-polls-sub"></span></p>
+    <div class="home-top">
+      <p class="hero-kick"><span class="pulse" aria-hidden="true"></span><span id="hero-j">J-…</span> avant le premier tour</p>
+      <button type="button" class="news-chip" id="news-chip" hidden style="display:none"></button>
+      <h2 class="home-q">Tu joues ou tu révises&nbsp;?</h2>
+      <div class="home-switch" role="tablist" aria-label="Choisis ton espace">
+        <button type="button" role="tab" id="hs-jouer" data-home="jouer" aria-selected="true" aria-controls="hp-jouer"><i aria-hidden="true">🎯</i><b>Je joue</b><small>Quiz, défi du jour, ligues</small></button>
+        <button type="button" role="tab" id="hs-reviser" data-home="reviser" aria-selected="false" aria-controls="hp-reviser"><i aria-hidden="true">📖</i><b>Je révise</b><small>Programmes, sondages, antisèches</small></button>
       </div>
-      <div class="hero-side">
-        <div class="teaser card" id="teaser" aria-live="polite">
-          <div class="t-top"><span class="t-lab">Échauffement</span><span class="t-score" id="t-score"></span></div>
-          <p class="t-q">Qui a proposé ça&nbsp;?</p>
-          <p class="t-m" id="t-m">…</p>
-          <div class="t-opts" id="t-opts" role="group" aria-label="Réponses"></div>
-          <p class="t-res" id="t-res"></p>
-          <button type="button" class="t-next" id="t-next" hidden>Une autre →</button>
-        </div>
-        <div class="card daily" id="daily">
+    </div>
+
+    <div class="home-panel" id="hp-jouer" role="tabpanel" aria-labelledby="hs-jouer">
+      <div class="play-top">
+        <div class="play-left">
+          <div class="card quick">
+            <h3>Une mesure. Un candidat. <em>À toi de deviner.</em></h3>
+            <button type="button" class="go hero-go" id="btn-quick"><span>Jouer maintenant</span><span aria-hidden="true">→</span></button>
+            <p class="hero-note">10 questions · les 7 favoris des sondages · 4 réponses au choix</p>
+          </div>
+          <div class="card daily" id="daily">
           <div class="d-top"><span class="d-lab">Défi du jour <b id="d-num">n°1</b></span><span class="d-streak" id="d-streak" title="Jours d’affilée avec le défi réussi">🔥 0</span></div>
           <h3>5 mesures, les mêmes pour tous</h3>
           <p class="d-state" id="d-state">Un seul essai par jour. Compare ton score avec tes amis.</p>
@@ -1180,24 +1259,38 @@ body.playing .ticker { display: none; }
           <p class="d-next" id="d-next"></p>
           <button type="button" class="lc-pill" id="lc-pill"><span id="lc-ava">🏛️</span> <span id="lc-txt">Ligue entre amis</span> →</button>
         </div>
-      </div>
-    </div>
-
-    <div class="sec-h" id="modes-h"><span class="step">1</span><h2>Choisis ton mode</h2></div>
-    <div class="modes" role="group" aria-label="Mode de jeu" id="modes">
-          <button type="button" id="m-classic" data-mode="classic" aria-pressed="true"><b>Classique</b><span>Une mesure, un candidat.</span></button>
-          <button type="button" id="m-duel" data-mode="duel" aria-pressed="false"><b>Confrontation</b><span>Deux candidats, une mesure.</span></button>
-          <button type="button" id="m-blitz" data-mode="blitz" aria-pressed="false"><b>Éclair 60 s</b><span>Une minute, un max de points.</span></button>
-          <button type="button" id="m-target" data-mode="target" aria-pressed="false"><b>Ciblé</b><span>Révise qui tu veux.</span></button>
-          <button type="button" id="m-accord" data-mode="accord" aria-pressed="false"><b>Ils sont d’accord&nbsp;!</b><span>Quand des rivaux pensent pareil.</span></button>
-          <button type="button" id="m-citations" data-mode="citations" aria-pressed="false"><b>Qui a dit ça&nbsp;?</b><span>10 phrases chocs, avec contexte.</span></button>
-          <button type="button" id="m-casier" data-mode="casier" aria-pressed="false"><b>Casier &amp; polémiques</b><span>10 dossiers judiciaires, sourcés.</span></button>
-          <button type="button" id="m-reve" data-mode="reve" aria-pressed="false" class="m-reve"><b>✨ Mon programme de rêve</b><span>Choisis tes mesures par thème : découvre ton candidat le plus proche.</span></button>
-          <button type="button" id="m-conseil" data-mode="conseil" aria-pressed="false"><b>Le Conseil constit’ tousse</b><span>Les mesures qui coincent en droit.</span></button>
         </div>
+        <div class="teaser card" id="teaser" aria-live="polite">
+          <div class="t-top"><span class="t-lab">Échauffement</span><span class="t-score" id="t-score"></span></div>
+          <p class="t-q">Qui a proposé ça&nbsp;?</p>
+          <p class="t-m" id="t-m">…</p>
+          <div class="t-opts" id="t-opts" role="group" aria-label="Réponses"></div>
+          <p class="t-res" id="t-res"></p>
+          <button type="button" class="t-next" id="t-next" hidden>Une autre →</button>
+        </div>
+      </div>
 
-    <div class="card modebox" id="modebox">
-      <div class="sec-h"><span class="step">2</span><h2>Règle ta partie</h2></div>
+      <div class="sec-h" id="modes-h"><h2>Tous les modes</h2></div>
+      <div id="modes" role="group" aria-label="Mode de jeu">
+        <button type="button" id="m-reve" data-mode="reve" aria-pressed="false" class="m-reve"><b><i class="ico" aria-hidden="true">✨</i>Mon programme de rêve</b><span>Choisis tes mesures par thème et découvre ton candidat le plus proche.</span></button>
+        <p class="mg-h">Le quiz</p>
+        <div class="modes">
+          <button type="button" id="m-classic" data-mode="classic" aria-pressed="false"><b><i class="ico" aria-hidden="true">🎯</i>Classique</b><span>Une mesure, un candidat.</span></button>
+          <button type="button" id="m-duel" data-mode="duel" aria-pressed="false"><b><i class="ico" aria-hidden="true">🥊</i>Confrontation</b><span>Deux candidats, une mesure.</span></button>
+          <button type="button" id="m-blitz" data-mode="blitz" aria-pressed="false"><b><i class="ico" aria-hidden="true">⚡</i>Éclair 60 s</b><span>Une minute, un max de points.</span></button>
+          <button type="button" id="m-target" data-mode="target" aria-pressed="false"><b><i class="ico" aria-hidden="true">🔎</i>Ciblé</b><span>Révise qui tu veux.</span></button>
+        </div>
+        <p class="mg-h">Pour aller plus loin</p>
+        <div class="modes">
+          <button type="button" id="m-accord" data-mode="accord" aria-pressed="false"><b><i class="ico" aria-hidden="true">🤝</i>Ils sont d’accord&nbsp;!</b><span>Quand des rivaux pensent pareil.</span></button>
+          <button type="button" id="m-citations" data-mode="citations" aria-pressed="false"><b><i class="ico" aria-hidden="true">💬</i>Qui a dit ça&nbsp;?</b><span>Des phrases chocs, avec contexte.</span></button>
+          <button type="button" id="m-casier" data-mode="casier" aria-pressed="false"><b><i class="ico" aria-hidden="true">⚖️</i>Casier &amp; polémiques</b><span>Les dossiers judiciaires, sourcés.</span></button>
+          <button type="button" id="m-conseil" data-mode="conseil" aria-pressed="false"><b><i class="ico" aria-hidden="true">🏛️</i>Le Conseil constit’ tousse</b><span>Les mesures qui coincent en droit.</span></button>
+        </div>
+      </div>
+
+      <div class="card modebox" id="modebox" hidden>
+      <div class="sec-h"><h2>Règle ta partie</h2></div>
       <div class="fields">
         <div class="field" id="fld-pool">
           <span class="lab" id="lab-pool">Candidats en jeu</span>
@@ -1253,10 +1346,30 @@ body.playing .ticker { display: none; }
         <span class="best" id="best"></span>
       </div>
     </div>
+    </div>
 
-    <div class="home-low">
-      <div class="hl-left">
-      <div class="cd" id="cd" aria-live="off">
+    <div class="home-panel" id="hp-reviser" role="tabpanel" aria-labelledby="hs-reviser" hidden>
+      <ul class="facts">
+        <li><b id="f-mes">0</b><span>mesures sourcées</span></li>
+        <li><b id="f-cand">0</b><span>candidats</span></li>
+        <li><b id="f-th">0</b><span>thèmes</span></li>
+      </ul>
+      <div class="learn-grid">
+        <a class="card mini-poll" id="mini-poll" href="#sondages">
+          <span class="mp-lab">📊 Les sondages</span>
+          <svg id="mp-arc" viewBox="0 0 220 122" role="img" aria-label="Dernier sondage"></svg>
+          <span class="mp-src" id="mp-src"></span>
+          <span class="mp-cta"><span id="hero-polls">Comparer les instituts</span> <span id="hero-polls-sub"></span> →</span>
+        </a>
+        <div class="learn-links">
+          <a class="card learn" href="https://quiapropose.fr/programmes/"><i aria-hidden="true">📚</i><b>Les programmes</b><span>Toutes les mesures de chaque candidat, avec les sources.</span></a>
+          <button type="button" class="card learn" data-go="cheat"><i aria-hidden="true">📝</i><b>Antisèches</b><span>Ce qu’il faut retenir de chaque candidat, en une page.</span></button>
+          <button type="button" class="card learn" data-go="explorer"><i aria-hidden="true">🔎</i><b>Toutes les mesures</b><span>Cherche par mot, par thème ou par candidat.</span></button>
+        </div>
+      </div>
+      <div class="home-low">
+        <div class="hl-left">
+          <div class="cd" id="cd" aria-live="off">
         <span class="j" id="cd-j">J-…</span>
         <span class="lbl">Avant le premier tour · dimanche 18 avril 2027</span>
         <div class="units" aria-hidden="true">
@@ -1267,24 +1380,20 @@ body.playing .ticker { display: none; }
         </div>
         <span class="quipcd" id="cd-quip"></span>
       </div>
-      <a class="card mini-poll" id="mini-poll" href="#sondages">
-        <span class="mp-lab">📊 Le dernier sondage</span>
-        <svg id="mp-arc" viewBox="0 0 220 122" role="img" aria-label="Dernier sondage"></svg>
-        <span class="mp-src" id="mp-src"></span>
-        <span class="mp-cta">Voir tous les sondages →</span>
-      </a>
-      </div>
-      <div class="card hemi">
+        </div>
+        <div class="card hemi">
         <h3>L’hémicycle des candidats</h3>
         <p>Clique sur un siège pour réviser un candidat.</p>
         <svg id="hemi" viewBox="0 0 420 235" role="group" aria-label="Hémicycle des candidats"></svg>
       </div>
-    </div>
-    <details class="more">
+      </div>
+      <details class="more">
       <summary>Voir les <span id="more-n">tous les</span> panneaux <small id="more-s"></small></summary>
       <p class="boards-intro">Bandeau <span class="soon-l">À venir</span> : programme 2027 incomplet, ou candidature déclarée sans programme pour l’instant. On complète dès que ça sort.</p>
       <div class="boards" id="boards-home"></div>
     </details>
+    </div>
+
   </section>
 
   <section class="view" id="v-game" hidden>
@@ -5151,7 +5260,8 @@ var views = { reve: $("v-reve"), setup: $("v-setup"), game: $("v-game"), res: $(
 function show(v) {
   Object.keys(views).forEach(function (k) { views[k].hidden = (k !== v); });
   document.body.classList.toggle("playing", v === "game");
-  $("tab-jouer").setAttribute("aria-pressed", v === "setup");
+  $("tab-jouer").setAttribute("aria-pressed", v === "setup" && homeTab === "jouer");
+  $("tab-reviser").setAttribute("aria-pressed", v === "setup" && homeTab === "reviser");
   $("tab-explorer").setAttribute("aria-pressed", v === "explorer");
   $("tab-cheat").setAttribute("aria-pressed", v === "cheat");
   $("tab-stats").setAttribute("aria-pressed", v === "stats");
@@ -5163,9 +5273,30 @@ document.querySelectorAll("nav.tabs button").forEach(function (b) {
     else if (b.dataset.view === "polls") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "sondages"; show("polls"); renderPolls(); window.scrollTo({ top: 0 }); }
     else if (b.dataset.view === "stats") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "stats"; show("stats"); renderStats(); window.scrollTo({ top: 0 }); }
     else if (b.dataset.view === "cheat") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "antiseches"; show("cheat"); renderCheat(); window.scrollTo({ top: 0 }); }
-    else goMenu();
+    else { goMenu(); setHome(b.dataset.view === "reviser" ? "reviser" : "jouer"); }
+    closeMenu();
   });
 });
+/* ---------- Accueil : Je joue / Je révise, et menu déroulant ---------- */
+var HOME_KEY = "qui2027-home", homeTab = "jouer";
+try { if (localStorage.getItem(HOME_KEY) === "reviser") homeTab = "reviser"; } catch (x) {}
+function setHome(k) {
+  homeTab = k === "reviser" ? "reviser" : "jouer";
+  try { localStorage.setItem(HOME_KEY, homeTab); } catch (x) {}
+  $("hp-jouer").hidden = homeTab !== "jouer"; $("hp-reviser").hidden = homeTab !== "reviser";
+  $("hs-jouer").setAttribute("aria-selected", homeTab === "jouer"); $("hs-reviser").setAttribute("aria-selected", homeTab === "reviser");
+  $("tab-jouer").setAttribute("aria-pressed", !views.setup.hidden && homeTab === "jouer");
+  $("tab-reviser").setAttribute("aria-pressed", !views.setup.hidden && homeTab === "reviser");
+}
+document.querySelectorAll(".home-switch button").forEach(function (b) { b.addEventListener("click", function () { setHome(b.dataset.home); }); });
+function closeMenu() { $("menu-pop").hidden = true; $("menu-btn").setAttribute("aria-expanded", "false"); }
+$("menu-btn").addEventListener("click", function (e) { e.stopPropagation(); var open = $("menu-pop").hidden; $("menu-pop").hidden = !open; this.setAttribute("aria-expanded", open); });
+document.addEventListener("click", function (e) { if (!$("menu-pop").hidden && !e.target.closest("#menu-pop")) closeMenu(); });
+document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !$("menu-pop").hidden) { closeMenu(); $("menu-btn").focus(); } });
+$("mn-contact").addEventListener("click", function () { closeMenu(); $("ft-contact").click(); });
+$("mn-app").addEventListener("click", function () { closeMenu(); $("ft-app").click(); });
+document.querySelectorAll(".learn[data-go]").forEach(function (b) { b.addEventListener("click", function () { $("tab-" + b.dataset.go).click(); }); });
+setHome(location.hash === "#reviser" ? "reviser" : homeTab);
 function goMenu() {
   clearInterval(timerId); clearTimeout(autoId); hideReact();
   game = null;
@@ -5310,7 +5441,8 @@ $("btn-quick").addEventListener("click", function () {
   startGame(buildQuestions(cfg), cfg);
 });
 $("modes").addEventListener("click", function (e) {
-  var mb = e.target.closest("button"); if (!mb || mb.dataset.mode === "fil" || mb.dataset.mode === "reve" || window.innerWidth > 860) return;
+  var mb = e.target.closest("button"); if (!mb || mb.dataset.mode === "fil" || mb.dataset.mode === "reve") return;
+  $("modebox").hidden = false;
   setTimeout(function () { $("modebox").scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" }); }, 60);
 });
 
@@ -5340,7 +5472,6 @@ $("polls").addEventListener("change", function (e) {
   var sel = e.target.closest("select"); if (!sel) return;
   var k = +sel.dataset.k, box = $("pb-" + k), h = POLLS[k].hyps[+sel.value]; box.innerHTML = pollBars(h); $("pa-" + k).innerHTML = arcSvg(h); growBars(box);
 });
-$("hero-polls").addEventListener("click", function (e) { e.preventDefault(); $("tab-polls").click(); });
 $("hero-polls-sub").textContent = "· " + POLLS.length + " instituts, mis à jour le " + POLLS_MAJ.replace(/ 2026$/, "");
 
 
