@@ -209,7 +209,7 @@ var views = { reve: $("v-reve"), setup: $("v-setup"), game: $("v-game"), res: $(
 function show(v) {
   Object.keys(views).forEach(function (k) { views[k].hidden = (k !== v); });
   document.body.classList.toggle("playing", v === "game");
-  syncPageTabs();
+  $("tab-jouer").setAttribute("aria-pressed", v === "setup");
   $("tab-explorer").setAttribute("aria-pressed", v === "explorer");
   $("tab-cheat").setAttribute("aria-pressed", v === "cheat");
   $("tab-stats").setAttribute("aria-pressed", v === "stats");
@@ -221,47 +221,17 @@ document.querySelectorAll("nav.tabs button").forEach(function (b) {
     else if (b.dataset.view === "polls") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "sondages"; show("polls"); renderPolls(); window.scrollTo({ top: 0 }); }
     else if (b.dataset.view === "stats") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "stats"; show("stats"); renderStats(); window.scrollTo({ top: 0 }); }
     else if (b.dataset.view === "cheat") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "antiseches"; show("cheat"); renderCheat(); window.scrollTo({ top: 0 }); }
-    else { enterSetup(); setPage(b.dataset.view === "reviser" ? "cours" : b.dataset.view === "porte" ? "porte" : "jeu"); }
-    closeMenu();
+    else goMenu();
   });
 });
-/* ---------- Accueil en pages : porte → côté jeu → réglages, ou côté cours ---------- */
-var PAGES = { porte: "pg-porte", jeu: "pg-jeu", reglages: "pg-reglages", cours: "pg-cours" }, PAGE_HASH = { porte: "", jeu: "#jeu", reglages: "#reglages", cours: "#cours" }, page = "porte";
-function syncPageTabs() {
-  var onSetup = !views.setup.hidden;
-  $("tab-home").setAttribute("aria-pressed", onSetup && page === "porte");
-  $("tab-jouer").setAttribute("aria-pressed", onSetup && (page === "jeu" || page === "reglages"));
-  $("tab-reviser").setAttribute("aria-pressed", onSetup && page === "cours");
-}
-function setPage(p, noPush) {
-  if (!PAGES[p]) p = "porte";
-  page = p;
-  Object.keys(PAGES).forEach(function (k) { $(PAGES[k]).hidden = k !== p; });
-  var h = PAGE_HASH[p];
-  if (!noPush && location.hash !== h) history.pushState(null, "", location.pathname + location.search + h);
-  syncPageTabs();
-  window.scrollTo({ top: 0 });
-}
-function enterSetup() { clearInterval(timerId); clearTimeout(autoId); hideReact(); game = null; show("setup"); syncSetup(); renderDaily(); }
-function setHome(k) { setPage(k === "reviser" ? "cours" : "jeu"); }
-document.addEventListener("click", function (e) { var b = e.target.closest("[data-page]"); if (b && !b.closest("#menu-pop")) setPage(b.dataset.page); });
-function pageFromHash(h) { return h === "#jeu" ? "jeu" : h === "#cours" || h === "#reviser" ? "cours" : h === "#reglages" ? "reglages" : (h === "" || h === "#") ? "porte" : null; }
-window.addEventListener("popstate", function () { var pg = pageFromHash(location.hash); if (pg) { enterSetup(); setPage(pg, true); } });
-function closeMenu() { $("menu-pop").hidden = true; $("menu-btn").setAttribute("aria-expanded", "false"); }
-$("menu-btn").addEventListener("click", function (e) { e.stopPropagation(); var open = $("menu-pop").hidden; $("menu-pop").hidden = !open; this.setAttribute("aria-expanded", open); });
-document.addEventListener("click", function (e) { if (!$("menu-pop").hidden && !e.target.closest("#menu-pop")) closeMenu(); });
-document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !$("menu-pop").hidden) { closeMenu(); $("menu-btn").focus(); } });
-$("mn-contact").addEventListener("click", function () { closeMenu(); $("ft-contact").click(); });
-$("mn-app").addEventListener("click", function () { closeMenu(); $("ft-app").click(); });
-document.querySelectorAll(".learn[data-go]").forEach(function (b) { b.addEventListener("click", function () { $("tab-" + b.dataset.go).click(); }); });
-
 function goMenu() {
   clearInterval(timerId); clearTimeout(autoId); hideReact();
   game = null;
+  if (location.hash) history.replaceState(null, "", location.pathname + location.search);
   show("setup"); syncSetup(); renderDaily();
-  setPage(typeof page !== "undefined" && page === "cours" ? "cours" : "jeu");
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
-$("home-title").addEventListener("click", function () { goMenu(); setPage("porte"); });
+$("home-title").addEventListener("click", goMenu);
 $("g-menu").addEventListener("click", goMenu);
 
 /* ---------- Accueil ---------- */
@@ -390,8 +360,7 @@ function syncSetup() {
   $("best").textContent = best ? "Ton record dans ce mode : " + fmt(best.pts) + " points (" + best.score + "/" + best.total + ")." : "Pas encore de record dans ce mode. La place est libre.";
 }
 function modeKey(c) { return c.mode === "classic" || c.mode === "blitz" || c.mode === "theme" ? c.mode + "-" + c.pool + "-" + c.diff : c.mode; }
-$("modes").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; if (b.dataset.mode === "fil") { openFil(); return; } if (b.dataset.mode === "reve") { openReve(); return; } cfg.mode = b.dataset.mode; syncSetup();
-  $("rg-title").innerHTML = b.querySelector("b").innerHTML; $("rg-sub").textContent = b.querySelector("span").textContent; setPage("reglages"); });
+$("modes").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; if (b.dataset.mode === "fil") { openFil(); return; } if (b.dataset.mode === "reve") { openReve(); return; } cfg.mode = b.dataset.mode; syncSetup(); });
 $("seg-pool").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; cfg.pool = b.dataset.pool; syncSetup(); });
 $("seg-diff").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; cfg.diff = b.dataset.diff; syncSetup(); });
 $("seg-len").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; cfg.len = b.dataset.len; syncSetup(); });
@@ -414,6 +383,10 @@ $("btn-start").addEventListener("click", function () { startGame(buildQuestions(
 $("btn-quick").addEventListener("click", function () {
   cfg.mode = "classic"; cfg.pool = "main"; cfg.diff = "easy"; cfg.len = "10"; syncSetup();
   startGame(buildQuestions(cfg), cfg);
+});
+$("modes").addEventListener("click", function (e) {
+  var mb = e.target.closest("button"); if (!mb || mb.dataset.mode === "fil" || mb.dataset.mode === "reve" || window.innerWidth > 860) return;
+  setTimeout(function () { $("modebox").scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" }); }, 60);
 });
 
 
@@ -442,6 +415,7 @@ $("polls").addEventListener("change", function (e) {
   var sel = e.target.closest("select"); if (!sel) return;
   var k = +sel.dataset.k, box = $("pb-" + k), h = POLLS[k].hyps[+sel.value]; box.innerHTML = pollBars(h); $("pa-" + k).innerHTML = arcSvg(h); growBars(box);
 });
+$("hero-polls").addEventListener("click", function (e) { e.preventDefault(); $("tab-polls").click(); });
 $("hero-polls-sub").textContent = "· " + POLLS.length + " instituts, mis à jour le " + POLLS_MAJ.replace(/ 2026$/, "");
 
 
@@ -2033,7 +2007,7 @@ initExplorer();
 renderHome();
 runIntro();
 $("contact-line").innerHTML = "écris à <a href=\"mailto:" + CONTACT_EMAIL + "\">" + CONTACT_EMAIL + "</a>, ou utilise le formulaire « Nous écrire » et le lien « Signaler une erreur » sous chaque réponse.";
-if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } else if (location.hash === "#antiseches") { show("cheat"); renderCheat(); } else if (location.hash === "#sondages") { show("polls"); renderPolls(); } else if (location.hash === "#stats") { show("stats"); renderStats(); } else if (location.hash === "#contact") { show("contact"); } else if (location.hash === "#programme-de-reve") { openReve(); } else { show("setup"); setPage(location.hash === "#reglages" ? "jeu" : (pageFromHash(location.hash) || "porte"), true); }
+if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } else if (location.hash === "#antiseches") { show("cheat"); renderCheat(); } else if (location.hash === "#sondages") { show("polls"); renderPolls(); } else if (location.hash === "#stats") { show("stats"); renderStats(); } else if (location.hash === "#contact") { show("contact"); } else if (location.hash === "#programme-de-reve") { openReve(); } else show("setup");
 window.addEventListener("hashchange", function () { if (checkHashChallenge() || checkHashLeague()) return; if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } });
 checkHashChallenge(); checkHashLeague();
 })();
