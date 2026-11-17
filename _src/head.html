@@ -1172,6 +1172,53 @@ body.th-thanksgiving .kick-fete { color: #c2410c; }
   .play-left .daily .d-go, .play-left .daily .d-share { font-size: 14px; padding: 9px 10px; }
   .play-left .daily { min-width: 0; }
 }
+
+/* ===== Accueil en pages : porte, côté jeu, réglages, côté cours ===== */
+.page[hidden] { display: none; }
+#pg-porte { text-align: center; padding: 18px 0 30px; animation: pgin .35s ease; }
+.door-q { margin: 6px auto 26px; max-width: 780px; font: 900 clamp(30px, 6vw, 62px)/.95 var(--f-display); text-transform: uppercase; text-wrap: balance; }
+#modes .modes button[aria-pressed="true"] { border-color: var(--line); background: var(--sheet); }
+#modes .modes button[aria-pressed="true"] b { color: inherit; }
+.doors { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 900px; margin: 0 auto; }
+.door { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; text-align: left; border: 0; border-radius: 18px; padding: 28px 26px 24px; min-height: 250px; cursor: pointer; font: inherit; transition: transform .15s ease, box-shadow .15s ease; }
+.door:hover { transform: translateY(-4px); }
+.door i { font-style: normal; font-size: 46px; line-height: 1; }
+.door b { font: 900 clamp(34px, 4.4vw, 48px)/.95 var(--f-display); text-transform: uppercase; }
+.door span { font-size: 16px; line-height: 1.4; opacity: .9; }
+.door em { margin-top: auto; font: 800 15px/1 var(--f-ui); font-style: normal; letter-spacing: .06em; text-transform: uppercase; }
+.door-jeu { background: linear-gradient(140deg, var(--bleu), #2a3fd0); color: #fff; box-shadow: inset 0 -7px 0 var(--rouge), 0 14px 30px rgba(0,0,145,.18); }
+.door-cours { background: var(--sheet); color: var(--ink); border: 2px solid var(--line); box-shadow: inset 0 -7px 0 var(--bleu), 0 14px 30px rgba(10,20,40,.08); }
+.door-cours em { color: var(--bleu); }
+@keyframes pgin { from { opacity: 0; transform: translateY(8px); } }
+.page:not(#pg-porte) { animation: pgin .3s ease; }
+.pg-head { margin: 4px 0 18px; }
+.pg-back { border: 0; background: none; padding: 4px 0; font: 700 14px/1 var(--f-ui); color: var(--muted); cursor: pointer; }
+.pg-back:hover { color: var(--bleu); text-decoration: underline; }
+.pg-head h2 { margin: 6px 0 4px; font: 900 clamp(32px, 5vw, 46px)/1 var(--f-display); text-transform: uppercase; }
+.pg-head p { margin: 0; color: var(--muted); font-size: 15px; }
+#pg-jeu .play-top { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: stretch; margin-bottom: 22px; }
+#pg-jeu .play-top .daily { display: grid !important; grid-template-columns: 1fr; grid-template-areas: "top" "h" "grid" "go" "next" "pill"; gap: 8px; align-content: start; padding: 18px 20px; border-bottom-width: 5px; }
+#pg-jeu .play-top .daily > * { text-align: left; }
+#pg-jeu .play-top .daily .d-top { grid-area: top; justify-content: space-between; }
+#pg-jeu .play-top .daily h3 { grid-area: h; font: 800 22px/1.05 var(--f-display); text-transform: uppercase; }
+#pg-jeu .play-top .daily .d-state { display: none; }
+#pg-jeu .play-top .daily .d-grid { grid-area: grid; gap: 5px; }
+#pg-jeu .play-top .daily .d-grid span { width: 26px; height: 26px; font-size: 12px; border-radius: 5px; }
+#pg-jeu .play-top .daily .d-go, #pg-jeu .play-top .daily .d-share { grid-area: go; margin: 4px 0 0 !important; font-size: 20px; padding: 14px 18px; }
+#pg-jeu .play-top .daily .d-next { grid-area: next; font-size: 12px; }
+#pg-jeu .play-top .daily .lc-pill { grid-area: pill; justify-self: start; font-size: 12px; padding: 5px 10px; }
+#pg-jeu .quick .hero-go { margin-top: auto; }
+.warm { max-width: 640px; margin: 26px auto 0; }
+.warm .teaser { transform: none; }
+#pg-reglages .modebox { max-width: 760px; }
+#pg-cours .facts { justify-content: center; margin-bottom: 18px; }
+#pg-cours .mini-poll { height: 100%; }
+@media (max-width: 760px) {
+  .doors { grid-template-columns: 1fr; gap: 12px; }
+  .door { min-height: 0; padding: 22px 20px 20px; }
+  .door i { font-size: 36px; }
+  #pg-jeu .play-top { grid-template-columns: 1fr; }
+}
 /* ===== Fil info (calme) ===== */
 .ticker { border-bottom: 1px solid var(--line); background: var(--sheet); font-size: 13.5px; color: var(--ink); }
 .tk-in { display: flex; align-items: baseline; gap: 10px; padding-top: 7px; padding-bottom: 7px; min-width: 0; }
@@ -1201,8 +1248,9 @@ body.playing .ticker { display: none; }
       <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="menu-pop"><span class="mb-ico" aria-hidden="true"><i></i><i></i><i></i></span>Menu</button>
       <div class="menu-pop" id="menu-pop" hidden>
         <nav class="tabs" aria-label="Sections">
-          <button type="button" id="tab-jouer" data-view="jouer" aria-pressed="true">🎯 Jouer</button>
-          <button type="button" id="tab-reviser" data-view="reviser" aria-pressed="false">📖 Réviser</button>
+          <button type="button" id="tab-home" data-view="porte" aria-pressed="true">🏠 Accueil</button>
+          <button type="button" id="tab-jouer" data-view="jouer" aria-pressed="false">🎯 Côté jeu</button>
+          <button type="button" id="tab-reviser" data-view="reviser" aria-pressed="false">📖 Côté cours</button>
           <button type="button" id="tab-polls" data-view="polls" aria-pressed="false">📊 Sondages</button>
           <button type="button" id="tab-cheat" data-view="cheat" aria-pressed="false">📝 Antisèches</button>
           <button type="button" id="tab-explorer" data-view="explorer" aria-pressed="false">🔎 Toutes les mesures</button>
@@ -1231,25 +1279,25 @@ body.playing .ticker { display: none; }
       <button type="button" class="go vs-go" id="vs-go"><span>Relever le défi</span><span aria-hidden="true">→</span></button>
       <button type="button" class="vs-x" id="vs-x" aria-label="Ignorer ce défi">✕</button>
     </div>
-    <div class="home-top">
+    <div class="page" id="pg-porte">
       <p class="hero-kick"><span class="pulse" aria-hidden="true"></span><span id="hero-j">J-…</span> avant le premier tour</p>
       <button type="button" class="news-chip" id="news-chip" hidden style="display:none"></button>
-      <h2 class="home-q">Tu joues ou tu révises&nbsp;?</h2>
-      <div class="home-switch" role="tablist" aria-label="Choisis ton espace">
-        <button type="button" role="tab" id="hs-jouer" data-home="jouer" aria-selected="true" aria-controls="hp-jouer"><i aria-hidden="true">🎯</i><b>Je joue</b><small>Quiz, défi du jour, ligues</small></button>
-        <button type="button" role="tab" id="hs-reviser" data-home="reviser" aria-selected="false" aria-controls="hp-reviser"><i aria-hidden="true">📖</i><b>Je révise</b><small>Programmes, sondages, antisèches</small></button>
+      <h2 class="door-q">Tu entres côté jeu ou côté cours&nbsp;?</h2>
+      <div class="doors">
+        <button type="button" class="door door-jeu" data-page="jeu"><i aria-hidden="true">🎯</i><b>Côté jeu</b><span>Devine qui a proposé quoi : quiz, défi du jour, ligues entre amis.</span><em>Entrer →</em></button>
+        <button type="button" class="door door-cours" data-page="cours"><i aria-hidden="true">📖</i><b>Côté cours</b><span>Les programmes, les sondages et les antisèches pour tout comprendre.</span><em>Entrer →</em></button>
       </div>
     </div>
 
-    <div class="home-panel" id="hp-jouer" role="tabpanel" aria-labelledby="hs-jouer">
+    <div class="page" id="pg-jeu" hidden>
+      <div class="pg-head"><button type="button" class="pg-back" data-page="porte">← Accueil</button><h2>Côté jeu</h2><p>Choisis ton mode de jeu.</p></div>
       <div class="play-top">
-        <div class="play-left">
-          <div class="card quick">
+        <div class="card quick">
             <h3>Une mesure. Un candidat. <em>À toi de deviner.</em></h3>
             <button type="button" class="go hero-go" id="btn-quick"><span>Jouer maintenant</span><span aria-hidden="true">→</span></button>
             <p class="hero-note">10 questions · les 7 favoris des sondages · 4 réponses au choix</p>
           </div>
-          <div class="card daily" id="daily">
+        <div class="card daily" id="daily">
           <div class="d-top"><span class="d-lab">Défi du jour <b id="d-num">n°1</b></span><span class="d-streak" id="d-streak" title="Jours d’affilée avec le défi réussi">🔥 0</span></div>
           <h3>5 mesures, les mêmes pour tous</h3>
           <p class="d-state" id="d-state">Un seul essai par jour. Compare ton score avec tes amis.</p>
@@ -1259,18 +1307,7 @@ body.playing .ticker { display: none; }
           <p class="d-next" id="d-next"></p>
           <button type="button" class="lc-pill" id="lc-pill"><span id="lc-ava">🏛️</span> <span id="lc-txt">Ligue entre amis</span> →</button>
         </div>
-        </div>
-        <div class="teaser card" id="teaser" aria-live="polite">
-          <div class="t-top"><span class="t-lab">Échauffement</span><span class="t-score" id="t-score"></span></div>
-          <p class="t-q">Qui a proposé ça&nbsp;?</p>
-          <p class="t-m" id="t-m">…</p>
-          <div class="t-opts" id="t-opts" role="group" aria-label="Réponses"></div>
-          <p class="t-res" id="t-res"></p>
-          <button type="button" class="t-next" id="t-next" hidden>Une autre →</button>
-        </div>
       </div>
-
-      <div class="sec-h" id="modes-h"><h2>Tous les modes</h2></div>
       <div id="modes" role="group" aria-label="Mode de jeu">
         <button type="button" id="m-reve" data-mode="reve" aria-pressed="false" class="m-reve"><b><i class="ico" aria-hidden="true">✨</i>Mon programme de rêve</b><span>Choisis tes mesures par thème et découvre ton candidat le plus proche.</span></button>
         <p class="mg-h">Le quiz</p>
@@ -1288,9 +1325,22 @@ body.playing .ticker { display: none; }
           <button type="button" id="m-conseil" data-mode="conseil" aria-pressed="false"><b><i class="ico" aria-hidden="true">🏛️</i>Le Conseil constit’ tousse</b><span>Les mesures qui coincent en droit.</span></button>
         </div>
       </div>
+      <div class="warm"><p class="mg-h">Pour t’échauffer</p>
+        <div class="teaser card" id="teaser" aria-live="polite">
+          <div class="t-top"><span class="t-lab">Échauffement</span><span class="t-score" id="t-score"></span></div>
+          <p class="t-q">Qui a proposé ça&nbsp;?</p>
+          <p class="t-m" id="t-m">…</p>
+          <div class="t-opts" id="t-opts" role="group" aria-label="Réponses"></div>
+          <p class="t-res" id="t-res"></p>
+          <button type="button" class="t-next" id="t-next" hidden>Une autre →</button>
+        </div>
+      </div>
+    </div>
 
-      <div class="card modebox" id="modebox" hidden>
-      <div class="sec-h"><h2>Règle ta partie</h2></div>
+    <div class="page" id="pg-reglages" hidden>
+      <div class="pg-head"><button type="button" class="pg-back" data-page="jeu">← Changer de mode</button><h2 id="rg-title">Classique</h2><p id="rg-sub">Une mesure, un candidat.</p></div>
+      <div class="card modebox" id="modebox">
+      
       <div class="fields">
         <div class="field" id="fld-pool">
           <span class="lab" id="lab-pool">Candidats en jeu</span>
@@ -1348,7 +1398,8 @@ body.playing .ticker { display: none; }
     </div>
     </div>
 
-    <div class="home-panel" id="hp-reviser" role="tabpanel" aria-labelledby="hs-reviser" hidden>
+    <div class="page" id="pg-cours" hidden>
+      <div class="pg-head"><button type="button" class="pg-back" data-page="porte">← Accueil</button><h2>Côté cours</h2><p>Les programmes, les sondages et les antisèches pour tout comprendre, sans pression.</p></div>
       <ul class="facts">
         <li><b id="f-mes">0</b><span>mesures sourcées</span></li>
         <li><b id="f-cand">0</b><span>candidats</span></li>
