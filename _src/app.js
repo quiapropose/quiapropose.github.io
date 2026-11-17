@@ -205,7 +205,7 @@ function countOf(id) { return SINGLE.filter(function (x) { return x.c === id; })
 /* ---------- État ---------- */
 var cfg = { mode: "classic", pool: "main", diff: "easy", len: "20", duel: ["lepen", "melenchon"], targets: [], themes: [] };
 var game = null, timerId = null, autoId = null;
-var views = { reve: $("v-reve"), setup: $("v-setup"), game: $("v-game"), res: $("v-res"), explorer: $("v-explorer"), cheat: $("v-cheat"), stats: $("v-stats"), contact: $("v-contact"), polls: $("v-polls"), hemi: $("v-hemi") };
+var views = { reve: $("v-reve"), setup: $("v-setup"), game: $("v-game"), res: $("v-res"), explorer: $("v-explorer"), cheat: $("v-cheat"), stats: $("v-stats"), contact: $("v-contact"), polls: $("v-polls"), hemi: $("v-hemi"), cands: $("v-cands") };
 function show(v) {
   Object.keys(views).forEach(function (k) { views[k].hidden = (k !== v); });
   document.body.classList.toggle("playing", v === "game");
@@ -215,7 +215,8 @@ function show(v) {
   $("tab-stats").setAttribute("aria-pressed", v === "stats");
   $("tab-polls").setAttribute("aria-pressed", v === "polls");
   $("tab-hemi").setAttribute("aria-pressed", v === "hemi");
-  $("dd").classList.toggle("on", ["polls", "hemi", "explorer", "cheat"].indexOf(v) >= 0);
+  $("tab-cands").setAttribute("aria-pressed", v === "cands");
+  $("dd").classList.toggle("on", ["polls", "hemi", "cands", "explorer", "cheat"].indexOf(v) >= 0);
 }
 function closeDd() { $("dd-pop").hidden = true; $("dd-btn").setAttribute("aria-expanded", "false"); }
 $("dd-btn").addEventListener("click", function (e) { e.stopPropagation(); var open = $("dd-pop").hidden; $("dd-pop").hidden = !open; this.setAttribute("aria-expanded", open); });
@@ -226,6 +227,7 @@ document.querySelectorAll("nav.tabs button[data-view]").forEach(function (b) {
     if (b.dataset.view === "explorer") { location.hash = "explorer"; show("explorer"); renderExplorer(); }
     else if (b.dataset.view === "polls") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "sondages"; show("polls"); renderPolls(); window.scrollTo({ top: 0 }); }
     else if (b.dataset.view === "stats") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "stats"; show("stats"); renderStats(); window.scrollTo({ top: 0 }); }
+    else if (b.dataset.view === "cands") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "candidats"; show("cands"); window.scrollTo({ top: 0 }); }
     else if (b.dataset.view === "hemi") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "hemicycle"; show("hemi"); window.scrollTo({ top: 0 }); }
     else if (b.dataset.view === "cheat") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "antiseches"; show("cheat"); renderCheat(); window.scrollTo({ top: 0 }); }
     else goMenu();
@@ -2016,7 +2018,7 @@ initExplorer();
 renderHome();
 runIntro();
 $("contact-line").innerHTML = "écris à <a href=\"mailto:" + CONTACT_EMAIL + "\">" + CONTACT_EMAIL + "</a>, ou utilise le formulaire « Nous écrire » et le lien « Signaler une erreur » sous chaque réponse.";
-if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } else if (location.hash === "#antiseches") { show("cheat"); renderCheat(); } else if (location.hash === "#sondages") { show("polls"); renderPolls(); } else if (location.hash === "#stats") { show("stats"); renderStats(); } else if (location.hash === "#contact") { show("contact"); } else if (location.hash === "#programme-de-reve") { openReve(); } else if (location.hash === "#hemicycle") { show("hemi"); } else show("setup");
+if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } else if (location.hash === "#antiseches") { show("cheat"); renderCheat(); } else if (location.hash === "#sondages") { show("polls"); renderPolls(); } else if (location.hash === "#stats") { show("stats"); renderStats(); } else if (location.hash === "#contact") { show("contact"); } else if (location.hash === "#programme-de-reve") { openReve(); } else if (location.hash === "#hemicycle") { show("hemi"); } else if (location.hash === "#candidats") { show("cands"); } else show("setup");
 window.addEventListener("hashchange", function () { if (checkHashChallenge() || checkHashLeague()) return; if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } });
 checkHashChallenge(); checkHashLeague();
 })();

@@ -1141,6 +1141,9 @@ nav.tabs .dd-pop button { display: block; width: 100%; text-align: left; border:
 nav.tabs .dd-pop button:hover { background: var(--paper); }
 nav.tabs .dd-pop button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); }
 nav.tabs { overflow: visible !important; flex-wrap: wrap; }
+#v-cands .cands-head h2 { margin: 6px 0 4px; font: 900 clamp(30px, 5vw, 44px)/1 var(--f-display); text-transform: uppercase; }
+#v-cands .cands-head p { margin: 0 0 10px; color: var(--muted); }
+#v-cands .boards-intro { margin: 0 0 16px; }
 #v-hemi .hemi { max-width: 760px; margin: 10px auto 0; }
 .home-low { display: none; }
 .hero-side .daily, #v-setup > .daily { }
@@ -1192,6 +1195,7 @@ body.playing .ticker { display: none; }
           <button type="button" class="dd-btn" id="dd-btn" aria-expanded="false" aria-controls="dd-pop">Comprendre <span aria-hidden="true">▾</span></button>
           <div class="dd-pop" id="dd-pop" hidden>
             <button type="button" id="tab-polls" data-view="polls" aria-pressed="false">📊 Les sondages</button>
+            <button type="button" id="tab-cands" data-view="cands" aria-pressed="false">🗳️ Tous les candidats</button>
             <button type="button" id="tab-hemi" data-view="hemi" aria-pressed="false">🏛️ L’hémicycle des candidats</button>
             <button type="button" id="tab-explorer" data-view="explorer" aria-pressed="false">🔎 Toutes les mesures</button>
             <button type="button" id="tab-cheat" data-view="cheat" aria-pressed="false">📝 Les antisèches</button>
@@ -1360,11 +1364,7 @@ body.playing .ticker { display: none; }
       </div>
       
     </div>
-    <details class="more">
-      <summary>Voir les <span id="more-n">tous les</span> panneaux <small id="more-s"></small></summary>
-      <p class="boards-intro">Bandeau <span class="soon-l">À venir</span> : programme 2027 incomplet, ou candidature déclarée sans programme pour l’instant. On complète dès que ça sort.</p>
-      <div class="boards" id="boards-home"></div>
-    </details>
+    
   </section>
 
   <section class="view" id="v-game" hidden>
@@ -1453,6 +1453,11 @@ body.playing .ticker { display: none; }
       <div class="rv-prog" aria-hidden="true"><i id="rv-bar"></i></div>
     </div>
     <div id="rv-body"></div>
+  </section>
+  <section class="view" id="v-cands" hidden>
+    <div class="cands-head"><h2>Tous les candidats</h2><p><b id="more-n">…</b> candidatures déclarées ou envisagées, <span id="more-s"></span>.</p></div>
+    <p class="boards-intro">Bandeau <span class="soon-l">À venir</span> : programme 2027 incomplet, ou candidature déclarée sans programme pour l’instant. On complète dès que ça sort.</p>
+    <div class="boards" id="boards-home"></div>
   </section>
   <section class="view" id="v-hemi" hidden>
     <div class="card hemi">
@@ -5234,7 +5239,7 @@ function countOf(id) { return SINGLE.filter(function (x) { return x.c === id; })
 /* ---------- État ---------- */
 var cfg = { mode: "classic", pool: "main", diff: "easy", len: "20", duel: ["lepen", "melenchon"], targets: [], themes: [] };
 var game = null, timerId = null, autoId = null;
-var views = { reve: $("v-reve"), setup: $("v-setup"), game: $("v-game"), res: $("v-res"), explorer: $("v-explorer"), cheat: $("v-cheat"), stats: $("v-stats"), contact: $("v-contact"), polls: $("v-polls"), hemi: $("v-hemi") };
+var views = { reve: $("v-reve"), setup: $("v-setup"), game: $("v-game"), res: $("v-res"), explorer: $("v-explorer"), cheat: $("v-cheat"), stats: $("v-stats"), contact: $("v-contact"), polls: $("v-polls"), hemi: $("v-hemi"), cands: $("v-cands") };
 function show(v) {
   Object.keys(views).forEach(function (k) { views[k].hidden = (k !== v); });
   document.body.classList.toggle("playing", v === "game");
@@ -5244,7 +5249,8 @@ function show(v) {
   $("tab-stats").setAttribute("aria-pressed", v === "stats");
   $("tab-polls").setAttribute("aria-pressed", v === "polls");
   $("tab-hemi").setAttribute("aria-pressed", v === "hemi");
-  $("dd").classList.toggle("on", ["polls", "hemi", "explorer", "cheat"].indexOf(v) >= 0);
+  $("tab-cands").setAttribute("aria-pressed", v === "cands");
+  $("dd").classList.toggle("on", ["polls", "hemi", "cands", "explorer", "cheat"].indexOf(v) >= 0);
 }
 function closeDd() { $("dd-pop").hidden = true; $("dd-btn").setAttribute("aria-expanded", "false"); }
 $("dd-btn").addEventListener("click", function (e) { e.stopPropagation(); var open = $("dd-pop").hidden; $("dd-pop").hidden = !open; this.setAttribute("aria-expanded", open); });
@@ -5255,6 +5261,7 @@ document.querySelectorAll("nav.tabs button[data-view]").forEach(function (b) {
     if (b.dataset.view === "explorer") { location.hash = "explorer"; show("explorer"); renderExplorer(); }
     else if (b.dataset.view === "polls") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "sondages"; show("polls"); renderPolls(); window.scrollTo({ top: 0 }); }
     else if (b.dataset.view === "stats") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "stats"; show("stats"); renderStats(); window.scrollTo({ top: 0 }); }
+    else if (b.dataset.view === "cands") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "candidats"; show("cands"); window.scrollTo({ top: 0 }); }
     else if (b.dataset.view === "hemi") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "hemicycle"; show("hemi"); window.scrollTo({ top: 0 }); }
     else if (b.dataset.view === "cheat") { clearInterval(timerId); clearTimeout(autoId); game = null; location.hash = "antiseches"; show("cheat"); renderCheat(); window.scrollTo({ top: 0 }); }
     else goMenu();
@@ -7045,7 +7052,7 @@ initExplorer();
 renderHome();
 runIntro();
 $("contact-line").innerHTML = "écris à <a href=\"mailto:" + CONTACT_EMAIL + "\">" + CONTACT_EMAIL + "</a>, ou utilise le formulaire « Nous écrire » et le lien « Signaler une erreur » sous chaque réponse.";
-if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } else if (location.hash === "#antiseches") { show("cheat"); renderCheat(); } else if (location.hash === "#sondages") { show("polls"); renderPolls(); } else if (location.hash === "#stats") { show("stats"); renderStats(); } else if (location.hash === "#contact") { show("contact"); } else if (location.hash === "#programme-de-reve") { openReve(); } else if (location.hash === "#hemicycle") { show("hemi"); } else show("setup");
+if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } else if (location.hash === "#antiseches") { show("cheat"); renderCheat(); } else if (location.hash === "#sondages") { show("polls"); renderPolls(); } else if (location.hash === "#stats") { show("stats"); renderStats(); } else if (location.hash === "#contact") { show("contact"); } else if (location.hash === "#programme-de-reve") { openReve(); } else if (location.hash === "#hemicycle") { show("hemi"); } else if (location.hash === "#candidats") { show("cands"); } else show("setup");
 window.addEventListener("hashchange", function () { if (checkHashChallenge() || checkHashLeague()) return; if (location.hash === "#explorer") { show("explorer"); renderExplorer(); } });
 checkHashChallenge(); checkHashLeague();
 })();

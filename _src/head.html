@@ -1141,6 +1141,9 @@ nav.tabs .dd-pop button { display: block; width: 100%; text-align: left; border:
 nav.tabs .dd-pop button:hover { background: var(--paper); }
 nav.tabs .dd-pop button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); }
 nav.tabs { overflow: visible !important; flex-wrap: wrap; }
+#v-cands .cands-head h2 { margin: 6px 0 4px; font: 900 clamp(30px, 5vw, 44px)/1 var(--f-display); text-transform: uppercase; }
+#v-cands .cands-head p { margin: 0 0 10px; color: var(--muted); }
+#v-cands .boards-intro { margin: 0 0 16px; }
 #v-hemi .hemi { max-width: 760px; margin: 10px auto 0; }
 .home-low { display: none; }
 .hero-side .daily, #v-setup > .daily { }
@@ -1192,6 +1195,7 @@ body.playing .ticker { display: none; }
           <button type="button" class="dd-btn" id="dd-btn" aria-expanded="false" aria-controls="dd-pop">Comprendre <span aria-hidden="true">▾</span></button>
           <div class="dd-pop" id="dd-pop" hidden>
             <button type="button" id="tab-polls" data-view="polls" aria-pressed="false">📊 Les sondages</button>
+            <button type="button" id="tab-cands" data-view="cands" aria-pressed="false">🗳️ Tous les candidats</button>
             <button type="button" id="tab-hemi" data-view="hemi" aria-pressed="false">🏛️ L’hémicycle des candidats</button>
             <button type="button" id="tab-explorer" data-view="explorer" aria-pressed="false">🔎 Toutes les mesures</button>
             <button type="button" id="tab-cheat" data-view="cheat" aria-pressed="false">📝 Les antisèches</button>
@@ -1360,11 +1364,7 @@ body.playing .ticker { display: none; }
       </div>
       
     </div>
-    <details class="more">
-      <summary>Voir les <span id="more-n">tous les</span> panneaux <small id="more-s"></small></summary>
-      <p class="boards-intro">Bandeau <span class="soon-l">À venir</span> : programme 2027 incomplet, ou candidature déclarée sans programme pour l’instant. On complète dès que ça sort.</p>
-      <div class="boards" id="boards-home"></div>
-    </details>
+    
   </section>
 
   <section class="view" id="v-game" hidden>
@@ -1453,6 +1453,11 @@ body.playing .ticker { display: none; }
       <div class="rv-prog" aria-hidden="true"><i id="rv-bar"></i></div>
     </div>
     <div id="rv-body"></div>
+  </section>
+  <section class="view" id="v-cands" hidden>
+    <div class="cands-head"><h2>Tous les candidats</h2><p><b id="more-n">…</b> candidatures déclarées ou envisagées, <span id="more-s"></span>.</p></div>
+    <p class="boards-intro">Bandeau <span class="soon-l">À venir</span> : programme 2027 incomplet, ou candidature déclarée sans programme pour l’instant. On complète dès que ça sort.</p>
+    <div class="boards" id="boards-home"></div>
   </section>
   <section class="view" id="v-hemi" hidden>
     <div class="card hemi">
