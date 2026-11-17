@@ -1097,6 +1097,15 @@ body.th-thanksgiving .kick-fete { color: #c2410c; }
 .theme-pick button[aria-pressed="true"] small { color: var(--accent); }
 #fld-themes { grid-column: 1 / -1; order: -1; }
 #fld-themes .theme-pick { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+
+/* ===== Accueil simplifié ===== */
+.hero .facts, .hero .hero-alt, .hero .hero-note, .hero .hero-polls { display: none; }
+.hero-cta { margin-top: 6px; }
+.modebox[hidden] { display: none; }
+.home-low .cd { display: none; }
+.seo-more { margin: 6px 0 0; }
+.seo-more summary { cursor: pointer; font-size: 13px; color: var(--muted); }
+.seo-more[open] summary { margin-bottom: 6px; }
 /* ===== Fil info (calme) ===== */
 .ticker { border-bottom: 1px solid var(--line); background: var(--sheet); font-size: 13.5px; color: var(--ink); }
 .tk-in { display: flex; align-items: baseline; gap: 10px; padding-top: 7px; padding-bottom: 7px; min-width: 0; }
@@ -1193,7 +1202,7 @@ body.playing .ticker { display: none; }
     <div class="sec-h" id="modes-h"><span class="step">1</span><h2>Choisis ton mode</h2></div>
     <div class="modes" role="group" aria-label="Mode de jeu" id="modes">
           <button type="button" id="m-classic" data-mode="classic" aria-pressed="true"><b>Classique</b><span>Une mesure, un candidat.</span></button>
-          <button type="button" id="m-theme" data-mode="theme" aria-pressed="false"><b>📚 Par thème</b><span>Entraîne-toi sur les sujets de ton choix.</span></button>
+          <button type="button" id="m-theme" data-mode="theme" aria-pressed="false"><b>Par thème</b><span>Entraîne-toi sur les sujets de ton choix.</span></button>
           <button type="button" id="m-duel" data-mode="duel" aria-pressed="false"><b>Confrontation</b><span>Deux candidats, une mesure.</span></button>
           <button type="button" id="m-blitz" data-mode="blitz" aria-pressed="false"><b>Éclair 60 s</b><span>Une minute, un max de points.</span></button>
           <button type="button" id="m-target" data-mode="target" aria-pressed="false"><b>Ciblé</b><span>Révise qui tu veux.</span></button>
@@ -1204,7 +1213,7 @@ body.playing .ticker { display: none; }
           <button type="button" id="m-conseil" data-mode="conseil" aria-pressed="false"><b>Le Conseil constit’ tousse</b><span>Les mesures qui coincent en droit.</span></button>
         </div>
 
-    <div class="card modebox" id="modebox">
+    <div class="card modebox" id="modebox" hidden>
       <div class="sec-h"><span class="step">2</span><h2>Règle ta partie</h2></div>
       <div class="fields">
         <div class="field" id="fld-pool">
@@ -1504,7 +1513,7 @@ body.playing .ticker { display: none; }
 
 <footer class="method">
     <p class="foot-links"><button type="button" class="linkbtn" id="ft-contact">✉️ Nous écrire</button> · <button type="button" class="linkbtn" id="ft-legal">Mentions légales</button> · <a href="https://quiapropose.fr/programmes/">📚 Tous les programmes 2027</a><span id="ft-app-w"> · <button type="button" class="linkbtn" id="ft-app">📲 Installer l’appli</button></span></p>
-    <nav class="seo-links" id="seo-links" aria-label="Programmes par candidat"><a href="https://quiapropose.fr/programmes/nathalie-arthaud">Programme Nathalie Arthaud</a> · <a href="https://quiapropose.fr/programmes/francois-asselineau">Programme François Asselineau</a> · <a href="https://quiapropose.fr/programmes/gabriel-attal">Programme Gabriel Attal</a> · <a href="https://quiapropose.fr/programmes/delphine-batho">Programme Delphine Batho</a> · <a href="https://quiapropose.fr/programmes/xavier-bertrand">Programme Xavier Bertrand</a> · <a href="https://quiapropose.fr/programmes/juan-branco">Programme Juan Branco</a> · <a href="https://quiapropose.fr/programmes/nicolas-dupont-aignan">Programme Nicolas Dupont-Aignan</a> · <a href="https://quiapropose.fr/programmes/raphael-glucksmann">Programme Raphaël Glucksmann</a> · <a href="https://quiapropose.fr/programmes/anasse-kazib">Programme Anasse Kazib</a> · <a href="https://quiapropose.fr/programmes/marine-le-pen">Programme Marine Le Pen</a> · <a href="https://quiapropose.fr/programmes/david-lisnard">Programme David Lisnard</a> · <a href="https://quiapropose.fr/programmes/jean-luc-melenchon">Programme Jean-Luc Mélenchon</a> · <a href="https://quiapropose.fr/programmes/edouard-philippe">Programme Édouard Philippe</a> · <a href="https://quiapropose.fr/programmes/florian-philippot">Programme Florian Philippot</a> · <a href="https://quiapropose.fr/programmes/natacha-polony">Programme Natacha Polony</a> · <a href="https://quiapropose.fr/programmes/bruno-retailleau">Programme Bruno Retailleau</a> · <a href="https://quiapropose.fr/programmes/teddy-riner">Programme Teddy Riner</a> · <a href="https://quiapropose.fr/programmes/fabien-roussel">Programme Fabien Roussel</a> · <a href="https://quiapropose.fr/programmes/francois-ruffin">Programme François Ruffin</a> · <a href="https://quiapropose.fr/programmes/marine-tondelier">Programme Marine Tondelier</a> · <a href="https://quiapropose.fr/programmes/eric-zemmour">Programme Éric Zemmour</a></nav>
+    <details class="seo-more"><summary>📚 Les programmes, candidat par candidat</summary><nav class="seo-links" id="seo-links" aria-label="Programmes par candidat"><a href="https://quiapropose.fr/programmes/nathalie-arthaud">Programme Nathalie Arthaud</a> · <a href="https://quiapropose.fr/programmes/francois-asselineau">Programme François Asselineau</a> · <a href="https://quiapropose.fr/programmes/gabriel-attal">Programme Gabriel Attal</a> · <a href="https://quiapropose.fr/programmes/delphine-batho">Programme Delphine Batho</a> · <a href="https://quiapropose.fr/programmes/xavier-bertrand">Programme Xavier Bertrand</a> · <a href="https://quiapropose.fr/programmes/juan-branco">Programme Juan Branco</a> · <a href="https://quiapropose.fr/programmes/nicolas-dupont-aignan">Programme Nicolas Dupont-Aignan</a> · <a href="https://quiapropose.fr/programmes/raphael-glucksmann">Programme Raphaël Glucksmann</a> · <a href="https://quiapropose.fr/programmes/anasse-kazib">Programme Anasse Kazib</a> · <a href="https://quiapropose.fr/programmes/marine-le-pen">Programme Marine Le Pen</a> · <a href="https://quiapropose.fr/programmes/david-lisnard">Programme David Lisnard</a> · <a href="https://quiapropose.fr/programmes/jean-luc-melenchon">Programme Jean-Luc Mélenchon</a> · <a href="https://quiapropose.fr/programmes/edouard-philippe">Programme Édouard Philippe</a> · <a href="https://quiapropose.fr/programmes/florian-philippot">Programme Florian Philippot</a> · <a href="https://quiapropose.fr/programmes/natacha-polony">Programme Natacha Polony</a> · <a href="https://quiapropose.fr/programmes/bruno-retailleau">Programme Bruno Retailleau</a> · <a href="https://quiapropose.fr/programmes/teddy-riner">Programme Teddy Riner</a> · <a href="https://quiapropose.fr/programmes/fabien-roussel">Programme Fabien Roussel</a> · <a href="https://quiapropose.fr/programmes/francois-ruffin">Programme François Ruffin</a> · <a href="https://quiapropose.fr/programmes/marine-tondelier">Programme Marine Tondelier</a> · <a href="https://quiapropose.fr/programmes/eric-zemmour">Programme Éric Zemmour</a></nav></details>
   <div class="wrap">
     <details>
     <summary>Méthode et limites</summary>
@@ -5340,7 +5349,8 @@ $("btn-quick").addEventListener("click", function () {
   startGame(buildQuestions(cfg), cfg);
 });
 $("modes").addEventListener("click", function (e) {
-  var mb = e.target.closest("button"); if (!mb || mb.dataset.mode === "fil" || mb.dataset.mode === "reve" || window.innerWidth > 860) return;
+  var mb = e.target.closest("button"); if (!mb || mb.dataset.mode === "fil" || mb.dataset.mode === "reve") return;
+  $("modebox").hidden = false;
   setTimeout(function () { $("modebox").scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" }); }, 60);
 });
 

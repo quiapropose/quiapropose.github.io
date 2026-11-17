@@ -385,7 +385,8 @@ $("btn-quick").addEventListener("click", function () {
   startGame(buildQuestions(cfg), cfg);
 });
 $("modes").addEventListener("click", function (e) {
-  var mb = e.target.closest("button"); if (!mb || mb.dataset.mode === "fil" || mb.dataset.mode === "reve" || window.innerWidth > 860) return;
+  var mb = e.target.closest("button"); if (!mb || mb.dataset.mode === "fil" || mb.dataset.mode === "reve") return;
+  $("modebox").hidden = false;
   setTimeout(function () { $("modebox").scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" }); }, 60);
 });
 
