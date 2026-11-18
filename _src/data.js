@@ -1,4 +1,4 @@
-/* Données : candidats, sources et mesures. État au 17 novembre 2026. */
+/* Données : candidats, sources et mesures. État au 18 novembre 2026. */
 var C = [
   { id: "arthaud", name: "Nathalie Arthaud", ini: "NA", party: "Lutte ouvrière" },
   { id: "asselineau", name: "François Asselineau", ini: "FA", party: "UPR" },
@@ -105,7 +105,8 @@ var S = {
   psSP: { s: "Public Sénat (grand oral de franceinfo sur les services publics)", d: "12 nov. 2026", u: "https://www.publicsenat.fr/actualites/politique/presidentielle-2027-sante-justice-education-cultureque-retenir-du-grand-oral-des-candidats-sur-les-services-publics" },
   glLiv: { s: "Livret « Une révolution pour sortir des énergies fossiles – Les premiers 100 jours » (glucks2027.fr)", d: "9 nov. 2026", u: "https://glucks2027.fr/wp-content/uploads/2026/11/livret_progr_revolution_ecologique_2027.pdf" },
   qzZe: { s: "Quartz (entretien à franceinfo)", d: "12 nov. 2026", u: "https://fr.qz.com/eric-zemmour-800000-postes-fonction-publique-111226" },
-  phLog: { s: "Europe 1 avec AFP (entretien au Parisien)", d: "15 nov. 2026", u: "https://www.europe1.fr/politique/presidentielle-2027-edouard-philippe-veut-batir-quatre-millions-de-logements-supplementaires-en-10-ans-1235907" }
+  phLog: { s: "Europe 1 avec AFP (entretien au Parisien)", d: "15 nov. 2026", u: "https://www.europe1.fr/politique/presidentielle-2027-edouard-philippe-veut-batir-quatre-millions-de-logements-supplementaires-en-10-ans-1235907" },
+  glVil: { s: "AFP via Yahoo Actualités (meeting de Villeurbanne et entretien aux journaux du groupe Ebra)", d: "17 nov. 2026", u: "https://fr.news.yahoo.com/villeurbanne-glucksmann-d%C3%A9fend-solidarit%C3%A9-%C3%A9trille-204656152.html" }
 };
 
 // [candidat, thème, mesure reformulée, clé source]
@@ -1103,7 +1104,8 @@ var RAW = [
   ["zemmour","Éducation","Mettre fin au collège unique et orienter vers la voie professionnelle dès la quatrième.","psSP"],
   ["philippe","Justice","Interdire aux magistrats de se syndiquer.","psSP"],
   ["philippe","Logement","Construire 4 millions de logements en dix ans grâce à des normes simplifiées et à une fiscalité avantageuse.","phLog"],
-  ["philippe","Logement","Supprimer les taxes incluses dans les « frais de notaire » pour les acheteurs de moins de 35 ans.","phLog"]
+  ["philippe","Logement","Supprimer les taxes incluses dans les « frais de notaire » pour les acheteurs de moins de 35 ans.","phLog"],
+  ["glucksmann","Immigration","Régulariser les travailleurs sans papiers, soit 250 000 à 300 000 personnes.","glVil"]
 ];
 
 
@@ -1263,14 +1265,14 @@ var POLLS_MAJ = "15 novembre 2026";
 
 /* Fil info (bandeau du haut) : les plus récents d'abord. k = declare | programme | mesure | agenda | insolite | debat */
 var NEWS = [
+  { d: "17 nov.", k: "debat", t: "Les équipes d’Attal, Lisnard et Retailleau avancent vers une primaire ouverte à deux tours en janvier, à 2 € par votant. Philippe refuse d’y participer.", s: "Public Sénat", u: "https://www.publicsenat.fr/actualites/politique/primaire-les-equipes-dattal-retailleau-et-lisnard-salignent-sur-un-vote-en-janvier-moins-sur-le-cas-deric-zemmour" },
+  { d: "17 nov.", k: "mesure", t: "À Villeurbanne, Raphaël Glucksmann se prononce pour la régularisation des travailleurs sans papiers, 250 000 à 300 000 personnes selon lui.", s: "AFP via Yahoo Actualités", u: "https://fr.news.yahoo.com/villeurbanne-glucksmann-d%C3%A9fend-solidarit%C3%A9-%C3%A9trille-204656152.html" },
+  { d: "17 nov.", k: "insolite", t: "Jean-Luc Mélenchon dîne à Paris avec des grands patrons, dont Bernard Arnault et Patrick Pouyanné. « Une présentation de programme », dit LFI.", s: "LCP avec AFP", u: "https://lcp.fr/actualites/presidentielle-2027-pourquoi-jean-luc-melenchon-va-diner-ce-mardi-avec-des-grands" },
   { d: "16 nov.", k: "debat", t: "Attal, Glucksmann, Le Pen, Mélenchon et Retailleau débattent d’impôts, de logement et de Smic sur TF1-LCI, chez les Restos du cœur. Philippe reste au Havre.", s: "AFP via France 24", u: "https://www.france24.com/fr/info-en-continu/20261116-imp%C3%B4ts-logement-smic-ce-qu-il-faut-retenir-du-d%C3%A9bat-entre-candidats-%C3%A0-la-pr%C3%A9sidentielle" },
   { d: "15 nov.", k: "mesure", t: "Édouard Philippe veut construire 4 millions de logements en dix ans et supprimer les « frais de notaire » pour les moins de 35 ans.", s: "AFP via Europe 1", u: "https://www.europe1.fr/politique/presidentielle-2027-edouard-philippe-veut-batir-quatre-millions-de-logements-supplementaires-en-10-ans-1235907" },
-  { d: "14 nov.", k: "debat", t: "Gérard Larcher veut réunir Attal, Lisnard, Philippe et Retailleau. Philippe accepte d’y parler de rassemblement, pas d’une primaire.", s: "AFP via Europe 1", u: "https://www.europe1.fr/politique/presidentielle-2027-edouard-philippe-daccord-pour-une-reunion-autour-de-gerard-larcher-mais-pas-pour-parler-dune-primaire-1235514" },
-  { d: "12 nov.", k: "programme", t: "Édouard Philippe publie son programme complet : ses mesures sont dans le quiz.", s: "edouardphilippe.fr", u: "https://www.edouardphilippe.fr/programme" },
-  { d: "9 nov.", k: "declare", t: "Teddy Riner se déclare candidat. Édouard Philippe salue un « candidat de poids ».", s: "AFP via La Libre", u: "https://www.lalibre.be/dernieres-depeches/2026/11/09/des-tatamis-a-lelysee-teddy-riner-annonce-sa-candidature-a-la-presidentielle-TN24TXUYZBDHLNYIUW4YHZJEI4/" },
   { d: "À venir", k: "agenda", t: "13 déc. : vote des Écologistes sur leur candidature · 12 mars : fin des parrainages · 18 avril : premier tour.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-declares-et-potentiels-444932" }
 ];
-var NEWS_MAJ = "17 novembre 2026";
+var NEWS_MAJ = "18 novembre 2026";
 
 /* Déguisements du titre selon la date (comme les doodles). from/to au format MM-JJ.
    draw = dessin posé sur le « Q » (bonnet, pelerin) ou emo = un emoji à la place ; side = grand dessin après le « ? » (dinde) ;
@@ -1281,6 +1283,7 @@ var FETES = [
   { id: "violences-femmes", from: "11-25", to: "11-25", emo: "🧡", fete: "Journée contre les violences faites aux femmes" },
   { id: "thanksgiving", from: "11-16", to: "11-27", draw: "pelerin", side: "dinde", q: "#c2410c", fete: "🦃 Thanksgiving, jeudi 26 novembre", tip: "Happy Thanksgiving !" },
   { id: "sida", from: "12-01", to: "12-01", emo: "🎗️", fete: "Journée mondiale de lutte contre le sida" },
+  { id: "handicap", from: "12-03", to: "12-03", emo: "🤝", fete: "Journée internationale des personnes handicapées" },
   { id: "noel", from: "12-01", to: "12-26", draw: "bonnet", q: "#0b7a3e", fete: "🎄 Joyeuses fêtes", tip: "Joyeux Noël !" },
   { id: "nouvel-an", from: "12-31", to: "01-01", emo: "🥂", fete: "🎆 Bonne année 2027", tip: "Bonne année !" },
   { id: "galette", from: "01-06", to: "01-06", emo: "👑", fete: "Épiphanie : qui aura la fève ?" },

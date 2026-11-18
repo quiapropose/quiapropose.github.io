@@ -1005,7 +1005,8 @@ var EXPL = {
   "Interdire les licenciements.": "Les entreprises n’auraient plus le droit de licencier leurs salariés. Aujourd’hui, un licenciement est possible pour motif personnel ou économique, à condition de respecter une procédure et de verser des indemnités.",
   "Supprimer la TVA.": "La TVA est la taxe incluse dans le prix de presque tout ce que l’on achète, en général 20 %. La supprimer ferait baisser les prix. Aujourd’hui, c’est la première recette fiscale de l’État.",
   "Créer un certificat de fin de primaire obligatoire pour entrer au collège.": "Les élèves devraient obtenir un diplôme à la fin du CM2 pour entrer en 6e. Aujourd’hui, le passage au collège est automatique ; un « certificat d’études » a existé jusqu’en 1989.",
-  "Supprimer la convention judiciaire d’intérêt public, qui permet aux entreprises de négocier leur sanction.": "La convention judiciaire d’intérêt public, créée en 2016, permet à une entreprise soupçonnée de corruption ou de fraude de payer une amende pour éviter un procès et une condamnation. La mesure la supprimerait."
+  "Supprimer la convention judiciaire d’intérêt public, qui permet aux entreprises de négocier leur sanction.": "La convention judiciaire d’intérêt public, créée en 2016, permet à une entreprise soupçonnée de corruption ou de fraude de payer une amende pour éviter un procès et une condamnation. La mesure la supprimerait.",
+  "Régulariser les travailleurs sans papiers, soit 250 000 à 300 000 personnes.": "Les étrangers sans titre de séjour qui travaillent en France obtiendraient des papiers. Aujourd’hui, la régularisation d’un salarié se fait au cas par cas, sur décision du préfet, selon la durée de séjour et de travail en France."
 };
 
 /* « Et la Constitution ? » : mesures qui demandent de réviser la Constitution, ou qui s'y heurtent en l'état.
@@ -2070,5 +2071,6 @@ var EST = {
   "Interdire les licenciements.": ["nc", null, "Mesure de droit du travail, sans effet budgétaire direct chiffrable."],
   "Supprimer la TVA.": ["cout", 4, "La TVA rapporte environ 200 milliards par an, première recette fiscale."],
   "Créer un certificat de fin de primaire obligatoire pour entrer au collège.": ["nc", null, "Coût de l’examen modeste ; l’effet dépend surtout du nombre d’élèves qui devraient refaire une année."],
-  "Supprimer la convention judiciaire d’intérêt public, qui permet aux entreprises de négocier leur sanction.": ["cout", 1, "Ces conventions ont rapporté plusieurs milliards depuis 2016, soit quelques centaines de millions par an ; des procès pourraient en compenser une partie."]
+  "Supprimer la convention judiciaire d’intérêt public, qui permet aux entreprises de négocier leur sanction.": ["cout", 1, "Ces conventions ont rapporté plusieurs milliards depuis 2016, soit quelques centaines de millions par an ; des procès pourraient en compenser une partie."],
+  "Régulariser les travailleurs sans papiers, soit 250 000 à 300 000 personnes.": ["nc", null, "Effets opposés difficiles à mesurer : nouvelles cotisations et impôts d’un côté, droits sociaux ouverts de l’autre."]
 };
