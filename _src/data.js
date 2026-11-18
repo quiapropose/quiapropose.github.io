@@ -106,6 +106,7 @@ var S = {
   glLiv: { s: "Livret « Une révolution pour sortir des énergies fossiles – Les premiers 100 jours » (glucks2027.fr)", d: "9 nov. 2026", u: "https://glucks2027.fr/wp-content/uploads/2026/11/livret_progr_revolution_ecologique_2027.pdf" },
   qzZe: { s: "Quartz (entretien à franceinfo)", d: "12 nov. 2026", u: "https://fr.qz.com/eric-zemmour-800000-postes-fonction-publique-111226" },
   phLog: { s: "Europe 1 avec AFP (entretien au Parisien)", d: "15 nov. 2026", u: "https://www.europe1.fr/politique/presidentielle-2027-edouard-philippe-veut-batir-quatre-millions-de-logements-supplementaires-en-10-ans-1235907" },
+  lpRet2: { s: "AFP via Orange (conférence de presse sur les retraites, au siège du RN)", d: "17 nov. 2026", u: "https://actu.orange.fr/france/travailler-plus-partir-plus-tot-le-pen-promet-de-reformer-les-retraites-quot-des-son-arrivee-au-pouvoir-quot-CNT000002tLSmo.html" },
   glVil: { s: "AFP via Yahoo Actualités (meeting de Villeurbanne et entretien aux journaux du groupe Ebra)", d: "17 nov. 2026", u: "https://fr.news.yahoo.com/villeurbanne-glucksmann-d%C3%A9fend-solidarit%C3%A9-%C3%A9trille-204656152.html" }
 };
 
@@ -1105,7 +1106,11 @@ var RAW = [
   ["philippe","Justice","Interdire aux magistrats de se syndiquer.","psSP"],
   ["philippe","Logement","Construire 4 millions de logements en dix ans grâce à des normes simplifiées et à une fiscalité avantageuse.","phLog"],
   ["philippe","Logement","Supprimer les taxes incluses dans les « frais de notaire » pour les acheteurs de moins de 35 ans.","phLog"],
-  ["glucksmann","Immigration","Régulariser les travailleurs sans papiers, soit 250 000 à 300 000 personnes.","glVil"]
+  ["glucksmann","Immigration","Régulariser les travailleurs sans papiers, soit 250 000 à 300 000 personnes.","glVil"],
+  ["lepen","Retraites","Créer une retraite par capitalisation obligatoire pour les actifs de 52 ans au plus, financée par le Fonds de réserve des retraites et une partie des cotisations logement et formation.","lpRet2"],
+  ["lepen","Retraites","Valider un trimestre de retraite seulement après trois mois de travail au moins à mi-temps, quel que soit le salaire.","lpRet2"],
+  ["lepen","Retraites","Remplacer les critères de pénibilité par un départ à 60 ans pour ceux qui ont travaillé six mois à temps plein avant 20 ans.","lpRet2"],
+  ["lepen","Retraites","Supprimer progressivement la majoration de pension des pères de trois enfants et porter celle des mères à 12 %.","lpRet2"]
 ];
 
 
@@ -1265,11 +1270,11 @@ var POLLS_MAJ = "15 novembre 2026";
 
 /* Fil info (bandeau du haut) : les plus récents d'abord. k = declare | programme | mesure | agenda | insolite | debat */
 var NEWS = [
+  { d: "17 nov.", k: "programme", t: "Marine Le Pen dévoile sa réforme des retraites : 62 ans et 42 annuités, 60 ans pour qui a commencé avant 20 ans, et une capitalisation obligatoire.", s: "AFP via Orange", u: "https://actu.orange.fr/france/travailler-plus-partir-plus-tot-le-pen-promet-de-reformer-les-retraites-quot-des-son-arrivee-au-pouvoir-quot-CNT000002tLSmo.html" },
   { d: "17 nov.", k: "debat", t: "Les équipes d’Attal, Lisnard et Retailleau avancent vers une primaire ouverte à deux tours en janvier, à 2 € par votant. Philippe refuse d’y participer.", s: "Public Sénat", u: "https://www.publicsenat.fr/actualites/politique/primaire-les-equipes-dattal-retailleau-et-lisnard-salignent-sur-un-vote-en-janvier-moins-sur-le-cas-deric-zemmour" },
   { d: "17 nov.", k: "mesure", t: "À Villeurbanne, Raphaël Glucksmann se prononce pour la régularisation des travailleurs sans papiers, 250 000 à 300 000 personnes selon lui.", s: "AFP via Yahoo Actualités", u: "https://fr.news.yahoo.com/villeurbanne-glucksmann-d%C3%A9fend-solidarit%C3%A9-%C3%A9trille-204656152.html" },
   { d: "17 nov.", k: "insolite", t: "Jean-Luc Mélenchon dîne à Paris avec des grands patrons, dont Bernard Arnault et Patrick Pouyanné. « Une présentation de programme », dit LFI.", s: "LCP avec AFP", u: "https://lcp.fr/actualites/presidentielle-2027-pourquoi-jean-luc-melenchon-va-diner-ce-mardi-avec-des-grands" },
   { d: "16 nov.", k: "debat", t: "Attal, Glucksmann, Le Pen, Mélenchon et Retailleau débattent d’impôts, de logement et de Smic sur TF1-LCI, chez les Restos du cœur. Philippe reste au Havre.", s: "AFP via France 24", u: "https://www.france24.com/fr/info-en-continu/20261116-imp%C3%B4ts-logement-smic-ce-qu-il-faut-retenir-du-d%C3%A9bat-entre-candidats-%C3%A0-la-pr%C3%A9sidentielle" },
-  { d: "15 nov.", k: "mesure", t: "Édouard Philippe veut construire 4 millions de logements en dix ans et supprimer les « frais de notaire » pour les moins de 35 ans.", s: "AFP via Europe 1", u: "https://www.europe1.fr/politique/presidentielle-2027-edouard-philippe-veut-batir-quatre-millions-de-logements-supplementaires-en-10-ans-1235907" },
   { d: "À venir", k: "agenda", t: "13 déc. : vote des Écologistes sur leur candidature · 12 mars : fin des parrainages · 18 avril : premier tour.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-declares-et-potentiels-444932" }
 ];
 var NEWS_MAJ = "18 novembre 2026";
