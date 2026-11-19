@@ -1621,7 +1621,7 @@ body.playing .ticker { display: none; }
 </footer>
 
 <script>
-/* Données : candidats, sources et mesures. État au 18 novembre 2026. */
+/* Données : candidats, sources et mesures. État au 19 novembre 2026. */
 var C = [
   { id: "arthaud", name: "Nathalie Arthaud", ini: "NA", party: "Lutte ouvrière" },
   { id: "asselineau", name: "François Asselineau", ini: "FA", party: "UPR" },
@@ -2900,14 +2900,15 @@ var POLLS_MAJ = "15 novembre 2026";
 
 /* Fil info (bandeau du haut) : les plus récents d'abord. k = declare | programme | mesure | agenda | insolite | debat */
 var NEWS = [
+  { d: "18 nov.", k: "declare", t: "Marine Tondelier se dit prête à une coalition autour de Jean-Luc Mélenchon, sous conditions (accord de gouvernement, législatives, programme).", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-marine-tondelier-prete-a-une-coalition-autour-de-jean-luc-melenchon" },
   { d: "18 nov.", k: "programme", t: "Édouard Philippe présente son projet « à date » : règle d’or budgétaire, retraite à 65 ans, privatisation de France Travail, suppression du Cese.", s: "franceinfo", u: "https://www.franceinfo.fr/politique/edouard-philippe/priorite-donnee-a-l-ecole-retablissement-des-comptes-publics-edouard-philippe-met-en-lumiere-plusieurs-mesures-de-son-programme-presidentiel_8287970.html" },
+  { d: "18 nov.", k: "debat", t: "Primaire de la droite et du centre (vote fin janvier, 2 €) : David Lisnard juge indispensable la présence de Philippe, qui refuse, et la veut ouverte à Zemmour.", s: "AFP via Boursorama", u: "https://www.boursorama.com/actualite-economique/actualites/presidentielle-lisnard-souffle-le-chaud-et-le-froid-sur-la-primaire-07f2591012191dd99e253faeb9cb0e65" },
   { d: "17 nov.", k: "programme", t: "Marine Le Pen dévoile sa réforme des retraites : 62 ans et 42 annuités, 60 ans pour qui a commencé avant 20 ans, et une capitalisation obligatoire.", s: "AFP via Orange", u: "https://actu.orange.fr/france/travailler-plus-partir-plus-tot-le-pen-promet-de-reformer-les-retraites-quot-des-son-arrivee-au-pouvoir-quot-CNT000002tLSmo.html" },
-  { d: "17 nov.", k: "debat", t: "Les équipes d’Attal, Lisnard et Retailleau avancent vers une primaire ouverte à deux tours en janvier, à 2 € par votant. Philippe refuse d’y participer.", s: "Public Sénat", u: "https://www.publicsenat.fr/actualites/politique/primaire-les-equipes-dattal-retailleau-et-lisnard-salignent-sur-un-vote-en-janvier-moins-sur-le-cas-deric-zemmour" },
   { d: "17 nov.", k: "mesure", t: "À Villeurbanne, Raphaël Glucksmann se prononce pour la régularisation des travailleurs sans papiers, 250 000 à 300 000 personnes selon lui.", s: "AFP via Yahoo Actualités", u: "https://fr.news.yahoo.com/villeurbanne-glucksmann-d%C3%A9fend-solidarit%C3%A9-%C3%A9trille-204656152.html" },
-  { d: "17 nov.", k: "insolite", t: "Jean-Luc Mélenchon dîne à Paris avec des grands patrons, dont Bernard Arnault et Patrick Pouyanné. « Une présentation de programme », dit LFI.", s: "LCP avec AFP", u: "https://lcp.fr/actualites/presidentielle-2027-pourquoi-jean-luc-melenchon-va-diner-ce-mardi-avec-des-grands" },
-  { d: "À venir", k: "agenda", t: "13 déc. : vote des Écologistes sur leur candidature · 12 mars : fin des parrainages · 18 avril : premier tour.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-declares-et-potentiels-444932" }
+  { d: "À venir", k: "agenda", t: "10 au 13 déc. : vote des Écologistes sur leur candidature · 12 mars : fin des parrainages · 18 avril : premier tour.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-marine-tondelier-prete-a-une-coalition-autour-de-jean-luc-melenchon" },
 ];
-var NEWS_MAJ = "18 novembre 2026";
+
+var NEWS_MAJ = "19 novembre 2026";
 
 /* Déguisements du titre selon la date (comme les doodles). from/to au format MM-JJ.
    draw = dessin posé sur le « Q » (bonnet, pelerin) ou emo = un emoji à la place ; side = grand dessin après le « ? » (dinde) ;
@@ -2917,6 +2918,7 @@ var FETES = [
   { id: "enfance", from: "11-20", to: "11-20", emo: "🧒", fete: "Journée internationale des droits de l’enfant" },
   { id: "violences-femmes", from: "11-25", to: "11-25", emo: "🧡", fete: "Journée contre les violences faites aux femmes" },
   { id: "thanksgiving", from: "11-16", to: "11-27", draw: "pelerin", side: "dinde", q: "#c2410c", fete: "🦃 Thanksgiving, jeudi 26 novembre", tip: "Happy Thanksgiving !" },
+  { id: "esclavage", from: "12-02", to: "12-02", emo: "🕊️", fete: "Journée internationale pour l’abolition de l’esclavage" },
   { id: "sida", from: "12-01", to: "12-01", emo: "🎗️", fete: "Journée mondiale de lutte contre le sida" },
   { id: "handicap", from: "12-03", to: "12-03", emo: "🤝", fete: "Journée internationale des personnes handicapées" },
   { id: "noel", from: "12-01", to: "12-26", draw: "bonnet", q: "#0b7a3e", fete: "🎄 Joyeuses fêtes", tip: "Joyeux Noël !" },
