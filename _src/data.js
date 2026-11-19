@@ -1289,11 +1289,13 @@ var NEWS_MAJ = "19 novembre 2026";
 
 /* Déguisements du titre selon la date (comme les doodles). from/to au format MM-JJ.
    draw = dessin posé sur le « Q » (bonnet, pelerin) ou emo = un emoji à la place ; side = grand dessin après le « ? » (dinde) ;
-   fete = petit texte à côté de la date de l'élection ; q = couleur du « ? » ; tip = info-bulle du titre.
+   fete = petit texte à côté de la date de l'élection ; q = couleur du « ? » ; tip = info-bulle du titre ;
+   anim = liste d'animations (rebond : le dessin du « Q » sautille ; roule : le dessin side roule et démarre au survol ; clignote : le « ? » change de couleur).
    Le premier élément dont la période contient la date du jour s'applique. Aperçu : ?theme=<id>. */
 var FETES = [
   { id: "enfance", from: "11-20", to: "11-20", emo: "🧒", fete: "Journée internationale des droits de l’enfant" },
   { id: "violences-femmes", from: "11-25", to: "11-25", emo: "🧡", fete: "Journée contre les violences faites aux femmes" },
+  { id: "jeu-video", from: "11-19", to: "11-19", draw: "manette", side: "voiture", anim: ["rebond", "roule", "clignote"], fete: "🎮 Sortie de GTA 6", tip: "Sortie de GTA 6 !" },
   { id: "thanksgiving", from: "11-16", to: "11-27", draw: "pelerin", side: "dinde", q: "#c2410c", fete: "🦃 Thanksgiving, jeudi 26 novembre", tip: "Happy Thanksgiving !" },
   { id: "esclavage", from: "12-02", to: "12-02", emo: "🕊️", fete: "Journée internationale pour l’abolition de l’esclavage" },
   { id: "sida", from: "12-01", to: "12-01", emo: "🎗️", fete: "Journée mondiale de lutte contre le sida" },

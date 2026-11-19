@@ -1026,6 +1026,30 @@ body.th-femmes .brand h1 em { color: #6b21a8; }
 .brand h1:hover .doodle2 { animation: wobble .6s ease; }
 @keyframes wobble { 30% { transform: rotate(-8deg); } 60% { transform: rotate(6deg); } }
 body.th-thanksgiving .kick-fete { color: #c2410c; }
+/* Animations réutilisables des déguisements (champ anim de FETES) */
+body.an-rebond .doodle svg, body.an-rebond .doodle.emo { animation: dd-rebond 1.4s ease-in-out infinite; }
+@keyframes dd-rebond { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14%); } }
+body.an-rebond .doodle .btns circle { animation: dd-btn 1.6s steps(1) infinite; }
+body.an-rebond .doodle .btns circle:nth-child(2) { animation-delay: .4s; }
+body.an-rebond .doodle .btns circle:nth-child(3) { animation-delay: .8s; }
+body.an-rebond .doodle .btns circle:nth-child(4) { animation-delay: 1.2s; }
+@keyframes dd-btn { 0% { opacity: .35; } 25% { opacity: 1; } }
+body.an-roule .doodle2 { width: 1.6em; overflow: visible; }
+body.an-roule .doodle2 .carbody { animation: dd-moteur .25s linear infinite; }
+@keyframes dd-moteur { 50% { transform: translateY(1px); } }
+body.an-roule .doodle2 .wheel { animation: dd-roue .6s linear infinite; }
+@keyframes dd-roue { to { transform: rotate(360deg); } }
+body.an-roule .doodle2 .puff { animation: dd-fumee 1.2s ease-out infinite; }
+body.an-roule .doodle2 .puff.p2 { animation-delay: .6s; }
+@keyframes dd-fumee { 0% { transform: translate(0, 0) scale(.5); opacity: .9; } 100% { transform: translate(-10px, -6px) scale(1.4); opacity: 0; } }
+body.an-roule .brand h1:hover .doodle2 { animation: dd-depart 1.6s ease-in-out; }
+body.an-roule .brand h1:hover .doodle2 .wheel { animation-duration: .2s; }
+@keyframes dd-depart { 0% { transform: none; } 40% { transform: translateX(260%); opacity: 0; } 41% { transform: translateX(-260%); opacity: 0; } 100% { transform: none; opacity: 1; } }
+body.an-clignote .brand h1 .q { animation: dd-clignote 2.4s steps(1) infinite; }
+@keyframes dd-clignote { 0% { color: #16a34a; } 25% { color: #2563eb; } 50% { color: #dc2626; } 75% { color: #ca8a04; } }
+body.th-jeu-video .kick-fete { color: #2563eb; }
+body.an-roule header.mast { overflow-x: clip; }
+@media (max-width: 640px) { body.an-roule .doodle2 { width: 1.3em; } }
 
 /* ===== Mode « Mon programme de rêve » ===== */
 .modes button.m-reve { border-color: var(--bleu); background: linear-gradient(135deg, #eef0ff, var(--sheet)); }

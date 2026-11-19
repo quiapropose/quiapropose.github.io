@@ -38,12 +38,13 @@ Object.keys(EX.CONSTIT || {}).forEach(function (t) { var c = EX.CONSTIT[t]; if (
 Object.keys(EX.COUT || {}).forEach(function (t) { var c = EX.COUT[t]; if (!texts[t]) bad("COUT : clé sans mesure correspondante : " + t.slice(0, 70)); if (c.length !== 5 || !/^https:\/\//.test(c[4])) bad("COUT : entrée incomplète ou URL non https : " + t.slice(0, 70)); });
 Object.keys(texts).forEach(function (t) { if (!(EX.COUT || {})[t] && !(EX.EST || {})[t]) bad("coût : ni chiffrage sourcé (COUT) ni estimation (EST) dans expl.js : " + t.slice(0, 70)); });
 Object.keys(EX.EST || {}).forEach(function (t) { var e = EX.EST[t]; if (!texts[t]) bad("EST : clé sans mesure correspondante : " + t.slice(0, 70)); if (["cout", "gain", "mixte", "nc"].indexOf(e[0]) < 0 || (e[0] === "nc") !== (e[1] === null) || (e[1] !== null && [0, 1, 2, 3, 4].indexOf(e[1]) < 0) || !e[2]) bad("EST : entrée invalide : " + t.slice(0, 70)); });
-var DRAWS = ["bonnet", "pelerin"], fid = {};
+var DRAWS = ["bonnet", "pelerin", "manette"], SIDES = ["dinde", "voiture"], ANIMS = ["rebond", "roule", "clignote"], fid = {};
 G.FETES.forEach(function (f, i) {
   if (!f.id || fid[f.id]) bad("FETES[" + i + "] id manquant ou en double"); fid[f.id] = 1;
   if (!/^\d\d-\d\d$/.test(f.from || "") || !/^\d\d-\d\d$/.test(f.to || "")) bad("FETES[" + i + "] dates au format MM-JJ");
   if (f.draw && DRAWS.indexOf(f.draw) < 0) bad("FETES[" + i + "] dessin inconnu : " + f.draw + " (disponibles : " + DRAWS.join(", ") + ")");
-  if (f.side && ["dinde"].indexOf(f.side) < 0) bad("FETES[" + i + "] dessin side inconnu : " + f.side);
+  if (f.side && SIDES.indexOf(f.side) < 0) bad("FETES[" + i + "] dessin side inconnu : " + f.side + " (disponibles : " + SIDES.join(", ") + ")");
+  if (f.anim && (!Array.isArray(f.anim) || f.anim.some(function (a) { return ANIMS.indexOf(a) < 0; }))) bad("FETES[" + i + "] anim doit être une liste parmi : " + ANIMS.join(", "));
   if (!f.draw && !f.emo) bad("FETES[" + i + "] il faut draw ou emo");
   if (f.fete && f.fete.length > 60) bad("FETES[" + i + "] texte fete trop long");
 });
