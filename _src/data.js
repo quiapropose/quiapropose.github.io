@@ -1,4 +1,4 @@
-/* Données : candidats, sources et mesures. État au 19 novembre 2026. */
+/* Données : candidats, sources et mesures. État au 20 novembre 2026. */
 var C = [
   { id: "arthaud", name: "Nathalie Arthaud", ini: "NA", party: "Lutte ouvrière" },
   { id: "asselineau", name: "François Asselineau", ini: "FA", party: "UPR" },
@@ -108,7 +108,9 @@ var S = {
   phConf: { s: "franceinfo (conférence de presse sur son projet « à date »)", d: "18 nov. 2026", u: "https://www.franceinfo.fr/politique/edouard-philippe/priorite-donnee-a-l-ecole-retablissement-des-comptes-publics-edouard-philippe-met-en-lumiere-plusieurs-mesures-de-son-programme-presidentiel_8287970.html" },
   phLog: { s: "Europe 1 avec AFP (entretien au Parisien)", d: "15 nov. 2026", u: "https://www.europe1.fr/politique/presidentielle-2027-edouard-philippe-veut-batir-quatre-millions-de-logements-supplementaires-en-10-ans-1235907" },
   lpRet2: { s: "AFP via Orange (conférence de presse sur les retraites, au siège du RN)", d: "17 nov. 2026", u: "https://actu.orange.fr/france/travailler-plus-partir-plus-tot-le-pen-promet-de-reformer-les-retraites-quot-des-son-arrivee-au-pouvoir-quot-CNT000002tLSmo.html" },
-  glVil: { s: "AFP via Yahoo Actualités (meeting de Villeurbanne et entretien aux journaux du groupe Ebra)", d: "17 nov. 2026", u: "https://fr.news.yahoo.com/villeurbanne-glucksmann-d%C3%A9fend-solidarit%C3%A9-%C3%A9trille-204656152.html" }
+  glVil: { s: "AFP via Yahoo Actualités (meeting de Villeurbanne et entretien aux journaux du groupe Ebra)", d: "17 nov. 2026", u: "https://fr.news.yahoo.com/villeurbanne-glucksmann-d%C3%A9fend-solidarit%C3%A9-%C3%A9trille-204656152.html" },
+  dbLcp: { s: "LCP (débat télévisé des candidats, aux Restos du Cœur)", d: "16 nov. 2026", u: "https://lcp.fr/actualites/logement-associations-jeunesse-ce-qu-il-faut-retenir-du-debat-presidentiel-sur-lci" },
+  dbAfp: { s: "AFP via Connaissance des Énergies (débat télévisé des candidats)", d: "16 nov. 2026", u: "https://www.connaissancedesenergies.org/afp/impots-logement-smic-ce-quil-faut-retenir-du-debat-entre-candidats-a-la-presidentielle-261116" }
 };
 
 // [candidat, thème, mesure reformulée, clé source]
@@ -1117,12 +1119,18 @@ var RAW = [
   ["lepen","Retraites","Créer une retraite par capitalisation obligatoire pour les actifs de 52 ans au plus, financée par le Fonds de réserve des retraites et une partie des cotisations logement et formation.","lpRet2"],
   ["lepen","Retraites","Valider un trimestre de retraite seulement après trois mois de travail au moins à mi-temps, quel que soit le salaire.","lpRet2"],
   ["lepen","Retraites","Remplacer les critères de pénibilité par un départ à 60 ans pour ceux qui ont travaillé six mois à temps plein avant 20 ans.","lpRet2"],
-  ["lepen","Retraites","Supprimer progressivement la majoration de pension des pères de trois enfants et porter celle des mères à 12 %.","lpRet2"]
+  ["lepen","Retraites","Supprimer progressivement la majoration de pension des pères de trois enfants et porter celle des mères à 12 %.","lpRet2"],
+  ["lepen","Jeunesse","Verser aux étudiants salariés une prime d’activité égale à 20 % de leur salaire, dans la limite de 200 € (30 % et 300 € pour les boursiers).","dbLcp"],
+  ["lepen","Jeunesse","Rendre le permis de conduire gratuit pour les jeunes.","dbLcp"],
+  ["lepen","Transports","Rendre les trains gratuits pour les jeunes aux heures creuses.","dbLcp"],
+  ["lepen","Logement","Transformer des bureaux vides en logements étudiants.","dbAfp"],
+  ["melenchon","Jeunesse","Verser une allocation d’autonomie de 1 337 € par mois aux jeunes en études, dès 16 ans dans les filières professionnelles.","dbLcp"]
 ];
 
 
 // Mesures partagées : [candidats, thème, mesure, {candidat: source}, "fou" si l'accord traverse les camps]
 var SHARED = [
+  [["attal","retailleau"],"Logement","Donner la priorité aux personnes qui travaillent dans l’attribution des logements sociaux.",{attal:"dbAfp",retailleau:"dbLcp"},0],
   [["lepen","melenchon","tondelier"],"Retraites","Abroger la réforme de 2023 et revenir à un âge légal de départ de 62 ans.",{lepen:"psRetr",melenchon:"psRetr",tondelier:"toMv"},1],
   [["lepen","dupont","philippot","tondelier"],"Institutions","Instaurer le référendum d’initiative citoyenne (RIC).",{lepen:"lp22",dupont:"ndDlf",philippot:"ptSite",tondelier:"toMv"},1],
   [["lepen","melenchon","glucksmann","tondelier"],"Institutions","Élire l’Assemblée nationale à la proportionnelle.",{lepen:"lp22",melenchon:"melR1",glucksmann:"glActe",tondelier:"toMv"},1],
@@ -1277,7 +1285,7 @@ var POLLS_MAJ = "15 novembre 2026";
 
 /* Fil info (bandeau du haut) : les plus récents d'abord. k = declare | programme | mesure | agenda | insolite | debat */
 var NEWS = [
-  { d: "18 nov.", k: "declare", t: "Marine Tondelier se dit prête à une coalition autour de Jean-Luc Mélenchon, sous conditions (accord de gouvernement, législatives, programme).", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-marine-tondelier-prete-a-une-coalition-autour-de-jean-luc-melenchon" },
+  { d: "19 nov.", k: "declare", t: "Coalition proposée la veille par Marine Tondelier : « une bonne nouvelle », répond Jean-Luc Mélenchon sur RTL, qui prône « une prudente réserve ».", s: "L’Express via Orange", u: "https://actu.orange.fr/politique/ca-devrait-pouvoir-se-faire-jean-luc-melenchon-reagit-a-la-proposition-de-coalition-de-marine-tondelier-l-express-via-6medias-CNT000002tOSES.html" },
   { d: "18 nov.", k: "programme", t: "Édouard Philippe présente son projet « à date » : règle d’or budgétaire, retraite à 65 ans, privatisation de France Travail, suppression du Cese.", s: "franceinfo", u: "https://www.franceinfo.fr/politique/edouard-philippe/priorite-donnee-a-l-ecole-retablissement-des-comptes-publics-edouard-philippe-met-en-lumiere-plusieurs-mesures-de-son-programme-presidentiel_8287970.html" },
   { d: "18 nov.", k: "debat", t: "Primaire de la droite et du centre (vote fin janvier, 2 €) : David Lisnard juge indispensable la présence de Philippe, qui refuse, et la veut ouverte à Zemmour.", s: "AFP via Boursorama", u: "https://www.boursorama.com/actualite-economique/actualites/presidentielle-lisnard-souffle-le-chaud-et-le-froid-sur-la-primaire-07f2591012191dd99e253faeb9cb0e65" },
   { d: "17 nov.", k: "programme", t: "Marine Le Pen dévoile sa réforme des retraites : 62 ans et 42 annuités, 60 ans pour qui a commencé avant 20 ans, et une capitalisation obligatoire.", s: "AFP via Orange", u: "https://actu.orange.fr/france/travailler-plus-partir-plus-tot-le-pen-promet-de-reformer-les-retraites-quot-des-son-arrivee-au-pouvoir-quot-CNT000002tLSmo.html" },
@@ -1285,7 +1293,7 @@ var NEWS = [
   { d: "À venir", k: "agenda", t: "10 au 13 déc. : vote des Écologistes sur leur candidature · 12 mars : fin des parrainages · 18 avril : premier tour.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-marine-tondelier-prete-a-une-coalition-autour-de-jean-luc-melenchon" },
 ];
 
-var NEWS_MAJ = "19 novembre 2026";
+var NEWS_MAJ = "20 novembre 2026";
 
 /* Déguisements du titre selon la date (comme les doodles). from/to au format MM-JJ.
    draw = dessin posé sur le « Q » (bonnet, pelerin) ou emo = un emoji à la place ; side = grand dessin après le « ? » (dinde) ;
@@ -1293,6 +1301,7 @@ var NEWS_MAJ = "19 novembre 2026";
    anim = liste d'animations (rebond : le dessin du « Q » sautille ; roule : le dessin side roule et démarre au survol ; clignote : le « ? » change de couleur).
    Le premier élément dont la période contient la date du jour s'applique. Aperçu : ?theme=<id>. */
 var FETES = [
+  { id: "television", from: "11-21", to: "11-21", emo: "📺", fete: "Journée mondiale de la télévision" },
   { id: "enfance", from: "11-20", to: "11-20", emo: "🧒", fete: "Journée internationale des droits de l’enfant" },
   { id: "violences-femmes", from: "11-25", to: "11-25", emo: "🧡", fete: "Journée contre les violences faites aux femmes" },
   { id: "jeu-video", from: "11-19", to: "11-19", draw: "manette", side: "voiture", anim: ["rebond", "roule", "clignote"], fete: "🎮 Sortie de GTA 6", tip: "Sortie de GTA 6 !" },
@@ -1300,6 +1309,7 @@ var FETES = [
   { id: "esclavage", from: "12-02", to: "12-02", emo: "🕊️", fete: "Journée internationale pour l’abolition de l’esclavage" },
   { id: "sida", from: "12-01", to: "12-01", emo: "🎗️", fete: "Journée mondiale de lutte contre le sida" },
   { id: "handicap", from: "12-03", to: "12-03", emo: "🤝", fete: "Journée internationale des personnes handicapées" },
+  { id: "monet", from: "12-05", to: "12-05", emo: "🎨", q: "#4f7cac", fete: "Il y a 100 ans disparaissait Claude Monet", tip: "Claude Monet (1840-1926), peintre des Nymphéas" },
   { id: "noel", from: "12-01", to: "12-26", draw: "bonnet", q: "#0b7a3e", fete: "🎄 Joyeuses fêtes", tip: "Joyeux Noël !" },
   { id: "nouvel-an", from: "12-31", to: "01-01", emo: "🥂", fete: "🎆 Bonne année 2027", tip: "Bonne année !" },
   { id: "galette", from: "01-06", to: "01-06", emo: "👑", fete: "Épiphanie : qui aura la fève ?" },

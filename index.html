@@ -1645,7 +1645,7 @@ body.playing .ticker { display: none; }
 </footer>
 
 <script>
-/* Données : candidats, sources et mesures. État au 19 novembre 2026. */
+/* Données : candidats, sources et mesures. État au 20 novembre 2026. */
 var C = [
   { id: "arthaud", name: "Nathalie Arthaud", ini: "NA", party: "Lutte ouvrière" },
   { id: "asselineau", name: "François Asselineau", ini: "FA", party: "UPR" },
@@ -1755,7 +1755,9 @@ var S = {
   phConf: { s: "franceinfo (conférence de presse sur son projet « à date »)", d: "18 nov. 2026", u: "https://www.franceinfo.fr/politique/edouard-philippe/priorite-donnee-a-l-ecole-retablissement-des-comptes-publics-edouard-philippe-met-en-lumiere-plusieurs-mesures-de-son-programme-presidentiel_8287970.html" },
   phLog: { s: "Europe 1 avec AFP (entretien au Parisien)", d: "15 nov. 2026", u: "https://www.europe1.fr/politique/presidentielle-2027-edouard-philippe-veut-batir-quatre-millions-de-logements-supplementaires-en-10-ans-1235907" },
   lpRet2: { s: "AFP via Orange (conférence de presse sur les retraites, au siège du RN)", d: "17 nov. 2026", u: "https://actu.orange.fr/france/travailler-plus-partir-plus-tot-le-pen-promet-de-reformer-les-retraites-quot-des-son-arrivee-au-pouvoir-quot-CNT000002tLSmo.html" },
-  glVil: { s: "AFP via Yahoo Actualités (meeting de Villeurbanne et entretien aux journaux du groupe Ebra)", d: "17 nov. 2026", u: "https://fr.news.yahoo.com/villeurbanne-glucksmann-d%C3%A9fend-solidarit%C3%A9-%C3%A9trille-204656152.html" }
+  glVil: { s: "AFP via Yahoo Actualités (meeting de Villeurbanne et entretien aux journaux du groupe Ebra)", d: "17 nov. 2026", u: "https://fr.news.yahoo.com/villeurbanne-glucksmann-d%C3%A9fend-solidarit%C3%A9-%C3%A9trille-204656152.html" },
+  dbLcp: { s: "LCP (débat télévisé des candidats, aux Restos du Cœur)", d: "16 nov. 2026", u: "https://lcp.fr/actualites/logement-associations-jeunesse-ce-qu-il-faut-retenir-du-debat-presidentiel-sur-lci" },
+  dbAfp: { s: "AFP via Connaissance des Énergies (débat télévisé des candidats)", d: "16 nov. 2026", u: "https://www.connaissancedesenergies.org/afp/impots-logement-smic-ce-quil-faut-retenir-du-debat-entre-candidats-a-la-presidentielle-261116" }
 };
 
 // [candidat, thème, mesure reformulée, clé source]
@@ -2764,12 +2766,18 @@ var RAW = [
   ["lepen","Retraites","Créer une retraite par capitalisation obligatoire pour les actifs de 52 ans au plus, financée par le Fonds de réserve des retraites et une partie des cotisations logement et formation.","lpRet2"],
   ["lepen","Retraites","Valider un trimestre de retraite seulement après trois mois de travail au moins à mi-temps, quel que soit le salaire.","lpRet2"],
   ["lepen","Retraites","Remplacer les critères de pénibilité par un départ à 60 ans pour ceux qui ont travaillé six mois à temps plein avant 20 ans.","lpRet2"],
-  ["lepen","Retraites","Supprimer progressivement la majoration de pension des pères de trois enfants et porter celle des mères à 12 %.","lpRet2"]
+  ["lepen","Retraites","Supprimer progressivement la majoration de pension des pères de trois enfants et porter celle des mères à 12 %.","lpRet2"],
+  ["lepen","Jeunesse","Verser aux étudiants salariés une prime d’activité égale à 20 % de leur salaire, dans la limite de 200 € (30 % et 300 € pour les boursiers).","dbLcp"],
+  ["lepen","Jeunesse","Rendre le permis de conduire gratuit pour les jeunes.","dbLcp"],
+  ["lepen","Transports","Rendre les trains gratuits pour les jeunes aux heures creuses.","dbLcp"],
+  ["lepen","Logement","Transformer des bureaux vides en logements étudiants.","dbAfp"],
+  ["melenchon","Jeunesse","Verser une allocation d’autonomie de 1 337 € par mois aux jeunes en études, dès 16 ans dans les filières professionnelles.","dbLcp"]
 ];
 
 
 // Mesures partagées : [candidats, thème, mesure, {candidat: source}, "fou" si l'accord traverse les camps]
 var SHARED = [
+  [["attal","retailleau"],"Logement","Donner la priorité aux personnes qui travaillent dans l’attribution des logements sociaux.",{attal:"dbAfp",retailleau:"dbLcp"},0],
   [["lepen","melenchon","tondelier"],"Retraites","Abroger la réforme de 2023 et revenir à un âge légal de départ de 62 ans.",{lepen:"psRetr",melenchon:"psRetr",tondelier:"toMv"},1],
   [["lepen","dupont","philippot","tondelier"],"Institutions","Instaurer le référendum d’initiative citoyenne (RIC).",{lepen:"lp22",dupont:"ndDlf",philippot:"ptSite",tondelier:"toMv"},1],
   [["lepen","melenchon","glucksmann","tondelier"],"Institutions","Élire l’Assemblée nationale à la proportionnelle.",{lepen:"lp22",melenchon:"melR1",glucksmann:"glActe",tondelier:"toMv"},1],
@@ -2924,7 +2932,7 @@ var POLLS_MAJ = "15 novembre 2026";
 
 /* Fil info (bandeau du haut) : les plus récents d'abord. k = declare | programme | mesure | agenda | insolite | debat */
 var NEWS = [
-  { d: "18 nov.", k: "declare", t: "Marine Tondelier se dit prête à une coalition autour de Jean-Luc Mélenchon, sous conditions (accord de gouvernement, législatives, programme).", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-marine-tondelier-prete-a-une-coalition-autour-de-jean-luc-melenchon" },
+  { d: "19 nov.", k: "declare", t: "Coalition proposée la veille par Marine Tondelier : « une bonne nouvelle », répond Jean-Luc Mélenchon sur RTL, qui prône « une prudente réserve ».", s: "L’Express via Orange", u: "https://actu.orange.fr/politique/ca-devrait-pouvoir-se-faire-jean-luc-melenchon-reagit-a-la-proposition-de-coalition-de-marine-tondelier-l-express-via-6medias-CNT000002tOSES.html" },
   { d: "18 nov.", k: "programme", t: "Édouard Philippe présente son projet « à date » : règle d’or budgétaire, retraite à 65 ans, privatisation de France Travail, suppression du Cese.", s: "franceinfo", u: "https://www.franceinfo.fr/politique/edouard-philippe/priorite-donnee-a-l-ecole-retablissement-des-comptes-publics-edouard-philippe-met-en-lumiere-plusieurs-mesures-de-son-programme-presidentiel_8287970.html" },
   { d: "18 nov.", k: "debat", t: "Primaire de la droite et du centre (vote fin janvier, 2 €) : David Lisnard juge indispensable la présence de Philippe, qui refuse, et la veut ouverte à Zemmour.", s: "AFP via Boursorama", u: "https://www.boursorama.com/actualite-economique/actualites/presidentielle-lisnard-souffle-le-chaud-et-le-froid-sur-la-primaire-07f2591012191dd99e253faeb9cb0e65" },
   { d: "17 nov.", k: "programme", t: "Marine Le Pen dévoile sa réforme des retraites : 62 ans et 42 annuités, 60 ans pour qui a commencé avant 20 ans, et une capitalisation obligatoire.", s: "AFP via Orange", u: "https://actu.orange.fr/france/travailler-plus-partir-plus-tot-le-pen-promet-de-reformer-les-retraites-quot-des-son-arrivee-au-pouvoir-quot-CNT000002tLSmo.html" },
@@ -2932,7 +2940,7 @@ var NEWS = [
   { d: "À venir", k: "agenda", t: "10 au 13 déc. : vote des Écologistes sur leur candidature · 12 mars : fin des parrainages · 18 avril : premier tour.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-marine-tondelier-prete-a-une-coalition-autour-de-jean-luc-melenchon" },
 ];
 
-var NEWS_MAJ = "19 novembre 2026";
+var NEWS_MAJ = "20 novembre 2026";
 
 /* Déguisements du titre selon la date (comme les doodles). from/to au format MM-JJ.
    draw = dessin posé sur le « Q » (bonnet, pelerin) ou emo = un emoji à la place ; side = grand dessin après le « ? » (dinde) ;
@@ -2940,6 +2948,7 @@ var NEWS_MAJ = "19 novembre 2026";
    anim = liste d'animations (rebond : le dessin du « Q » sautille ; roule : le dessin side roule et démarre au survol ; clignote : le « ? » change de couleur).
    Le premier élément dont la période contient la date du jour s'applique. Aperçu : ?theme=<id>. */
 var FETES = [
+  { id: "television", from: "11-21", to: "11-21", emo: "📺", fete: "Journée mondiale de la télévision" },
   { id: "enfance", from: "11-20", to: "11-20", emo: "🧒", fete: "Journée internationale des droits de l’enfant" },
   { id: "violences-femmes", from: "11-25", to: "11-25", emo: "🧡", fete: "Journée contre les violences faites aux femmes" },
   { id: "jeu-video", from: "11-19", to: "11-19", draw: "manette", side: "voiture", anim: ["rebond", "roule", "clignote"], fete: "🎮 Sortie de GTA 6", tip: "Sortie de GTA 6 !" },
@@ -2947,6 +2956,7 @@ var FETES = [
   { id: "esclavage", from: "12-02", to: "12-02", emo: "🕊️", fete: "Journée internationale pour l’abolition de l’esclavage" },
   { id: "sida", from: "12-01", to: "12-01", emo: "🎗️", fete: "Journée mondiale de lutte contre le sida" },
   { id: "handicap", from: "12-03", to: "12-03", emo: "🤝", fete: "Journée internationale des personnes handicapées" },
+  { id: "monet", from: "12-05", to: "12-05", emo: "🎨", q: "#4f7cac", fete: "Il y a 100 ans disparaissait Claude Monet", tip: "Claude Monet (1840-1926), peintre des Nymphéas" },
   { id: "noel", from: "12-01", to: "12-26", draw: "bonnet", q: "#0b7a3e", fete: "🎄 Joyeuses fêtes", tip: "Joyeux Noël !" },
   { id: "nouvel-an", from: "12-31", to: "01-01", emo: "🥂", fete: "🎆 Bonne année 2027", tip: "Bonne année !" },
   { id: "galette", from: "01-06", to: "01-06", emo: "👑", fete: "Épiphanie : qui aura la fève ?" },
@@ -4008,7 +4018,13 @@ var EXPL = {
   "Créer une retraite par capitalisation obligatoire pour les actifs de 52 ans au plus, financée par le Fonds de réserve des retraites et une partie des cotisations logement et formation.": "Chaque actif aurait, en plus de sa retraite actuelle, un compte d’épargne retraite placé et rémunéré. Aujourd’hui, les pensions sont payées par les cotisations des actifs du moment (répartition) ; l’épargne retraite par capitalisation reste facultative.",
   "Valider un trimestre de retraite seulement après trois mois de travail au moins à mi-temps, quel que soit le salaire.": "Il faudrait avoir travaillé au moins à mi-temps pendant trois mois pour valider un trimestre. Aujourd’hui, il suffit d’avoir gagné l’équivalent de 150 heures payées au Smic, même en peu de jours.",
   "Remplacer les critères de pénibilité par un départ à 60 ans pour ceux qui ont travaillé six mois à temps plein avant 20 ans.": "Le compte professionnel de prévention, qui permet aux salariés exposés à des conditions pénibles (travail de nuit, bruit…) de partir plus tôt, disparaîtrait. Le départ anticipé dépendrait de l’âge du premier emploi stable.",
-  "Supprimer progressivement la majoration de pension des pères de trois enfants et porter celle des mères à 12 %.": "Aujourd’hui, les pères et les mères d’au moins trois enfants ont chacun une pension majorée de 10 %. Celle des pères disparaîtrait peu à peu, celle des mères passerait à 12 %."
+  "Supprimer progressivement la majoration de pension des pères de trois enfants et porter celle des mères à 12 %.": "Aujourd’hui, les pères et les mères d’au moins trois enfants ont chacun une pension majorée de 10 %. Celle des pères disparaîtrait peu à peu, celle des mères passerait à 12 %.",
+  "Verser aux étudiants salariés une prime d’activité égale à 20 % de leur salaire, dans la limite de 200 € (30 % et 300 € pour les boursiers).": "Les étudiants qui travaillent recevraient un complément égal à une part de leur salaire, plafonné à 200 € (300 € pour les boursiers). Aujourd’hui, la prime d’activité n’est versée aux étudiants que s’ils gagnent au moins 78 % du Smic net environ.",
+  "Rendre le permis de conduire gratuit pour les jeunes.": "Les jeunes passeraient le permis sans payer l’auto-école. Aujourd’hui, il coûte souvent plus de 1 500 € ; des aides existent déjà, comme le « permis à 1 € par jour » (un prêt sans intérêts) ou une aide de 500 € pour les apprentis.",
+  "Rendre les trains gratuits pour les jeunes aux heures creuses.": "Les jeunes voyageraient gratuitement en train aux heures où les trains sont les moins remplis. Aujourd’hui, ils bénéficient seulement de réductions, par exemple avec la carte Avantage Jeune de la SNCF (12-27 ans).",
+  "Transformer des bureaux vides en logements étudiants.": "Des immeubles de bureaux inoccupés deviendraient des logements pour étudiants. Aujourd’hui, ces transformations restent rares : elles coûtent cher et se heurtent aux règles d’urbanisme, que des lois récentes cherchent à assouplir.",
+  "Verser une allocation d’autonomie de 1 337 € par mois aux jeunes en études, dès 16 ans dans les filières professionnelles.": "Les jeunes en études toucheraient 1 337 € par mois, dès 16 ans dans la voie professionnelle. Aujourd’hui, les bourses sur critères sociaux vont d’environ 150 à moins de 700 € par mois, selon les revenus des parents.",
+  "Donner la priorité aux personnes qui travaillent dans l’attribution des logements sociaux.": "Les ménages qui travaillent passeraient en priorité pour obtenir un logement social. Aujourd’hui, les logements sociaux sont attribués sous plafond de ressources, avec des publics prioritaires fixés par la loi (personnes mal logées, handicapées, victimes de violences…)."
 };
 
 /* « Et la Constitution ? » : mesures qui demandent de réviser la Constitution, ou qui s'y heurtent en l'état.
@@ -4111,7 +4127,9 @@ var COUT = {
   "Ouvrir le RSA aux moins de 25 ans.": ["environ 5,8 milliards d’euros par an (coût net)", "Drees, estimation de 2016 pour l’ouverture du RSA dès 18 ans", "Proposition de loi relative aux droits nouveaux dès dix-huit ans – Sénat, L’essentiel", "13 janvier 2021", "https://www.senat.fr/lessentiel/ppl20-182_1.pdf"],
   "Ouvrir le RSA dès 18 ans, sans condition de ressources des parents.": ["environ 5,8 milliards d’euros par an (coût net)", "Drees, estimation de 2016 pour l’ouverture du RSA dès 18 ans", "Proposition de loi relative aux droits nouveaux dès dix-huit ans – Sénat, L’essentiel", "13 janvier 2021", "https://www.senat.fr/lessentiel/ppl20-182_1.pdf"],
   "Ne pas remplacer 400 000 fonctionnaires, dont 300 000 postes économisés grâce à l’intelligence artificielle et à la réorganisation.": ["économie d’environ 25 milliards d’euros (plan d’économies sur cinq ans)", "Chiffrage annoncé par le candidat lui-même, non vérifié de façon indépendante", "Bruno Retailleau s’engage sur un plan d’économies de près de 200 milliards d’euros – Public Sénat", "12 octobre 2026", "https://www.publicsenat.fr/actualites/economie/presidentielle-2027-bruno-retailleau-sengage-sur-un-plan-deconomies-de-pres-de-200-milliards-deuros-sil-est-elu"],
-  "Un âge minimal de départ à 63 ans, avec une décote de 7 % par an, et le taux plein automatique ramené de 67 à 65 ans.": ["économie d’environ 12 milliards d’euros (sur 42 milliards attendus de l’ensemble de sa réforme des retraites)", "Chiffrage annoncé par le candidat lui-même, non vérifié de façon indépendante", "Bruno Retailleau s’engage sur un plan d’économies de près de 200 milliards d’euros – Public Sénat", "12 octobre 2026", "https://www.publicsenat.fr/actualites/economie/presidentielle-2027-bruno-retailleau-sengage-sur-un-plan-deconomies-de-pres-de-200-milliards-deuros-sil-est-elu"]
+  "Un âge minimal de départ à 63 ans, avec une décote de 7 % par an, et le taux plein automatique ramené de 67 à 65 ans.": ["économie d’environ 12 milliards d’euros (sur 42 milliards attendus de l’ensemble de sa réforme des retraites)", "Chiffrage annoncé par le candidat lui-même, non vérifié de façon indépendante", "Bruno Retailleau s’engage sur un plan d’économies de près de 200 milliards d’euros – Public Sénat", "12 octobre 2026", "https://www.publicsenat.fr/actualites/economie/presidentielle-2027-bruno-retailleau-sengage-sur-un-plan-deconomies-de-pres-de-200-milliards-deuros-sil-est-elu"],
+  "Rendre le permis de conduire gratuit pour les jeunes.": ["environ 700 millions d’euros par an", "Chiffrage annoncé par le candidat lui-même, non vérifié de façon indépendante", "Euronews, « Présidentielle 2027 : Le Pen promet une prime d’activité pour les jeunes »", "nov. 2026", "https://fr.euronews.com/2026/11/17/presidentielle-2027-le-pen-promet-une-prime-dactivite-pour-les-jeunes-melenchon-souhaite-u"],
+  "Verser une allocation d’autonomie de 1 337 € par mois aux jeunes en études, dès 16 ans dans les filières professionnelles.": ["9,5 milliards d’euros par an", "Chiffrage annoncé par le candidat lui-même, non vérifié de façon indépendante", "LCP, « Ce qu’il faut retenir du débat présidentiel sur LCI »", "nov. 2026", "https://lcp.fr/actualites/logement-associations-jeunesse-ce-qu-il-faut-retenir-du-debat-presidentiel-sur-lci"]
 };
 
 /* « Combien ça coûte ? » (suite) : ORDRE DE GRANDEUR ESTIMÉ PAR LE SITE, en attente du chiffrage de l’Institut Montaigne (à vérifier début 2027), pour les mesures sans chiffrage sourcé (COUT a priorité).
@@ -5084,7 +5102,11 @@ var EST = {
   "Créer une retraite par capitalisation obligatoire pour les actifs de 52 ans au plus, financée par le Fonds de réserve des retraites et une partie des cotisations logement et formation.": ["nc", null, "Redirige des fonds existants (réserve des retraites, cotisations logement et formation) : l’effet dépend des politiques réduites en contrepartie."],
   "Valider un trimestre de retraite seulement après trois mois de travail au moins à mi-temps, quel que soit le salaire.": ["nc", null, "Effet sur les droits à la retraite étalé sur des décennies, selon les carrières concernées."],
   "Remplacer les critères de pénibilité par un départ à 60 ans pour ceux qui ont travaillé six mois à temps plein avant 20 ans.": ["nc", null, "Remplace un dispositif par un autre ; le coût dépend du nombre de départs anticipés, non chiffré."],
-  "Supprimer progressivement la majoration de pension des pères de trois enfants et porter celle des mères à 12 %.": ["gain", 2, "À terme, l’économie sur les pensions des pères dépasse la hausse de celle des mères ; montée en charge très progressive."]
+  "Supprimer progressivement la majoration de pension des pères de trois enfants et porter celle des mères à 12 %.": ["gain", 2, "À terme, l’économie sur les pensions des pères dépasse la hausse de celle des mères ; montée en charge très progressive."],
+  "Verser aux étudiants salariés une prime d’activité égale à 20 % de leur salaire, dans la limite de 200 € (30 % et 300 € pour les boursiers).": ["cout", 2, "Près d’un million d’étudiants travaillent ; un complément plafonné à 200 ou 300 € représente un à quelques milliards par an."],
+  "Rendre les trains gratuits pour les jeunes aux heures creuses.": ["cout", 1, "Recettes perdues sur des trains peu remplis, à compenser en partie aux opérateurs : quelques centaines de millions par an."],
+  "Transformer des bureaux vides en logements étudiants.": ["nc", null, "Coût selon le nombre de bureaux transformés et la part payée par l’État."],
+  "Donner la priorité aux personnes qui travaillent dans l’attribution des logements sociaux.": ["nc", null, "Changement des règles d’attribution, sans dépense directe."]
 };
 
 </script>
