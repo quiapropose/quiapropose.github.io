@@ -1035,7 +1035,8 @@ var EXPL = {
   "Ouvrir 5 000 places supplémentaires dans les EPIDE, internats qui accompagnent des jeunes vers l’emploi.": "Les EPIDE (établissements pour l’insertion dans l’emploi) accueillent en internat, avec un encadrement inspiré de l’armée, des jeunes sans diplôme ni emploi. Ils compteraient 5 000 places de plus.",
   "Créer 30 000 places d’hébergement dans le cadre d’une politique du « logement d’abord ».": "Le « logement d’abord » consiste à proposer directement un logement aux personnes sans abri, plutôt qu’un long passage par des foyers. 30 000 places d’hébergement s’ajouteraient aux quelque 200 000 que l’État finance aujourd’hui.",
   "Plafonner chaque année le reste à charge des assurés selon leurs revenus.": "Le reste à charge est ce que l’assuré paie lui-même après le remboursement de l’Assurance maladie. Il serait plafonné chaque année selon les revenus. Aujourd’hui, il n’existe pas de plafond général, seulement des prises en charge à 100 % (affections de longue durée…).",
-  "Soumettre à la CSG la consommation de « tokens » d’intelligence artificielle des entreprises.": "Les « tokens » sont l’unité de calcul facturée par les fournisseurs d’intelligence artificielle. Leur consommation par les entreprises serait taxée par la CSG, qui finance la Sécurité sociale et porte aujourd’hui sur les revenus."
+  "Soumettre à la CSG la consommation de « tokens » d’intelligence artificielle des entreprises.": "Les « tokens » sont l’unité de calcul facturée par les fournisseurs d’intelligence artificielle. Leur consommation par les entreprises serait taxée par la CSG, qui finance la Sécurité sociale et porte aujourd’hui sur les revenus.",
+  "Supprimer l’Arcom, le régulateur de l’audiovisuel et du numérique.": "L’Arcom est l’autorité publique indépendante qui attribue les fréquences aux chaînes de télévision et aux radios, veille au pluralisme et à la protection des mineurs, et lutte contre le piratage. La mesure la ferait disparaître."
 };
 
 /* « Et la Constitution ? » : mesures qui demandent de réviser la Constitution, ou qui s'y heurtent en l'état.
@@ -2130,5 +2131,6 @@ var EST = {
   "Ouvrir 5 000 places supplémentaires dans les EPIDE, internats qui accompagnent des jeunes vers l’emploi.": ["cout", 1, "Un internat d’insertion coûte plusieurs dizaines de milliers d’euros par place et par an : de l’ordre de 100 à 200 millions pour 5 000 places."],
   "Créer 30 000 places d’hébergement dans le cadre d’une politique du « logement d’abord ».": ["cout", 1, "Une place d’hébergement coûte de l’ordre de 10 000 à 15 000 € par an : quelques centaines de millions pour 30 000 places."],
   "Plafonner chaque année le reste à charge des assurés selon leurs revenus.": ["nc", null, "Coût selon le niveau des plafonds et la part prise par les mutuelles, non précisés."],
-  "Soumettre à la CSG la consommation de « tokens » d’intelligence artificielle des entreprises.": ["nc", null, "Nouvelle recette dont le montant dépend du taux et de la consommation d’IA des entreprises, non précisés."]
+  "Soumettre à la CSG la consommation de « tokens » d’intelligence artificielle des entreprises.": ["nc", null, "Nouvelle recette dont le montant dépend du taux et de la consommation d’IA des entreprises, non précisés."],
+  "Supprimer l’Arcom, le régulateur de l’audiovisuel et du numérique.": ["gain", 0, "Économie limitée au budget de fonctionnement du régulateur, inférieur à 100 millions d’euros par an, si ses missions ne sont pas confiées à un autre organisme."]
 };

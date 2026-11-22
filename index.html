@@ -1645,7 +1645,7 @@ body.playing .ticker { display: none; }
 </footer>
 
 <script>
-/* Données : candidats, sources et mesures. État au 21 novembre 2026. */
+/* Données : candidats, sources et mesures. État au 22 novembre 2026. */
 var C = [
   { id: "arthaud", name: "Nathalie Arthaud", ini: "NA", party: "Lutte ouvrière" },
   { id: "asselineau", name: "François Asselineau", ini: "FA", party: "UPR" },
@@ -1760,7 +1760,8 @@ var S = {
   dbLcp: { s: "LCP (débat télévisé des candidats, aux Restos du Cœur)", d: "16 nov. 2026", u: "https://lcp.fr/actualites/logement-associations-jeunesse-ce-qu-il-faut-retenir-du-debat-presidentiel-sur-lci" },
   dbAfp: { s: "AFP via Connaissance des Énergies (débat télévisé des candidats)", d: "16 nov. 2026", u: "https://www.connaissancedesenergies.org/afp/impots-logement-smic-ce-quil-faut-retenir-du-debat-entre-candidats-a-la-presidentielle-261116" },
   viProg: { s: "Programme « Réussir à nouveau » (lafrancehumaniste.fr)", d: "20 nov. 2026", u: "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/" },
-  viLcp: { s: "LCP (« que retenir des 258 propositions »)", d: "20 nov. 2026", u: "https://lcp.fr/actualites/presidentielle-2027-que-retenir-des-258-propositions-du-programme-de-dominique-de" }
+  viLcp: { s: "LCP (« que retenir des 258 propositions »)", d: "20 nov. 2026", u: "https://lcp.fr/actualites/presidentielle-2027-que-retenir-des-258-propositions-du-programme-de-dominique-de" },
+  zeToul: { s: "Europe 1, avec AFP (premier meeting de campagne, au Zénith de Toulon)", d: "21 nov. 2026", u: "https://www.europe1.fr/politique/presidentielle-eric-zemmour-se-pose-en-candidat-de-la-liberte-de-parler-face-au-totalitarisme-datmosphere-1241899" }
 };
 
 // [candidat, thème, mesure reformulée, clé source]
@@ -2787,7 +2788,8 @@ var RAW = [
   ["villepin","Jeunesse","Ouvrir 5 000 places supplémentaires dans les EPIDE, internats qui accompagnent des jeunes vers l’emploi.","viProg"],
   ["villepin","Logement","Créer 30 000 places d’hébergement dans le cadre d’une politique du « logement d’abord ».","viProg"],
   ["villepin","Santé","Plafonner chaque année le reste à charge des assurés selon leurs revenus.","viProg"],
-  ["villepin","Social","Soumettre à la CSG la consommation de « tokens » d’intelligence artificielle des entreprises.","viProg"]
+  ["villepin","Social","Soumettre à la CSG la consommation de « tokens » d’intelligence artificielle des entreprises.","viProg"],
+  ["zemmour","Culture","Supprimer l’Arcom, le régulateur de l’audiovisuel et du numérique.","zeToul"]
 ];
 
 
@@ -2948,15 +2950,15 @@ var POLLS_MAJ = "15 novembre 2026";
 
 /* Fil info (bandeau du haut) : les plus récents d'abord. k = declare | programme | mesure | agenda | insolite | debat */
 var NEWS = [
+  { d: "21 nov.", k: "declare", t: "François Ruffin retire sa candidature : « le duel des deux gauches irréconciliables est installé ». Il ne soutient aucun candidat.", s: "LCP (avec AFP)", u: "https://lcp.fr/actualites/francois-ruffin-se-retire-de-la-presidentielle-2027-sans-soutenir-aucun-des-candidats-de" },
+  { d: "21 nov.", k: "programme", t: "Premier meeting d’Éric Zemmour, au Zénith de Toulon : « candidat de la liberté de parler », il promet de supprimer l’Arcom.", s: "Europe 1 (avec AFP)", u: "https://www.europe1.fr/politique/presidentielle-eric-zemmour-se-pose-en-candidat-de-la-liberte-de-parler-face-au-totalitarisme-datmosphere-1241899" },
   { d: "20 nov.", k: "declare", t: "Dominique de Villepin se déclare candidat et publie 258 propositions : retour de l’ISF et de l’ENA, vote à 16 ans, autoroutes nationalisées.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-que-retenir-des-258-propositions-du-programme-de-dominique-de" },
   { d: "19 nov.", k: "declare", t: "Coalition proposée la veille par Marine Tondelier : « une bonne nouvelle », répond Jean-Luc Mélenchon sur RTL, qui prône « une prudente réserve ».", s: "L’Express via Orange", u: "https://actu.orange.fr/politique/ca-devrait-pouvoir-se-faire-jean-luc-melenchon-reagit-a-la-proposition-de-coalition-de-marine-tondelier-l-express-via-6medias-CNT000002tOSES.html" },
   { d: "18 nov.", k: "programme", t: "Édouard Philippe présente son projet « à date » : règle d’or budgétaire, retraite à 65 ans, privatisation de France Travail, suppression du Cese.", s: "franceinfo", u: "https://www.franceinfo.fr/politique/edouard-philippe/priorite-donnee-a-l-ecole-retablissement-des-comptes-publics-edouard-philippe-met-en-lumiere-plusieurs-mesures-de-son-programme-presidentiel_8287970.html" },
-  { d: "18 nov.", k: "debat", t: "Primaire de la droite et du centre (vote fin janvier, 2 €) : David Lisnard juge indispensable la présence de Philippe, qui refuse, et la veut ouverte à Zemmour.", s: "AFP via Boursorama", u: "https://www.boursorama.com/actualite-economique/actualites/presidentielle-lisnard-souffle-le-chaud-et-le-froid-sur-la-primaire-07f2591012191dd99e253faeb9cb0e65" },
-  { d: "17 nov.", k: "programme", t: "Marine Le Pen dévoile sa réforme des retraites : 62 ans et 42 annuités, 60 ans pour qui a commencé avant 20 ans, et une capitalisation obligatoire.", s: "AFP via Orange", u: "https://actu.orange.fr/france/travailler-plus-partir-plus-tot-le-pen-promet-de-reformer-les-retraites-quot-des-son-arrivee-au-pouvoir-quot-CNT000002tLSmo.html" },
   { d: "À venir", k: "agenda", t: "10 au 13 déc. : vote des Écologistes sur leur candidature · 12 mars : fin des parrainages · 18 avril : premier tour.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-marine-tondelier-prete-a-une-coalition-autour-de-jean-luc-melenchon" },
 ];
 
-var NEWS_MAJ = "21 novembre 2026";
+var NEWS_MAJ = "22 novembre 2026";
 
 /* Déguisements du titre selon la date (comme les doodles). from/to au format MM-JJ.
    draw = dessin posé sur le « Q » (bonnet, pelerin) ou emo = un emoji à la place ; side = grand dessin après le « ? » (dinde) ;
@@ -2964,6 +2966,8 @@ var NEWS_MAJ = "21 novembre 2026";
    anim = liste d'animations (rebond : le dessin du « Q » sautille ; roule : le dessin side roule et démarre au survol ; clignote : le « ? » change de couleur).
    Le premier élément dont la période contient la date du jour s'applique. Aperçu : ?theme=<id>. */
 var FETES = [
+  { id: "sainte-cecile", from: "11-22", to: "11-22", emo: "🎺", q: "#b45309", fete: "Sainte-Cécile, fête des musiciens", tip: "Bonne fête aux musiciens et aux harmonies !" },
+  { id: "aviation", from: "12-07", to: "12-07", emo: "✈️", q: "#0369a1", fete: "Journée de l’aviation civile internationale" },
   { id: "television", from: "11-21", to: "11-21", emo: "📺", fete: "Journée mondiale de la télévision" },
   { id: "enfance", from: "11-20", to: "11-20", emo: "🧒", fete: "Journée internationale des droits de l’enfant" },
   { id: "violences-femmes", from: "11-25", to: "11-25", emo: "🧡", fete: "Journée contre les violences faites aux femmes" },
@@ -4055,7 +4059,8 @@ var EXPL = {
   "Ouvrir 5 000 places supplémentaires dans les EPIDE, internats qui accompagnent des jeunes vers l’emploi.": "Les EPIDE (établissements pour l’insertion dans l’emploi) accueillent en internat, avec un encadrement inspiré de l’armée, des jeunes sans diplôme ni emploi. Ils compteraient 5 000 places de plus.",
   "Créer 30 000 places d’hébergement dans le cadre d’une politique du « logement d’abord ».": "Le « logement d’abord » consiste à proposer directement un logement aux personnes sans abri, plutôt qu’un long passage par des foyers. 30 000 places d’hébergement s’ajouteraient aux quelque 200 000 que l’État finance aujourd’hui.",
   "Plafonner chaque année le reste à charge des assurés selon leurs revenus.": "Le reste à charge est ce que l’assuré paie lui-même après le remboursement de l’Assurance maladie. Il serait plafonné chaque année selon les revenus. Aujourd’hui, il n’existe pas de plafond général, seulement des prises en charge à 100 % (affections de longue durée…).",
-  "Soumettre à la CSG la consommation de « tokens » d’intelligence artificielle des entreprises.": "Les « tokens » sont l’unité de calcul facturée par les fournisseurs d’intelligence artificielle. Leur consommation par les entreprises serait taxée par la CSG, qui finance la Sécurité sociale et porte aujourd’hui sur les revenus."
+  "Soumettre à la CSG la consommation de « tokens » d’intelligence artificielle des entreprises.": "Les « tokens » sont l’unité de calcul facturée par les fournisseurs d’intelligence artificielle. Leur consommation par les entreprises serait taxée par la CSG, qui finance la Sécurité sociale et porte aujourd’hui sur les revenus.",
+  "Supprimer l’Arcom, le régulateur de l’audiovisuel et du numérique.": "L’Arcom est l’autorité publique indépendante qui attribue les fréquences aux chaînes de télévision et aux radios, veille au pluralisme et à la protection des mineurs, et lutte contre le piratage. La mesure la ferait disparaître."
 };
 
 /* « Et la Constitution ? » : mesures qui demandent de réviser la Constitution, ou qui s'y heurtent en l'état.
@@ -5150,7 +5155,8 @@ var EST = {
   "Ouvrir 5 000 places supplémentaires dans les EPIDE, internats qui accompagnent des jeunes vers l’emploi.": ["cout", 1, "Un internat d’insertion coûte plusieurs dizaines de milliers d’euros par place et par an : de l’ordre de 100 à 200 millions pour 5 000 places."],
   "Créer 30 000 places d’hébergement dans le cadre d’une politique du « logement d’abord ».": ["cout", 1, "Une place d’hébergement coûte de l’ordre de 10 000 à 15 000 € par an : quelques centaines de millions pour 30 000 places."],
   "Plafonner chaque année le reste à charge des assurés selon leurs revenus.": ["nc", null, "Coût selon le niveau des plafonds et la part prise par les mutuelles, non précisés."],
-  "Soumettre à la CSG la consommation de « tokens » d’intelligence artificielle des entreprises.": ["nc", null, "Nouvelle recette dont le montant dépend du taux et de la consommation d’IA des entreprises, non précisés."]
+  "Soumettre à la CSG la consommation de « tokens » d’intelligence artificielle des entreprises.": ["nc", null, "Nouvelle recette dont le montant dépend du taux et de la consommation d’IA des entreprises, non précisés."],
+  "Supprimer l’Arcom, le régulateur de l’audiovisuel et du numérique.": ["gain", 0, "Économie limitée au budget de fonctionnement du régulateur, inférieur à 100 millions d’euros par an, si ses missions ne sont pas confiées à un autre organisme."]
 };
 
 </script>
