@@ -18,7 +18,7 @@ var C = [
   { id: "riner", name: "Teddy Riner", ini: "TR", party: "Sans étiquette" },
   { id: "retailleau", name: "Bruno Retailleau", ini: "BR", party: "Les Républicains", main: true },
   { id: "roussel", name: "Fabien Roussel", ini: "FR", party: "Parti communiste" },
-  { id: "ruffin", name: "François Ruffin", ini: "FRu", party: "Debout !" },
+  { id: "ruffin", name: "François Ruffin", ini: "FRu", party: "Debout !", out: "21 novembre 2026" },
   { id: "tondelier", name: "Marine Tondelier", ini: "MT", party: "Les Écologistes", main: true },
   { id: "villepin", name: "Dominique de Villepin", ini: "DV", party: "La France humaniste" },
   { id: "zemmour", name: "Éric Zemmour", ini: "EZ", party: "Reconquête" }

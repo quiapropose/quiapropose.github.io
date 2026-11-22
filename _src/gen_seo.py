@@ -87,7 +87,7 @@ for c in C:
     canon = f"{SITE}programmes/{SLUG[cid]}"
     body = [f'<nav class="crumb"><a href="{SITE}">Accueil</a> › <a href="{SITE}programmes/">Programmes 2027</a> › {e(c["name"])}</nav>',
             f'<h1>Programme de {e(c["name"])} pour 2027</h1>',
-            f'<p class="lede">{e(c["party"])}' + (f' · {e(FAMILY.get(cid, ""))}' if FAMILY.get(cid, "") != c["party"] else "") + f' · {n} mesures recensées, classées par thème.</p>',
+            f'<p class="lede">{e(c["party"])}' + (f' · {e(FAMILY.get(cid, ""))}' if FAMILY.get(cid, "") != c["party"] else "") + f' · {n} mesures recensées, classées par thème.</p>' + (f'<p class="lede"><b>Candidature retirée le {e(c["out"])}.</b> Ses propositions restent recensées ici.</p>' if c.get("out") else ""),
             f'<a class="cta" href="{SITE}">Sauras-tu reconnaître ses mesures ? Jouer →</a><a class="cta alt" href="{SITE}programmes/">Comparer avec les autres</a>',
             '<p class="note">Mesures reformulées de façon courte et neutre à partir des programmes, sites et déclarations du candidat. Elles ne sont ni jugées ni classées par importance. Le programme peut évoluer : on met à jour dès qu’une nouvelle version sort.</p>']
     for t in sorted(themes, key=lambda t: (-len(themes[t]), t)):
@@ -112,7 +112,7 @@ for c in C:
     urls.append((canon, "0.8"))
 
 total = len(RAW) + len(SHARED)
-cards = "".join(f'<a class="card" style="--fam:{FAMCOL.get(FAMILY.get(c["id"], ""), "#000091")}" href="{SITE}programmes/{SLUG[c["id"]]}"><b>{e(c["name"])}</b><span>{e(c["party"])} · {counts[c["id"]]} mesures</span></a>' for c in ORDER)
+cards = "".join(f'<a class="card" style="--fam:{FAMCOL.get(FAMILY.get(c["id"], ""), "#000091")}" href="{SITE}programmes/{SLUG[c["id"]]}"><b>{e(c["name"])}</b><span>{e(c["party"])} · {counts[c["id"]]} mesures' + (" · candidature retirée" if c.get("out") else "") + '</span></a>' for c in ORDER)
 idx_title = f"Programmes de la présidentielle 2027 : les {len(C)} candidats et leurs {total} mesures | Qui a proposé ça ?"
 idx_desc = f"Comparer les programmes de la présidentielle 2027 : {total} mesures sourcées de {len(C)} candidats (Mélenchon, Le Pen, Philippe, Attal, Retailleau, Glucksmann, Tondelier…), classées par thème."
 idx_body = f"""<nav class="crumb"><a href="{SITE}">Accueil</a> › Programmes 2027</nav>

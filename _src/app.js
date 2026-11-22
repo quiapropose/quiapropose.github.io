@@ -165,11 +165,14 @@ function srcHtml(m) {
   if (keys.length === 1) { var s = m.srcs[keys[0]]; return "Source : <a href=\"" + esc(s.u) + "\" target=\"_blank\" rel=\"noopener\">" + esc(s.s) + " ↗</a> · " + esc(s.d); }
   return "Sources : " + keys.map(function (k) { var s = m.srcs[k]; return esc(last(CBY[k].name)) + " (<a href=\"" + esc(s.u) + "\" target=\"_blank\" rel=\"noopener\">" + esc(s.s) + " ↗</a>)"; }).join(" ; ");
 }
+// Candidature retirée (champ out de C) : bandeau « Retiré » sur l'affiche, mention dans les fiches.
+function outTxt(c) { return c.out ? "Candidature retirée le " + c.out : ""; }
 function boardHtml(c, tag, extra, key) {
   tag = tag || "div";
-  return "<" + tag + (tag === "button" ? " type=\"button\"" : "") + " class=\"board\" style=\"--fam:" + (FAMCOL[FAMILY[c.id]] || "transparent") + "\" " + (extra || "") + ">" +
+  return "<" + tag + (tag === "button" ? " type=\"button\"" : "") + " class=\"board" + (c.out ? " out" : "") + "\" style=\"--fam:" + (FAMCOL[FAMILY[c.id]] || "transparent") + "\" " + (c.out && tag !== "button" ? "title=\"" + esc(outTxt(c)) + "\" " : "") + (extra || "") + ">" +
     "<span class=\"num\">" + c.n + "</span>" + (key ? "<span class=\"key\">" + key + "</span>" : "") +
-    "<span class=\"ini\">" + esc(c.ini) + "</span><span class=\"nm\">" + esc(c.name) + "</span><span class=\"pt\">" + esc(c.party) + "</span></" + tag + ">";
+    "<span class=\"ini\">" + esc(c.ini) + "</span><span class=\"nm\">" + esc(c.name) + "</span><span class=\"pt\">" + esc(c.party) + "</span>" +
+    (c.out ? "<span class=\"out-band\" aria-label=\"" + esc(outTxt(c)) + "\">Retiré</span>" : "") + "</" + tag + ">";
 }
 var SOON = {
   lepen: "Programme 2027 à l’impression. En attendant, on a ressorti celui de 2022.",
@@ -270,9 +273,9 @@ function renderHome() {
   renderHemi();
   MODES.forEach(function (m) { var b = $("m-" + m); if (b && MODE_ICON[m] && !b.querySelector(".ico")) b.querySelector("b").insertAdjacentHTML("afterbegin", "<i class=\"ico\" aria-hidden=\"true\">" + MODE_ICON[m] + "</i>"); });
   countUp($("f-mes"), NPROG, 900);
-  $("f-cand").textContent = C.length;
+  $("f-cand").textContent = C.filter(function (c) { return !c.out; }).length;
   $("f-th").textContent = THEMES.length;
-  var full = C.filter(function (c) { return !SOON[c.id]; }), part = C.filter(function (c) { return SOON[c.id]; });
+  var full = C.filter(function (c) { return !SOON[c.id] && !c.out; }).concat(C.filter(function (c) { return c.out; })), part = C.filter(function (c) { return SOON[c.id] && !c.out; });
   $("boards-home").innerHTML = full.map(function (c) { return boardHtml(c); }).join("") +
     part.map(function (c) {
       return boardHtml(c).replace("class=\"board\"", "class=\"board soon-b\" title=\"" + esc(SOON[c.id]) + "\"").replace("<span class=\"num\">", "<span class=\"soon\">À venir</span><span class=\"num\">").replace(/<\/div>$/, "<span class=\"soonq\">" + esc(SOON[c.id]) + "</span></div>");
@@ -281,7 +284,7 @@ function renderHome() {
       return "<div class=\"board soon-b noprog\" title=\"" + esc(x.q) + "\"><span class=\"soon\">À venir</span><span class=\"num\">?</span><span class=\"ini\">" + esc(x.ini) + "</span><span class=\"nm\">" + esc(x.name) + "</span><span class=\"pt\">" + esc(x.party) + "</span><span class=\"soonq\">" + esc(x.q) + "</span></div>";
     }).join("");
   stagger($("boards-home"));
-  $("more-n").textContent = C.length + NOPROG.length; $("more-s").textContent = "dont " + (part.length + NOPROG.length) + " « à venir »";
+  $("more-n").textContent = C.length + NOPROG.length; var nOut = C.filter(function (c) { return c.out; }).length; $("more-s").textContent = "dont " + (part.length + NOPROG.length) + " « à venir »" + (nOut ? " et " + nOut + (nOut > 1 ? " retirées" : " retirée") : "");
   $("theme-pick").innerHTML = THEMES.map(function (t, i) {
     var n = SINGLE.filter(function (x) { return x.t === t; }).length;
     return "<button type=\"button\" id=\"th-" + i + "\" data-i=\"" + i + "\" aria-pressed=\"false\"><span>" + esc(t) + "</span><small>" + n + "</small></button>";
@@ -1497,7 +1500,7 @@ function reveal(a, animate) {
   }
   if (m.imp) { var so = m.srcs[m.c]; parts.push("<span>Source de l’obstacle : <a href=\"" + esc(so.u) + "\" target=\"_blank\" rel=\"noopener\">" + esc(so.s) + " ↗</a> · " + esc(so.d) + "</span>"); }
   else parts.push("<span>" + srcHtml(m) + "</span>");
-  if (!special(m) && m.cs.length === 1) parts.push("<span class=\"memo\">Antisèche : " + esc(CBY[m.c].name) + " · " + esc(FAMILY[m.c]) + " · " + esc(CBY[m.c].party) + " · " + plural(countAll(m.c), "mesure", "mesures") + " dans le quiz</span>");
+  if (!special(m) && m.cs.length === 1) parts.push("<span class=\"memo\">Antisèche : " + esc(CBY[m.c].name) + " · " + esc(FAMILY[m.c]) + " · " + esc(CBY[m.c].party) + " · " + plural(countAll(m.c), "mesure", "mesures") + " dans le quiz" + (CBY[m.c].out ? " · " + esc(outTxt(CBY[m.c]).toLowerCase()) : "") + "</span>");
   if (a.cheated) parts.push("<span class=\"memo\">Antisèche utilisée : points divisés par deux.</span>");
   var rl = reportLink(m); if (rl) parts.push("<span>" + rl + "</span>");
   $("g-src").innerHTML = parts.join("");
@@ -1639,7 +1642,7 @@ function renderCheat() {
     var step = Math.max(1, Math.floor(picks.length / 3)), ex = [0, 1, 2].map(function (k) { return picks[k * step]; }).filter(Boolean);
     return "<article class=\"card fiche\" style=\"--fam:" + (FAMCOL[FAMILY[c.id]] || "var(--accent)") + "\"><h3><span class=\"num\">" + c.n + "</span>" + esc(c.name) + "</h3>" +
       "<span class=\"fam\">" + esc(c.party) + " · " + esc(FAMILY[c.id]) + " · " + plural(mine.length, "mesure", "mesures") + "</span>" +
-      (SOON[c.id] ? "<span class=\"soonx\">À venir : " + esc(SOON[c.id]) + "</span>" : "") +
+      (c.out ? "<span class=\"soonx outx\">" + esc(outTxt(c)) + ". Ses propositions restent dans le quiz.</span>" : SOON[c.id] ? "<span class=\"soonx\">À venir : " + esc(SOON[c.id]) + "</span>" : "") +
       "<div class=\"tags\">" + top.map(function (t) { return "<span>" + esc(t) + "</span>"; }).join("") + "</div>" +
       "<ul>" + ex.map(function (x) { return "<li>" + esc(x.m) + "</li>"; }).join("") + "</ul>" +
       "<button type=\"button\" class=\"btn\" data-rev=\"" + c.id + "\">Réviser " + esc(last(c.name)) + " →</button></article>";
@@ -1907,7 +1910,7 @@ function renderExplorer() {
     if (fc && fc !== "__main" && fc !== "__shared" && fc !== c.id) return "";
     var mine = list.filter(function (x) { return x.cs.indexOf(c.id) >= 0; });
     if (!mine.length) return "";
-    return "<section class=\"ex-group\"><h3><span class=\"num\">" + c.n + "</span>" + esc(c.name) + "<small>" + esc(c.party) + " · " + plural(mine.length, "mesure", "mesures") + "</small></h3><div class=\"ex-list\">" +
+    return "<section class=\"ex-group\"><h3><span class=\"num\">" + c.n + "</span>" + esc(c.name) + "<small>" + esc(c.party) + " · " + plural(mine.length, "mesure", "mesures") + (c.out ? " · " + esc(outTxt(c).toLowerCase()) : "") + "</small></h3><div class=\"ex-list\">" +
       mine.map(function (x) {
         var also = x.shared ? "<span class=\"also\">Aussi proposé par " + esc(names(x.cs.filter(function (k) { return k !== c.id; }))) + "</span>" : "";
         return "<article class=\"card ex-item\"><p>" + esc(x.m) + "</p><div class=\"meta\"><span class=\"th\">" + esc(x.t) + "</span>" + also + "<span>" + srcHtml(x) + "</span></div></article>";
