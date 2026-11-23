@@ -1649,7 +1649,7 @@ body.playing .ticker { display: none; }
 </footer>
 
 <script>
-/* Données : candidats, sources et mesures. État au 22 novembre 2026. */
+/* Données : candidats, sources et mesures. État au 23 novembre 2026. */
 var C = [
   { id: "arthaud", name: "Nathalie Arthaud", ini: "NA", party: "Lutte ouvrière" },
   { id: "asselineau", name: "François Asselineau", ini: "FA", party: "UPR" },
@@ -1765,7 +1765,9 @@ var S = {
   dbAfp: { s: "AFP via Connaissance des Énergies (débat télévisé des candidats)", d: "16 nov. 2026", u: "https://www.connaissancedesenergies.org/afp/impots-logement-smic-ce-quil-faut-retenir-du-debat-entre-candidats-a-la-presidentielle-261116" },
   viProg: { s: "Programme « Réussir à nouveau » (lafrancehumaniste.fr)", d: "20 nov. 2026", u: "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/" },
   viLcp: { s: "LCP (« que retenir des 258 propositions »)", d: "20 nov. 2026", u: "https://lcp.fr/actualites/presidentielle-2027-que-retenir-des-258-propositions-du-programme-de-dominique-de" },
-  zeToul: { s: "Europe 1, avec AFP (premier meeting de campagne, au Zénith de Toulon)", d: "21 nov. 2026", u: "https://www.europe1.fr/politique/presidentielle-eric-zemmour-se-pose-en-candidat-de-la-liberte-de-parler-face-au-totalitarisme-datmosphere-1241899" }
+  zeToul: { s: "Europe 1, avec AFP (premier meeting de campagne, au Zénith de Toulon)", d: "21 nov. 2026", u: "https://www.europe1.fr/politique/presidentielle-eric-zemmour-se-pose-en-candidat-de-la-liberte-de-parler-face-au-totalitarisme-datmosphere-1241899" },
+  phSecu: { s: "Programme d’Édouard Philippe, volet sécurité (edouardphilippe.fr)", d: "18 nov. 2026", u: "https://www.edouardphilippe.fr/programme/securite" },
+  phLcp: { s: "LCP (présentation du « volume 1 » de son programme)", d: "18 nov. 2026", u: "https://lcp.fr/actualites/presidentielle-2027-edouard-philippe-promet-des-reformes-radicales-pour-relancer-sa" }
 };
 
 // [candidat, thème, mesure reformulée, clé source]
@@ -2793,7 +2795,9 @@ var RAW = [
   ["villepin","Logement","Créer 30 000 places d’hébergement dans le cadre d’une politique du « logement d’abord ».","viProg"],
   ["villepin","Santé","Plafonner chaque année le reste à charge des assurés selon leurs revenus.","viProg"],
   ["villepin","Social","Soumettre à la CSG la consommation de « tokens » d’intelligence artificielle des entreprises.","viProg"],
-  ["zemmour","Culture","Supprimer l’Arcom, le régulateur de l’audiovisuel et du numérique.","zeToul"]
+  ["zemmour","Culture","Supprimer l’Arcom, le régulateur de l’audiovisuel et du numérique.","zeToul"],
+  ["philippe","Social","Suspendre automatiquement le RSA des délinquants condamnés, sauf si le maire en décide autrement après examen de leur situation.","phSecu"],
+  ["philippe","Justice","Créer 30 000 places de prison pour les peines courtes.","phLcp"]
 ];
 
 
@@ -2954,15 +2958,15 @@ var POLLS_MAJ = "15 novembre 2026";
 
 /* Fil info (bandeau du haut) : les plus récents d'abord. k = declare | programme | mesure | agenda | insolite | debat */
 var NEWS = [
+  { d: "22 nov.", k: "debat", t: "Sur BFMTV, David Lisnard défend une primaire de la droite ouverte à Éric Zemmour, un « pré-premier tour » ; Bruno Retailleau et Gabriel Attal s’y opposent.", s: "AFP via La Gazette France", u: "https://www.lagazettefrance.fr/article/attaque-par-le-rn-et-le-centre-lisnard-ne-lache-rien-sur-la-primaire" },
   { d: "21 nov.", k: "declare", t: "François Ruffin retire sa candidature : « le duel des deux gauches irréconciliables est installé ». Il ne soutient aucun candidat.", s: "LCP (avec AFP)", u: "https://lcp.fr/actualites/francois-ruffin-se-retire-de-la-presidentielle-2027-sans-soutenir-aucun-des-candidats-de" },
   { d: "21 nov.", k: "programme", t: "Premier meeting d’Éric Zemmour, au Zénith de Toulon : « candidat de la liberté de parler », il promet de supprimer l’Arcom.", s: "Europe 1 (avec AFP)", u: "https://www.europe1.fr/politique/presidentielle-eric-zemmour-se-pose-en-candidat-de-la-liberte-de-parler-face-au-totalitarisme-datmosphere-1241899" },
   { d: "20 nov.", k: "declare", t: "Dominique de Villepin se déclare candidat et publie 258 propositions : retour de l’ISF et de l’ENA, vote à 16 ans, autoroutes nationalisées.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-que-retenir-des-258-propositions-du-programme-de-dominique-de" },
   { d: "19 nov.", k: "declare", t: "Coalition proposée la veille par Marine Tondelier : « une bonne nouvelle », répond Jean-Luc Mélenchon sur RTL, qui prône « une prudente réserve ».", s: "L’Express via Orange", u: "https://actu.orange.fr/politique/ca-devrait-pouvoir-se-faire-jean-luc-melenchon-reagit-a-la-proposition-de-coalition-de-marine-tondelier-l-express-via-6medias-CNT000002tOSES.html" },
-  { d: "18 nov.", k: "programme", t: "Édouard Philippe présente son projet « à date » : règle d’or budgétaire, retraite à 65 ans, privatisation de France Travail, suppression du Cese.", s: "franceinfo", u: "https://www.franceinfo.fr/politique/edouard-philippe/priorite-donnee-a-l-ecole-retablissement-des-comptes-publics-edouard-philippe-met-en-lumiere-plusieurs-mesures-de-son-programme-presidentiel_8287970.html" },
   { d: "À venir", k: "agenda", t: "10 au 13 déc. : vote des Écologistes sur leur candidature · 12 mars : fin des parrainages · 18 avril : premier tour.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-marine-tondelier-prete-a-une-coalition-autour-de-jean-luc-melenchon" },
 ];
 
-var NEWS_MAJ = "22 novembre 2026";
+var NEWS_MAJ = "23 novembre 2026";
 
 /* Déguisements du titre selon la date (comme les doodles). from/to au format MM-JJ.
    draw = dessin posé sur le « Q » (bonnet, pelerin) ou emo = un emoji à la place ; side = grand dessin après le « ? » (dinde) ;
@@ -2983,6 +2987,7 @@ var FETES = [
   { id: "monet", from: "12-05", to: "12-05", emo: "🎨", q: "#4f7cac", fete: "Il y a 100 ans disparaissait Claude Monet", tip: "Claude Monet (1840-1926), peintre des Nymphéas" },
   { id: "sainte-barbe", from: "12-04", to: "12-04", emo: "🚒", q: "#c81e1e", fete: "Sainte-Barbe, fête des sapeurs-pompiers", tip: "Merci aux sapeurs-pompiers !" },
   { id: "saint-nicolas", from: "12-06", to: "12-06", emo: "🎁", fete: "Joyeuse Saint-Nicolas !", tip: "Fête traditionnelle dans le Nord et l’Est" },
+  { id: "lumieres", from: "12-08", to: "12-08", emo: "🕯️", anim: ["clignote"], fete: "8 décembre : fête des Lumières à Lyon", tip: "Lumignons aux fenêtres pour la fête des Lumières" },
   { id: "noel", from: "12-01", to: "12-26", draw: "bonnet", q: "#0b7a3e", fete: "🎄 Joyeuses fêtes", tip: "Joyeux Noël !" },
   { id: "nouvel-an", from: "12-31", to: "01-01", emo: "🥂", fete: "🎆 Bonne année 2027", tip: "Bonne année !" },
   { id: "galette", from: "01-06", to: "01-06", emo: "👑", fete: "Épiphanie : qui aura la fève ?" },
@@ -4064,7 +4069,9 @@ var EXPL = {
   "Créer 30 000 places d’hébergement dans le cadre d’une politique du « logement d’abord ».": "Le « logement d’abord » consiste à proposer directement un logement aux personnes sans abri, plutôt qu’un long passage par des foyers. 30 000 places d’hébergement s’ajouteraient aux quelque 200 000 que l’État finance aujourd’hui.",
   "Plafonner chaque année le reste à charge des assurés selon leurs revenus.": "Le reste à charge est ce que l’assuré paie lui-même après le remboursement de l’Assurance maladie. Il serait plafonné chaque année selon les revenus. Aujourd’hui, il n’existe pas de plafond général, seulement des prises en charge à 100 % (affections de longue durée…).",
   "Soumettre à la CSG la consommation de « tokens » d’intelligence artificielle des entreprises.": "Les « tokens » sont l’unité de calcul facturée par les fournisseurs d’intelligence artificielle. Leur consommation par les entreprises serait taxée par la CSG, qui finance la Sécurité sociale et porte aujourd’hui sur les revenus.",
-  "Supprimer l’Arcom, le régulateur de l’audiovisuel et du numérique.": "L’Arcom est l’autorité publique indépendante qui attribue les fréquences aux chaînes de télévision et aux radios, veille au pluralisme et à la protection des mineurs, et lutte contre le piratage. La mesure la ferait disparaître."
+  "Supprimer l’Arcom, le régulateur de l’audiovisuel et du numérique.": "L’Arcom est l’autorité publique indépendante qui attribue les fréquences aux chaînes de télévision et aux radios, veille au pluralisme et à la protection des mineurs, et lutte contre le piratage. La mesure la ferait disparaître.",
+  "Suspendre automatiquement le RSA des délinquants condamnés, sauf si le maire en décide autrement après examen de leur situation.": "Le RSA (revenu de solidarité active) est le revenu minimum versé aux personnes sans ressources suffisantes. Aujourd’hui, une condamnation ne le supprime pas en elle-même. Il serait suspendu automatiquement après une condamnation, sauf décision contraire du maire après examen individuel.",
+  "Créer 30 000 places de prison pour les peines courtes.": "Il s’agit de construire des places de prison réservées aux courtes peines. Aujourd’hui, les prisons françaises comptent un peu plus de 60 000 places pour plus de 80 000 détenus, ce qui crée une forte surpopulation."
 };
 
 /* « Et la Constitution ? » : mesures qui demandent de réviser la Constitution, ou qui s'y heurtent en l'état.
@@ -5160,7 +5167,9 @@ var EST = {
   "Créer 30 000 places d’hébergement dans le cadre d’une politique du « logement d’abord ».": ["cout", 1, "Une place d’hébergement coûte de l’ordre de 10 000 à 15 000 € par an : quelques centaines de millions pour 30 000 places."],
   "Plafonner chaque année le reste à charge des assurés selon leurs revenus.": ["nc", null, "Coût selon le niveau des plafonds et la part prise par les mutuelles, non précisés."],
   "Soumettre à la CSG la consommation de « tokens » d’intelligence artificielle des entreprises.": ["nc", null, "Nouvelle recette dont le montant dépend du taux et de la consommation d’IA des entreprises, non précisés."],
-  "Supprimer l’Arcom, le régulateur de l’audiovisuel et du numérique.": ["gain", 0, "Économie limitée au budget de fonctionnement du régulateur, inférieur à 100 millions d’euros par an, si ses missions ne sont pas confiées à un autre organisme."]
+  "Supprimer l’Arcom, le régulateur de l’audiovisuel et du numérique.": ["gain", 0, "Économie limitée au budget de fonctionnement du régulateur, inférieur à 100 millions d’euros par an, si ses missions ne sont pas confiées à un autre organisme."],
+  "Suspendre automatiquement le RSA des délinquants condamnés, sauf si le maire en décide autrement après examen de leur situation.": ["nc", null, "Nombre d’allocataires concernés inconnu, et le maire pourrait maintenir le versement : effet non chiffrable."],
+  "Créer 30 000 places de prison pour les peines courtes.": ["cout", 2, "30 000 places à 200 000 à 300 000 euros, soit 1 à 2 milliards par an sur cinq ans, puis leur fonctionnement."]
 };
 
 </script>
