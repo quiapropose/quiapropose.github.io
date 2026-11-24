@@ -1649,7 +1649,7 @@ body.playing .ticker { display: none; }
 </footer>
 
 <script>
-/* Données : candidats, sources et mesures. État au 23 novembre 2026. */
+/* Données : candidats, sources et mesures. État au 24 novembre 2026. */
 var C = [
   { id: "arthaud", name: "Nathalie Arthaud", ini: "NA", party: "Lutte ouvrière" },
   { id: "asselineau", name: "François Asselineau", ini: "FA", party: "UPR" },
@@ -2927,6 +2927,11 @@ var IMPOSS = [
 /* Derniers sondages d'intentions de vote au 1er tour (en % des suffrages exprimés).
    Chiffres recoupés : notice de la Commission des sondages et/ou rapport de l'institut, et relevés observatoire2027.fr. */
 var POLLS = [
+  { inst: "Toluna Harris Interactive", pour: "M6, RTL et L’Express", terrain: "18 et 19 novembre 2026", n: "2 378 personnes, dont 2 088 inscrites sur les listes électorales", marge: "± 1,4 à 3 points selon le score", methode: "Questionnaire en ligne, méthode des quotas",
+    u: "https://www.commission-des-sondages.fr/notices/files/notices/2026/novembre/10393-pres-iv-vague-10-toluna-harris-interactive-23-novembre.pdf", hyps: [
+    { nom: "Avec Édouard Philippe", r: [["lepen",31],["melenchon",19],["glucksmann",11],["lisnard",11],["philippe",10],["retailleau",4],["zemmour",4],["riner",4],["villepin",2],["arthaud",1],["roussel",1],["tondelier",1],["dupont",1]] },
+    { nom: "Avec Gabriel Attal", r: [["lepen",30],["melenchon",19],["lisnard",12],["glucksmann",11],["attal",7],["retailleau",5],["riner",5],["zemmour",4],["tondelier",2],["villepin",2],["arthaud",1],["roussel",1],["dupont",1]] },
+    { nom: "Avec Gabriel Attal et Édouard Philippe", r: [["lepen",31],["melenchon",18],["glucksmann",11],["lisnard",11],["philippe",9],["attal",4],["retailleau",4],["riner",4],["zemmour",3],["arthaud",1],["roussel",1],["tondelier",1],["villepin",1],["dupont",1]] } ] },
   { inst: "Elabe", pour: "BFMTV et La Tribune Dimanche", terrain: "12 et 13 novembre 2026", n: "1 500 personnes, dont 1 391 inscrites sur les listes électorales", marge: "± 3,5 points au maximum", methode: "Questionnaire en ligne, méthode des quotas",
     u: "https://elabe.fr/presidentielle-2027-novembre/", hyps: [
     { nom: "Avec Édouard Philippe et Dominique de Villepin", r: [["lepen",33],["melenchon",17],["philippe",15],["glucksmann",13.5],["retailleau",6],["zemmour",4.5],["tondelier",3],["dupont",3],["villepin",2.5],["roussel",2],["arthaud",0.5]] },
@@ -2941,12 +2946,6 @@ var POLLS = [
     { nom: "Avec Gabriel Attal", r: [["lepen",31],["melenchon",20.5],["glucksmann",11.5],["attal",11],["lisnard",10],["retailleau",6],["dupont",3],["zemmour",3],["roussel",2],["tondelier",1.5],["arthaud",0.5]] },
     { nom: "Avec Christine Lagarde", r: [["lepen",30.5],["melenchon",20.5],["Christine Lagarde",14],["glucksmann",10],["lisnard",10],["retailleau",5.5],["zemmour",3],["roussel",2.5],["dupont",2],["tondelier",1.5],["arthaud",0.5]] },
     { nom: "Hypothèse large (avec Teddy Riner)", r: [["lepen",27],["melenchon",19],["glucksmann",8],["philippe",8],["lisnard",8],["Christine Lagarde",8],["retailleau",5],["polony",2.5],["attal",2],["dupont",2],["zemmour",2],["riner",2],["roussel",1.5],["ruffin",1.5],["tondelier",1],["asselineau",1],["villepin",1],["arthaud",0.5]] } ] },
-  { inst: "Toluna Harris Interactive", pour: "M6 et RTL", terrain: "du 3 au 5 novembre 2026", n: "2 436 personnes, dont 2 101 inscrites sur les listes électorales", marge: "± 2,6 points au maximum", methode: "Questionnaire en ligne, méthode des quotas",
-    u: "https://www.commission-des-sondages.fr/notices/", hyps: [
-    { nom: "Avec Édouard Philippe", r: [["lepen",36],["melenchon",19],["philippe",14],["glucksmann",12],["retailleau",8],["zemmour",4],["roussel",2],["tondelier",2],["dupont",2],["arthaud",1]] },
-    { nom: "Avec Gabriel Attal", r: [["lepen",36],["melenchon",19],["glucksmann",13],["attal",10],["retailleau",10],["zemmour",4],["tondelier",3],["roussel",2],["dupont",2],["arthaud",1]] },
-    { nom: "Avec Gabriel Attal et Édouard Philippe", r: [["lepen",36],["melenchon",18],["glucksmann",11],["philippe",11],["retailleau",7],["attal",6],["zemmour",4],["roussel",2],["tondelier",2],["dupont",2],["arthaud",1]] },
-    { nom: "Avec Philippe, Lisnard et Villepin", r: [["lepen",34],["melenchon",19],["philippe",12],["glucksmann",11],["lisnard",9],["retailleau",5],["zemmour",3],["tondelier",2],["villepin",2],["arthaud",1],["roussel",1],["dupont",1]] } ] },
   { inst: "Ifop", pour: "LCI", terrain: "du 27 au 29 octobre 2026", n: "1 650 personnes, dont 1 501 inscrites sur les listes électorales", marge: "± 2,8 points au maximum", methode: "Questionnaire en ligne, méthode des quotas",
     u: "https://www.commission-des-sondages.fr/notices/files/notices/2026/novembre/10352-pres-iv-ifop-lci-3-novembre.pdf", hyps: [
     { nom: "Avec Édouard Philippe et Bruno Retailleau", r: [["lepen",37],["melenchon",17.5],["philippe",15],["glucksmann",11.5],["retailleau",7],["zemmour",4],["tondelier",3.5],["dupont",2],["roussel",1.5],["arthaud",1]] },
@@ -2954,19 +2953,19 @@ var POLLS = [
     { nom: "Avec Attal, Retailleau et Lisnard", r: [["lepen",36],["melenchon",17.5],["glucksmann",13],["attal",9],["lisnard",7.5],["retailleau",5],["zemmour",4.5],["tondelier",3],["roussel",2],["dupont",2],["arthaud",0.5]] },
     { nom: "Avec Attal, Philippe, Retailleau et Lisnard", r: [["lepen",35],["melenchon",18],["glucksmann",10],["philippe",9.5],["lisnard",7],["attal",5],["zemmour",4.5],["retailleau",4],["tondelier",3],["roussel",2],["dupont",1.5],["arthaud",0.5]] } ] }
 ];
-var POLLS_MAJ = "15 novembre 2026";
+var POLLS_MAJ = "23 novembre 2026";
 
 /* Fil info (bandeau du haut) : les plus récents d'abord. k = declare | programme | mesure | agenda | insolite | debat */
 var NEWS = [
+  { d: "24 nov.", k: "debat", t: "Ouverture du Congrès des maires à Paris : les candidats y cherchent des parrainages, que 27,6 % des maires se disent prêts à donner (Cevipof).", s: "Public Sénat", u: "https://www.publicsenat.fr/actualites/politique/congres-des-maires-les-candidats-partent-a-la-chasse-aux-parrainages-meme-si-seul-un-maire-sur-quatre-compte-donner-sa-signature-selon-une-enquete-du-cevipof" },
+  { d: "23 nov.", k: "declare", t: "Les adhérents de Génération.s votent à 85 % pour soutenir Jean-Luc Mélenchon, dans le cadre d’un accord de majorité législative avec LFI.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-generations-officialise-son-soutien-a-jean-luc-melenchon-445502" },
   { d: "22 nov.", k: "debat", t: "Sur BFMTV, David Lisnard défend une primaire de la droite ouverte à Éric Zemmour, un « pré-premier tour » ; Bruno Retailleau et Gabriel Attal s’y opposent.", s: "AFP via La Gazette France", u: "https://www.lagazettefrance.fr/article/attaque-par-le-rn-et-le-centre-lisnard-ne-lache-rien-sur-la-primaire" },
   { d: "21 nov.", k: "declare", t: "François Ruffin retire sa candidature : « le duel des deux gauches irréconciliables est installé ». Il ne soutient aucun candidat.", s: "LCP (avec AFP)", u: "https://lcp.fr/actualites/francois-ruffin-se-retire-de-la-presidentielle-2027-sans-soutenir-aucun-des-candidats-de" },
   { d: "21 nov.", k: "programme", t: "Premier meeting d’Éric Zemmour, au Zénith de Toulon : « candidat de la liberté de parler », il promet de supprimer l’Arcom.", s: "Europe 1 (avec AFP)", u: "https://www.europe1.fr/politique/presidentielle-eric-zemmour-se-pose-en-candidat-de-la-liberte-de-parler-face-au-totalitarisme-datmosphere-1241899" },
-  { d: "20 nov.", k: "declare", t: "Dominique de Villepin se déclare candidat et publie 258 propositions : retour de l’ISF et de l’ENA, vote à 16 ans, autoroutes nationalisées.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-que-retenir-des-258-propositions-du-programme-de-dominique-de" },
-  { d: "19 nov.", k: "declare", t: "Coalition proposée la veille par Marine Tondelier : « une bonne nouvelle », répond Jean-Luc Mélenchon sur RTL, qui prône « une prudente réserve ».", s: "L’Express via Orange", u: "https://actu.orange.fr/politique/ca-devrait-pouvoir-se-faire-jean-luc-melenchon-reagit-a-la-proposition-de-coalition-de-marine-tondelier-l-express-via-6medias-CNT000002tOSES.html" },
-  { d: "À venir", k: "agenda", t: "10 au 13 déc. : vote des Écologistes sur leur candidature · 12 mars : fin des parrainages · 18 avril : premier tour.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-marine-tondelier-prete-a-une-coalition-autour-de-jean-luc-melenchon" },
+  { d: "À venir", k: "agenda", t: "Jusqu’au 26 nov. : Congrès des maires · 10 au 13 déc. : vote des Écologistes sur leur candidature · 18 avril : premier tour.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-marine-tondelier-prete-a-une-coalition-autour-de-jean-luc-melenchon" },
 ];
 
-var NEWS_MAJ = "23 novembre 2026";
+var NEWS_MAJ = "24 novembre 2026";
 
 /* Déguisements du titre selon la date (comme les doodles). from/to au format MM-JJ.
    draw = dessin posé sur le « Q » (bonnet, pelerin) ou emo = un emoji à la place ; side = grand dessin après le « ? » (dinde) ;
@@ -2978,6 +2977,8 @@ var FETES = [
   { id: "aviation", from: "12-07", to: "12-07", emo: "✈️", q: "#0369a1", fete: "Journée de l’aviation civile internationale" },
   { id: "television", from: "11-21", to: "11-21", emo: "📺", fete: "Journée mondiale de la télévision" },
   { id: "enfance", from: "11-20", to: "11-20", emo: "🧒", fete: "Journée internationale des droits de l’enfant" },
+  { id: "darwin", from: "11-24", to: "11-24", emo: "🐢", q: "#15803d", fete: "24 nov. 1859 : Darwin publie « L’Origine des espèces »", tip: "Charles Darwin et la théorie de l’évolution" },
+  { id: "nobel", from: "11-27", to: "11-27", emo: "🏅", q: "#a16207", fete: "1895 : Alfred Nobel signe le testament des prix Nobel", tip: "Le testament qui a créé les prix Nobel" },
   { id: "violences-femmes", from: "11-25", to: "11-25", emo: "🧡", fete: "Journée contre les violences faites aux femmes" },
   { id: "jeu-video", from: "11-19", to: "11-19", draw: "manette", side: "voiture", anim: ["rebond", "roule", "clignote"], fete: "🎮 Sortie de GTA 6", tip: "Sortie de GTA 6 !" },
   { id: "thanksgiving", from: "11-16", to: "11-27", draw: "pelerin", side: "dinde", q: "#c2410c", fete: "🦃 Thanksgiving, jeudi 26 novembre", tip: "Happy Thanksgiving !" },
