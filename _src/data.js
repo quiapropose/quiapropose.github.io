@@ -1,4 +1,4 @@
-/* Données : candidats, sources et mesures. État au 26 novembre 2026. */
+/* Données : candidats, sources et mesures. État au 27 novembre 2026. */
 var C = [
   { id: "arthaud", name: "Nathalie Arthaud", ini: "NA", party: "Lutte ouvrière" },
   { id: "asselineau", name: "François Asselineau", ini: "FA", party: "UPR" },
@@ -116,7 +116,8 @@ var S = {
   viLcp: { s: "LCP (« que retenir des 258 propositions »)", d: "20 nov. 2026", u: "https://lcp.fr/actualites/presidentielle-2027-que-retenir-des-258-propositions-du-programme-de-dominique-de" },
   zeToul: { s: "Europe 1, avec AFP (premier meeting de campagne, au Zénith de Toulon)", d: "21 nov. 2026", u: "https://www.europe1.fr/politique/presidentielle-eric-zemmour-se-pose-en-candidat-de-la-liberte-de-parler-face-au-totalitarisme-datmosphere-1241899" },
   phSecu: { s: "Programme d’Édouard Philippe, volet sécurité (edouardphilippe.fr)", d: "18 nov. 2026", u: "https://www.edouardphilippe.fr/programme/securite" },
-  phLcp: { s: "LCP (présentation du « volume 1 » de son programme)", d: "18 nov. 2026", u: "https://lcp.fr/actualites/presidentielle-2027-edouard-philippe-promet-des-reformes-radicales-pour-relancer-sa" }
+  phLcp: { s: "LCP (présentation du « volume 1 » de son programme)", d: "18 nov. 2026", u: "https://lcp.fr/actualites/presidentielle-2027-edouard-philippe-promet-des-reformes-radicales-pour-relancer-sa" },
+  phHpv: { s: "LCP (Convention nationale des centres de lutte contre le cancer)", d: "24 nov. 2026", u: "https://lcp.fr/actualites/eradiquer-le-cancer-du-col-de-l-uterus-edouard-philippe-veut-rendre-obligatoire-la" }
 };
 
 // [candidat, thème, mesure reformulée, clé source]
@@ -1146,7 +1147,8 @@ var RAW = [
   ["villepin","Social","Soumettre à la CSG la consommation de « tokens » d’intelligence artificielle des entreprises.","viProg"],
   ["zemmour","Culture","Supprimer l’Arcom, le régulateur de l’audiovisuel et du numérique.","zeToul"],
   ["philippe","Social","Suspendre automatiquement le RSA des délinquants condamnés, sauf si le maire en décide autrement après examen de leur situation.","phSecu"],
-  ["philippe","Justice","Créer 30 000 places de prison pour les peines courtes.","phLcp"]
+  ["philippe","Justice","Créer 30 000 places de prison pour les peines courtes.","phLcp"],
+  ["philippe","Santé","Rendre obligatoire la vaccination contre les papillomavirus (HPV).","phHpv"]
 ];
 
 
@@ -1306,15 +1308,15 @@ var POLLS_MAJ = "23 novembre 2026";
 
 /* Fil info (bandeau du haut) : les plus récents d'abord. k = declare | programme | mesure | agenda | insolite | debat */
 var NEWS = [
-  { d: "25 nov.", k: "declare", t: "David Lisnard réélu président de l’Association des maires de France avec plus de 72 % des voix, face à Philippe Laurent, maire UDI de Sceaux.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-david-lisnard-tres-largement-reelu-a-la-tete-de-l-association-des" },
+  { d: "26 nov.", k: "declare", t: "Réélu la veille à la tête de l’Association des maires de France, David Lisnard reçoit le soutien de huit députés LR, dans une tribune publiée par Paris Match.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-david-lisnard-candidat-de-l-automne-ou-ascension-durable-445996" },
   { d: "25 nov.", k: "declare", t: "Course aux parrainages au Congrès des maires : 400 assurés pour Marine Le Pen selon le RN, « un peu plus de la moitié » pour LFI, la moitié pour Natacha Polony.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-ou-en-sont-les-candidats-dans-leur-recolte-des-500-parrainages" },
+  { d: "24 nov.", k: "mesure", t: "Édouard Philippe veut rendre obligatoire la vaccination contre les papillomavirus, pour « éradiquer » le cancer du col de l’utérus.", s: "LCP", u: "https://lcp.fr/actualites/eradiquer-le-cancer-du-col-de-l-uterus-edouard-philippe-veut-rendre-obligatoire-la" },
   { d: "23 nov.", k: "declare", t: "Yannick Jadot et Jérémie Iordanoff, partis des Écologistes, lancent « Écologistes et Démocrates », qui soutiendra Raphaël Glucksmann.", s: "Grenoble Mag", u: "https://www.grenoblemag.com/article/3750/ecologistes-et-democrates-l-iserois-jeremie-iordanoff-et-yannick-jadot-lancent-leur-propre-parti" },
   { d: "23 nov.", k: "declare", t: "Les adhérents de Génération.s votent à 85 % pour soutenir Jean-Luc Mélenchon, dans le cadre d’un accord de majorité législative avec LFI.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-generations-officialise-son-soutien-a-jean-luc-melenchon-445502" },
-  { d: "22 nov.", k: "debat", t: "Sur BFMTV, David Lisnard défend une primaire de la droite ouverte à Éric Zemmour, un « pré-premier tour » ; Bruno Retailleau et Gabriel Attal s’y opposent.", s: "AFP via La Gazette France", u: "https://www.lagazettefrance.fr/article/attaque-par-le-rn-et-le-centre-lisnard-ne-lache-rien-sur-la-primaire" },
-  { d: "À venir", k: "agenda", t: "Jusqu’au 26 nov. : Congrès des maires · 10 au 13 déc. : vote des Écologistes sur leur candidature · 18 avril : premier tour.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-marine-tondelier-prete-a-une-coalition-autour-de-jean-luc-melenchon" },
+  { d: "À venir", k: "agenda", t: "10 au 13 déc. : vote des Écologistes sur leur candidature · 18 avril : premier tour · 2 mai : second tour, maintenu à cette date par le gouvernement.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-malgre-les-critiques-le-gouvernement-maintient-a-ce-stade-le-second" },
 ];
 
-var NEWS_MAJ = "26 novembre 2026";
+var NEWS_MAJ = "27 novembre 2026";
 
 /* Déguisements du titre selon la date (comme les doodles). from/to au format MM-JJ.
    draw = dessin posé sur le « Q » (bonnet, pelerin) ou emo = un emoji à la place ; side = grand dessin après le « ? » (dinde) ;
@@ -1340,6 +1342,11 @@ var FETES = [
   { id: "lumieres", from: "12-08", to: "12-08", emo: "🕯️", anim: ["clignote"], fete: "8 décembre : fête des Lumières à Lyon", tip: "Lumignons aux fenêtres pour la fête des Lumières" },
   { id: "droits-homme", from: "12-10", to: "12-10", emo: "📜", q: "#1d4ed8", fete: "10 déc. 1948 : Déclaration universelle des droits de l’homme", tip: "Adoptée à Paris, au palais de Chaillot" },
   { id: "montagne", from: "12-11", to: "12-11", emo: "🏔️", q: "#0f766e", fete: "Journée internationale de la montagne", tip: "Journée proclamée par l’ONU, chaque 11 décembre" },
+  { id: "magellan", from: "11-28", to: "11-28", emo: "⛵", q: "#0e7490", fete: "28 nov. 1520 : Magellan débouche dans le Pacifique", tip: "Fin de la traversée du détroit qui porte son nom" },
+  { id: "avent", from: "11-29", to: "11-29", emo: "🌟", anim: ["rebond"], q: "#b45309", fete: "Premier dimanche de l’Avent", tip: "Le compte à rebours vers Noël commence" },
+  { id: "football", from: "11-30", to: "11-30", emo: "⚽", anim: ["rebond"], q: "#15803d", fete: "30 nov. 1872 : premier match international de football", tip: "Écosse-Angleterre à Glasgow : 0-0" },
+  { id: "souris", from: "12-09", to: "12-09", emo: "🖱️", q: "#4b5563", fete: "9 déc. 1968 : première démonstration de la souris", tip: "Douglas Engelbart présente la souris d’ordinateur à San Francisco" },
+  { id: "radio", from: "12-12", to: "12-12", emo: "📻", anim: ["clignote"], fete: "12 déc. 1901 : premier signal radio transatlantique", tip: "Guglielmo Marconi capte à Terre-Neuve un signal émis d’Angleterre" },
   { id: "noel", from: "12-01", to: "12-26", draw: "bonnet", q: "#0b7a3e", fete: "🎄 Joyeuses fêtes", tip: "Joyeux Noël !" },
   { id: "nouvel-an", from: "12-31", to: "01-01", emo: "🥂", fete: "🎆 Bonne année 2027", tip: "Bonne année !" },
   { id: "galette", from: "01-06", to: "01-06", emo: "👑", fete: "Épiphanie : qui aura la fève ?" },

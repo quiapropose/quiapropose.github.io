@@ -1038,7 +1038,8 @@ var EXPL = {
   "Soumettre à la CSG la consommation de « tokens » d’intelligence artificielle des entreprises.": "Les « tokens » sont l’unité de calcul facturée par les fournisseurs d’intelligence artificielle. Leur consommation par les entreprises serait taxée par la CSG, qui finance la Sécurité sociale et porte aujourd’hui sur les revenus.",
   "Supprimer l’Arcom, le régulateur de l’audiovisuel et du numérique.": "L’Arcom est l’autorité publique indépendante qui attribue les fréquences aux chaînes de télévision et aux radios, veille au pluralisme et à la protection des mineurs, et lutte contre le piratage. La mesure la ferait disparaître.",
   "Suspendre automatiquement le RSA des délinquants condamnés, sauf si le maire en décide autrement après examen de leur situation.": "Le RSA (revenu de solidarité active) est le revenu minimum versé aux personnes sans ressources suffisantes. Aujourd’hui, une condamnation ne le supprime pas en elle-même. Il serait suspendu automatiquement après une condamnation, sauf décision contraire du maire après examen individuel.",
-  "Créer 30 000 places de prison pour les peines courtes.": "Il s’agit de construire des places de prison réservées aux courtes peines. Aujourd’hui, les prisons françaises comptent un peu plus de 60 000 places pour plus de 80 000 détenus, ce qui crée une forte surpopulation."
+  "Créer 30 000 places de prison pour les peines courtes.": "Il s’agit de construire des places de prison réservées aux courtes peines. Aujourd’hui, les prisons françaises comptent un peu plus de 60 000 places pour plus de 80 000 détenus, ce qui crée une forte surpopulation.",
+  "Rendre obligatoire la vaccination contre les papillomavirus (HPV).": "Les papillomavirus provoquent notamment le cancer du col de l’utérus. Le vaccin est aujourd’hui recommandé, mais pas obligatoire, pour les filles et les garçons de 11 à 14 ans : en 2024, environ 48 % des filles et 25 % des garçons avaient reçu toutes les doses. Il rejoindrait les 11 vaccins obligatoires."
 };
 
 /* « Et la Constitution ? » : mesures qui demandent de réviser la Constitution, ou qui s'y heurtent en l'état.
@@ -2136,5 +2137,6 @@ var EST = {
   "Soumettre à la CSG la consommation de « tokens » d’intelligence artificielle des entreprises.": ["nc", null, "Nouvelle recette dont le montant dépend du taux et de la consommation d’IA des entreprises, non précisés."],
   "Supprimer l’Arcom, le régulateur de l’audiovisuel et du numérique.": ["gain", 0, "Économie limitée au budget de fonctionnement du régulateur, inférieur à 100 millions d’euros par an, si ses missions ne sont pas confiées à un autre organisme."],
   "Suspendre automatiquement le RSA des délinquants condamnés, sauf si le maire en décide autrement après examen de leur situation.": ["nc", null, "Nombre d’allocataires concernés inconnu, et le maire pourrait maintenir le versement : effet non chiffrable."],
-  "Créer 30 000 places de prison pour les peines courtes.": ["cout", 2, "30 000 places à 200 000 à 300 000 euros, soit 1 à 2 milliards par an sur cinq ans, puis leur fonctionnement."]
+  "Créer 30 000 places de prison pour les peines courtes.": ["cout", 2, "30 000 places à 200 000 à 300 000 euros, soit 1 à 2 milliards par an sur cinq ans, puis leur fonctionnement."],
+  "Rendre obligatoire la vaccination contre les papillomavirus (HPV).": ["cout", 0, "Doses supplémentaires remboursées pour une partie d’une classe d’âge d’environ 800 000 enfants, le vaccin étant déjà recommandé et pris en charge."]
 };
