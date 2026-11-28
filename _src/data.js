@@ -1,4 +1,4 @@
-/* Données : candidats, sources et mesures. État au 27 novembre 2026. */
+/* Données : candidats, sources et mesures. État au 28 novembre 2026. */
 var C = [
   { id: "arthaud", name: "Nathalie Arthaud", ini: "NA", party: "Lutte ouvrière" },
   { id: "asselineau", name: "François Asselineau", ini: "FA", party: "UPR" },
@@ -117,7 +117,8 @@ var S = {
   zeToul: { s: "Europe 1, avec AFP (premier meeting de campagne, au Zénith de Toulon)", d: "21 nov. 2026", u: "https://www.europe1.fr/politique/presidentielle-eric-zemmour-se-pose-en-candidat-de-la-liberte-de-parler-face-au-totalitarisme-datmosphere-1241899" },
   phSecu: { s: "Programme d’Édouard Philippe, volet sécurité (edouardphilippe.fr)", d: "18 nov. 2026", u: "https://www.edouardphilippe.fr/programme/securite" },
   phLcp: { s: "LCP (présentation du « volume 1 » de son programme)", d: "18 nov. 2026", u: "https://lcp.fr/actualites/presidentielle-2027-edouard-philippe-promet-des-reformes-radicales-pour-relancer-sa" },
-  phHpv: { s: "LCP (Convention nationale des centres de lutte contre le cancer)", d: "24 nov. 2026", u: "https://lcp.fr/actualites/eradiquer-le-cancer-du-col-de-l-uterus-edouard-philippe-veut-rendre-obligatoire-la" }
+  phHpv: { s: "LCP (Convention nationale des centres de lutte contre le cancer)", d: "24 nov. 2026", u: "https://lcp.fr/actualites/eradiquer-le-cancer-du-col-de-l-uterus-edouard-philippe-veut-rendre-obligatoire-la" },
+  lpSec: { s: "AFP via DH (conférence de presse au siège du RN)", d: "27 nov. 2026", u: "https://www.dhnet.be/dernieres-depeches/2026/11/27/bardella-moutouh-face-aux-revelations-le-pen-attaque-la-presse-5HNQB5QTRVFG5AI4ST5MIT364A/" }
 };
 
 // [candidat, thème, mesure reformulée, clé source]
@@ -1148,7 +1149,8 @@ var RAW = [
   ["zemmour","Culture","Supprimer l’Arcom, le régulateur de l’audiovisuel et du numérique.","zeToul"],
   ["philippe","Social","Suspendre automatiquement le RSA des délinquants condamnés, sauf si le maire en décide autrement après examen de leur situation.","phSecu"],
   ["philippe","Justice","Créer 30 000 places de prison pour les peines courtes.","phLcp"],
-  ["philippe","Santé","Rendre obligatoire la vaccination contre les papillomavirus (HPV).","phHpv"]
+  ["philippe","Santé","Rendre obligatoire la vaccination contre les papillomavirus (HPV).","phHpv"],
+  ["lepen","Justice","Alourdir les peines encourues par les médias pour recel de violation du secret de l’enquête et de l’instruction.","lpSec"]
 ];
 
 
@@ -1308,15 +1310,15 @@ var POLLS_MAJ = "23 novembre 2026";
 
 /* Fil info (bandeau du haut) : les plus récents d'abord. k = declare | programme | mesure | agenda | insolite | debat */
 var NEWS = [
+  { d: "27 nov.", k: "mesure", t: "En conférence de presse, Marine Le Pen promet d’alourdir les peines des médias qui publient des éléments couverts par le secret de l’enquête.", s: "AFP via DH", u: "https://www.dhnet.be/dernieres-depeches/2026/11/27/bardella-moutouh-face-aux-revelations-le-pen-attaque-la-presse-5HNQB5QTRVFG5AI4ST5MIT364A/" },
   { d: "26 nov.", k: "declare", t: "Réélu la veille à la tête de l’Association des maires de France, David Lisnard reçoit le soutien de huit députés LR, dans une tribune publiée par Paris Match.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-david-lisnard-candidat-de-l-automne-ou-ascension-durable-445996" },
   { d: "25 nov.", k: "declare", t: "Course aux parrainages au Congrès des maires : 400 assurés pour Marine Le Pen selon le RN, « un peu plus de la moitié » pour LFI, la moitié pour Natacha Polony.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-ou-en-sont-les-candidats-dans-leur-recolte-des-500-parrainages" },
   { d: "24 nov.", k: "mesure", t: "Édouard Philippe veut rendre obligatoire la vaccination contre les papillomavirus, pour « éradiquer » le cancer du col de l’utérus.", s: "LCP", u: "https://lcp.fr/actualites/eradiquer-le-cancer-du-col-de-l-uterus-edouard-philippe-veut-rendre-obligatoire-la" },
-  { d: "23 nov.", k: "declare", t: "Yannick Jadot et Jérémie Iordanoff, partis des Écologistes, lancent « Écologistes et Démocrates », qui soutiendra Raphaël Glucksmann.", s: "Grenoble Mag", u: "https://www.grenoblemag.com/article/3750/ecologistes-et-democrates-l-iserois-jeremie-iordanoff-et-yannick-jadot-lancent-leur-propre-parti" },
   { d: "23 nov.", k: "declare", t: "Les adhérents de Génération.s votent à 85 % pour soutenir Jean-Luc Mélenchon, dans le cadre d’un accord de majorité législative avec LFI.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-generations-officialise-son-soutien-a-jean-luc-melenchon-445502" },
   { d: "À venir", k: "agenda", t: "10 au 13 déc. : vote des Écologistes sur leur candidature · 18 avril : premier tour · 2 mai : second tour, maintenu à cette date par le gouvernement.", s: "LCP", u: "https://lcp.fr/actualites/presidentielle-2027-malgre-les-critiques-le-gouvernement-maintient-a-ce-stade-le-second" },
 ];
 
-var NEWS_MAJ = "27 novembre 2026";
+var NEWS_MAJ = "28 novembre 2026";
 
 /* Déguisements du titre selon la date (comme les doodles). from/to au format MM-JJ.
    draw = dessin posé sur le « Q » (bonnet, pelerin) ou emo = un emoji à la place ; side = grand dessin après le « ? » (dinde) ;
